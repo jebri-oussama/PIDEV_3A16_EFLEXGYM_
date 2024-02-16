@@ -1,19 +1,45 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+
+import entities.categorie;
+import entities.type;
+import service.categorieService;
+import utils.DataSource;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.List;
+import static entities.type.alimentaire;
+import static entities.type.vestimentaire;
+import entities.produit;
+import service.produitService;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Entrée with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        DataSource ds1 = DataSource.getInstance();
+        System.out.println(ds1);
+        produitService ps= new produitService();
+        categorieService pc= new categorieService();
+        categorie c1 = new categorie(5,vestimentaire,"ffff");
+        categorie c2= new categorie(6,vestimentaire,"ffff");
+        produit p1 = new produit(2,"prot","image.png",50.3F,5,"555555",c1,1,1);
+       // ps.add(p1);
+        ps.delete(2);
 
-        // Press Maj+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
 
-            // Press Maj+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+
+
+
+      //  categorie p1=ps.readById(1);
+      //  System.out.println(p1);
+
+     //   pc.delete(6);
+//ps.add(p2);
+
+//ps.delete(2);
+
+       // ps.readAll().forEach(System.out::println);
+      /*  p1.setDescription("lyaass");
+        ps.update(1,p1);*/
         }
     }
-}
