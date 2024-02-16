@@ -1,6 +1,7 @@
 package GestionFinance.service;
 
 import GestionFinance.entites.Abonnement;
+import GestionFinance.entites.BilanFinancier;
 import GestionFinance.entites.Etat;
 import GestionFinance.entites.Type;
 import utils.DataSource;
@@ -74,7 +75,7 @@ public class AbonnementService implements IService<Abonnement> {
 
     }
 
-    @Override
+
     @Override
     public List<Abonnement> readAll() {
         String requete = "SELECT * FROM Abonnement";
@@ -110,6 +111,31 @@ public class AbonnementService implements IService<Abonnement> {
 
     @Override
     public Abonnement readById(int id) {
+        String requete = "SELECT * FROM Abonnement WHERE id = ?";
+        try {
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Type type = Type.valueOf(rs.getString("type"));
+                double prix = rs.getDouble("prix");
+                LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
+                LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
+                Etat etat = Etat.valueOf(rs.getString("etat"));
+
+
+                int idAdherent = rs.getInt("id_adherent");
+                gestion_user.entities.Adherent adherent = adherentService.readById(idAdherent);
+
+                int idBilanFinancier = rs.getInt("id_bilan_financier");
+                BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
+
+                return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
+
 }
