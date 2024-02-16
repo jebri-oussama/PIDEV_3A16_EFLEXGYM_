@@ -51,6 +51,14 @@ public class Abonnement  {
         return a;
     }
 
+    public LocalDate getDate_debut() {
+        return date_debut;
+    }
+
+    public LocalDate getDate_fin() {
+        return date_fin;
+    }
+
     public void setA(Adherent a) {
         this.a = a;
     }
