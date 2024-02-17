@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AjouterAbonnementController">
    <children>
-      <TextField fx:id="typeTF" layoutX="57.0" layoutY="67.0" />
-      <TextField fx:id="idbilanTF" layoutX="57.0" layoutY="336.0" />
-      <TextField fx:id="prixTF" layoutX="57.0" layoutY="112.0" />
-      <TextField fx:id="idadherentTF" layoutX="57.0" layoutY="291.0" />
-      <TextField fx:id="datedebutTF" layoutX="57.0" layoutY="157.0" />
-      <TextField fx:id="datefinTF" layoutX="57.0" layoutY="200.0" />
-      <TextField fx:id="etatTF" layoutX="57.0" layoutY="247.0" />
-      <Button layoutX="433.0" layoutY="316.0" mnemonicParsing="false" onAction="#ajouter" text="Button" />
+      <TextField fx:id="typeTF" layoutX="139.0" layoutY="67.0" />
+      <TextField fx:id="idbilanTF" layoutX="139.0" layoutY="336.0" />
+      <TextField fx:id="prixTF" layoutX="139.0" layoutY="112.0" />
+      <TextField fx:id="idadherentTF" layoutX="139.0" layoutY="291.0" />
+      <TextField fx:id="etatTF" layoutX="139.0" layoutY="247.0" />
+      <Button layoutX="433.0" layoutY="316.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+      <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+      <Text layoutX="14.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
+      <Text layoutX="14.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date debut" />
+      <Text layoutX="14.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" />
+      <Text layoutX="14.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat" />
+      <Text layoutX="14.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adherent" />
+      <Text layoutX="14.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilan financier" />
+      <DatePicker fx:id="dateDebutDP" layoutX="139.0" layoutY="157.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="dateFinDP" layoutX="139.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" />
    </children>
 </AnchorPane>

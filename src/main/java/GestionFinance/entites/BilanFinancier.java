@@ -49,6 +49,10 @@ public class BilanFinancier {
     public BilanFinancier() {
     }
 
+    public BilanFinancier(int id) {
+        this.id=id;
+    }
+
     public LocalDate getDateDebut() {
         return dateDebut;
     }
