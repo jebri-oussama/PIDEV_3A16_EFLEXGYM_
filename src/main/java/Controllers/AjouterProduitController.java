@@ -29,7 +29,7 @@ public class AjouterProduitController {
     private TextField txtdescription;
 
     @FXML
-    private TextField txtcategorie; // Change this to TextField
+    private TextField txtcategorie;
 
     @FXML
     private TextField txtid_bilan_financier;
