@@ -102,7 +102,10 @@ public class BilanFinancier {
 
     public double recupererSalairesCoachs() {
         double salairesCoachs = 0;
-        String requete = "SELECT SUM(salaire) AS salaires_coachs FROM coach  C JOIN bilan_financier B on C.id_bilan_financier = B.id WHERE B.id = ?";
+        String requete = "SELECT SUM(U.salaire) AS salaires_coachs " +
+                "FROM user U " +
+                "JOIN bilan_financier B ON U.id_bilan_financier = B.id " +
+                "WHERE U.role = 'COACH' AND B.id = ?";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, getId());

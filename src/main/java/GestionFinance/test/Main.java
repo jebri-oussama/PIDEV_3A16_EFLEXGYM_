@@ -16,7 +16,7 @@ public class Main {
                 LocalDate.of(2024,2,9), LocalDate.of(2024,3,9),1200.0, 100.0);
         //bs.add(b2);
 
-        System.out.println(bs.readById(2));
+        /*System.out.println(bs.readById(2));
 
         System.out.println(b2.recupererRevenuAbonnements());
         System.out.println(b2.recupererRevenusProduits());
@@ -26,6 +26,7 @@ public class Main {
         b2.setSalaires_coachs(b2.recupererSalairesCoachs());
         System.out.println(b2.calculerProfit());
         b2.setProfit(b2.calculerProfit());
-        bs.update(b2);
+        bs.update(b2);*/
+        bs.readAll().forEach(System.out::println);
     }
 }
