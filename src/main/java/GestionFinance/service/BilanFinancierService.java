@@ -21,7 +21,7 @@ public class BilanFinancierService implements IService<BilanFinancier> {
 
     @Override
     public void add(BilanFinancier bf) {
-        String requete = "INSERT INTO bilan_financier (id, date_debut, date_fin, salaires_coachs, prix_location, profit, revenus_abonnements, revenus_produits, depenses) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String requete = "INSERT INTO bilan_financier (id, date_debut, date_fin, salaires_coachs, prix_location, revenus_abonnements, revenus_produits, depenses, profit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, bf.getId());
@@ -29,10 +29,10 @@ public class BilanFinancierService implements IService<BilanFinancier> {
             pst.setDate(3, Date.valueOf(bf.getDateFin()));
             pst.setDouble(4, bf.getSalaires_coachs());
             pst.setDouble(5, bf.getPrix_location());
-            pst.setDouble(6, bf.getProfit());
-            pst.setDouble(7, bf.getRevenus_abonnements());
-            pst.setDouble(8, bf.getRevenus_produits());
-            pst.setDouble(9, bf.getDepenses());
+            pst.setDouble(6, bf.getRevenus_abonnements());
+            pst.setDouble(7, bf.getRevenus_produits());
+            pst.setDouble(8, bf.getDepenses());
+            pst.setDouble(9, bf.getProfit());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -60,11 +60,12 @@ public class BilanFinancierService implements IService<BilanFinancier> {
             pst.setDate(2, Date.valueOf(bf.getDateFin()));
             pst.setDouble(3, bf.getSalaires_coachs());
             pst.setDouble(4, bf.getPrix_location());
-            pst.setDouble(5, bf.getProfit());
-            pst.setDouble(6, bf.getRevenus_abonnements());
-            pst.setDouble(7, bf.getRevenus_produits());
-            pst.setDouble(8, bf.getDepenses());
+            pst.setDouble(5, bf.getRevenus_abonnements());
+            pst.setDouble(6, bf.getRevenus_produits());
+            pst.setDouble(7, bf.getDepenses());
+            pst.setDouble(8, bf.getProfit());
             pst.setInt(9, bf.getId());
+
             pst.executeUpdate();
         } catch(SQLException e){
             throw new RuntimeException(e);
@@ -84,11 +85,11 @@ public class BilanFinancierService implements IService<BilanFinancier> {
                 LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
                 double salaires_coachs = rs.getDouble("salaires_coachs");
                 double prix_location = rs.getDouble("prix_location");
-                double profit = rs.getDouble("profit");
                 double revenus_abonnements = rs.getDouble("revenus_abonnements");
                 double revenus_produits = rs.getDouble("revenus_produits");
                 double depenses = rs.getDouble("depenses");
-                BilanFinancier bilan = new BilanFinancier(id, dateDebut, dateFin, salaires_coachs, prix_location, profit, revenus_abonnements, revenus_produits, depenses);
+                double profit = rs.getDouble("profit");
+                BilanFinancier bilan = new BilanFinancier(id, dateDebut, dateFin, salaires_coachs, prix_location, revenus_abonnements, revenus_produits, depenses, profit);
                 list.add(bilan);
             }
         } catch (SQLException e) {
@@ -109,11 +110,11 @@ public class BilanFinancierService implements IService<BilanFinancier> {
                 LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
                 double salaires_coachs = rs.getDouble("salaires_coachs");
                 double prix_location = rs.getDouble("prix_location");
-                double profit = rs.getDouble("profit");
                 double revenus_abonnements = rs.getDouble("revenus_abonnements");
                 double revenus_produits = rs.getDouble("revenus_produits");
                 double depenses = rs.getDouble("depenses");
-                return new BilanFinancier(id, dateDebut, dateFin, salaires_coachs, prix_location, profit, revenus_abonnements, revenus_produits, depenses);
+                double profit = rs.getDouble("profit");
+                return new BilanFinancier(id, dateDebut, dateFin, salaires_coachs, prix_location, revenus_abonnements, revenus_produits, depenses, profit);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

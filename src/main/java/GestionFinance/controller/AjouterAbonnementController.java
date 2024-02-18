@@ -47,25 +47,17 @@ public class AjouterAbonnementController {
 
         String typeString = typeTF.getText();
         Type type = Type.valueOf(typeString);
-
         double prix = Double.parseDouble(prixTF.getText());
         LocalDate dateDebut = dateDebutDP.getValue();
         LocalDate dateFin = dateFinDP.getValue();
-
         String etatString = etatTF.getText();
         Etat etat = Etat.valueOf(etatString);
-
         int idAdherent = Integer.parseInt(idadherentTF.getText());
         int idBilan = Integer.parseInt(idbilanTF.getText());
-
-
        // Adherent adherent = new Adherent(idAdherent);
         BilanFinancier bilanFinancier = new BilanFinancier(idBilan);
 
-
         Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, /*adherent,*/ bilanFinancier);
-
-
         as.add(abonnement);
 
         FXMLLoader loader = new FXMLLoader(getClass()
