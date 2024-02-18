@@ -19,8 +19,7 @@ public class produit {
     }
 
 
-    public produit(int id, String nom, String image, float prix, int quantite, String description, categorie categorie, int id_bilan_financier, int id_admin) {
-        this.id = id;
+    public produit( String nom, String image, float prix, int quantite, String description, categorie categorie, int id_bilan_financier, int id_admin) {
         this.nom = nom;
         this.image = image;
         this.prix = prix;

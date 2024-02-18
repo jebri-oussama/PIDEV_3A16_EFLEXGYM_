@@ -103,7 +103,7 @@ public class produitService implements  IService<produit> {
            int c=  rs.getInt(7);
                 int id_bilan_financier = rs.getInt(8);
                 int id_admin = rs.getInt(9);
-                list.add(new produit(id, nom, image, prix, quantite, description, new categorie(c,null,null), id_bilan_financier, id_admin));
+                list.add(new produit( nom, image, prix, quantite, description, new categorie(c,null,null), id_bilan_financier, id_admin));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -121,7 +121,7 @@ public class produitService implements  IService<produit> {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return new produit(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getInt(5), rs.getString(6), (categorie) rs.getObject(7),rs.getInt(8), rs.getInt(9));
+                return new produit( rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getInt(5), rs.getString(6), (categorie) rs.getObject(7),rs.getInt(8), rs.getInt(9));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
