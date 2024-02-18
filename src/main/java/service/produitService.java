@@ -94,6 +94,7 @@ public class produitService implements  IService<produit> {
             ste = conn.createStatement();
             ResultSet rs = ste.executeQuery(requete);
             while (rs.next()) {
+
                 String nom = rs.getString(1);
                 String image = rs.getString(2);
                 float prix = rs.getFloat(3);

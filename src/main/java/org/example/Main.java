@@ -16,17 +16,16 @@ import service.produitService;
 
 public class Main {
     public static void main(String[] args) {
-       /* DataSource ds1 = DataSource.getInstance();
+       DataSource ds1 = DataSource.getInstance();
         System.out.println(ds1);
        produitService ps= new produitService();
         categorieService pc= new categorieService();
         categorie c1 = new categorie(5,vestimentaire,"ffff");
         categorie c2= new categorie(6,vestimentaire,"ffff");
         produit p2 = new produit("prot","image.png",50.3F,5,"555555",c2,1,1);
-        ps.add(p2);*/
+       // ps.add(p2);
       //  pc.add(c2);
        // ps.delete(2);
-
 
 
 
