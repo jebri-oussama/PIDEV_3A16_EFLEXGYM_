@@ -59,11 +59,11 @@ public class AjouterAbonnementController {
         int idBilan = Integer.parseInt(idbilanTF.getText());
 
 
-        Adherent adherent = new Adherent(idAdherent);
+       // Adherent adherent = new Adherent(idAdherent);
         BilanFinancier bilanFinancier = new BilanFinancier(idBilan);
 
 
-        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, /*adherent,*/ bilanFinancier);
 
 
         as.add(abonnement);

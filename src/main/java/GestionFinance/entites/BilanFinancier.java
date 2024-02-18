@@ -136,6 +136,7 @@ public class BilanFinancier {
     }
 
 
+
     public Connection getConn() {
         return conn;
     }
@@ -207,7 +208,7 @@ public class BilanFinancier {
     public void setPst(PreparedStatement pst) {
         this.pst = pst;
     }
-    private double calculerProfit() {
+    public double calculerProfit() {
         return revenus_abonnements + revenus_produits - salaires_coachs - depenses - prix_location;
     }
 

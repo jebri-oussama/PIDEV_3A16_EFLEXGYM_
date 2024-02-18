@@ -11,28 +11,28 @@ public class Abonnement  {
     private LocalDate date_debut;
     private LocalDate date_fin;
     private Etat etat;
-    Adherent a;
+    //Adherent a;
     BilanFinancier b;
 
-    public Abonnement(int id , Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, Adherent a, BilanFinancier b) {
+    public Abonnement(int id , Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, /*Adherent a*/ BilanFinancier b) {
         this.type = type;
         this.prix = prix;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.etat = etat;
         this.b=b;
-        this.a=a;
+       // this.a=a;
         this.id=id;
 
     }
 
-    public Abonnement(Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, Adherent a, BilanFinancier b) {
+    public Abonnement(Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, /*Adherent a,*/ BilanFinancier b) {
         this.type = type;
         this.prix = prix;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.etat = etat;
-        this.a = a;
+       // this.a = a;
         this.b = b;
     }
 
@@ -49,9 +49,9 @@ public class Abonnement  {
         this.date_fin = date_fin;
     }
 
-    public Adherent getA() {
+    /*public Adherent getA() {
         return a;
-    }
+    }*/
 
     public LocalDate getDate_debut() {
         return date_debut;
@@ -61,9 +61,9 @@ public class Abonnement  {
         return date_fin;
     }
 
-    public void setA(Adherent a) {
+  /*  public void setA(Adherent a) {
         this.a = a;
-    }
+    }*/
 
     public BilanFinancier getB() {
         return b;
@@ -120,7 +120,7 @@ public class Abonnement  {
                 ", date_debut=" + date_debut +
                 ", date_fin=" + date_fin +
                 ", etat=" + etat +
-                ", a=" + a +
+                //", a=" + a +
                 ", b=" + b +
                 '}';
     }

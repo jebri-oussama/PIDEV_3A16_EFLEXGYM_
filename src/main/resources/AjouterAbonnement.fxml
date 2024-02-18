@@ -23,5 +23,6 @@
       <Text layoutX="14.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilan financier" />
       <DatePicker fx:id="dateDebutDP" layoutX="139.0" layoutY="157.0" prefHeight="25.0" prefWidth="149.0" />
       <DatePicker fx:id="dateFinDP" layoutX="139.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text layoutX="200.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un nouveau abonnement" />
    </children>
 </AnchorPane>
