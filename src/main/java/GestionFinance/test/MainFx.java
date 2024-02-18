@@ -23,12 +23,25 @@ public class MainFx extends Application {
         primaryStage.setTitle("Ajouter Abonnement");
         primaryStage.show();*/
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterBilanFinancier.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterBilanFinancier.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Ajouter Bilan Financier");
+        primaryStage.show();*/
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateBilanFinancier.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Mise à jour Bilan Financier");
         primaryStage.show();
+
+          /*  FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Afficher Bilan Financier");
+            primaryStage.show();*/
 
     }
 }

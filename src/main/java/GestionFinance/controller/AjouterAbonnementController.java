@@ -74,6 +74,7 @@ public class AjouterAbonnementController {
             ac.setrType(typeString);
             ac.setrList(as.readAll().toString());
 
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

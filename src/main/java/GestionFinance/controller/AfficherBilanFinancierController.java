@@ -4,67 +4,74 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.time.LocalDate;
+
 public class AfficherBilanFinancierController {
     @FXML
-    private TextField RevenusDesAbonnementsId;
+    private DatePicker idDateDebut;
 
     @FXML
-    private DatePicker dateDebutId;
+    private DatePicker idDateFin;
 
     @FXML
-    private DatePicker dateFinId;
+    private TextField idDepenses;
 
     @FXML
-    private TextField depensesId;
+    private TextField idList;
 
     @FXML
-    private TextField listId;
+    private TextField idPrixLocation;
 
     @FXML
-    private TextField prixLocationId;
+    private TextField idProfit;
 
     @FXML
-    private TextField profitId;
+    private TextField idRevenusDesAbonnements;
 
     @FXML
-    private TextField revenusDesProduitsId;
+    private TextField idRevenusDesProduits;
 
     @FXML
-    private TextField salairesDesCoachsId;
+    private TextField idSalairesDesCoachs;
 
-    public void setRevenusDesAbonnementsId(TextField revenusDesAbonnementsId) {
-        RevenusDesAbonnementsId = revenusDesAbonnementsId;
+    public void setIdRevenusDesAbonnements(double idRevenusDesAbonnements) {
+        this.idRevenusDesAbonnements.setText(String.valueOf(idRevenusDesAbonnements));
     }
 
-    public void setDateDebutId(DatePicker dateDebutId) {
-        this.dateDebutId = dateDebutId;
+    public void setIdDateDebut(LocalDate idDateDebut) {
+        this.idDateDebut.setValue(idDateDebut);
     }
 
-    public void setDateFinId(DatePicker dateFinId) {
-        this.dateFinId = dateFinId;
+    public void setIdDateFin(LocalDate idDateFin) {
+
+        this.idDateFin.setValue(idDateFin);
     }
 
-    public void setDepensesId(TextField depensesId) {
-        this.depensesId = depensesId;
+    public void setIdDepenses(Double idDepenses) {
+
+        this.idDepenses.setText(String.valueOf(idDepenses));
     }
 
-    public void setListId(TextField listId) {
-        this.listId = listId;
+    public void setIdList(String idList) {
+
+        this.idList.setText(idList);
     }
 
-    public void setPrixLocationId(TextField prixLocationId) {
-        this.prixLocationId = prixLocationId;
+    public void setIdPrixLocation(Double idPrixLocation) {
+
+        this.idPrixLocation.setText(String.valueOf(idPrixLocation));
     }
 
-    public void setProfitId(TextField profitId) {
-        this.profitId = profitId;
+    public void setIdProfit(Double idProfit) {
+
+        this.idProfit.setText(String.valueOf(idProfit));
     }
 
-    public void setRevenusDesProduitsId(TextField revenusDesProduitsId) {
-        this.revenusDesProduitsId = revenusDesProduitsId;
+    public void setIdRevenusDesProduits(Double idRevenusDesProduits) {
+        this.idRevenusDesProduits.setText(String.valueOf(idRevenusDesProduits));
     }
 
-    public void setSalairesDesCoachsId(TextField salairesDesCoachsId) {
-        this.salairesDesCoachsId = salairesDesCoachsId;
+    public void setIdSalairesDesCoachs(Double idSalairesDesCoachs) {
+        this.idSalairesDesCoachs.setText(String.valueOf(idSalairesDesCoachs));
     }
 }
