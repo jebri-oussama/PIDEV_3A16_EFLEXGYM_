@@ -4,8 +4,12 @@ import entities.categorie;
 import entities.produit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import service.produitService;
+
+import java.io.IOException;
 
 public class AjouterProduitController {
 
@@ -47,5 +51,25 @@ public class AjouterProduitController {
         produit p = new produit(nom, image, prix, quantite, description, category, id_bilan_financier, id_admin);
         produitService ps = new produitService();
         ps.add(p);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("/AfficherProduit.fxml"));
+        try {
+            Parent root = loader.load();
+            AfficherProduitController ac = loader.getController();
+            ac.setRnom(nom);
+            ac.setRimage(image);
+            ac.setRprix(Float.toString(prix));
+            ac.setRquantite(Integer.toString(quantite));
+            ac.setRdescription(description);
+            ac.setRcategorie(category.toString());
+            ac.setRid_bilan_financier(Integer.toString(id_bilan_financier));
+            ac.setRid_admin(Integer.toString(id_admin));
+            ac.setRlist(ps.readAll().toString());
+            txtnom.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
-}
+    }
+

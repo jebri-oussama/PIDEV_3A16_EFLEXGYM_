@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AfficherProduitController">
+    <children>
+        <Label layoutX="47.0" layoutY="40.0" text="Product Information" />
+
+        <Label layoutX="47.0" layoutY="80.0" text="Name:" />
+        <TextField fx:id="rnom" layoutX="140.0" layoutY="80.0" prefWidth="200" />
+
+        <Label layoutX="47.0" layoutY="120.0" text="Image URL:" />
+        <TextField fx:id="rimage" layoutX="140.0" layoutY="120.0" prefWidth="400" />
+
+        <Label layoutX="47.0" layoutY="160.0" text="Price:" />
+        <TextField fx:id="rprix" layoutX="140.0" layoutY="160.0" prefWidth="100" />
+
+        <Label layoutX="47.0" layoutY="200.0" text="Description:" />
+        <TextField fx:id="rdescription" layoutX="140.0" layoutY="200.0" prefWidth="400" prefHeight="100" />
+
+        <Label layoutX="47.0" layoutY="320.0" text="Quantity:" />
+        <TextField fx:id="rquantite" layoutX="140.0" layoutY="320.0" prefWidth="100" />
+
+        <Label layoutX="47.0" layoutY="360.0" text="Categories:" />
+        <TextField fx:id="rcategorie" layoutX="140.0" layoutY="360.0" prefWidth="400" />
+
+        <Label layoutX="47.0" layoutY="440.0" text="Financial Balance ID:" />
+        <TextField fx:id="rid_bilan_financier" layoutX="140.0" layoutY="440.0" prefWidth="100" />
+
+        <Label layoutX="47.0" layoutY="480.0" text="Admin ID:" />
+        <TextField fx:id="rid_admin" layoutX="140.0" layoutY="480.0" prefWidth="100" />
+
+        <TextField fx:id="rlist" layoutX="64.0" layoutY="269.0" prefWidth="486.0" prefHeight="102.0" />
+    </children>
+</AnchorPane>

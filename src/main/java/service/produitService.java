@@ -103,7 +103,7 @@ public class produitService implements  IService<produit> {
            int c=  rs.getInt(7);
                 int id_bilan_financier = rs.getInt(8);
                 int id_admin = rs.getInt(9);
-                list.add(new produit( nom, image, prix, quantite, description, new categorie(c,null,null), id_bilan_financier, id_admin));
+                list.add(new produit( id,nom, image, prix, quantite, description, new categorie(c,null,null), id_bilan_financier, id_admin));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
