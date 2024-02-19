@@ -17,11 +17,11 @@ public class mainfx extends Application {
     @Override
     public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("/UpdateProduit.fxml")); // Changer le chemin du fichier FXML
+                .getResource("/AjouterProduit.fxml")); // Changer le chemin du fichier FXML
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Update Produit"); // Changer le titre de la fenêtre
+            primaryStage.setTitle("a Produit"); // Changer le titre de la fenêtre
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

@@ -71,5 +71,4 @@ public class AjouterProduitController {
             System.out.println(e.getMessage());
         }
     }
-    }
-
+}

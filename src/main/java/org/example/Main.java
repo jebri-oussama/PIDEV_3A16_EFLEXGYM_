@@ -38,7 +38,7 @@ public class Main {
 
 //ps.delete(2);
 
-       // ps.readAll().forEach(System.out::println);
+        ps.readAll().forEach(System.out::println);
       /*  p1.setDescription("lyaass");
         ps.update(1,p1);*/
         }
