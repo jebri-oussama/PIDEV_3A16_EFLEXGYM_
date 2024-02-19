@@ -55,7 +55,7 @@ public class UpdateProduitController {
         ps.update(id,p);
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/AfficherProduit.fxml"));
-        try {
+       /* try {
             Parent root = loader.load();
             AfficherProduitController ac = loader.getController();
             ac.setRnom(nom);
@@ -71,7 +71,7 @@ public class UpdateProduitController {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
     }
 }
 

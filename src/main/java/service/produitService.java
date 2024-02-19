@@ -94,15 +94,19 @@ public class produitService implements  IService<produit> {
             ste = conn.createStatement();
             ResultSet rs = ste.executeQuery(requete);
             while (rs.next()) {
-                String nom = rs.getString(2);
-                String image = rs.getString(3);
-                float prix = rs.getFloat(4);
-                int quantite = rs.getInt(5);
-                String description = rs.getString(6);
-                int c=  rs.getInt(7);
-                int id_bilan_financier = rs.getInt(8);
-                int id_admin = rs.getInt(9);
-                list.add(new produit( nom, image, prix, quantite, description, new categorie(c,null,null), id_bilan_financier, id_admin));
+                  int c=  rs.getInt(7);
+                produit produit = new produit(
+                 rs.getString(2),
+                 rs.getString(3),
+                 rs.getFloat(4),
+                rs.getInt(5),
+                rs.getString(6),
+                        new categorie(c,null,null),
+                rs.getInt(8),
+              rs.getInt(9)
+              );
+                produit.setId(rs.getInt(1)); // Set the id from the database
+                list.add(produit);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

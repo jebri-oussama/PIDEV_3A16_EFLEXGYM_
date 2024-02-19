@@ -51,7 +51,7 @@ public class AjouterProduitController {
         produit p = new produit(nom, image, prix, quantite, description, category, id_bilan_financier, id_admin);
         produitService ps = new produitService();
         ps.add(p);
-        FXMLLoader loader = new FXMLLoader(getClass()
+       /* FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/AfficherProduit.fxml"));
         try {
             Parent root = loader.load();
@@ -69,6 +69,6 @@ public class AjouterProduitController {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
     }
 }
