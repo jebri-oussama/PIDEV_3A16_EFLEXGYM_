@@ -23,7 +23,7 @@ public class AbonnementService implements IService<Abonnement> {
 
     @Override
     public void add(Abonnement a) {
-        String requete = "INSERT INTO Abonnement (id, type, prix, date_debut, date_fin, etat, /*id_adherent,*/ id_bilan_financier) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String requete = "INSERT INTO Abonnement (id, type, prix, date_debut, date_fin, etat, id_adherent, id_bilan_financier) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, a.getId());
@@ -32,8 +32,8 @@ public class AbonnementService implements IService<Abonnement> {
             pst.setDate(4, Date.valueOf(a.getDate_debut()));
             pst.setDate(5, Date.valueOf(a.getDate_fin()));
             pst.setString(6, a.getEtat().toString());
-           // pst.setInt(7, a.getA().getId());
-            pst.setInt(7, a.getB().getId());
+            pst.setInt(7, a.getAdherent().getId());
+            pst.setInt(8, a.getB().getId());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -56,7 +56,7 @@ public class AbonnementService implements IService<Abonnement> {
 
     @Override
     public void update(Abonnement abonnement) {
-        String requete = "UPDATE Abonnement SET type = ?, prix = ?, date_debut= ?, date_fin = ?, etat= ?, /*id_adherent = ?,*/ id_bilan_financier = ? WHERE id =?";
+        String requete = "UPDATE Abonnement SET type = ?, prix = ?, date_debut= ?, date_fin = ?, etat= ?, id_adherent = ?, id_bilan_financier = ? WHERE id =?";
         try{
             pst = conn.prepareStatement(requete);
             pst.setString(1, abonnement.getType().toString());
@@ -64,9 +64,9 @@ public class AbonnementService implements IService<Abonnement> {
             pst.setDate(3, Date.valueOf(abonnement.getDate_debut()));
             pst.setDate(4, Date.valueOf(abonnement.getDate_fin()));
             pst.setString(5,abonnement.getEtat().toString());
-         //   pst.setInt(6,abonnement.getA().getId());
-            pst.setInt(6,abonnement.getB().getId());
-            pst.setInt(7,abonnement.getId());
+            pst.setInt(6,abonnement.getAdherent().getId());
+            pst.setInt(7,abonnement.getB().getId());
+            pst.setInt(8,abonnement.getId());
             pst.executeUpdate();
 
         }catch(SQLException e){
@@ -90,19 +90,12 @@ public class AbonnementService implements IService<Abonnement> {
                 LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
                 LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
                 Etat etat = Etat.valueOf(rs.getString("etat"));
-
-
                 int idAdherent = rs.getInt("id_adherent");
-             //   Adherent adherent = AdherentService.readById(idAdherent);
-
-
+              //  User adherent = AdherentService.readById(idAdherent);
                 int idBilanFinancier = rs.getInt("id_bilan_financier");
                 BilanFinancierService bilanFinancierService = new BilanFinancierService();
                 BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
-
-
-
-                list.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat,/* adherent*/ bilanFinancier));
+           //     list.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat,/* adherent*/ bilanFinancier));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -135,7 +128,7 @@ public class AbonnementService implements IService<Abonnement> {
                 BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
 
 
-                return new Abonnement(id, type, prix, dateDebut, dateFin, etat,/* adherent,*/ bilanFinancier);
+               // return new Abonnement(id, type, prix, dateDebut, dateFin, etat,/* adherent,*/ bilanFinancier);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

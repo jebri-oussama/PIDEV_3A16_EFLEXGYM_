@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherAbonnementsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherAbonnementsController">
    <children>
-      <TextField fx:id="rType" layoutX="33.0" layoutY="47.0" />
-      <TextField fx:id="rPrix" layoutX="33.0" layoutY="109.0" />
-      <TextField fx:id="rDateDebut" layoutX="33.0" layoutY="175.0" />
-      <TextField fx:id="rDateFin" layoutX="218.0" layoutY="47.0" />
-      <TextField fx:id="rEtat" layoutX="218.0" layoutY="109.0" />
-      <TextField fx:id="rBilan" layoutX="218.0" layoutY="175.0" />
-      <TextField fx:id="rAdherent" layoutX="416.0" layoutY="109.0" />
-      <TextField fx:id="rList" layoutX="70.0" layoutY="244.0" prefHeight="101.0" prefWidth="491.0" />
-      <Label layoutX="80.0" layoutY="30.0" text="Type" />
-      <Label layoutX="80.0" layoutY="92.0" text="Prix" />
-      <Label layoutX="80.0" layoutY="158.0" text="Date Debut" />
-      <Label layoutX="272.0" layoutY="30.0" text="Date Fin" />
-      <Label layoutX="272.0" layoutY="92.0" text="Etat" />
-      <Label layoutX="272.0" layoutY="158.0" text="Bilan Financier" />
-      <Label layoutX="477.0" layoutY="92.0" text="Adherent" />
+      <Label layoutX="47.0" layoutY="40.0" text="Evenements List" />
+
+      <TableView fx:id="tableViewEvenements" layoutX="47.0" layoutY="80.0" prefWidth="506.0" prefHeight="270.0">
+         <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="typeColumn" text="Type" />
+            <TableColumn fx:id="dateDebutColumn" text="Date de début" />
+            <TableColumn fx:id="dateFinColumn" text="Date de fin" />
+            <TableColumn fx:id="dureeColumn" text="Durée" />
+            <TableColumn fx:id="deleteColumn" text="Supprimer" />
+
+
+
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

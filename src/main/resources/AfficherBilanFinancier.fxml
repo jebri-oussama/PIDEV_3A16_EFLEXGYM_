@@ -4,26 +4,31 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherBilanFinancierController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherAbonnementsController">
    <children>
-      <Text layoutX="48.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Debut" />
-      <TextField fx:id="idSalairesDesCoachs" layoutX="27.0" layoutY="175.0" prefHeight="25.0" prefWidth="174.0" />
-      <DatePicker fx:id="idDateDebut" layoutX="27.0" layoutY="65.0" />
-      <Text layoutX="48.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" />
-      <DatePicker fx:id="idDateFin" layoutX="27.0" layoutY="119.0" />
-      <Text layoutX="48.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salaires des coachs" />
-      <Text layoutX="48.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix location" />
-      <TextField fx:id="idPrixLocation" layoutX="27.0" layoutY="229.0" prefHeight="25.0" prefWidth="174.0" />
-      <Text layoutX="239.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenus des abonnements" />
-      <TextField fx:id="idRevenusDesAbonnements" layoutX="232.0" layoutY="65.0" prefHeight="25.0" prefWidth="174.0" />
-      <Text layoutX="239.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenus des produits" />
-      <TextField fx:id="idRevenusDesProduits" layoutX="232.0" layoutY="119.0" prefHeight="25.0" prefWidth="174.0" />
-      <Text layoutX="239.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depenses" />
-      <TextField fx:id="idDepenses" layoutX="232.0" layoutY="175.0" prefHeight="25.0" prefWidth="174.0" />
-      <Text layoutX="239.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profit" />
-      <TextField fx:id="idProfit" layoutX="232.0" layoutY="229.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextField fx:id="idList" layoutX="25.0" layoutY="270.0" prefHeight="99.0" prefWidth="533.0" />
+      <Label layoutX="47.0" layoutY="40.0" text="Evenements List" />
+
+      <TableView fx:id="tableViewEvenements" layoutX="47.0" layoutY="80.0" prefWidth="506.0" prefHeight="270.0">
+         <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="idDateDebut" text="Date de début" />
+            <TableColumn fx:id="idDateFin" text="Date de fin" />
+            <TableColumn fx:id="idSalairesDesCoachs" text="Salaires des coachs" />
+            <TableColumn fx:id="idPrixLocation" text="Prix location" />
+            <TableColumn fx:id="idRevenusDesAbonnements" text="Revenus des abonnements" />
+            <TableColumn fx:id="idRevenusDesProduits" text="Revenus des produits" />
+            <TableColumn fx:id="idDepenses" text="Depenses" />
+            <TableColumn fx:id="idProfit" text="Profit" />
+            <TableColumn fx:id="deleteColumn" text="Supprimer" />
+
+
+
+
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

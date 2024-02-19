@@ -2,76 +2,46 @@ package GestionFinance.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 
 public class AfficherBilanFinancierController {
     @FXML
-    private DatePicker idDateDebut;
+    private TableColumn<?, ?> deleteColumn;
 
     @FXML
-    private DatePicker idDateFin;
+    private TableColumn<?, ?> idColumn;
 
     @FXML
-    private TextField idDepenses;
+    private TableColumn<?, ?> idDateDebut;
 
     @FXML
-    private TextField idList;
+    private TableColumn<?, ?> idDateFin;
 
     @FXML
-    private TextField idPrixLocation;
+    private TableColumn<?, ?> idDepenses;
 
     @FXML
-    private TextField idProfit;
+    private TableColumn<?, ?> idPrixLocation;
 
     @FXML
-    private TextField idRevenusDesAbonnements;
+    private TableColumn<?, ?> idProfit;
 
     @FXML
-    private TextField idRevenusDesProduits;
+    private TableColumn<?, ?> idRevenusDesAbonnements;
 
     @FXML
-    private TextField idSalairesDesCoachs;
+    private TableColumn<?, ?> idRevenusDesProduits;
 
-    public void setIdRevenusDesAbonnements(double idRevenusDesAbonnements) {
-        this.idRevenusDesAbonnements.setText(String.valueOf(idRevenusDesAbonnements));
-    }
+    @FXML
+    private TableColumn<?, ?> idSalairesDesCoachs;
 
-    public void setIdDateDebut(LocalDate idDateDebut) {
-        this.idDateDebut.setValue(idDateDebut);
-    }
+    @FXML
+    private TableView<?> tableViewEvenements;
 
-    public void setIdDateFin(LocalDate idDateFin) {
 
-        this.idDateFin.setValue(idDateFin);
-    }
 
-    public void setIdDepenses(Double idDepenses) {
-
-        this.idDepenses.setText(String.valueOf(idDepenses));
-    }
-
-    public void setIdList(String idList) {
-
-        this.idList.setText(idList);
-    }
-
-    public void setIdPrixLocation(Double idPrixLocation) {
-
-        this.idPrixLocation.setText(String.valueOf(idPrixLocation));
-    }
-
-    public void setIdProfit(Double idProfit) {
-
-        this.idProfit.setText(String.valueOf(idProfit));
-    }
-
-    public void setIdRevenusDesProduits(Double idRevenusDesProduits) {
-        this.idRevenusDesProduits.setText(String.valueOf(idRevenusDesProduits));
-    }
-
-    public void setIdSalairesDesCoachs(Double idSalairesDesCoachs) {
-        this.idSalairesDesCoachs.setText(String.valueOf(idSalairesDesCoachs));
-    }
 }
