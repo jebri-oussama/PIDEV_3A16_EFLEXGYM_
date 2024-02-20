@@ -42,6 +42,91 @@ public class AfficherBilanFinancierController {
     @FXML
     private TableView<?> tableViewEvenements;
 
+    public TableColumn<?, ?> getDeleteColumn() {
+        return deleteColumn;
+    }
 
+    public void setDeleteColumn(TableColumn<?, ?> deleteColumn) {
+        this.deleteColumn = deleteColumn;
+    }
 
+    public TableColumn<?, ?> getIdColumn() {
+        return idColumn;
+    }
+
+    public void setIdColumn(TableColumn<?, ?> idColumn) {
+        this.idColumn = idColumn;
+    }
+
+    public TableColumn<?, ?> getIdDateDebut() {
+        return idDateDebut;
+    }
+
+    public void setIdDateDebut(TableColumn<?, ?> idDateDebut) {
+        this.idDateDebut = idDateDebut;
+    }
+
+    public TableColumn<?, ?> getIdDateFin() {
+        return idDateFin;
+    }
+
+    public void setIdDateFin(TableColumn<?, ?> idDateFin) {
+        this.idDateFin = idDateFin;
+    }
+
+    public TableColumn<?, ?> getIdDepenses() {
+        return idDepenses;
+    }
+
+    public void setIdDepenses(TableColumn<?, ?> idDepenses) {
+        this.idDepenses = idDepenses;
+    }
+
+    public TableColumn<?, ?> getIdPrixLocation() {
+        return idPrixLocation;
+    }
+
+    public void setIdPrixLocation(TableColumn<?, ?> idPrixLocation) {
+        this.idPrixLocation = idPrixLocation;
+    }
+
+    public TableColumn<?, ?> getIdProfit() {
+        return idProfit;
+    }
+
+    public void setIdProfit(TableColumn<?, ?> idProfit) {
+        this.idProfit = idProfit;
+    }
+
+    public TableColumn<?, ?> getIdRevenusDesAbonnements() {
+        return idRevenusDesAbonnements;
+    }
+
+    public void setIdRevenusDesAbonnements(TableColumn<?, ?> idRevenusDesAbonnements) {
+        this.idRevenusDesAbonnements = idRevenusDesAbonnements;
+    }
+
+    public TableColumn<?, ?> getIdRevenusDesProduits() {
+        return idRevenusDesProduits;
+    }
+
+    public void setIdRevenusDesProduits(TableColumn<?, ?> idRevenusDesProduits) {
+        this.idRevenusDesProduits = idRevenusDesProduits;
+    }
+
+    public TableColumn<?, ?> getIdSalairesDesCoachs() {
+        return idSalairesDesCoachs;
+    }
+
+    public void setIdSalairesDesCoachs(TableColumn<?, ?> idSalairesDesCoachs) {
+        this.idSalairesDesCoachs = idSalairesDesCoachs;
+    }
+
+    public TableView<?> getTableViewEvenements() {
+        return tableViewEvenements;
+    }
+
+    public void setTableViewEvenements(TableView<?> tableViewEvenements) {
+        this.tableViewEvenements = tableViewEvenements;
+    }
 }

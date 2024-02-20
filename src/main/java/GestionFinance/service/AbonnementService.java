@@ -4,6 +4,7 @@ import GestionFinance.entites.Abonnement;
 import GestionFinance.entites.BilanFinancier;
 import GestionFinance.entites.Etat;
 import GestionFinance.entites.Type;
+import GestionFinance.entites.Role;
 import utils.DataSource;
 
 import java.sql.*;
@@ -24,6 +25,9 @@ public class AbonnementService implements IService<Abonnement> {
     @Override
     public void add(Abonnement a) {
         String requete = "INSERT INTO Abonnement (id, type, prix, date_debut, date_fin, etat, id_adherent, id_bilan_financier) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
+        if (a.getAdherent().getRole() != getRole().equalAdherent) {
+            throw new IllegalArgumentException("Le rôle de l'utilisateur doit être 'ADHERENT'.");
+        }
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, a.getId());
