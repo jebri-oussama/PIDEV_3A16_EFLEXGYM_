@@ -55,8 +55,9 @@ public class EvenementService implements IServiceE<Evenement> {
     }
 //
 
+
     @Override
-    public void update(Evenement evenement) {
+    public void update(int id, Evenement evenement) {
         String query = "UPDATE Evenement SET type = ?, date_debut = ?, date_fin = ?, duree = ? WHERE id = ?";
         try {
             pst = conn.prepareStatement(query);
@@ -64,34 +65,38 @@ public class EvenementService implements IServiceE<Evenement> {
             pst.setTimestamp(2, new java.sql.Timestamp(evenement.getDate_debut().getTime()));
             pst.setTimestamp(3, new java.sql.Timestamp(evenement.getDate_fin().getTime()));
             pst.setString(4, evenement.getDuree());
-            pst.setInt(5, evenement.getId());
+            pst.setInt(5, id);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+
     @Override
     public List<Evenement> readAll() {
         String query = "SELECT * FROM Evenement";
-        ;
         List<Evenement> list = new ArrayList<>();
         try {
             pst = conn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                list.add(new Evenement(
+                Evenement evenement = new Evenement(
                         rs.getString("type"),
                         rs.getTimestamp("date_debut"),
                         rs.getTimestamp("date_fin"),
                         rs.getString("duree")
-                ));
+                );
+                evenement.setId(rs.getInt("id")); // Set the id from the database
+                list.add(evenement);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return list;
     }
+
+
 
     @Override
     public Evenement readById(int id) {

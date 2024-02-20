@@ -15,10 +15,17 @@
                 <TableColumn fx:id="dateFinColumn" text="Date de fin" />
                 <TableColumn fx:id="dureeColumn" text="Durée" />
                 <TableColumn fx:id="deleteColumn" text="Supprimer" />
+                <TableColumn fx:id="updateColumn" text="Supprimer" />
 
 
 
             </columns>
+
+
+
         </TableView>
+        <Button text="Ajouter" layoutX="47.0" layoutY="360.0" onAction="#redirectToAddEvent" />
+
+
     </children>
 </AnchorPane>

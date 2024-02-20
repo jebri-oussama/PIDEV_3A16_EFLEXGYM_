@@ -4,11 +4,17 @@ import gestion_communaute.entities.Evenement;
 import gestion_communaute.service.EvenementService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,8 +42,10 @@ public class AfficherEvenementController implements Initializable {
     private final ObservableList<Evenement> evenements = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Evenement, Void> deleteColumn;
-
+    @FXML
+    private TableColumn<Evenement, Void> updateColumn;
     private EvenementService evenementService;
+
 
 
     @Override
@@ -73,6 +81,28 @@ public class AfficherEvenementController implements Initializable {
             }
         });
 
+        // Create the "Update" button column
+        updateColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button updateButton = new Button("Modifier");
+
+            {
+                updateButton.setOnAction(event -> {
+                    Evenement evenement = getTableView().getItems().get(getIndex());
+                    updateEvenement(evenement.getId());
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(updateButton);
+                }
+            }
+        });
+
         // Load data from the database
         List<Evenement> evenementsList = evenementService.readAll();
         evenements.addAll(evenementsList);
@@ -93,12 +123,57 @@ public class AfficherEvenementController implements Initializable {
             }
         });
     }
-
-    private void refreshTable() {
+   private void refreshTable() {
         evenements.clear();
         List<Evenement> evenementsList = evenementService.readAll();
         evenements.addAll(evenementsList);
-        tableViewEvenements.setItems(evenements);
-    }}
+        tableViewEvenements.setItems(evenements);}
 
+
+
+
+
+    public void redirectToAddEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEvenement.fxml"));
+
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+/*
+    public void redirectToUpdateEvent(Evenement evenement) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateEvenement.fxml"));
+            Parent root = loader.load();
+
+            UpdateEvenementController updateController = loader.getController();
+            updateController.initData(evenement.getId());
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    public void updateEvenement(int id) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateEvenement.fxml"));
+            Parent root = loader.load();
+
+            UpdateEvenementController updateController = loader.getController();
+            updateController.initData(id);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }}
 

@@ -5,8 +5,11 @@ import gestion_communaute.service.EvenementService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -32,22 +35,31 @@ public class AjouterEvenementController {
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
         String duree = txtduree.getText();
 
-        Evenement evenement = new Evenement( type, date_debut, date_fin, duree);
+        Evenement evenement = new Evenement(type, date_debut, date_fin, duree);
         EvenementService evenementService = new EvenementService();
         evenementService.add(evenement);
 
-      /*  FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenement.fxml"));
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenement.fxml"));
             Parent root = loader.load();
-            AfficherEvenementController ac = loader.getController();
-            ac.setRtype(type);
-            ac.setRdate_debut(date_debut.toString());
-            ac.setRdate_fin(date_fin.toString());
-            ac.setRduree(duree);
-            ac.setRlist(evenementService.readAll().toString());
-            txtnom.getScene().setRoot(root);
+            txttype.getScene().setRoot(root);
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
     }
+
+
+
+   /* public void redirectToAfficherEvenement(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherEvenement.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }
+
