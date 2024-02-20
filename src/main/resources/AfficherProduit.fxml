@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AfficherProduitController">
+
+    <!-- Table of Reading (on the left) -->
+    <TableView fx:id="tableViewProduit" layoutX="8.0" layoutY="18.0" prefHeight="364.0" prefWidth="300.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="18.0">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="nomColumn" prefWidth="139.0" text="Nom" />
+            <TableColumn fx:id="prixColumn" prefWidth="75.0" text="Prix" />
+            <TableColumn fx:id="quantiteColumn" prefWidth="75.0" text="Quantité" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="139.0" text="Description" />
+            <TableColumn fx:id="categorieColumn" prefWidth="139.0" text="Catégorie" />
+            <TableColumn fx:id="idbilanfinancierColumn" prefWidth="139.0" text="ID Bilan Financier" />
+            <TableColumn fx:id="idadminColumn" prefWidth="139.0" text="ID Admin" />
+            <TableColumn fx:id="deleteColumn" prefWidth="75.0" text="Supprimer" />
+            <TableColumn fx:id="selectColumn" prefWidth="75.0" text="Sélectionner" />
+        </columns>
+    </TableView>
+
+    <VBox layoutX="300.0" layoutY="38.0" spacing="10.0">
+        <children>
+            <TextField fx:id="txtId" editable="false" />
+
+
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="Nom:" />
+                    <TextField fx:id="txtnom" />
+                </children>
+            </HBox>
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="Image:" />
+                    <TextField fx:id="txtimage" />
+                    <ImageView fx:id="imageView" fitHeight="50" fitWidth="50" />
+                </children>
+            </HBox>
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="Prix:" />
+                    <TextField fx:id="txtprix" />
+                </children>
+            </HBox>
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="Quantite:" />
+                    <TextField fx:id="txtquantite" />
+                </children>
+            </HBox>
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="Description:" />
+                    <TextField fx:id="txtdescription" />
+                </children>
+            </HBox>
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="Catégorie:" />
+                    <TextField fx:id="txtcategorie" />
+                </children>
+            </HBox>
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="ID Bilan Financier:" />
+                    <TextField fx:id="txtid_bilan_financier" />
+                </children>
+            </HBox>
+            <HBox spacing="10.0">
+                <children>
+                    <Label text="ID Admin:" />
+                    <TextField fx:id="txtid_admin" />
+                </children>
+            </HBox>
+            <!-- Other form fields -->
+            <Button mnemonicParsing="false" onAction="#addProduit" text="Ajouter" />
+            <Button mnemonicParsing="false" onAction="#updateProduit" text="Appliquer les changements" />
+        </children>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+    </VBox>
+
+</AnchorPane>
