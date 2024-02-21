@@ -1,8 +1,8 @@
 package org.example;
-import gestion_communaute.entities.Evenement;
-import gestion_communaute.entities.Reclamation;
- import gestion_communaute.service.IService;
-import gestion_communaute.service.EvenementService;
+import gestion_evenement.entities.Evenement;
+import gestion_evenement.entities.Type;
+import gestion_evenement.service.EvenementService;
+import gestion_evenement.service.TypeService;
 
 import java.sql.Timestamp;
 
@@ -13,13 +13,14 @@ public class MainC {
 
         /*DataSource ds1 = DataSource.getInstance();
         System.out.println(ds1);*/
-        // ReclamationService R = new ReclamationService();
-       /* List<Reclamation> filteredReclamations = R.getReclamationsByStatusAndType(Reclamation.Status.pending, "gggg");
+      /*  TypeService R = new TypeService();
+       Type type = new Type("aa");
+       int id = 1; // Replace 1 with the actual ID of the type you want to update
 
-        for (Reclamation reclamation : filteredReclamations) {
-            System.out.println(reclamation); // Assuming you have overridden the toString method in Reclamation class
-        }*/
+        //R.readAll().forEach(System.out::println);
+        R.add(type); // Assuming you have overridden the toString method in Reclamation class
 
+*/
 
 
    /*    Reclamation r1 = new Reclamation(8 ,
@@ -27,23 +28,23 @@ public class MainC {
         );*/
         //R.add(r1);
         //R.update(r1);
-        //R.readAll().forEach(System.out::println);
+
         //R.delete(7);
 
 
 
 
         // ID of the Reclamation you want to retrieve
-      /*  int reclamationIdToRetrieve = 5; // Change this to the desired ID
+    /*   int reclamationIdToRetrieve = 1; // Change this to the desired ID
 
         // Retrieve the Reclamation by ID and print it
-        Reclamation retrievedReclamation = R.readById(reclamationIdToRetrieve);
+        Type retrievedReclamation = R.readById(reclamationIdToRetrieve);
         if (retrievedReclamation != null) {
             System.out.println("Retrieved Reclamation: " + retrievedReclamation);
         } else {
             System.out.println("No Reclamation found with ID: " + reclamationIdToRetrieve);
-        }*/
-
+        }
+*/
 
 
 
@@ -61,14 +62,19 @@ public class MainC {
         } else {
             System.out.println("No Evenement found with ID: " + eventIdToRetrieve);
         }
-*/
-        EvenementService E= new EvenementService();
-        Evenement e1 = new Evenement(
-                "2123123123123", Timestamp.valueOf("2024-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"),"20"
+*/     EvenementService evenementService = new EvenementService();
 
-        );
+    TypeService typeService = new TypeService();
 
-        //dynamic delete
+    int typeId = 1; // Replace your_type_id_here with the actual type ID
+    Type type = typeService.readById(typeId);
+
+    Evenement e1 = new Evenement(type, Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "20");
+
+evenementService.update(15,e1);
+
+
+    //dynamic delete
         // ID of the Evenement you want to delete
       /*  int eventIdToDelete = 5; // Change this to the desired ID
         //E.delete(eventIdToDelete);
@@ -77,7 +83,7 @@ public class MainC {
         //E.add(e1);
         // E.update(e1);
 
-       E.readAll().forEach(System.out::println);
+     //  E.readAll().forEach(System.out::println);
 
 
 
