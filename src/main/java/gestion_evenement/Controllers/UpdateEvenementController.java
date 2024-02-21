@@ -39,37 +39,44 @@ public class UpdateEvenementController {
 
         Evenement evenement = evenementService.readById(eventId);
         txtid.setText(String.valueOf(eventId));
-        TypeService typeService = new TypeService();
-        List<Type> types = typeService.readAll();
-        typeComboBox.setItems(FXCollections.observableArrayList(types));
-        typeComboBox.setValue(evenement.getType());
+
+        Type eventType = evenement.getType();
+        if (eventType != null) {
+            TypeService typeService = new TypeService();
+            List<Type> types = typeService.readAll();
+            typeComboBox.setItems(FXCollections.observableArrayList(types));
+
+            // Find the matching type in the comboBox
+            Type selectedType = types.stream()
+                    .filter(type -> type.getId() == eventType.getId())
+                    .findFirst()
+                    .orElse(null);
+
+            typeComboBox.setValue(selectedType);
+        }
+
         txtdate_debut.setText(evenement.getDate_debut().toString());
         txtdate_fin.setText(evenement.getDate_fin().toString());
         txtduree.setText(evenement.getDuree());
     }
+
+
 
     @FXML
     void updateEvenement(ActionEvent event) {
         int id = Integer.parseInt(txtid.getText());
         Type type = typeComboBox.getValue();
 
-        // Check if a Type is selected
-        if (type == null) {
-            System.out.println("No type selected.");
-            return;
-        }
-
-        // Check if the selected Type exists in the database
-        TypeService typeService = new TypeService();
-        Type existingType = typeService.readById(type.getId());
-        if (existingType == null) {
-            System.out.println("Selected type does not exist in the database.");
-            return;
-        }
-
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
         String duree = txtduree.getText();
+
+        // Check if the selected type is null or does not exist in the database
+        TypeService typeService = new TypeService();
+        if (type == null || typeService.readById(type.getId()) == null) {
+            System.out.println("Selected type does not exist in the database.");
+            return; // Exit the method without performing the update
+        }
 
         Evenement evenement = new Evenement(type, date_debut, date_fin, duree);
         evenementService.update(id, evenement);
@@ -79,6 +86,8 @@ public class UpdateEvenementController {
         Stage stage = (Stage) txtid.getScene().getWindow();
         stage.close();
     }
+
+
 
 
 
