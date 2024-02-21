@@ -129,6 +129,7 @@ public class AdherentService implements IService<Adherent> {
                             role
 
                     );
+                    adherent.setId(rs.getInt(1));
                 }
             }
 
