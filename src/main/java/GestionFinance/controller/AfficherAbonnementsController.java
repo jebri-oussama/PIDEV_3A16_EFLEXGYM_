@@ -3,13 +3,19 @@ package GestionFinance.controller;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import GestionFinance.entites.Abonnement;
 import GestionFinance.service.AbonnementService;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,6 +33,7 @@ public class AfficherAbonnementsController implements Initializable {
 
     @FXML
     private TableColumn<Abonnement, String> dateFinColumn;
+
     @FXML
     private TableColumn<Abonnement, String> etatColumn;
 
@@ -51,30 +58,49 @@ public class AfficherAbonnementsController implements Initializable {
         idAdherentColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_adherent().getId()).asObject());
         idBilanFinancierColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_bilan_financier().getId()).asObject());
 
-
         // Load data from the database
         refreshTable();
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
         abonnements.clear();
         List<Abonnement> abonnementsList = abonnementService.readAll();
         abonnements.addAll(abonnementsList);
         abonnementsTable.setItems(abonnements);
     }
 
+    @FXML
+    void ajouterAbonnement(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterAbonnement.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
 
-    public void supprimerAbonnement(int id) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete this subscription?");
-        Abonnement abonnement = new Abonnement();
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                abonnementService.delete(abonnement);
-                refreshTable();
-            }
-        });
+            AjouterAbonnementController controller = loader.getController();
+            controller.setCurrentScene(scene); // Passer la scène actuelle au contrôleur AjouterAbonnementController
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void openUpdateAbonnement(Abonnement abonnement) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateAbonnement.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            UpdateAbonnementController controller = loader.getController();
+            controller.initData(abonnement.getId()); // Passer l'ID de l'abonnement au contrôleur UpdateAbonnementController
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
