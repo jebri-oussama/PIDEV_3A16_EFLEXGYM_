@@ -1,66 +1,80 @@
 package GestionFinance.controller;
 
-import GestionFinance.service.AbonnementService;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import GestionFinance.entites.Abonnement;
+import GestionFinance.service.AbonnementService;
 
-public class AfficherAbonnementsController {
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
-    private final AbonnementService as = new AbonnementService();
-
-    @FXML
-    private TextField rAdherent;
-
-    @FXML
-    private TextField rBilan;
-
-    @FXML
-    private TextField rDateDebut;
+public class AfficherAbonnementsController implements Initializable {
 
     @FXML
-    private TextField rDateFin;
+    private TableView<Abonnement> abonnementsTable;
 
     @FXML
-    private TextField rEtat;
+    private TableColumn<Abonnement, String> typeColumn;
 
     @FXML
-    private TextField rList;
+    private TableColumn<Abonnement, String> dateDebutColumn;
 
     @FXML
-    private TextField rPrix;
+    private TableColumn<Abonnement, String> dateFinColumn;
+    @FXML
+    private TableColumn<Abonnement, String> etatColumn;
 
     @FXML
-    private TextField rType;
+    private TableColumn<Abonnement, Integer> idAdherentColumn;
 
-    public void setrAdherent(String rAdherentText) {
-        this.rAdherent.setText(rAdherentText);
+    @FXML
+    private TableColumn<Abonnement, Integer> idBilanFinancierColumn;
+
+    private final ObservableList<Abonnement> abonnements = FXCollections.observableArrayList();
+    private AbonnementService abonnementService;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        abonnementService = new AbonnementService();
+
+        // Set up the columns
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
+        dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+        etatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
+        idAdherentColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_adherent().getId()).asObject());
+        idBilanFinancierColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_bilan_financier().getId()).asObject());
+
+
+        // Load data from the database
+        refreshTable();
     }
 
-    public void setrBilan(String rBilanText) {
-        this.rBilan.setText(rBilanText);
+    private void refreshTable() {
+        abonnements.clear();
+        List<Abonnement> abonnementsList = abonnementService.readAll();
+        abonnements.addAll(abonnementsList);
+        abonnementsTable.setItems(abonnements);
     }
 
-    public void setrDateDebut(String rDateDebutText) {
-        this.rDateDebut.setText(rDateDebutText);
-    }
 
-    public void setrDateFin(String rDateFinText) {
-        this.rDateFin.setText(rDateFinText);
-    }
-
-    public void setrEtat(String rEtatText) {
-        this.rEtat.setText(rEtatText);
-    }
-
-    public void setrList(String rListText) {
-        this.rList.setText(rListText);
-    }
-
-    public void setrPrix(String rPrixText) {
-        this.rPrix.setText(rPrixText);
-    }
-
-    public void setrType(String rTypeText) {
-        this.rType.setText(rTypeText);
+    public void supprimerAbonnement(int id) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this subscription?");
+        Abonnement abonnement = new Abonnement();
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                abonnementService.delete(abonnement);
+                refreshTable();
+            }
+        });
     }
 }

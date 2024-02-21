@@ -43,7 +43,7 @@ public class AjouterAbonnementController {
 
 
     @FXML
-    void ajouter(ActionEvent event)  {
+    void ajouter(ActionEvent event) {
 
         String typeString = typeTF.getText();
         Type type = Type.valueOf(typeString);
@@ -54,15 +54,15 @@ public class AjouterAbonnementController {
         Etat etat = Etat.valueOf(etatString);
         int idAdherent = Integer.parseInt(idadherentTF.getText());
         int idBilan = Integer.parseInt(idbilanTF.getText());
-       // Adherent adherent = new Adherent(idAdherent);
+        // Adherent adherent = new Adherent(idAdherent);
         BilanFinancier bilanFinancier = new BilanFinancier(idBilan);
 
-        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, /*adherent,*/ bilanFinancier);
-        as.add(abonnement);
+        // Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, /*adherent,*/ bilanFinancier);
+        // as.add(abonnement);
 
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/AfficherPersonne.fxml"));
-        try {
+       /* try {
             Parent root = loader.load();
             AfficherAbonnementsController ac = loader.getController();
             ac.setrAdherent(String.valueOf(idAdherent));
@@ -80,6 +80,7 @@ public class AjouterAbonnementController {
         }
 
 
+    }*/
     }
 
 

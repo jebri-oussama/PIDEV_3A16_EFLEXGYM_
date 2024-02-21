@@ -1,24 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherAbonnementsController">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<HBox prefHeight="584.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherAbonnementsController">
    <children>
-      <Label layoutX="47.0" layoutY="40.0" text="Evenements List" />
+      <AnchorPane layoutY="1.0" prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
+         <children>
+            <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FFC300;">
+               <children>
+                  <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="70.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
+                     <font>
+                        <Font name="Impact" size="31.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="50.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Button fx:id="dashboardId" mnemonicParsing="false" text="Dashboard">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="abonnementsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="156.0" text="Abonnements">
+                     <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="adherentsId" mnemonicParsing="false" text="Adherents">
+                     <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="157.0" text="Coachs">
+                     <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="584.0" prefWidth="400.0">
+         <children>
+            <TableView fx:id="abonnementsTable" prefHeight="588.0" prefWidth="601.0">
+               <columns>
+                  <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Type">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="type" />
+                     </cellValueFactory>
+                  </TableColumn>
 
-      <TableView fx:id="tableViewEvenements" layoutX="47.0" layoutY="80.0" prefWidth="506.0" prefHeight="270.0">
-         <columns>
-            <TableColumn fx:id="idColumn" text="ID" />
-            <TableColumn fx:id="typeColumn" text="Type" />
-            <TableColumn fx:id="dateDebutColumn" text="Date de début" />
-            <TableColumn fx:id="dateFinColumn" text="Date de fin" />
-            <TableColumn fx:id="dureeColumn" text="Durée" />
-            <TableColumn fx:id="deleteColumn" text="Supprimer" />
+                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" text="Date Début">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="date_debut" />
+                     </cellValueFactory>
+                  </TableColumn>
 
+                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" text="Date Fin">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="date_fin" />
+                     </cellValueFactory>
+                  </TableColumn>
 
+                  <TableColumn fx:id="etatColumn" prefWidth="100.0" text="Etat">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="etat" />
+                     </cellValueFactory>
+                  </TableColumn>
 
-         </columns>
-      </TableView>
+                  <TableColumn fx:id="idAdherentColumn" prefWidth="100.0" text="ID Adhérent">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="id_adherent" />
+                     </cellValueFactory>
+                  </TableColumn>
+
+                  <TableColumn fx:id="idBilanFinancierColumn" prefWidth="100.0" text="ID Bilan Financier">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="id_bilan_financier" />
+                     </cellValueFactory>
+                  </TableColumn>
+
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</HBox>

@@ -58,7 +58,7 @@ public class UpdateBilanFinancierController {
         bs.update(bilanFinancier);
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/AfficherBilanFinancier.fxml"));
-        try {
+      /*  try {
             Parent root = loader.load();
             AfficherBilanFinancierController ac = loader.getController();
             ac.setIdRevenusDesAbonnements(revenusAbonnements);
@@ -74,7 +74,7 @@ public class UpdateBilanFinancierController {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
 
 
     }

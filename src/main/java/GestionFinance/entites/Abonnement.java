@@ -1,6 +1,8 @@
 package GestionFinance.entites;
 
 
+import gestion_user.entities.User;
+
 import java.time.LocalDate;
 
 public class Abonnement  {
@@ -11,29 +13,29 @@ public class Abonnement  {
     private LocalDate date_debut;
     private LocalDate date_fin;
     private Etat etat;
-    User adherent;
-    BilanFinancier b;
+    User id_adherent;
+    BilanFinancier id_bilan_financier;
 
-    public Abonnement(int id , Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, User adherent, BilanFinancier b) {
+    public Abonnement(int id , Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, User id_adherent, BilanFinancier id_bilan_financier) {
         this.type = type;
         this.prix = prix;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.etat = etat;
-        this.b=b;
-        this.adherent=adherent;
+        this.id_bilan_financier=id_bilan_financier;
+        this.id_adherent=id_adherent;
         this.id=id;
 
     }
 
-    public Abonnement(Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, User adherent,  BilanFinancier b) {
+    public Abonnement(Type type, double prix, LocalDate date_debut, LocalDate date_fin, Etat etat, User id_adherent,  BilanFinancier id_bilan_financier) {
         this.type = type;
         this.prix = prix;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.etat = etat;
-        this.adherent = adherent;
-        this.b = b;
+        this.id_adherent = id_adherent;
+        this.id_bilan_financier = id_bilan_financier;
     }
 
     public Abonnement() {
@@ -59,20 +61,20 @@ public class Abonnement  {
         return date_fin;
     }
 
-    public User getAdherent() {
-        return adherent;
+    public User getId_adherent() {
+        return id_adherent;
     }
 
-    public void setAdherent(User adherent) {
-        this.adherent = adherent;
+    public void setId_adherent(User id_adherent) {
+        this.id_adherent = id_adherent;
     }
 
-    public BilanFinancier getB() {
-        return b;
+    public BilanFinancier getId_bilan_financier() {
+        return id_bilan_financier;
     }
 
-    public void setB(BilanFinancier b) {
-        this.b = b;
+    public void setId_bilan_financier(BilanFinancier id_bilan_financier) {
+        this.id_bilan_financier = id_bilan_financier;
     }
 
     public int getId() {
@@ -122,8 +124,8 @@ public class Abonnement  {
                 ", date_debut=" + date_debut +
                 ", date_fin=" + date_fin +
                 ", etat=" + etat +
-                ", adherent=" + adherent +
-                ", b=" + b +
+                ", id_adherent=" + id_adherent +
+                ", id_bilan_financier=" + id_bilan_financier +
                 '}';
     }
 }
