@@ -95,7 +95,38 @@ public class TypeService implements IService<Type> {
         }
         return null;
     }
+    public List<Type> getAllTypes() {
+        List<Type> types = new ArrayList<>();
+        String query = "SELECT * FROM Type";
+        try {
+            pst = conn.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Type type = new Type(rs.getString("typeName"));
+                types.add(type);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return types;
+    }
 
+    public Type getTypeByName(String typeName) {
+        String query = "SELECT * FROM Type WHERE typeName = ?";
+        try {
+            pst = conn.prepareStatement(query);
+            pst.setString(1, typeName);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Type type = new Type(rs.getString("typeName"));
+                type.setId(rs.getInt("id"));
+                return type;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 
 
 

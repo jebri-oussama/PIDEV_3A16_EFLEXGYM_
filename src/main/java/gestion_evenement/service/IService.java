@@ -13,5 +13,6 @@ public interface IService<T> {
     List<T> readAll();
 
     T readById(int id);
-
+    List<T> getAllTypes();
+    T getTypeByName(String typeName);
 }

@@ -4,6 +4,8 @@ import gestion_evenement.entities.Evenement;
 import gestion_evenement.entities.EventBus;
 import gestion_evenement.entities.Type;
 import gestion_evenement.service.EvenementService;
+import gestion_evenement.service.TypeService;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class AjouterEvenementController {
 
@@ -27,10 +30,18 @@ public class AjouterEvenementController {
 
     @FXML
     private TextField txtduree;
-
+    @FXML
+    private void initialize() {
+        populateTypeComboBox();
+    }
     @FXML
     void addEvenement(ActionEvent event) {
-        Type type = typeComboBox.getValue();
+        Type selectedType = typeComboBox.getValue();
+        String typeName = selectedType.getTypeName();
+
+        TypeService typeService = new TypeService();
+        Type type = typeService.getTypeByName(typeName); // Implement getTypeByName method in TypeService
+
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
         String duree = txtduree.getText();
@@ -44,6 +55,12 @@ public class AjouterEvenementController {
         stage.close();
     }
 
+
+    private void populateTypeComboBox() {
+        TypeService typeService = new TypeService(); // Assuming you have a TypeService class
+        List<Type> types = typeService.getAllTypes(); // Implement this method in your TypeService
+        typeComboBox.setItems(FXCollections.observableArrayList(types));
+    }
 
 
    /* public void redirectToAfficherEvenement(ActionEvent event) {

@@ -52,15 +52,19 @@ public class UpdateEvenementController {
     void updateEvenement(ActionEvent event) {
         int id = Integer.parseInt(txtid.getText());
         Type type = typeComboBox.getValue();
-        System.out.println("Before readById: " + type.getId());
-        Evenement typeEvent = evenementService.readById(type.getId());
-        System.out.println("After readById: " + typeEvent);
 
-        // Check if the selected Type object exists in the database
-        if (type == null || evenementService.readById(type.getId()) == null) {
-            // Handle the case where the selected Type does not exist
+        // Check if a Type is selected
+        if (type == null) {
+            System.out.println("No type selected.");
+            return;
+        }
+
+        // Check if the selected Type exists in the database
+        TypeService typeService = new TypeService();
+        Type existingType = typeService.readById(type.getId());
+        if (existingType == null) {
             System.out.println("Selected type does not exist in the database.");
-            return; // Exit the method without performing the update
+            return;
         }
 
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
@@ -75,6 +79,8 @@ public class UpdateEvenementController {
         Stage stage = (Stage) txtid.getScene().getWindow();
         stage.close();
     }
+
+
 
 
 }

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EvenementService implements IService<Evenement> {
+public class EvenementService implements IServiceE<Evenement> {
 
     private Connection conn;
     private PreparedStatement pst;
@@ -116,18 +116,21 @@ public class EvenementService implements IService<Evenement> {
             if (rs.next()) {
                 int typeId = rs.getInt("type");
                 Type type = readTypeById(typeId);
-                return new Evenement(
+                Evenement evenement = new Evenement(
                         type,
                         rs.getTimestamp("date_debut"),
                         rs.getTimestamp("date_fin"),
                         rs.getString("duree")
                 );
+                evenement.setId(rs.getInt("id")); // Set the ID here
+                return evenement;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
     }
+
 
 
 

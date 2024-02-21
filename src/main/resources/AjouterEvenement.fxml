@@ -13,7 +13,7 @@
                 <HBox spacing="10.0">
                     <children>
                         <Label text="Type:" />
-                        <ComboBox fx:id="txttype" />
+                        <ComboBox fx:id="typeComboBox" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">
