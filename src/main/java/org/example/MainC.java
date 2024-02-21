@@ -12,14 +12,13 @@ public class MainC {
 
 
         /*DataSource ds1 = DataSource.getInstance();
-        System.out.println(ds1);*/
-      /*  TypeService R = new TypeService();
+      System.out.println(ds1);*/
+   /*    TypeService R = new TypeService();
        Type type = new Type("aa");
        int id = 1; // Replace 1 with the actual ID of the type you want to update
 
         //R.readAll().forEach(System.out::println);
-        R.add(type); // Assuming you have overridden the toString method in Reclamation class
-
+       // R.add(type); // Assuming you have overridden the toString method in Reclamation class
 */
 
 
@@ -31,11 +30,11 @@ public class MainC {
 
         //R.delete(7);
 
-
+/*
 
 
         // ID of the Reclamation you want to retrieve
-    /*   int reclamationIdToRetrieve = 1; // Change this to the desired ID
+      int reclamationIdToRetrieve = 1; // Change this to the desired ID
 
         // Retrieve the Reclamation by ID and print it
         Type retrievedReclamation = R.readById(reclamationIdToRetrieve);
@@ -44,16 +43,16 @@ public class MainC {
         } else {
             System.out.println("No Reclamation found with ID: " + reclamationIdToRetrieve);
         }
+
 */
 
 
 
-
         //READ BY ID
-       /* EvenementService evenementService = new EvenementService();
+       EvenementService evenementService = new EvenementService();
 
         // ID of the Evenement you want to retrieve
-        int eventIdToRetrieve = 6; // Change this to the desired ID
+        int eventIdToRetrieve = 15; // Change this to the desired ID
 
         // Retrieve the Evenement by ID and print it
         Evenement retrievedEvenement = evenementService.readById(eventIdToRetrieve);
@@ -62,16 +61,16 @@ public class MainC {
         } else {
             System.out.println("No Evenement found with ID: " + eventIdToRetrieve);
         }
-*/     EvenementService evenementService = new EvenementService();
+   //EvenementService evenementService = new EvenementService();
 
     TypeService typeService = new TypeService();
 
-    int typeId = 1; // Replace your_type_id_here with the actual type ID
-    Type type = typeService.readById(typeId);
+  //  int typeId = 1; // Replace your_type_id_here with the actual type ID
+  //  Type type = typeService.readById(typeId);
 
-    Evenement e1 = new Evenement(type, Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "20");
+   // Evenement e1 = new Evenement(type, Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "20");
 
-evenementService.update(15,e1);
+//evenementService.update(15,e1);
 
 
     //dynamic delete

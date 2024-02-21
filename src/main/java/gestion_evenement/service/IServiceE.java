@@ -1,6 +1,6 @@
-package gestion_communaute.service;
+package gestion_evenement.service;
 
-import gestion_communaute.entities.Evenement;
+import gestion_evenement.entities.Evenement;
 
 import java.util.List;
 

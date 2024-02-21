@@ -1,23 +1,23 @@
-package gestion_communaute.Controllers;
+package gestion_evenement.Controllers;
 
-import gestion_communaute.entities.Evenement;
-import gestion_communaute.service.EvenementService;
+import gestion_evenement.entities.Evenement;
+import gestion_evenement.entities.EventBus;
+import gestion_evenement.entities.Type;
+import gestion_evenement.service.EvenementService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 
 public class AjouterEvenementController {
 
     @FXML
-    private TextField txttype;
+    private ComboBox<Type> typeComboBox;
+
 
     @FXML
     private TextField txtdate_debut;
@@ -30,22 +30,18 @@ public class AjouterEvenementController {
 
     @FXML
     void addEvenement(ActionEvent event) {
-        String type = txttype.getText();
+        Type type = typeComboBox.getValue();
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
         String duree = txtduree.getText();
 
         Evenement evenement = new Evenement(type, date_debut, date_fin, duree);
+
         EvenementService evenementService = new EvenementService();
         evenementService.add(evenement);
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenement.fxml"));
-            Parent root = loader.load();
-            txttype.getScene().setRoot(root);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        EventBus.getInstance().notifyTableRefreshed();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
 

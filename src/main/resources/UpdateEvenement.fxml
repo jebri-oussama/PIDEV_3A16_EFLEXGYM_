@@ -5,7 +5,7 @@
 
 <?import javafx.geometry.Insets?>
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="gestion_communaute.Controllers.UpdateEvenementController"
+            fx:controller="gestion_evenement.Controllers.UpdateEvenementController"
             prefHeight="400.0" prefWidth="600.0">
 
     <children>
@@ -20,7 +20,8 @@
                 <HBox spacing="10.0">
                     <children>
                         <Label text="Type:" />
-                        <TextField fx:id="txttype" />
+                        <!-- Change the TextField to a ComboBox and set the fx:id to "typeComboBox" -->
+                        <ComboBox fx:id="typeComboBox" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0">

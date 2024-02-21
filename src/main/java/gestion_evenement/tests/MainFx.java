@@ -1,4 +1,4 @@
-package gestion_communaute.tests;
+package gestion_evenement.tests;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

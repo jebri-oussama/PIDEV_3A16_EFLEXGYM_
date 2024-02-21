@@ -1,7 +1,6 @@
-package gestion_communaute.Controllers;
+package gestion_evenement.Controllers;
 
-import gestion_communaute.service.EvenementService;
-import javafx.fxml.FXML;
+import gestion_evenement.service.EvenementService;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 

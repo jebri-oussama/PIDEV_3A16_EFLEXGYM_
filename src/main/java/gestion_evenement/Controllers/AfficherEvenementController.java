@@ -1,7 +1,8 @@
-package gestion_communaute.Controllers;
+package gestion_evenement.Controllers;
 
-import gestion_communaute.entities.Evenement;
-import gestion_communaute.service.EvenementService;
+import gestion_evenement.entities.Evenement;
+import gestion_evenement.entities.EventBus;
+import gestion_evenement.service.EvenementService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +20,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AfficherEvenementController implements Initializable {
+public class AfficherEvenementController implements Initializable, EventBus.EventListener {
 
     @FXML
     private TableView<Evenement> tableViewEvenements;
@@ -107,8 +108,12 @@ public class AfficherEvenementController implements Initializable {
         List<Evenement> evenementsList = evenementService.readAll();
         evenements.addAll(evenementsList);
         tableViewEvenements.setItems(evenements);
+        EventBus.getInstance().register(this);
     }
-
+    @Override
+    public void onTableRefreshed() {
+        refreshTable();
+    }
 
     public void supprimerEvenement(int id) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
