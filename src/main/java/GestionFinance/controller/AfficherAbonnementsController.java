@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AfficherAbonnementsController implements Initializable {
@@ -26,24 +27,21 @@ public class AfficherAbonnementsController implements Initializable {
     private TableView<Abonnement> abonnementsTable;
     @FXML
     private TableColumn<Abonnement, Void> modifierColumn;
+    @FXML
+    private TableColumn<Abonnement, Void> supprimerColumn;
 
     @FXML
     private TableColumn<Abonnement, String> typeColumn;
     @FXML
     private TableColumn<Abonnement, String> prixColumn;
-
     @FXML
     private TableColumn<Abonnement, String> dateDebutColumn;
-
     @FXML
     private TableColumn<Abonnement, String> dateFinColumn;
-
     @FXML
     private TableColumn<Abonnement, String> etatColumn;
-
     @FXML
     private TableColumn<Abonnement, Integer> idAdherentColumn;
-
     @FXML
     private TableColumn<Abonnement, Integer> idBilanFinancierColumn;
 
@@ -54,7 +52,6 @@ public class AfficherAbonnementsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         abonnementService = new AbonnementService();
 
-        // Set up the columns
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         prixColumn.setCellValueFactory(new PropertyValueFactory<>("prix"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
@@ -63,7 +60,6 @@ public class AfficherAbonnementsController implements Initializable {
         idAdherentColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_adherent().getId()).asObject());
         idBilanFinancierColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_bilan_financier().getId()).asObject());
 
-        // Load data from the database
         refreshTable();
 
         modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
@@ -81,6 +77,28 @@ public class AfficherAbonnementsController implements Initializable {
                     button.setOnAction(event -> {
                         Abonnement abonnement = getTableView().getItems().get(getIndex());
                         openUpdateAbonnement(abonnement);
+                    });
+                    setGraphic(button);
+                    setText(null);
+                }
+            }
+        });
+
+        supprimerColumn.setCellValueFactory(new PropertyValueFactory<>("supprimerButton"));
+        supprimerColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button button = new Button("Supprimer");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    button.setOnAction(event -> {
+                        Abonnement abonnement = getTableView().getItems().get(getIndex());
+                        deleteAbonnement(abonnement);
                     });
                     setGraphic(button);
                     setText(null);
@@ -106,7 +124,7 @@ public class AfficherAbonnementsController implements Initializable {
             stage.setScene(scene);
 
             AjouterAbonnementController controller = loader.getController();
-            controller.setCurrentScene(scene); // Passer la scène actuelle au contrôleur AjouterAbonnementController
+            controller.setCurrentScene(scene);
 
             stage.show();
         } catch (IOException e) {
@@ -123,12 +141,25 @@ public class AfficherAbonnementsController implements Initializable {
             stage.setScene(scene);
 
             UpdateAbonnementController controller = loader.getController();
-            controller.setCurrentScene(scene); // Passer la scène actuelle au contrôleur UpdateAbonnementController
-            controller.initData(abonnement.getId()); // Passer l'ID de l'abonnement au contrôleur UpdateAbonnementController
+            controller.setCurrentScene(scene);
+            controller.initData(abonnement.getId());
 
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void deleteAbonnement(Abonnement abonnement) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cet abonnement ?");
+        alert.setContentText("Cette action est irréversible.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            abonnementService.delete(abonnement);
+            refreshTable();
         }
     }
 }

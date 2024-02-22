@@ -121,6 +121,12 @@
                         <PropertyValueFactory property="modifierButton" />
                      </cellFactory>
                   </TableColumn>
+                  <TableColumn fx:id="supprimerColumn" prefWidth="100.0" text="Supprimer">
+                     <cellFactory>
+                        <PropertyValueFactory property="supprimerButton" />
+                     </cellFactory>
+                  </TableColumn>
+
 
 
 
