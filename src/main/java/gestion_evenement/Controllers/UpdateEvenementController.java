@@ -30,8 +30,6 @@ public class UpdateEvenementController {
     @FXML
     private TextField txtdate_fin;
 
-    @FXML
-    private TextField txtduree;
 
     private EvenementService evenementService;
 
@@ -47,7 +45,6 @@ public class UpdateEvenementController {
             List<Type> types = typeService.readAll();
             typeComboBox.setItems(FXCollections.observableArrayList(types));
 
-            // Find the matching type in the comboBox
             Type selectedType = types.stream()
                     .filter(type -> type.getId() == eventType.getId())
                     .findFirst()
@@ -58,7 +55,6 @@ public class UpdateEvenementController {
 
         txtdate_debut.setText(evenement.getDate_debut().toString());
         txtdate_fin.setText(evenement.getDate_fin().toString());
-        txtduree.setText(evenement.getDuree());
     }
 
 
@@ -74,69 +70,52 @@ public class UpdateEvenementController {
 
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
-        String duree = txtduree.getText();
 
-        Evenement evenement = new Evenement(type, date_debut, date_fin, duree);
+
+        Evenement evenement = new Evenement(type, date_debut, date_fin);
         evenementService.update(id, evenement);
         EventBus.getInstance().notifyTableRefreshed();
 
-        // Close the current stage
+
         Stage stage = (Stage) txtid.getScene().getWindow();
         stage.close();
     }
 
     private boolean validateInput() {
         if (typeComboBox.getValue() == null) {
-            // No type selected
             System.out.println("Please select a type.");
             return false;
         }
 
         if (!isValidTimestamp(txtdate_debut.getText())) {
-            // Invalid date format for date_debut
             System.out.println("Invalid date format for Date de début. Use yyyy-MM-dd HH:mm:ss");
             return false;
         }
 
         if (!isValidTimestamp(txtdate_fin.getText())) {
-            // Invalid date format for date_fin
             System.out.println("Invalid date format for Date de fin. Use yyyy-MM-dd HH:mm:ss");
-            return false;
-        }
-
-        if (!isValidDuration(txtduree.getText())) {
-            // Invalid duration format
-            System.out.println("Invalid duration format. Please enter a value in HH:mm:ss format.");
             return false;
         }
 
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
 
-        // Validate date_debut is not less than today's date
         if (date_debut.before(Timestamp.valueOf(LocalDateTime.now()))) {
             System.out.println("Date de début should not be less than today's date.");
             return false;
         }
 
-        // Validate date_fin is not less than date_debut
         if (date_fin.before(date_debut)) {
             System.out.println("Date de fin should not be less than Date de début.");
             return false;
         }
 
-        // If date_debut and date_fin are equal, duree should not be null
-        if (date_debut.equals(date_fin) && txtduree.getText().equals("00:00:00") ) {
+        if (date_debut.equals(date_fin) ) {
             System.out.println("If Date de début and Date de fin are equal, Durée should not be empty.");
             return false;
         }
 
         return true;
-    }
-    private boolean isValidDuration(String duration) {
-        // Regex to match the HH:mm:ss format
-        String regex = "([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]";
-        return duration.matches(regex);
     }
 
     private boolean isValidTimestamp(String value) {
@@ -147,8 +126,6 @@ public class UpdateEvenementController {
             return false;
         }
     }
-
-
 
 
 }

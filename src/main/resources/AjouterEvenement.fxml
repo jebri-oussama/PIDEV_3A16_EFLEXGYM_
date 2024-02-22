@@ -33,12 +33,6 @@
                         <TextField fx:id="txtdate_fin" styleClass="text-field" />
                     </children>
                 </HBox>
-                <HBox spacing="10.0" styleClass="input-row">
-                    <children>
-                        <Label text="Durée:" styleClass="input-label" />
-                        <TextField fx:id="txtduree" styleClass="text-field" />
-                    </children>
-                </HBox>
                 <Button layoutX="321.0" layoutY="304.0" mnemonicParsing="false" onAction="#addEvenement" text="Ajouter" styleClass="add-button" />
             </children>
             <padding>

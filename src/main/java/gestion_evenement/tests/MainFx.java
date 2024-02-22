@@ -21,7 +21,7 @@ public class MainFx extends Application {
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            primaryStage.setTitle("AfficherEvenement"); // Changer le titre de la fenêtre
+            primaryStage.setTitle("Afficher Evenement"); // Changer le titre de la fenêtre
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

@@ -37,9 +37,6 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
     @FXML
     private TableColumn<Evenement, String> dateFinColumn;
 
-    @FXML
-    private TableColumn<Evenement, String> dureeColumn;
-
     private final ObservableList<Evenement> evenements = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Evenement, Void> deleteColumn;
@@ -58,7 +55,7 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
-        dureeColumn.setCellValueFactory(new PropertyValueFactory<>("duree"));
+
 
         // Create the "Supprimer" button column
         deleteColumn.setCellFactory(param -> new TableCell<>() {
@@ -150,22 +147,6 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
             e.printStackTrace();
         }
     }
-/*
-    public void redirectToUpdateEvent(Evenement evenement) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateEvenement.fxml"));
-            Parent root = loader.load();
-
-            UpdateEvenementController updateController = loader.getController();
-            updateController.initData(evenement.getId());
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public void updateEvenement(int id) {
         try {

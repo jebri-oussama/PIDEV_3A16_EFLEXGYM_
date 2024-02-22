@@ -8,13 +8,13 @@ public class Evenement {
     private Type type;
     private Timestamp date_debut;
     private Timestamp date_fin;
-    private String duree;
 
-    public Evenement(Type type, Timestamp date_debut, Timestamp date_fin, String duree) {
+
+    public Evenement(Type type, Timestamp date_debut, Timestamp date_fin ) {
         this.type = type;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
-        this.duree = duree;
+
     }
 
     public int getId() {
@@ -48,13 +48,14 @@ public class Evenement {
     public void setDate_fin(Timestamp date_fin) {
         this.date_fin = date_fin;
     }
+    public String getDuration() {
+        long durationInMillis = date_fin.getTime() - date_debut.getTime();
+        long days = durationInMillis / (1000 * 60 * 60 * 24);
+        long hours = (durationInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+        long minutes = (durationInMillis % (1000 * 60 * 60)) / (1000 * 60);
 
-    public String getDuree() {
-        return duree;
-    }
 
-    public void setDuree(String duree) {
-        this.duree = duree;
+        return String.format("%d days, %d hours, %d minutes", days, hours, minutes);
     }
 
     @Override
@@ -64,7 +65,6 @@ public class Evenement {
                 ", type=" + type +
                 ", date_debut=" + date_debut +
                 ", date_fin=" + date_fin +
-                ", duree='" + duree + '\'' +
                 '}';
     }
 }

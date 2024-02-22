@@ -30,7 +30,6 @@ public class EvenementService implements IServiceE<Evenement> {
             pst.setInt(1, e.getType().getId());
             pst.setTimestamp(2, new java.sql.Timestamp(e.getDate_debut().getTime()));
             pst.setTimestamp(3, new java.sql.Timestamp(e.getDate_fin().getTime()));
-            pst.setString(4, e.getDuree());
             pst.executeUpdate();
 
             ResultSet rs = pst.getGeneratedKeys();
@@ -69,8 +68,7 @@ public class EvenementService implements IServiceE<Evenement> {
             pst.setInt(1, evenement.getType().getId());
             pst.setTimestamp(2, new java.sql.Timestamp(evenement.getDate_debut().getTime()));
             pst.setTimestamp(3, new java.sql.Timestamp(evenement.getDate_fin().getTime()));
-            pst.setString(4, evenement.getDuree());
-            pst.setInt(5, id);
+            pst.setInt(4, id);
             pst.executeUpdate();System.out.println("Type ID: " + id); // Add this line for debugging;
 
         } catch (SQLException e) {
@@ -93,8 +91,7 @@ public class EvenementService implements IServiceE<Evenement> {
                 Evenement evenement = new Evenement(
                         type,
                         rs.getTimestamp("date_debut"),
-                        rs.getTimestamp("date_fin"),
-                        rs.getString("duree")
+                        rs.getTimestamp("date_fin")
                 );
                 evenement.setId(rs.getInt("id"));
                 list.add(evenement);
@@ -119,8 +116,7 @@ public class EvenementService implements IServiceE<Evenement> {
                 Evenement evenement = new Evenement(
                         type,
                         rs.getTimestamp("date_debut"),
-                        rs.getTimestamp("date_fin"),
-                        rs.getString("duree")
+                        rs.getTimestamp("date_fin")
                 );
                 evenement.setId(rs.getInt("id")); // Set the ID here
                 return evenement;
