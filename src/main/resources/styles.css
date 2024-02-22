@@ -1,0 +1,54 @@
+/* styles.css */
+.root {
+    -fx-background-color: #ffffff; /* white background */
+}
+
+.label {
+    -fx-text-fill: #ffffff; /* white text color */
+}
+
+.text-field,
+.combo-box {
+    -fx-background-color: #252525; /* black background */
+    -fx-text-fill: #ffffff; /* white text color */
+    -fx-background-radius: 5px; /* round the corners */
+}
+
+.button {
+    -fx-background-color: #FFA500; /* orange background */
+    -fx-text-fill: #ffffff; /* white text color */
+    -fx-font-size: 14px; /* set font size */
+    -fx-padding: 8px 16px; /* add padding */
+    -fx-background-radius: 5px; /* round the corners */
+    -fx-border-radius: 5px; /* round the corners */
+    -fx-border-color: #ffffff; /* white border color */
+    -fx-border-width: 1px; /* set border width */
+    -fx-cursor: hand; /* change cursor on hover */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 ); /* add drop shadow effect */
+    -fx-transition: all 0.3s; /* add smooth transition */
+}
+
+.button:hover {
+    -fx-background-color: #FF6347; /* orange hover color */
+}
+
+/* styles.css */
+.big-label {
+    -fx-font-size: 24px; /* set font size */
+    -fx-text-fill: #FFA500; /* orange text color */
+}
+
+.vbox {
+    -fx-background-color: #ffffff; /* white background */
+    -fx-padding: 20px; /* add padding */
+    -fx-spacing: 10px; /* set spacing between children */
+    -fx-alignment: center; /* center children */
+}
+
+.hbox {
+    -fx-spacing: 10px; /* set spacing between children */
+    -fx-alignment: center; /* center children */
+}
+
+
+/* Add more styles as needed */

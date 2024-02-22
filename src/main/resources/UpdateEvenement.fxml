@@ -4,39 +4,42 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import java.lang.String?>
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="gestion_evenement.Controllers.UpdateEvenementController"
             prefHeight="400.0" prefWidth="600.0">
-
+    <stylesheets>
+        <String fx:value="styles.css" />
+    </stylesheets>
     <children>
-        <VBox layoutX="35.0" layoutY="38.0" spacing="10.0">
+        <VBox layoutX="35.0" layoutY="38.0" spacing="10.0" styleClass="vbox">
             <children>
-                <HBox spacing="10.0">
+                <Label text="Modifier" styleClass="big-label" />
+                <HBox spacing="10.0" styleClass="hbox">
                     <children>
                         <Label text="ID:" />
-                        <TextField fx:id="txtid" />
+                        <TextField fx:id="txtid" editable="false"/>
                     </children>
                 </HBox>
-                <HBox spacing="10.0">
+                <HBox spacing="10.0" styleClass="hbox">
                     <children>
                         <Label text="Type:" />
-                        <!-- Change the TextField to a ComboBox and set the fx:id to "typeComboBox" -->
                         <ComboBox fx:id="typeComboBox" />
                     </children>
                 </HBox>
-                <HBox spacing="10.0">
+                <HBox spacing="10.0" styleClass="hbox">
                     <children>
                         <Label text="Date de début:" />
                         <TextField fx:id="txtdate_debut" />
                     </children>
                 </HBox>
-                <HBox spacing="10.0">
+                <HBox spacing="10.0" styleClass="hbox">
                     <children>
                         <Label text="Date de fin:" />
                         <TextField fx:id="txtdate_fin" />
                     </children>
                 </HBox>
-                <HBox spacing="10.0">
+                <HBox spacing="10.0" styleClass="hbox">
                     <children>
                         <Label text="Durée:" />
                         <TextField fx:id="txtduree" />
