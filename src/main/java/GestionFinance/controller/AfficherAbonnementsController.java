@@ -24,9 +24,13 @@ public class AfficherAbonnementsController implements Initializable {
 
     @FXML
     private TableView<Abonnement> abonnementsTable;
+    @FXML
+    private TableColumn<Abonnement, Void> modifierColumn;
 
     @FXML
     private TableColumn<Abonnement, String> typeColumn;
+    @FXML
+    private TableColumn<Abonnement, String> prixColumn;
 
     @FXML
     private TableColumn<Abonnement, String> dateDebutColumn;
@@ -52,6 +56,7 @@ public class AfficherAbonnementsController implements Initializable {
 
         // Set up the columns
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        prixColumn.setCellValueFactory(new PropertyValueFactory<>("prix"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
         etatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
@@ -60,6 +65,28 @@ public class AfficherAbonnementsController implements Initializable {
 
         // Load data from the database
         refreshTable();
+
+        modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
+        modifierColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button button = new Button("Modifier");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    button.setOnAction(event -> {
+                        Abonnement abonnement = getTableView().getItems().get(getIndex());
+                        openUpdateAbonnement(abonnement);
+                    });
+                    setGraphic(button);
+                    setText(null);
+                }
+            }
+        });
     }
 
     public void refreshTable() {
@@ -96,6 +123,7 @@ public class AfficherAbonnementsController implements Initializable {
             stage.setScene(scene);
 
             UpdateAbonnementController controller = loader.getController();
+            controller.setCurrentScene(scene); // Passer la scène actuelle au contrôleur UpdateAbonnementController
             controller.initData(abonnement.getId()); // Passer l'ID de l'abonnement au contrôleur UpdateAbonnementController
 
             stage.show();

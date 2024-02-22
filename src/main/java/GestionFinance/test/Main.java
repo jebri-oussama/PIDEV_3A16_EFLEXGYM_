@@ -56,8 +56,10 @@ public class Main {
         //a1.setEtat(non_actif);
         //abs.update(a1);
        // System.out.println(abs.readById(7));
-        abs.readAll().forEach(System.out::println);
-
+        //abs.readAll().forEach(System.out::println);
+         Abonnement a = abs.readById(2);
+         a.setEtat(non_actif);
+         abs.update(a);
 
     }
 }
