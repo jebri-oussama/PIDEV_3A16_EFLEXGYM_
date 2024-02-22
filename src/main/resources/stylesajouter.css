@@ -1,4 +1,4 @@
-/* styles.css */
+/* stylesajouter.css */
 
 .root {
     -fx-background-color: #f0f0f0;
@@ -51,7 +51,7 @@
     -fx-border-width: 1px;
 }
 
-.update-button {
+.add-button {
     -fx-background-color: #ff9900;
     -fx-text-fill: #ffffff;
     -fx-font-size: 16px;
@@ -62,7 +62,7 @@
     -fx-border-width: 1px;
 }
 
-.update-button:hover {
+.add-button:hover {
     -fx-background-color: #ff6600;
     -fx-border-color: #ff6600;
 }
