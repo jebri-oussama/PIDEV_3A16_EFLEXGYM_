@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface IService<C> {
 
-   void add(C c);
+   void addAdherent(C c);
 
-    void delete(int id);
+    void deleteAdherent(int id);
 
-    void update(int id,String role, C c);
+    void updateAdherent(int id, C c);
 
-    List<C> readAll();
+    List<C> readAllAdherent();
 
-    C readById(int id);
+    //C readAdherentById(int id);
 }
