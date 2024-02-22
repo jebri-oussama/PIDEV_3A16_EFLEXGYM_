@@ -1,4 +1,4 @@
-package gestion_user;
+package test;
 
 import org.example.Gestion_planing.entities.TypeCours;
 import org.example.Gestion_planing.entities.cours;

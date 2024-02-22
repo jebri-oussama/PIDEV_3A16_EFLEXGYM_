@@ -1,4 +1,4 @@
-package org.example;
+package gestion_user;
 import gestion_communaute.entities.Evenement;
 import gestion_communaute.entities.Reclamation;
  import gestion_communaute.service.IService;
