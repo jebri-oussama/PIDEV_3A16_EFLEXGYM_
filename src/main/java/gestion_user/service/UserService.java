@@ -138,6 +138,7 @@ public class UserService implements IService<User> {
                             role
 
                     );
+                    adherent.setId(rs.getInt(1));
                 }
             }
 
