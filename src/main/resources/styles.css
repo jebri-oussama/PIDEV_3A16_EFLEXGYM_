@@ -1,0 +1,42 @@
+.logo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.nav-bar {
+    -fx-background-color: #333333;
+    -fx-padding: 10px;
+}
+
+.sidebar {
+    -fx-background-color: #666666;
+    -fx-padding: 10px;
+}
+
+.title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.form-label {
+    -fx-min-width: 100px;
+    -fx-font-weight: bold;
+}
+
+.form-button {
+    -fx-background-color: #0099FF;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.form-button:hover {
+    -fx-background-color: #0077CC;
+}
+#titre {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
