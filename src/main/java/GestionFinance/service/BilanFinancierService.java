@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BilanFinancierService implements IService<BilanFinancier> {
 
-    private Connection conn;
+    private static  Connection conn;
     private Statement ste;
     private PreparedStatement pst;
 
@@ -120,5 +120,28 @@ public class BilanFinancierService implements IService<BilanFinancier> {
             throw new RuntimeException(e);
         }
         return null;
+    }
+    public int getIdBilanFinancier() {
+        List<BilanFinancier> bilanFinanciers = readAll();
+        if (!bilanFinanciers.isEmpty()) {
+            return bilanFinanciers.get(0).getId();
+        } else {
+            throw new RuntimeException("Aucun Bilan Financier");
+        }
+    }
+    public static List<Integer> getAllIdBilanFinancier() {
+        String query = "SELECT id FROM bilan_financier";
+        List<Integer> idList = new ArrayList<>();
+
+        try (Statement statement = conn.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                idList.add(resultSet.getInt("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idList;
     }
 }

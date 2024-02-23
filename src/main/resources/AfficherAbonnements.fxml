@@ -80,6 +80,11 @@
                         <PropertyValueFactory property="type" />
                      </cellValueFactory>
                   </TableColumn>
+                  <TableColumn fx:id="prixColumn" prefWidth="100.0" text="Prix">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="prix" />
+                     </cellValueFactory>
+                  </TableColumn>
 
                   <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" text="Date Début">
                      <cellValueFactory>
@@ -99,6 +104,7 @@
                      </cellValueFactory>
                   </TableColumn>
 
+
                   <TableColumn fx:id="idAdherentColumn" prefWidth="100.0" text="ID Adhérent">
                      <cellValueFactory>
                         <PropertyValueFactory property="id_adherent" />
@@ -110,6 +116,18 @@
                         <PropertyValueFactory property="id_bilan_financier" />
                      </cellValueFactory>
                   </TableColumn>
+                  <TableColumn fx:id="modifierColumn" prefWidth="100.0" text="Modifier">
+                     <cellFactory>
+                        <PropertyValueFactory property="modifierButton" />
+                     </cellFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="supprimerColumn" prefWidth="100.0" text="Supprimer">
+                     <cellFactory>
+                        <PropertyValueFactory property="supprimerButton" />
+                     </cellFactory>
+                  </TableColumn>
+
+
 
 
                </columns>

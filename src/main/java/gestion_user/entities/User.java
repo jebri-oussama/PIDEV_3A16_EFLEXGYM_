@@ -1,5 +1,8 @@
 package gestion_user.entities;
 
+
+import javafx.beans.property.IntegerProperty;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -14,8 +17,16 @@ public class User {
     private Sexe sexe;
     private Role role;
 
+    private double salaire;
 
-    public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role) {
+    private int idBilanFinancier;
+
+
+
+
+
+
+    public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, double aDouble, int anInt) {
         this.nom = nom;
         this.prenom = prenom;
         this.mot_de_passe = mot_de_passe;
@@ -26,6 +37,7 @@ public class User {
     }
 
     public User(int anInt,String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe) {
+
         this.nom = nom;
         this.prenom = prenom;
         this.mot_de_passe = mot_de_passe;
@@ -33,8 +45,51 @@ public class User {
         this.date_de_naissance = date_de_naissance;
         this.sexe = sexe;
     }
+    public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mot_de_passe = mot_de_passe;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.role=role;
+    }
 
+    public User(int anInt, String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mot_de_passe = mot_de_passe;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.role=role;
+    }
 
+    public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, int idBilanFinancier, double salaire) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mot_de_passe = mot_de_passe;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.role=role;
+        this.idBilanFinancier=idBilanFinancier;
+        this.salaire=salaire;
+    }
+
+    public User(int anInt, String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, double salaire, int idBilanFinancier) {
+
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mot_de_passe = mot_de_passe;
+        this.email = email;
+        this.date_de_naissance = date_de_naissance;
+        this.sexe = sexe;
+        this.role=role;
+        this.idBilanFinancier=idBilanFinancier;
+        this.salaire=salaire;
+
+    }
 
 
     public  int getId() {
@@ -106,16 +161,36 @@ public class User {
         this.role = role;
     }
 
+    public double getSalaire() {
+        return salaire;
+    }
+
+    public void setSalaire(double salaire) {
+        this.salaire = salaire;
+    }
+
+    public int getBilanFinancier() {
+        return idBilanFinancier;
+    }
+
+    public void setBilanFinancier(int idBilanFinancier) {
+        this.idBilanFinancier = idBilanFinancier;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
-                "nom='" + nom + '\'' +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", mot_de_passe='" + mot_de_passe + '\'' +
                 ", email='" + email + '\'' +
                 ", date_de_naissance=" + date_de_naissance +
                 ", sexe=" + sexe +
                 ", role=" + role +
+                ", salaire=" + salaire +
+                ", idBilanFinancier=" + idBilanFinancier +
                 '}';
     }
 }
