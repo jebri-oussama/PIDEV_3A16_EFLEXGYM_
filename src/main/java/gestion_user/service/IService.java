@@ -1,16 +1,20 @@
 package gestion_user.service;
 
+import gestion_user.entities.User;
+
 import java.util.List;
 
 public interface IService<C> {
 
-   void addAdherent(C c);
+   void add(C c);
 
-    void deleteAdherent(int id);
+    void delete(int id);
 
-    void updateAdherent(int id, C c);
+    void update(int id, C c);
 
-    List<C> readAllAdherent();
+    List<C> readAll();
+
+    User readById(int id);
 
     //C readAdherentById(int id);
 }
