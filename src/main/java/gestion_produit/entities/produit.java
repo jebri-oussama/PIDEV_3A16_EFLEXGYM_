@@ -1,5 +1,5 @@
-package entities;
- import entities.categorie;
+package gestion_produit.entities;
+
 public class produit {
    private int id;
    private String nom;
@@ -7,7 +7,7 @@ public class produit {
    private float prix;
    private int quantite;
    private String description;
-  private static categorie categorie;
+  private  categorie categorie;
   private   int id_bilan_financier;
    private int id_admin;
 
@@ -29,7 +29,6 @@ public class produit {
         this.id_bilan_financier = id_bilan_financier;
         this.id_admin = id_admin;
     }
-
 
 
     public int getId() {
@@ -54,12 +53,14 @@ public class produit {
     public String getDescription() {
         return description;
     }
+
     public int getId_bilan_financier() {
         return id_bilan_financier;
     }
     public int getId_admin() {
         return id_admin;
     }
+
 
     public void setId(int id) {
         this.id = id;
@@ -109,7 +110,7 @@ public class produit {
                 ", prix=" + prix +
                 ", quantite=" + quantite +
                 ", description='" + description + '\'' +
-                ", categorie=" + categorie +
+                  categorie +
                 ", id_bilan_financier=" + id_bilan_financier +
                 ", id_admin=" + id_admin +
                 '}';

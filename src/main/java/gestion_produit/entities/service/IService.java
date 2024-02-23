@@ -1,4 +1,4 @@
-package service;
+package gestion_produit.entities.service;
 
 import java.util.List;
 public interface IService<T> {
@@ -9,7 +9,7 @@ public interface IService<T> {
 
     List<T> readAll();
 
-    T readById(int id);
+     T readById(int id);
 
 
 }

@@ -1,15 +1,12 @@
 package Controllers;
 
-import entities.categorie;
-import entities.produit;
+import gestion_produit.entities.categorie;
+import gestion_produit.entities.produit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
-import service.produitService;
-
-import java.io.IOException;
+import gestion_produit.entities.service.produitService;
 
 public class UpdateProduitController {
     @FXML

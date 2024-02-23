@@ -1,16 +1,14 @@
-package service;
+package gestion_produit.entities.service;
 
 
 
-import entities.categorie;
-import entities.produit;
-import entities.type;
+import gestion_produit.entities.categorie;
+import gestion_produit.entities.produit;
 import utils.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class produitService implements  IService<produit> {
 
@@ -88,25 +86,27 @@ public class produitService implements  IService<produit> {
 
     @Override
     public List<produit> readAll() {
-        String requete = "select * from produit";
+        String requete = "SELECT * FROM produit";
         List<produit> list = new ArrayList<>();
         try {
             ste = conn.createStatement();
             ResultSet rs = ste.executeQuery(requete);
             while (rs.next()) {
-                  int c=  rs.getInt(7);
+                int categoryId = rs.getInt("categorie");
+                categorieService cs = new categorieService();
+                categorie c = cs.readById(categoryId);
                 produit produit = new produit(
-                 rs.getString(2),
-                 rs.getString(3),
-                 rs.getFloat(4),
-                rs.getInt(5),
-                rs.getString(6),
-                        new categorie(c,null,null),
-                rs.getInt(8),
-              rs.getInt(9)
-              );
-                produit.setId(rs.getInt(1)); // Set the id from the database
-                list.add(produit);
+                        rs.getString(2),   // nom
+                        rs.getString(3),   // image
+                        rs.getFloat(4),    // prix
+                        rs.getInt(5),      // quantite
+                        rs.getString(6),   // description
+                        c,                 // categorie
+                        rs.getInt(8),      // id_bilan_financier
+                        rs.getInt(9)       // id_admin
+                );
+                produit.setId(rs.getInt("id")); // Set the produit ID
+                list.add(produit); // Add produit to the list
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -114,6 +114,7 @@ public class produitService implements  IService<produit> {
 
         return list;
     }
+
 
 
     @Override

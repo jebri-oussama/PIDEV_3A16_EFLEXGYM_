@@ -1,17 +1,17 @@
-package service;
-import entities.produit;
-import entities.type;
+package gestion_produit.entities.service;
+import gestion_produit.entities.type;
 import utils.DataSource;
-import entities.categorie;
+import gestion_produit.entities.categorie;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 public class categorieService implements IService<categorie>{
 
 
-    private Connection conn;
+    private  Connection conn;
     private Statement ste;
-    private PreparedStatement pst;
+    private  PreparedStatement pst;
 
 
     public categorieService() {
@@ -83,23 +83,25 @@ public class categorieService implements IService<categorie>{
     @Override
     public categorie readById(int id) {
         String requete = "SELECT * FROM categorie WHERE id = ?";
-        try{
+        try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            if (rs.next()){
-                //System.out.println("Retrieved ID: " + rs.getInt(1));
-                // System.out.println("Retrieved Name: " + rs.getString(2));
-                //
-                type Type = type.valueOf(rs.getString(2));
-                return new categorie(rs.getInt("id"), Type, rs.getString("description"));
+            if (rs.next()) {
+                String typeName = rs.getString("type");
+                gestion_produit.entities.type type = gestion_produit.entities.type.valueOf(typeName);
+                String description = rs.getString("description");
+                return new categorie(id, type, description);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
     }
+
 }
+
+
 
 
 

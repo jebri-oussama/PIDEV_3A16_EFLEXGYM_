@@ -1,4 +1,4 @@
-package entities;
+package gestion_produit.entities;
 
 public class categorie {
     private  int id;

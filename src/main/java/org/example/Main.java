@@ -1,29 +1,26 @@
 package org.example;
 
 
-import entities.categorie;
-import entities.type;
-import service.categorieService;
+import gestion_produit.entities.categorie;
+import gestion_produit.entities.service.categorieService;
 import utils.DataSource;
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.List;
-import static entities.type.alimentaire;
-import static entities.type.vestimentaire;
-import entities.produit;
-import service.produitService;
+//import static gestion_produit.entities.type.alimentaire;
+//import static gestion_produit.entities.type.vestimentaire;
+import gestion_produit.entities.produit;
+import gestion_produit.entities.service.produitService;
+
+import static gestion_produit.entities.type.vestimentaire;
 
 public class Main {
     public static void main(String[] args) {
-      /* DataSource ds1 = DataSource.getInstance();
+     DataSource ds1 = DataSource.getInstance();
         System.out.println(ds1);
        produitService ps= new produitService();
-        categorieService pc= new categorieService();
+       categorieService pc= new categorieService();
         categorie c1 = new categorie(5,vestimentaire,"ffff");
-        categorie c2= new categorie(6,vestimentaire,"ffff");
-        produit p2 = new produit("prot","image.png",50.3F,5,"555555",c2,1,1);
-       ps.add(p2);*/
+       // categorie c2= new categorie(7,vestimentaire,"ffff");
+        produit p2 = new produit("prot","image.png",50.3F,5,"555555",c1,1,1);
+     //  ps.add(p2);
       //  pc.add(c2);
        // ps.delete(2);
 
@@ -31,14 +28,14 @@ public class Main {
 
 
       //  categorie p1=ps.readById(1);
-      //  System.out.println(p1);
+       //System.out.println(p2);
 
      //   pc.delete(6);
 //ps.add(p2);
 
 //ps.delete(2);
-
-     //   ps.readAll().forEach(System.out::println);
+      //  pc.readAll().forEach(System.out::println);
+        ps.readAll().forEach(System.out::println);
       /*  p1.setDescription("lyaass");
         ps.update(1,p1);*/
         }
