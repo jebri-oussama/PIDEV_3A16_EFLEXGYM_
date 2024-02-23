@@ -61,6 +61,12 @@ public class BilanFinancierController {
         double nouveauxRevenusProduits = bilanFinancier.recupererRevenusProduits();
         double nouveauxSalairesCoachs = bilanFinancier.recupererSalairesCoachs();
 
+        // Mettre à jour les valeurs dans l'objet BilanFinancier
+        bilanFinancier.setRevenus_abonnements(nouveauxRevenusAbonnements);
+        bilanFinancier.setRevenus_produits(nouveauxRevenusProduits);
+        bilanFinancier.setSalaires_coachs(nouveauxSalairesCoachs);
+
+        // Mettre à jour les valeurs dans la base de données
         bilanFinancierService.updateRevenusAbonnements(id, nouveauxRevenusAbonnements);
         bilanFinancierService.updateRevenusProduits(id, nouveauxRevenusProduits);
         bilanFinancierService.updateSalairesCoachs(id, nouveauxSalairesCoachs);
@@ -71,8 +77,13 @@ public class BilanFinancierController {
 
         // Calculer le profit en utilisant les données récupérées de la base de données
         double profit = bilanFinancier.calculerProfit();
+
+        // Mettre à jour la valeur du profit dans la base de données
+        bilanFinancierService.updateProfit(id, profit);
+
         profitLabel.setText(Double.toString(profit));
     }
+
 
 
 }

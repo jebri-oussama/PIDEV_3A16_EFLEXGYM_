@@ -14,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import GestionFinance.entites.Abonnement;
 import GestionFinance.service.AbonnementService;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,7 +28,6 @@ public class AfficherAbonnementsController implements Initializable {
     private TableColumn<Abonnement, Void> modifierColumn;
     @FXML
     private TableColumn<Abonnement, Void> supprimerColumn;
-
     @FXML
     private TableColumn<Abonnement, String> typeColumn;
     @FXML

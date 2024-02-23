@@ -94,11 +94,9 @@ public class AjouterAbonnementController {
         Etat etat = Etat.valueOf(etatString);
         int adherentIdSelected = Integer.parseInt(adherentId.getValue()); // Convertir la chaîne en entier
         int bilanFinancierIdSelected = Integer.parseInt(bilanFinancierId.getValue()); // Convertir la chaîne en entier
-
         // Récupérer les objets User et BilanFinancier correspondants aux ID sélectionnés
         User user = userService.readById(adherentIdSelected);
         BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
-
         // Création de l'abonnement avec les données récupérées
         Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 

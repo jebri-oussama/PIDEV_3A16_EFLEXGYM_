@@ -1,132 +1,92 @@
 package GestionFinance.controller;
 
+import GestionFinance.entites.BilanFinancier;
+import GestionFinance.service.BilanFinancierService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
-import java.time.LocalDate;
+import java.io.IOException;
+import java.util.List;
 
 public class AfficherBilanFinancierController {
-    @FXML
-    private TableColumn<?, ?> deleteColumn;
+    private final ObservableList<BilanFinancier> bilanFinanciers = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<?, ?> idColumn;
+    private TableView<BilanFinancier> bilanFinancierTable;
 
     @FXML
-    private TableColumn<?, ?> idDateDebut;
+    private TableColumn<BilanFinancier, String> dateDebutColumn;
 
     @FXML
-    private TableColumn<?, ?> idDateFin;
+    private TableColumn<BilanFinancier, String> dateFinColumn;
 
     @FXML
-    private TableColumn<?, ?> idDepenses;
+    private TableColumn<BilanFinancier, Double> salairesCoachsColumn;
 
     @FXML
-    private TableColumn<?, ?> idPrixLocation;
+    private TableColumn<BilanFinancier, Double> prixLocationColumn;
 
     @FXML
-    private TableColumn<?, ?> idProfit;
+    private TableColumn<BilanFinancier, Double> revenusAbonnementsColumn;
 
     @FXML
-    private TableColumn<?, ?> idRevenusDesAbonnements;
+    private TableColumn<BilanFinancier, Double> revenusProduitsColumn;
 
     @FXML
-    private TableColumn<?, ?> idRevenusDesProduits;
+    private TableColumn<BilanFinancier, Double> depensesColumn;
 
     @FXML
-    private TableColumn<?, ?> idSalairesDesCoachs;
+    private TableColumn<BilanFinancier, Double> profitColumn;
+
+    private final BilanFinancierService bilanFinancierService = new BilanFinancierService();
 
     @FXML
-    private TableView<?> tableViewEvenements;
-
-    public TableColumn<?, ?> getDeleteColumn() {
-        return deleteColumn;
+    public void initialize() {
+        // Initialize table columns
+        dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
+        dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+        salairesCoachsColumn.setCellValueFactory(new PropertyValueFactory<>("salaires_coachs"));
+        prixLocationColumn.setCellValueFactory(new PropertyValueFactory<>("prix_location"));
+        revenusAbonnementsColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_abonnements"));
+        revenusProduitsColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_produits"));
+        depensesColumn.setCellValueFactory(new PropertyValueFactory<>("depenses"));
+        profitColumn.setCellValueFactory(new PropertyValueFactory<>("profit"));
+        // Load data into the table
+        refreshTable();
     }
 
-    public void setDeleteColumn(TableColumn<?, ?> deleteColumn) {
-        this.deleteColumn = deleteColumn;
+    private void refreshTable() {
+        bilanFinanciers.clear();
+        List<BilanFinancier> bilanFinancierList = bilanFinancierService.readAll();
+        bilanFinanciers.addAll(bilanFinancierList);
+        bilanFinancierTable.setItems(bilanFinanciers);
     }
 
-    public TableColumn<?, ?> getIdColumn() {
-        return idColumn;
-    }
+    public void ajouter(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterBilanFinancier.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
 
-    public void setIdColumn(TableColumn<?, ?> idColumn) {
-        this.idColumn = idColumn;
-    }
+            AjouterBilanFinancierController controller = loader.getController();
+            controller.setCurrentScene(scene);
 
-    public TableColumn<?, ?> getIdDateDebut() {
-        return idDateDebut;
-    }
-
-    public void setIdDateDebut(TableColumn<?, ?> idDateDebut) {
-        this.idDateDebut = idDateDebut;
-    }
-
-    public TableColumn<?, ?> getIdDateFin() {
-        return idDateFin;
-    }
-
-    public void setIdDateFin(TableColumn<?, ?> idDateFin) {
-        this.idDateFin = idDateFin;
-    }
-
-    public TableColumn<?, ?> getIdDepenses() {
-        return idDepenses;
-    }
-
-    public void setIdDepenses(TableColumn<?, ?> idDepenses) {
-        this.idDepenses = idDepenses;
-    }
-
-    public TableColumn<?, ?> getIdPrixLocation() {
-        return idPrixLocation;
-    }
-
-    public void setIdPrixLocation(TableColumn<?, ?> idPrixLocation) {
-        this.idPrixLocation = idPrixLocation;
-    }
-
-    public TableColumn<?, ?> getIdProfit() {
-        return idProfit;
-    }
-
-    public void setIdProfit(TableColumn<?, ?> idProfit) {
-        this.idProfit = idProfit;
-    }
-
-    public TableColumn<?, ?> getIdRevenusDesAbonnements() {
-        return idRevenusDesAbonnements;
-    }
-
-    public void setIdRevenusDesAbonnements(TableColumn<?, ?> idRevenusDesAbonnements) {
-        this.idRevenusDesAbonnements = idRevenusDesAbonnements;
-    }
-
-    public TableColumn<?, ?> getIdRevenusDesProduits() {
-        return idRevenusDesProduits;
-    }
-
-    public void setIdRevenusDesProduits(TableColumn<?, ?> idRevenusDesProduits) {
-        this.idRevenusDesProduits = idRevenusDesProduits;
-    }
-
-    public TableColumn<?, ?> getIdSalairesDesCoachs() {
-        return idSalairesDesCoachs;
-    }
-
-    public void setIdSalairesDesCoachs(TableColumn<?, ?> idSalairesDesCoachs) {
-        this.idSalairesDesCoachs = idSalairesDesCoachs;
-    }
-
-    public TableView<?> getTableViewEvenements() {
-        return tableViewEvenements;
-    }
-
-    public void setTableViewEvenements(TableView<?> tableViewEvenements) {
-        this.tableViewEvenements = tableViewEvenements;
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
+
