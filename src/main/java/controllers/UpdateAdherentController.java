@@ -55,7 +55,7 @@ public class UpdateAdherentController {
 
 
 
-    public void initData(User selectedAdherent) {
+  /*  public void initData(User selectedAdherent) {
         id_adherent.setText(String.valueOf(selectedAdherent.getId()));
         nom.setText(selectedAdherent.getNom());
         prenom.setText(selectedAdherent.getPrenom());
@@ -146,5 +146,5 @@ public class UpdateAdherentController {
         Salaire.setVisible(false);
     }
 
-    // Add methods for handling the update action...
+    // Add methods for handling the update action...*/
 }

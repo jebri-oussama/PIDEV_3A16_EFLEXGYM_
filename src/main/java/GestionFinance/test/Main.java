@@ -5,7 +5,7 @@ import GestionFinance.entites.BilanFinancier;
 import GestionFinance.service.AbonnementService;
 import GestionFinance.service.BilanFinancierService;
 import gestion_user.entities.User;
-import gestion_user.service.AdherentService;
+
 import utils.DataSource;
 
 import java.time.LocalDate;
@@ -21,7 +21,7 @@ public class Main {
 
         BilanFinancierService bs = new BilanFinancierService();
         BilanFinancier b2 = new BilanFinancier(2,
-                LocalDate.of(2024,2,9), LocalDate.of(2024,3,9),1200.0, 100.0);
+                LocalDate.of(2024, 2, 9), LocalDate.of(2024, 3, 9), 1200.0, 100.0);
         //bs.add(b2);
 
         /*System.out.println(bs.readById(2));
@@ -35,9 +35,9 @@ public class Main {
         System.out.println(b2.calculerProfit());
         b2.setProfit(b2.calculerProfit());
         bs.update(b2);*/
-    //    bs.readAll().forEach(System.out::println);
+        //    bs.readAll().forEach(System.out::println);
 
-
+/*
         AdherentService ads = new AdherentService();
        User adherent = ads.readById(7);
        BilanFinancier b1 = bs.readById(1);
@@ -61,5 +61,6 @@ public class Main {
          a.setEtat(non_actif);
          abs.update(a);
 
+    }*/
     }
 }

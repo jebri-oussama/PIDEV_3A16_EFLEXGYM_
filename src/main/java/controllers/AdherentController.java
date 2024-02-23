@@ -62,11 +62,11 @@ public class AdherentController {
     private Button refreshButton;
 
 
-    @FXML
+  /*  @FXML
     void handleRefresh(ActionEvent event) {
         adherentList.clear(); // Clear existing data
         readAllAdherents();   // Reload data from the database
-    }
+    }*/
 
 
     @FXML
@@ -138,7 +138,7 @@ public class AdherentController {
     private PreparedStatement pst;
 
 
-    private String getSelectedRole() {
+   /* private String getSelectedRole() {
         if (rbAdherent.isSelected()) {
             return "Adherent";
         } else if (rbCoach.isSelected()) {
@@ -158,7 +158,7 @@ public class AdherentController {
         conn = DataSource.getInstance().getCnx();
         UserService as = new UserService();
 
-        as.readAllAdherent();
+        as.readAll();
         Integer idBilan= null;
         Double Salaire =null;
 
@@ -175,13 +175,13 @@ public class AdherentController {
              idBilan = Integer.valueOf(id_bilan.getText());
             Salaire = Double.valueOf(salaire.getText());
             User a1 = new User(adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1,Role.valueOf(selectedRole),Salaire,idBilan);
-            as.addAdherent(a1);
+            as.add(a1);
             adherentList.add(a1);
 
         }
         // Get the values from the text fields
         User a1 = new User(adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1,Role.valueOf(selectedRole));
-        as.addAdherent(a1);
+        as.add(a1);
         adherentList.add(a1);
 
     };
@@ -348,7 +348,7 @@ public class AdherentController {
 
 
 
-
+*/
 
 
 }

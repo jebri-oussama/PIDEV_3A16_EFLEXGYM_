@@ -73,55 +73,55 @@
       </AnchorPane>
       <AnchorPane prefHeight="584.0" prefWidth="400.0">
          <children>
-            <TableView fx:id="abonnementsTable" prefHeight="468.0" prefWidth="601.0">
+            <TableView fx:id="abonnementsTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="901.0">
                <columns>
-                  <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Type">
+                  <TableColumn fx:id="typeColumn" prefWidth="133.0" style="-fx-background-color: EEEE19;" styleClass="font" text="Type">
                      <cellValueFactory>
                         <PropertyValueFactory property="type" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="prixColumn" prefWidth="100.0" text="Prix">
+                  <TableColumn fx:id="prixColumn" prefWidth="67.0" style="-fx-background-color: EEEE19;" text="Prix">
                      <cellValueFactory>
                         <PropertyValueFactory property="prix" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" text="Date Début">
+                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="Date Début">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_debut" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" text="Date Fin">
+                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="Date Fin">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_fin" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="etatColumn" prefWidth="100.0" text="Etat">
+                  <TableColumn fx:id="etatColumn" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="Etat">
                      <cellValueFactory>
                         <PropertyValueFactory property="etat" />
                      </cellValueFactory>
                   </TableColumn>
 
 
-                  <TableColumn fx:id="idAdherentColumn" prefWidth="100.0" text="ID Adhérent">
+                  <TableColumn fx:id="idAdherentColumn" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="ID Adhérent">
                      <cellValueFactory>
                         <PropertyValueFactory property="id_adherent" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="idBilanFinancierColumn" prefWidth="100.0" text="ID Bilan Financier">
+                  <TableColumn fx:id="idBilanFinancierColumn" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="ID Bilan Financier">
                      <cellValueFactory>
                         <PropertyValueFactory property="id_bilan_financier" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="modifierColumn" prefWidth="100.0" text="Modifier">
+                  <TableColumn fx:id="modifierColumn" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="Modifier">
                      <cellFactory>
                         <PropertyValueFactory property="modifierButton" />
                      </cellFactory>
                   </TableColumn>
-                  <TableColumn fx:id="supprimerColumn" prefWidth="100.0" text="Supprimer">
+                  <TableColumn fx:id="supprimerColumn" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="Supprimer">
                      <cellFactory>
                         <PropertyValueFactory property="supprimerButton" />
                      </cellFactory>
@@ -133,6 +133,11 @@
                </columns>
             </TableView>
             <Button fx:id="ajouterAbonnementButton" layoutX="393.0" layoutY="508.0" onAction="#ajouterAbonnement" text="Ajouter Abonnement" />
+            <AnchorPane prefHeight="62.0" prefWidth="1089.0">
+               <children>
+                  <VBox prefHeight="62.0" prefWidth="1089.0" style="-fx-background-color: DCD6C5;" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

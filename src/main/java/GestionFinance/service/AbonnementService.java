@@ -6,8 +6,9 @@ import GestionFinance.entites.Etat;
 import GestionFinance.entites.Type;
 import gestion_user.entities.Role;
 import gestion_user.entities.User;
+import gestion_user.service.UserService;
 import utils.DataSource;
-import gestion_user.service.AdherentService;
+
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -31,6 +32,9 @@ public class AbonnementService implements IService<Abonnement> {
         }
         if (a.getPrix() <= 0 || a.getDate_debut() == null || a.getDate_fin() == null || a.getEtat() == null) {
             throw new IllegalArgumentException("Les données d'abonnement ne sont pas valides.");
+        }
+        if (a.getId_adherent().getRole() != Role.Adherent) {
+            throw new IllegalArgumentException("L'utilisateur n'est pas un adhérent.");
         }
         try {
             pst = conn.prepareStatement(requete);
@@ -94,7 +98,7 @@ public class AbonnementService implements IService<Abonnement> {
                 LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
                 Etat etat = Etat.valueOf(rs.getString("etat"));
                 int idAdherent = rs.getInt("id_adherent");
-                AdherentService adherentService = new AdherentService();
+                UserService adherentService = new UserService();
                 User adherent = adherentService.readById(idAdherent);
                 int idBilanFinancier = rs.getInt("id_bilan_financier");
                 BilanFinancierService bilanFinancierService = new BilanFinancierService();
@@ -122,7 +126,7 @@ public class AbonnementService implements IService<Abonnement> {
                 Etat etat = Etat.valueOf(rs.getString("etat"));
 
                 int idAdherent = rs.getInt("id_adherent");
-                AdherentService adherentService = new AdherentService();
+                UserService adherentService = new UserService();
                 User adherent = adherentService.readById(idAdherent);
 
                 int idBilanFinancier = rs.getInt("id_bilan_financier");

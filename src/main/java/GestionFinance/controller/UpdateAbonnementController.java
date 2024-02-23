@@ -5,9 +5,9 @@ import GestionFinance.entites.BilanFinancier;
 import GestionFinance.entites.Etat;
 import GestionFinance.entites.Type;
 import GestionFinance.service.AbonnementService;
-import gestion_user.entities.Adherent;
-import gestion_user.service.AdherentService;
 import GestionFinance.service.BilanFinancierService;
+import gestion_user.entities.User;
+import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -23,7 +23,7 @@ import java.time.LocalDate;
 
 public class UpdateAbonnementController {
     private final AbonnementService abonnementService = new AbonnementService();
-    private final AdherentService adherentService = new AdherentService();
+    private final UserService userService = new UserService();
     private final BilanFinancierService bilanFinancierService = new BilanFinancierService();
 
     @FXML
@@ -80,11 +80,11 @@ public class UpdateAbonnementController {
         int bilanFinancierIdSelected = bilanFinancierId.getValue();
 
         // Lecture des entités Adherent et BilanFinancier à partir de leur ID
-        Adherent adherent = adherentService.readById(adherentIdSelected);
+        User user = userService.readById(adherentIdSelected);
         BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
 
         // Création de l'objet Abonnement avec les valeurs récupérées
-        Abonnement abonnement = new Abonnement(abonnementId, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+        Abonnement abonnement = new Abonnement(abonnementId, type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 
         // Appel de la méthode update de AbonnementService pour mettre à jour l'abonnement dans la base de données
         abonnementService.update(abonnement);

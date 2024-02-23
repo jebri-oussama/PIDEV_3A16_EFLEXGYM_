@@ -6,9 +6,9 @@ import GestionFinance.entites.Etat;
 import GestionFinance.entites.Type;
 import GestionFinance.service.AbonnementService;
 import gestion_user.entities.User;
-import gestion_user.entities.Adherent;
-import gestion_user.service.AdherentService;
+
 import GestionFinance.service.BilanFinancierService;
+import gestion_user.service.UserService;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 public class AjouterAbonnementController {
     private final AbonnementService abonnementService = new AbonnementService();
-    private final AdherentService adherentService = new AdherentService();
+    private final UserService userService = new UserService();
     private final BilanFinancierService bilanFinancierService = new BilanFinancierService();
 
     private Scene currentScene;
@@ -64,9 +64,9 @@ public class AjouterAbonnementController {
     void initialize() {
         try {
             // Récupérez la liste des adhérents et extrayez les identifiants
-            List<Adherent> adherents = adherentService.readAll();
-            List<String> adherentIds = adherents.stream()
-                    .map(Adherent::getId)
+            List<User> users = userService.readAll();
+            List<String> adherentIds = users.stream()
+                    .map(User::getId)
                     .map(String::valueOf) // Convertir les entiers en chaînes
                     .collect(Collectors.toList());
             adherentId.setItems(FXCollections.observableArrayList(adherentIds));
@@ -96,11 +96,11 @@ public class AjouterAbonnementController {
         int bilanFinancierIdSelected = Integer.parseInt(bilanFinancierId.getValue()); // Convertir la chaîne en entier
 
         // Récupérer les objets User et BilanFinancier correspondants aux ID sélectionnés
-        User adherent = adherentService.readById(adherentIdSelected);
+        User user = userService.readById(adherentIdSelected);
         BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
 
         // Création de l'abonnement avec les données récupérées
-        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 
         // Ajout de l'abonnement à la base de données
         abonnementService.add(abonnement);

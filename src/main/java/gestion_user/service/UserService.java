@@ -22,7 +22,7 @@ public class UserService implements IService<User> {
     }
 
     @Override
-    public void addAdherent(User c) {
+    public void add(User c) {
         String requete = "INSERT INTO user (nom, prenom, mot_de_passe, email, date_de_naissance, sexe, role,salaire, id_bilan_financier) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
         try {
             pst = conn.prepareStatement(requete);
@@ -47,7 +47,7 @@ public class UserService implements IService<User> {
 
 
     @Override
-    public void updateAdherent(int id, User c) {
+    public void update(int id, User c) {
         String requete = "UPDATE user SET nom = ?, prenom = ?, mot_de_passe = ?, email = ?, date_de_naissance = ?, sexe = ?, role= ?, salaire = ?,id_bilan_financier = ?  WHERE id = ?";
 
         try (PreparedStatement pst = conn.prepareStatement(requete)) {
@@ -75,7 +75,7 @@ public class UserService implements IService<User> {
     }
 
     @Override
-    public  List<User> readAllAdherent() {
+    public  List<User> readAll() {
         String requete = "select * from user";
         List<User> list = new ArrayList<>();
         try {
@@ -100,7 +100,7 @@ public class UserService implements IService<User> {
     }
 
     @Override
-    public void deleteAdherent(int id) {
+    public void delete(int id) {
         String requete = "DELETE FROM user WHERE id = ? and role='Adherent'";
         try{
             pst = conn.prepareStatement(requete);
@@ -117,8 +117,8 @@ public class UserService implements IService<User> {
 
 
 
-   /* @Override
-    public Adherent readAdherentById(int id) {
+   @Override
+    public User readById(int id) {
         String requete = "SELECT * FROM user WHERE id = ? and role='Adherent'";
         User user = null;
         try (PreparedStatement pst = conn.prepareStatement(requete)) {
@@ -138,7 +138,7 @@ public class UserService implements IService<User> {
                             role
 
                     );
-                    adherent.setId(rs.getInt(1));
+                    user.setId(rs.getInt(1));
                 }
             }
 
@@ -147,6 +147,6 @@ public class UserService implements IService<User> {
 
         }
         return user;
-    }*/
+    }
 
 }
