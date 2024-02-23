@@ -22,7 +22,7 @@ public class CoursService implements IntService<cours> {
             pst.setInt(1, c.getId());
             pst.setString(2, c.getNom());
             pst.setString(3,c.getType().toString());
-            pst.setInt(4, c.getDuree());
+            pst.setString(4, c.getDuree());
 
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class CoursService implements IntService<cours> {
             pst = conn.prepareStatement(requete);
             pst.setString(1, c.getNom());
             pst.setString(2, c.getType().toString()); // Assuming getType() returns a String representation of the enum
-            pst.setInt(3, c.getDuree());
+            pst.setString(3, c.getDuree());
             pst.setInt(4, c.getId()); // Assuming getId() returns the ID of the course
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class CoursService implements IntService<cours> {
             ResultSet rs = ste.executeQuery(query);
             while (rs.next()) {
                 TypeCours type = TypeCours.valueOf(rs.getString(3));
-                list.add(new cours(rs.getInt(1), rs.getString(2), type, rs.getInt(4)));
+                list.add(new cours(rs.getInt(1), rs.getString(2), type, rs.getString(4)));
             }
         }catch(SQLException e){
             throw new RuntimeException(e);
@@ -83,7 +83,7 @@ public class CoursService implements IntService<cours> {
             ResultSet rs = pst.executeQuery();
             if (rs.next()){
                 TypeCours type = TypeCours.valueOf(rs.getString(3));
-                return new cours(rs.getInt(rs.getInt(1)), rs.getString(2), type, rs.getInt(4));
+                return new cours(rs.getInt(rs.getInt(1)), rs.getString(2), type, rs.getString(4));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

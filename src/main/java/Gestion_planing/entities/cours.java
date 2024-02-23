@@ -5,10 +5,16 @@ public class cours {
     private int id;
     private String nom;
     private TypeCours type; // Variable de type enum pour le type de cours
-    private int duree;
+    private String duree;
 
-    public cours(int id, String nom, TypeCours type, int duree) {
+    public cours(int id, String nom, TypeCours type, String duree) {
         this.id = id;
+        this.nom = nom;
+        this.type = type;
+        this.duree = duree;
+    }
+
+    public cours(String nom, TypeCours type, String duree) {
         this.nom = nom;
         this.type = type;
         this.duree = duree;
@@ -26,7 +32,7 @@ public class cours {
         return type;
     }
 
-    public int getDuree() {
+    public String getDuree() {
         return duree;
     }
 
@@ -43,7 +49,7 @@ public class cours {
         this.type = type;
     }
 
-    public void setDuree(int duree) {
+    public void setDuree(String duree) {
         this.duree = duree;
     }
 

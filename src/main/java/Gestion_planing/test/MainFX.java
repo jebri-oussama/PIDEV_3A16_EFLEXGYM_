@@ -1,4 +1,4 @@
-package test;
+package Gestion_planing.test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
