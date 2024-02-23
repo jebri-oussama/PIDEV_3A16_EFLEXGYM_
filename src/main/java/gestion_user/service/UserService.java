@@ -96,7 +96,6 @@ public class UserService implements IService<User> {
                 ad.setId(rs.getInt(1));
                 ad.setSalaire(rs.getDouble(9));
 
-                // Assuming that 'idBilanFinancier' is a column in your user table
                 int idBilanFinancier = rs.getInt("id_bilan_financier");
                 ad.setBilanFinancier(idBilanFinancier);
 

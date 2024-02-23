@@ -39,10 +39,10 @@
             <TableColumn fx:id="colDateNaissance" prefWidth="120.0" text="Date de Naissance" />
             <TableColumn fx:id="colSexe" prefWidth="66.0" text="Sexe" />
             <TableColumn fx:id="colRole" prefWidth="72.0" text="Role" />
-            <TableColumn fx:id="colSalaire" prefWidth="87.0" />
-            <TableColumn fx:id="colBilan" prefWidth="59.0" />
-            <TableColumn fx:id="colUpdate" prefWidth="87.0" />
-            <TableColumn fx:id="colDelete" prefWidth="136.0" />
+            <TableColumn fx:id="colSalaire" prefWidth="67.0" text="Salaire" />
+            <TableColumn fx:id="colBilan" prefWidth="93.0" text="Bilan Financier" />
+            <TableColumn fx:id="colUpdate" prefWidth="64.0" />
+            <TableColumn fx:id="colDelete" prefWidth="102.0" />
         </columns>
       </TableView>
       <Button fx:id="refreshButton" layoutX="344.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
