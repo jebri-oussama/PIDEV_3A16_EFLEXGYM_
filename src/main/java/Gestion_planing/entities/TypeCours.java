@@ -1,4 +1,4 @@
-package org.example.Gestion_planing.entities;
+package Gestion_planing.entities;
 
 public enum TypeCours {
         Presentiel,

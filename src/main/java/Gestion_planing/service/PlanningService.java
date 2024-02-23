@@ -1,12 +1,8 @@
-package org.example.Gestion_planing.service;
-
-
-
-import org.example.Gestion_user.entities.Role;
-import org.example.Gestion_user.entities.User;
-import org.example.Gestion_planing.entities.cours;
-import org.example.Gestion_planing.entities.planning;
-import org.example.utils.DataSource;
+package Gestion_planing.service;
+import Gestion_planing.entities.cours;
+import Gestion_planing.entities.planning;
+import gestion_user.entities.Role;
+import utils.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -71,6 +67,17 @@ public  class PlanningService implements IntService<planning>{
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }}}
+
+    @Override
+    public List<planning> readAll() {
+        return null;
+    }
+
+    @Override
+    public planning readById(int id) {
+        return null;
+    }
+}
    /* public List<planning> readAll() {
         String query = "SELECT * FROM planning";
         List<planning> list = new ArrayList<>();

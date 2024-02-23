@@ -1,7 +1,7 @@
-package org.example.Gestion_planing.service;
-import org.example.Gestion_planing.entities.TypeCours;
-import org.example.Gestion_planing.entities.cours;
-import org.example.utils.DataSource;
+package Gestion_planing.service;
+import Gestion_planing.entities.TypeCours;
+import Gestion_planing.entities.cours;
+import utils.DataSource;
 
 import java.sql.*;
 import java.util.ArrayList;

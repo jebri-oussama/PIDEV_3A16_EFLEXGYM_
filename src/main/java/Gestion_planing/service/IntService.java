@@ -1,4 +1,4 @@
-package org.example.Gestion_planing.service;
+package Gestion_planing.service;
 
 import java.util.List;
 

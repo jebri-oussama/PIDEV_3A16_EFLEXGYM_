@@ -1,10 +1,8 @@
-package org.example.Gestion_planing.service;
+package Gestion_planing.service;
 
-import org.example.Gestion_planing.entities.*;
-import org.example.Gestion_user.entities.Role;
-import org.example.Gestion_user.entities.User;
+import Gestion_planing.entities.*;
+import gestion_user.entities.Role;
 import org.example.utils.DataSource;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

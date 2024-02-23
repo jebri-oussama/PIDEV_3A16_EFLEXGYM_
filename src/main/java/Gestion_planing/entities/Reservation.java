@@ -1,6 +1,7 @@
-package org.example.Gestion_planing.entities;
+package Gestion_planing.entities;
 
-import org.example.Gestion_user.entities.User;
+
+import gestion_user.entities.User;
 
 public class Reservation {
     private int id_reservation;

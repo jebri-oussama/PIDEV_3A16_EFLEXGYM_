@@ -1,6 +1,6 @@
-package org.example.Gestion_planing.entities;
+package Gestion_planing.entities;
 
-import org.example.Gestion_user.entities.User;
+import gestion_user.entities.User;
 
 import java.sql.Time;
 import java.util.Date;
@@ -17,7 +17,7 @@ public class planning {
     public planning() {
     }
 
-    public planning(int id, String salle, int nb_place_max, Date date, Time heure, org.example.Gestion_planing.entities.cours cours, User user) {
+    public planning(int id, String salle, int nb_place_max, Date date, Time heure, cours cours, User user) {
         this.id = id;
         this.salle = salle;
         this.nb_place_max = nb_place_max;
@@ -67,11 +67,11 @@ public class planning {
         this.nb_place_max = nb_place_max;
     }
 
-    public org.example.Gestion_planing.entities.cours getCours() {
+    public cours getCours() {
         return cours;
     }
 
-    public void setCours(org.example.Gestion_planing.entities.cours cours) {
+    public void setCours(cours cours) {
         this.cours = cours;
     }
 
