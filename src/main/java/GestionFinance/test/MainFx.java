@@ -36,12 +36,19 @@ public class MainFx extends Application {
         primaryStage.setTitle("Mise à jour Bilan Financier");
         primaryStage.show();*/
 
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+        /*   FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Afficher Abonnements");
-            primaryStage.show();
+            primaryStage.show();*/
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BilanFinancier.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Bilan Financier");
+        primaryStage.show();
 
     }
 }

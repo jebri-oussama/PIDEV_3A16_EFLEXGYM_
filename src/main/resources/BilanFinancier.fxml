@@ -69,17 +69,29 @@
                 </VBox>
             </children>
         </AnchorPane>
-        <GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" vgap="10">
+        <VBox spacing="10" alignment="CENTER_LEFT" prefWidth="200">
+            <padding>
+                <Insets top="20" left="20" right="20" bottom="20"/>
+            </padding>
+            <Label text="ID du Bilan Financier:"/>
+            <TextField fx:id="idField"/>
 
-            <Label text="ID du Bilan Financier:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <TextField fx:id="idField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Button text="Obtenir Revenus Abonnements" onAction="#obtenirRevenusAbonnements"/>
 
-            <Button text="Calculer Profit" onAction="#calculerProfit" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+            <Label text="Revenus Abonnements:" fx:id="revenusAbonnementsLabel"/>
 
-            <Label text="Profit:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Label fx:id="profitLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Button text="Obtenir Revenus Produits" onAction="#obtenirRevenusProduits"/>
 
-        </GridPane>
+            <Label text="Revenus Produits:" fx:id="revenusProduitsLabel"/>
 
+            <Button text="Salaires des coachs" onAction="#obtenirSalairesCoachs"/>
+
+            <Label text="Salaires des coachs:" fx:id="salairesCoachsLabel"/>
+
+
+            <Button text="Calculer Profit" onAction="#calculerProfit"/>
+
+            <Label text="Profit:" fx:id="profitLabel"/>
+        </VBox>
     </children>
 </HBox>
