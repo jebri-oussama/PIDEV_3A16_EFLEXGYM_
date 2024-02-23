@@ -76,7 +76,7 @@ public class AfficherAbonnementsController implements Initializable {
                 } else {
                     button.setOnAction(event -> {
                         Abonnement abonnement = getTableView().getItems().get(getIndex());
-                        openUpdateAbonnement(abonnement);
+                        updateAbonnement(abonnement);
                     });
                     setGraphic(button);
                     setText(null);
@@ -132,7 +132,7 @@ public class AfficherAbonnementsController implements Initializable {
         }
     }
 
-    private void openUpdateAbonnement(Abonnement abonnement) {
+    private void updateAbonnement(Abonnement abonnement) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateAbonnement.fxml"));
             Parent root = loader.load();

@@ -144,4 +144,41 @@ public class BilanFinancierService implements IService<BilanFinancier> {
 
         return idList;
     }
+    public void updateRevenusAbonnements(int id, double nouveauxRevenusAbonnements) {
+        String requete = "UPDATE bilan_financier SET revenus_abonnements = ? WHERE id = ?";
+        try {
+            pst = conn.prepareStatement(requete);
+            pst.setDouble(1, nouveauxRevenusAbonnements);
+            pst.setInt(2, id);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateRevenusProduits(int id, double nouveauxRevenusProduits) {
+        String requete = "UPDATE bilan_financier SET revenus_produits = ? WHERE id = ?";
+        try {
+            pst = conn.prepareStatement(requete);
+            pst.setDouble(1, nouveauxRevenusProduits);
+            pst.setInt(2, id);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateSalairesCoachs(int id, double nouveauxSalairesCoachs) {
+        String requete = "UPDATE bilan_financier SET salaires_coachs = ? WHERE id = ?";
+        try {
+            pst = conn.prepareStatement(requete);
+            pst.setDouble(1, nouveauxSalairesCoachs);
+            pst.setInt(2, id);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

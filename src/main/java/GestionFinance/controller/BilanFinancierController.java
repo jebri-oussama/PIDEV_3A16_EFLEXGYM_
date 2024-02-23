@@ -28,31 +28,51 @@ public class BilanFinancierController {
     public void obtenirRevenusAbonnements() {
         int id = Integer.parseInt(idField.getText());
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
-        double revenusAbonnements = bilanFinancier.recupererRevenuAbonnements();
-        revenusAbonnementsLabel.setText(Double.toString(revenusAbonnements));
+        double nouveauxRevenusAbonnements = bilanFinancier.recupererRevenuAbonnements();
+        revenusAbonnementsLabel.setText(Double.toString(nouveauxRevenusAbonnements));
+        bilanFinancierService.updateRevenusAbonnements(id, nouveauxRevenusAbonnements);
     }
 
     @FXML
     public void obtenirRevenusProduits() {
         int id = Integer.parseInt(idField.getText());
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
-        double revenusProduits = bilanFinancier.recupererRevenusProduits();
-        revenusProduitsLabel.setText(Double.toString(revenusProduits));
+        double nouveauxRevenusProduits = bilanFinancier.recupererRevenusProduits();
+        revenusProduitsLabel.setText(Double.toString(nouveauxRevenusProduits));
+        bilanFinancierService.updateRevenusProduits(id, nouveauxRevenusProduits);
     }
 
     @FXML
     public void obtenirSalairesCoachs() {
         int id = Integer.parseInt(idField.getText());
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
-        double salairesCoachs = bilanFinancier.recupererSalairesCoachs();
-        salairesCoachsLabel.setText(Double.toString(salairesCoachs));
+        double nouveauxSalairesCoachs = bilanFinancier.recupererSalairesCoachs();
+        salairesCoachsLabel.setText(Double.toString(nouveauxSalairesCoachs));
+        bilanFinancierService.updateSalairesCoachs(id, nouveauxSalairesCoachs);
     }
 
     @FXML
     public void calculerProfit() {
         int id = Integer.parseInt(idField.getText());
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
+
+        // Mettre à jour les revenus des abonnements, des revenus des produits et des salaires des coachs
+        double nouveauxRevenusAbonnements = bilanFinancier.recupererRevenuAbonnements();
+        double nouveauxRevenusProduits = bilanFinancier.recupererRevenusProduits();
+        double nouveauxSalairesCoachs = bilanFinancier.recupererSalairesCoachs();
+
+        bilanFinancierService.updateRevenusAbonnements(id, nouveauxRevenusAbonnements);
+        bilanFinancierService.updateRevenusProduits(id, nouveauxRevenusProduits);
+        bilanFinancierService.updateSalairesCoachs(id, nouveauxSalairesCoachs);
+
+        // Récupérer le prix de location et les dépenses du bilan financier depuis la base de données
+        double prixLocation = bilanFinancier.getPrix_location();
+        double depenses = bilanFinancier.getDepenses();
+
+        // Calculer le profit en utilisant les données récupérées de la base de données
         double profit = bilanFinancier.calculerProfit();
         profitLabel.setText(Double.toString(profit));
     }
+
+
 }

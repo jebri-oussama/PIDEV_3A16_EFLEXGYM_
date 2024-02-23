@@ -211,9 +211,13 @@ public class BilanFinancier {
     public void setPst(PreparedStatement pst) {
         this.pst = pst;
     }
+    public double calculerProfit(double prixLocation, double depenses) {
+        return revenus_abonnements + revenus_produits - salaires_coachs - depenses - prixLocation;
+    }
     public double calculerProfit() {
         return revenus_abonnements + revenus_produits - salaires_coachs - depenses - prix_location;
     }
+
 
     @Override
     public String toString() {
