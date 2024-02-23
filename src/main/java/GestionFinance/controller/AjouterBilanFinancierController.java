@@ -55,7 +55,7 @@ public class AjouterBilanFinancierController {
 
         BilanFinancierService bs = new BilanFinancierService();
 
-      BilanFinancier bilanFinancier = new BilanFinancier(dateDebut, dateFin, salairesCoachs, prixLocation, revenusAbonnements, revenusProduits, depenses, profit);
+     /* BilanFinancier bilanFinancier = new BilanFinancier(dateDebut, dateFin, salairesCoachs, prixLocation, revenusAbonnements, revenusProduits, depenses, profit);
         bs.add(bilanFinancier);
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/AfficherBilanFinancier.fxml"));
@@ -76,6 +76,6 @@ public class AjouterBilanFinancierController {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
     }
 }
