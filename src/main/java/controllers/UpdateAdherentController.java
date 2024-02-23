@@ -1,5 +1,6 @@
 package controllers;
 
+import GestionFinance.service.BilanFinancierService;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import utils.DataSource;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 public class UpdateAdherentController {
     @FXML
@@ -51,7 +54,7 @@ public class UpdateAdherentController {
     @FXML
     private TextField Salaire;
     @FXML
-    private TextField idBilan;
+    private ChoiceBox<Integer> idBilanChoiceBox;
 
 
 
@@ -61,12 +64,15 @@ public class UpdateAdherentController {
         prenom.setText(selectedAdherent.getPrenom());
         mot_de_passe.setText(selectedAdherent.getMot_de_passe());
         email.setText(selectedAdherent.getEmail());
-        dateNaissance.getValue();
+        dateNaissance.setValue(LocalDate.parse(selectedAdherent.getFormattedDateNaissance()));
         sexe.setText(selectedAdherent.getSexe().toString());
         if(selectedAdherent.getRole().toString().equals("Adherent")){
                 rbA.fire();}
         else if (selectedAdherent.getRole().toString().equals("Coach")){
-            rbC.fire();}
+            rbC.fire();
+            initializeIdBilanChoiceBox();
+            idBilanChoiceBox.setValue(Integer.valueOf(selectedAdherent.getBilanFinancier()));            Salaire.setText(String.valueOf(Double.valueOf(selectedAdherent.getSalaire())));
+        }
 
 
     }
@@ -86,7 +92,7 @@ public class UpdateAdherentController {
         Sexe sexe1 = Sexe.valueOf(SexeString);
         String selectedRole = getSelectedRole();
             if ("Coach".equals(selectedRole)){
-              Integer  id_bilan = Integer.valueOf(idBilan.getText());
+              Integer  id_bilan = idBilanChoiceBox.getValue();
                Double salaire = Double.valueOf(Salaire.getText());
                 User a1 = new User(adherentId, adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1, Role.valueOf(selectedRole),salaire,id_bilan);
                 as.updateAdherent(adherentId,a1);
@@ -120,6 +126,9 @@ public class UpdateAdherentController {
     @FXML
     void handleRoleSelection(ActionEvent event) {
         updateAdditionalFieldsVisibility();
+        if (rbC.isSelected()) {
+            initializeIdBilanChoiceBox();
+        }
     }
 
     private void updateAdditionalFieldsVisibility() {
@@ -127,7 +136,7 @@ public class UpdateAdherentController {
         boolean isCoachSelected = "Coach".equals(selectedRole);
 
         labelBilan.setVisible(isCoachSelected);
-        idBilan.setVisible(isCoachSelected);
+        idBilanChoiceBox.setVisible(isCoachSelected);
         labelSalaire.setVisible(isCoachSelected);
         Salaire.setVisible(isCoachSelected);
     }
@@ -141,10 +150,20 @@ public class UpdateAdherentController {
         boolean isCoachSelected = "Adherent".equals(selectedRole);
 
         labelBilan.setVisible(false);
-        idBilan.setVisible(false);
+        idBilanChoiceBox.setVisible(false);
         labelSalaire.setVisible(false);
         Salaire.setVisible(false);
     }
+    private void initializeIdBilanChoiceBox() {
+        // Fetch the list of BilanFinancier IDs and add them to the choice box
+        List<Integer> idBilanFinanciers = BilanFinancierService.getAllIdBilanFinancier();
+        idBilanChoiceBox.getItems().setAll(idBilanFinanciers);
 
-    // Add methods for handling the update action...
+        // Optionally, set a default value if needed
+        if (!idBilanFinanciers.isEmpty()) {
+            idBilanChoiceBox.setValue(idBilanFinanciers.get(0));
+        }
+    }
+
+
 }

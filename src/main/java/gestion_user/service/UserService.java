@@ -1,6 +1,8 @@
 package gestion_user.service;
 
 
+import GestionFinance.entites.BilanFinancier;
+import GestionFinance.service.BilanFinancierService;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
@@ -16,9 +18,10 @@ public class UserService implements IService<User> {
     private Connection conn;
     private Statement ste;
     private PreparedStatement pst;
-
+    private BilanFinancierService bilanFinancierService;
     public UserService() {
         conn = DataSource.getInstance().getCnx();
+        bilanFinancierService = new BilanFinancierService();
     }
 
     @Override
@@ -34,7 +37,8 @@ public class UserService implements IService<User> {
             pst.setString(6, c.getSexe().toString());
             pst.setString(7, c.getRole().toString());
             pst.setDouble(8,c.getSalaire());
-            pst.setInt(9,c.getId_bilan_financier());
+            int idBilanFinancier = bilanFinancierService.getIdBilanFinancier();
+            pst.setInt(9,idBilanFinancier);
 
             pst.executeUpdate();
 
@@ -60,7 +64,8 @@ public class UserService implements IService<User> {
             pst.setString(6, c.getSexe().toString());
             pst.setString(7,c.getRole().toString());
             pst.setDouble(8, c.getSalaire());
-            pst.setInt(9,c.getId_bilan_financier());
+
+            pst.setInt(9, c.getBilanFinancier());
             pst.setInt(10,id);
             int test= pst.executeUpdate();
             if (test == 0) {
@@ -76,32 +81,37 @@ public class UserService implements IService<User> {
 
     @Override
     public  List<User> readAllAdherent() {
-        String requete = "select * from user";
+        String requete = "SELECT * FROM user";
         List<User> list = new ArrayList<>();
+
         try {
             ste = conn.createStatement();
             ResultSet rs = ste.executeQuery(requete);
+
             while (rs.next()) {
                 Sexe sexe = Sexe.valueOf(rs.getString(7));
                 Role role = Role.valueOf(rs.getString(8));
 
-                User ad = new User( rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), sexe,role);
+                User ad = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), sexe, role);
                 ad.setId(rs.getInt(1));
                 ad.setSalaire(rs.getDouble(9));
-                ad.setId_bilan_financier(rs.getInt(10));
 
+                // Assuming that 'idBilanFinancier' is a column in your user table
+                int idBilanFinancier = rs.getInt("id_bilan_financier");
+                ad.setBilanFinancier(idBilanFinancier);
 
-                    list.add(ad);
-                                }
+                list.add(ad);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
 
-        } return list;
+        return list;
     }
 
     @Override
     public void deleteAdherent(int id) {
-        String requete = "DELETE FROM user WHERE id = ? and role='Adherent'";
+        String requete = "DELETE FROM user WHERE id = ?";
         try{
             pst = conn.prepareStatement(requete);
             pst.setInt(1 , id);

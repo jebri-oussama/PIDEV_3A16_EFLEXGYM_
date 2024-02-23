@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdherentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdherentController">
    <children>
       <Label layoutX="25.0" layoutY="23.0" text="Nom" />
       <Label layoutX="185.0" layoutY="24.0" text="Prenom" />
@@ -38,16 +46,17 @@
         </columns>
       </TableView>
       <Button fx:id="refreshButton" layoutX="344.0" layoutY="416.0" mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
-      <TextField fx:id="id_bilan" layoutX="348.0" layoutY="111.0" prefHeight="25.0" prefWidth="70.0" visible="false" />
-      <TextField fx:id="salaire" layoutX="511.0" layoutY="111.0" prefHeight="25.0" prefWidth="70.0" visible="false" />
-      <Label fx:id="labelBilan" layoutX="255.0" layoutY="115.0" text="ID Bilan Fiancier" visible="false" />
+       <TextField fx:id="salaire" layoutX="511.0" layoutY="111.0" prefHeight="25.0" prefWidth="70.0" visible="false" />
+       <ChoiceBox fx:id="idBilanFinanciersChoiceBox" layoutX="368.0" layoutY="111.0" prefHeight="25.0" prefWidth="72.0" visible="false" />
+       <Label fx:id="labelBilan" layoutX="255.0" layoutY="115.0" text="ID Bilan Fiancier" visible="false" />
       <Label fx:id="labelSalaire" layoutX="447.0" layoutY="115.0" text="Salaire" visible="false" />
          <RadioButton fx:id="rbAdherent" layoutX="58.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleRoleSelectionAD" prefHeight="17.0" prefWidth="72.0" text="Adherent">
-         <toggleGroup>
+             <toggleGroup>
             <ToggleGroup fx:id="TGR" />
          </toggleGroup>
       </RadioButton>
          <RadioButton fx:id="rbCoach" layoutX="143.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleRoleSelection" text="Coach" toggleGroup="$TGR" />
+
 
    </children>
 </AnchorPane>

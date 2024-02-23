@@ -1,5 +1,6 @@
 package gestion_user;
 
+import GestionFinance.service.BilanFinancierService;
 import gestion_user.entities.User;
 import gestion_user.service.UserService;
 
@@ -9,7 +10,10 @@ public class Main {
     public static void main(String[] args) {
 
 
-
+        UserService bs = new UserService();
+        System.out.println(
+                bs.readAllAdherent()
+        );
 
 
         }

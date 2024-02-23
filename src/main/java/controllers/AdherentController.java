@@ -2,6 +2,7 @@ package controllers;
 
 
 
+import GestionFinance.service.BilanFinancierService;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
@@ -63,13 +64,6 @@ public class AdherentController {
 
 
     @FXML
-    void handleRefresh(ActionEvent event) {
-        adherentList.clear(); // Clear existing data
-        readAllAdherents();   // Reload data from the database
-    }
-
-
-    @FXML
     private TableView<User> list;
 
     @FXML
@@ -111,15 +105,12 @@ public class AdherentController {
     @FXML
     private RadioButton rbAdherent;
 
-    @FXML
-    private Group role;
 
     @FXML
     private RadioButton rbCoach;
 
 
-    @FXML
-    private TextField id_bilan;
+
 
     @FXML
     private Label labelBilan;
@@ -129,6 +120,9 @@ public class AdherentController {
 
     @FXML
     private TextField salaire;
+
+    @FXML
+    private ChoiceBox<Integer> idBilanFinanciersChoiceBox;
 
     private ObservableList<User> adherentList = FXCollections.observableArrayList();
 
@@ -159,8 +153,7 @@ public class AdherentController {
         UserService as = new UserService();
 
         as.readAllAdherent();
-        Integer idBilan= null;
-        Double Salaire =null;
+
 
         //int adherentId = Integer.parseInt(id_adherent.getText());
         String adherentNom = nom.getText();
@@ -172,17 +165,19 @@ public class AdherentController {
         Sexe sexe1 = Sexe.valueOf(SexeString);
         String selectedRole = getSelectedRole();
         if ("Coach".equals(selectedRole)){
-             idBilan = Integer.valueOf(id_bilan.getText());
-            Salaire = Double.valueOf(salaire.getText());
-            User a1 = new User(adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1,Role.valueOf(selectedRole),Salaire,idBilan);
+            Integer idBilan = idBilanFinanciersChoiceBox.getValue();
+            Double Salaire = Double.parseDouble(salaire.getText());
+            User a1 = new User(adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1,Role.valueOf(selectedRole));
+            a1.setBilanFinancier(idBilan);
+            a1.setSalaire(Salaire);
             as.addAdherent(a1);
             adherentList.add(a1);
 
-        }
+        } else {
         // Get the values from the text fields
         User a1 = new User(adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1,Role.valueOf(selectedRole));
         as.addAdherent(a1);
-        adherentList.add(a1);
+        adherentList.add(a1);}
 
     };
     @FXML
@@ -195,7 +190,7 @@ public class AdherentController {
         boolean isCoachSelected = "Coach".equals(selectedRole);
 
         labelBilan.setVisible(isCoachSelected);
-        id_bilan.setVisible(isCoachSelected);
+        idBilanFinanciersChoiceBox.setVisible(isCoachSelected);
         labelSalaire.setVisible(isCoachSelected);
         salaire.setVisible(isCoachSelected);
     }
@@ -209,7 +204,7 @@ public class AdherentController {
         boolean isCoachSelected = "Adherent".equals(selectedRole);
 
         labelBilan.setVisible(false);
-        id_bilan.setVisible(false);
+        idBilanFinanciersChoiceBox.setVisible(false);
         labelSalaire.setVisible(false);
         salaire.setVisible(false);
     }
@@ -220,9 +215,31 @@ public class AdherentController {
         initializeTableView();
         readAllAdherents();
         initializeRefreshButton();
+        initializeIdBilanFinanciersChoiceBox();
+    }
+    private void initializeIdBilanFinanciersChoiceBox() {
+        List<Integer> idBilanFinanciersChoices = BilanFinancierService.getAllIdBilanFinancier();
+        idBilanFinanciersChoiceBox.getItems().addAll(idBilanFinanciersChoices);
+        System.out.println("ID Bilan Financiers Choices: " + idBilanFinanciersChoices);
+
+
+        if (!idBilanFinanciersChoices.isEmpty()) {
+            // Optionally, set a default value if needed
+            idBilanFinanciersChoiceBox.setValue(idBilanFinanciersChoices.get(0));
+        }
     }
 
     private void initializeRefreshButton() {
+
+        refreshButton.setOnAction(event -> {
+            adherentList.clear();
+            readAllAdherents();
+        });
+    }
+    @FXML
+    private void handleRefresh(ActionEvent event) {
+        adherentList.clear();
+        readAllAdherents();
     }
 
     private void initializeTableView() {
@@ -240,7 +257,7 @@ public class AdherentController {
         });
         colSexe.setCellValueFactory(new PropertyValueFactory<>("sexe"));
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
-        colBilan.setCellValueFactory(new PropertyValueFactory<>("id_bilan_financier"));
+        colBilan.setCellValueFactory(new PropertyValueFactory<>("BilanFinancier"));
         colSalaire.setCellValueFactory(new PropertyValueFactory<>("salaire"));
 
         // Set TableView items
