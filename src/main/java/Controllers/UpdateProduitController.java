@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
-import gestion_produit.entities.service.produitService;
+import gestion_produit.service.produitService;
 
 public class UpdateProduitController {
     @FXML

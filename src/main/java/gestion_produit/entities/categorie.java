@@ -2,7 +2,7 @@ package gestion_produit.entities;
 
 public class categorie {
     private  int id;
-    private type type;
+    private gestion_produit.entities.type type;
     private String description;
 
 

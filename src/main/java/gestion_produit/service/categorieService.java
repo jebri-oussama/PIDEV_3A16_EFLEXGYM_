@@ -1,4 +1,4 @@
-package gestion_produit.entities.service;
+package gestion_produit.service;
 import gestion_produit.entities.type;
 import utils.DataSource;
 import gestion_produit.entities.categorie;
@@ -89,7 +89,7 @@ public class categorieService implements IService<categorie>{
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 String typeName = rs.getString("type");
-                gestion_produit.entities.type type = gestion_produit.entities.type.valueOf(typeName);
+                type type = gestion_produit.entities.type.valueOf(typeName);
                 String description = rs.getString("description");
                 return new categorie(id, type, description);
             }

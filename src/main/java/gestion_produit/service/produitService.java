@@ -1,4 +1,4 @@
-package gestion_produit.entities.service;
+package gestion_produit.service;
 
 
 

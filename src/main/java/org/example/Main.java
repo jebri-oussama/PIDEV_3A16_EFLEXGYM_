@@ -2,12 +2,12 @@ package org.example;
 
 
 import gestion_produit.entities.categorie;
-import gestion_produit.entities.service.categorieService;
+import gestion_produit.service.categorieService;
 import utils.DataSource;
 //import static gestion_produit.entities.type.alimentaire;
 //import static gestion_produit.entities.type.vestimentaire;
 import gestion_produit.entities.produit;
-import gestion_produit.entities.service.produitService;
+import gestion_produit.service.produitService;
 
 import static gestion_produit.entities.type.vestimentaire;
 

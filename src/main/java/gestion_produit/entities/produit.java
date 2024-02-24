@@ -1,5 +1,7 @@
 package gestion_produit.entities;
 
+import gestion_produit.entities.categorie;
+
 public class produit {
    private int id;
    private String nom;
@@ -7,7 +9,7 @@ public class produit {
    private float prix;
    private int quantite;
    private String description;
-  private  categorie categorie;
+  private gestion_produit.entities.categorie categorie;
   private   int id_bilan_financier;
    private int id_admin;
 
