@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +21,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import GestionFinance.entites.BilanFinancier;
 import gestion_produit.entities.categorie;
@@ -68,8 +74,6 @@ public class AfficherProduitController implements Initializable {
     @FXML
     private TextField txtnom;
 
-    @FXML
-    private TextField txtimage;
 
     @FXML
     private TextField txtprix;
@@ -97,16 +101,49 @@ public class AfficherProduitController implements Initializable {
 
     @FXML
     private ToggleButton chkVestimentaire;
-
+@FXML
+private ImageView imageView;
     private produitService produitService;
     private Connection conn;
     private PreparedStatement pst;
 
     private final ObservableList<produit> produits = FXCollections.observableArrayList();
+    private String image;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         produitService = new produitService();
+        imageColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<produit, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<produit, String> param) {
+                return new SimpleStringProperty(param.getValue().getImage());
+            }
+        });
+
+        imageColumn.setCellFactory(column -> {
+            return new TableCell<produit, String>() {
+                private final ImageView imageView = new ImageView();
+
+                {
+                    setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    setGraphic(imageView);
+                    imageView.setFitWidth(100);
+                    imageView.setFitHeight(100);
+                }
+
+                @Override
+                protected void updateItem(String imagePath, boolean empty) {
+                    super.updateItem(imagePath, empty);
+                    if (empty || imagePath == null || imagePath.isEmpty()) {
+                        imageView.setImage(null);
+                    } else {
+                        imageView.setImage(new Image(imagePath));
+                    }
+                }
+            };
+        });
+
+
 
         setupTableColumns();
         refreshTable();
@@ -160,6 +197,7 @@ public class AfficherProduitController implements Initializable {
             return new SimpleIntegerProperty(bilanid).asObject();
         });
         idadminColumn.setCellValueFactory(new PropertyValueFactory<>("id_admin"));
+
 
         deleteColumn.setCellFactory(createDeleteButtonCellFactory());
         selectColumn.setCellFactory(createSelectButtonCellFactory());
@@ -221,6 +259,7 @@ public class AfficherProduitController implements Initializable {
         };
     }
 
+
     private void supprimerProduit(int id) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -238,30 +277,28 @@ public class AfficherProduitController implements Initializable {
     private void updateSelectedProductFields(produit produit) {
         txtId.setText(String.valueOf(produit.getId()));
         txtnom.setText(produit.getNom());
-        txtimage.setText(produit.getImage());
         txtprix.setText(String.valueOf(produit.getPrix()));
         txtquantite.setText(String.valueOf(produit.getQuantite()));
         txtdescription.setText(produit.getDescription());
         txtcategorie.setText(String.valueOf(produit.getCategorie().getId()));
         int bilanId = produit.getId_bilan_financier().getId();
 
-        // Check if the ComboBox items contain the BilanFinancier ID
-        if (comboBoxBilan.getItems().contains(bilanId)) {
-            // Set the ComboBox value to the BilanFinancier ID
-            comboBoxBilan.setValue(bilanId);
-        } else {
-            // BilanFinancier ID not found in ComboBox items, display a message or handle accordingly
-            System.out.println("BilanFinancier ID not found in ComboBox items.");
-        }
+        // Set the ComboBox value to the BilanFinancier ID
+        comboBoxBilan.setValue(bilanId);
+
         txtid_admin.setText(String.valueOf(produit.getId_admin()));
+        // Set the image
+        image = produit.getImage();
+        Image img = new Image(image);
+        imageView.setImage(img);
     }
+
 
     @FXML
     public void updateProduit(ActionEvent event) {
         produit selectedProduit = tableViewProduit.getSelectionModel().getSelectedItem();
         int id = Integer.parseInt(txtId.getText());
         String nom = txtnom.getText();
-        String image = txtimage.getText();
         float prix = Float.parseFloat(txtprix.getText());
         int quantite = Integer.parseInt(txtquantite.getText());
         String description = txtdescription.getText();
@@ -270,17 +307,20 @@ public class AfficherProduitController implements Initializable {
         Integer selectedBilanId = comboBoxBilan.getValue();
         BilanFinancier bilan = new BilanFinancier(selectedBilanId, null, null, 0, 0, 0, 0, 0, 0);
         int id_admin = Integer.parseInt(txtid_admin.getText());
-        produit updatedProduit = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
+        // Retrieve image from the field
+        String updatedImage = image;
+        produit updatedProduit = new produit(nom, updatedImage, prix, quantite, description, category, bilan, id_admin);
         produitService.update(id, updatedProduit);
         txtId.setText("");
         clearFields();
         refreshTable();
     }
 
+
     @FXML
     void addProduit() throws SQLException {
         // Check if the required fields are empty
-        if (txtnom.getText().isEmpty() || txtimage.getText().isEmpty() || txtprix.getText().isEmpty() ||
+        if (txtnom.getText().isEmpty()  || txtprix.getText().isEmpty() ||
                 txtquantite.getText().isEmpty() || txtdescription.getText().isEmpty() ||
                 txtid_admin.getText().isEmpty()) {
             showAlert(AlertType.ERROR, "Erreur", "Champ(s) vide(s)", "Veuillez remplir tous les champs.");
@@ -331,11 +371,12 @@ public class AfficherProduitController implements Initializable {
             showAlert(AlertType.ERROR, "Erreur", "Aucun bilan financier sélectionné", "Veuillez sélectionner un bilan financier.");
             return;
         }
+        String image=this.image;
 
         // Create the product object
         categorie category = new categorie(categoryId, null, null);
         BilanFinancier bilan = new BilanFinancier(selectedBilan, null, null, 0, 0, 0, 0, 0, 0);
-        produit p = new produit(txtnom.getText(), txtimage.getText(), prix, quantite, txtdescription.getText(), category, bilan, id_admin);
+        produit p = new produit(txtnom.getText(), image, prix, quantite, txtdescription.getText(), category, bilan, id_admin);
 
         // Call the service to add the product
         produitService.add(p);
@@ -345,7 +386,20 @@ public class AfficherProduitController implements Initializable {
 
 
 
+    @FXML
+    void selectImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            image= selectedFile.toURI().toString();
+            Image image1 = new Image(image);
+            imageView.setImage(image1);
+        }
 
+    }
     private void showAlert(AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -357,12 +411,11 @@ public class AfficherProduitController implements Initializable {
     private void clearFields() {
         txtId.setText("");
         txtnom.setText("");
-        txtimage.setText("");
         txtprix.setText("");
         txtquantite.setText("");
         txtdescription.setText("");
         txtcategorie.setText("");
-        txtid_bilan_financier.setText("");
+imageView.setImage(null);
         txtid_admin.setText("");
         comboBoxBilan.getSelectionModel().clearSelection();
     }

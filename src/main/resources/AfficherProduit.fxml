@@ -39,11 +39,13 @@
                 <TextField fx:id="txtnom" />
             </HBox>
 
-            <HBox spacing="10.0">
-                <Label text="Image:" style="-fx-text-fill: #FFA500;" />
-                <TextField fx:id="txtimage" />
-                <ImageView fx:id="imageView" fitHeight="50" fitWidth="50" />
+            <HBox spacing="10.0" styleClass="input-row">
+                <children>
+                    <Label text="Image:" styleClass="input-label" />
+                    <Button text="Sélectionner" onAction="#selectImage" />
+                </children>
             </HBox>
+            <ImageView fx:id="imageView" fitWidth="100" fitHeight="100" />
 
             <HBox spacing="10.0">
                 <Label text="Prix:" style="-fx-text-fill: #FFA500;" />
