@@ -5,78 +5,154 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="584.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AjouterAbonnementController">
+<AnchorPane prefHeight="590.0" prefWidth="1934.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AjouterAbonnementController">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
+      <TextField fx:id="typeId" layoutX="394.0" layoutY="119.0" prefHeight="25.0" prefWidth="174.0" />
+      <DatePicker fx:id="dateDebutId" layoutX="394.0" layoutY="240.0" />
+      <DatePicker fx:id="dateFinId" layoutX="394.0" layoutY="297.0" />
+      <TextField fx:id="prixId" layoutX="394.0" layoutY="181.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="etatId" layoutX="394.0" layoutY="355.0" prefHeight="25.0" prefWidth="174.0" />
+      <ComboBox fx:id="adherentId" layoutX="394.0" layoutY="409.0" prefHeight="25.0" prefWidth="174.0" />
+      <ComboBox fx:id="bilanFinancierId" layoutX="394.0" layoutY="465.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button fx:id="ajouterId" layoutX="613.0" layoutY="507.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+      <Text layoutX="258.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type d'abonnement" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FFC300;">
+            <AnchorPane prefHeight="519.0" prefWidth="1266.0">
                <children>
-                  <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
-                     <image>
-                        <Image url="@logo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="70.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
-                     <font>
-                        <Font name="Impact" size="31.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Button fx:id="dashboardId" mnemonicParsing="false" text="Dashboard">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="15.0" left="50.0" right="50.0" />
-                     </padding>
-                  </Button>
-                  <Button fx:id="abonnementsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="156.0" text="Abonnements">
-                     <padding>
-                        <Insets bottom="15.0" left="50.0" right="50.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="adherentsId" mnemonicParsing="false" text="Adherents">
-                     <padding>
-                        <Insets bottom="15.0" left="50.0" right="50.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="157.0" text="Coachs">
-                     <padding>
-                        <Insets bottom="15.0" left="50.0" right="50.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                     </VBox.margin>
-                  </Button>
+                  <VBox layoutY="-5.0" prefHeight="593.0" prefWidth="222.0" style="-fx-background-color: FFC300;">
+                     <children>
+                        <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                           <image>
+                              <Image url="@logo.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="70.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
+                           <font>
+                              <Font name="Impact" size="31.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="50.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Button fx:id="dashboardId" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" style="-fx-background-color: FFFFFF;" text="Dashboard" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="15.0" left="50.0" right="50.0" />
+                           </padding>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font name="MS Gothic" size="13.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="abonnementsId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="161.0" style="-fx-background-color: FFFFFF;" text="Abonnements">
+                           <padding>
+                              <Insets bottom="15.0" left="50.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="MS Gothic" size="13.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" opacity="0.9900000095367432" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="adherentsId" mnemonicParsing="false" style="-fx-background-color: FFFFFF;" text="Adherents">
+                           <padding>
+                              <Insets bottom="15.0" left="50.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="MS Gothic" size="13.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="157.0" style="-fx-background-color: FFFFFF;" text="Coachs">
+                           <padding>
+                              <Insets bottom="15.0" left="50.0" right="50.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="MS Gothic" size="13.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <AnchorPane layoutX="221.0" prefHeight="62.0" prefWidth="1304.0">
+                     <children>
+                        <VBox prefHeight="62.0" prefWidth="1311.0" style="-fx-background-color: DCD6C5;">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/home/Abonnements" textAlignment="JUSTIFY" wrappingWidth="241.029296875">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="30.0" right="10.0" top="15.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="MS Gothic" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <Text layoutX="258.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" />
+                  <Text layoutX="268.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat" />
+                  <Text layoutX="261.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de debut" />
+                  <Text layoutX="259.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
+                  <Text layoutX="263.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérent" />
+                  <Text layoutX="262.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilan financier" />
                </children>
-            </VBox>
+      
+                        </AnchorPane>
          </children>
-      </AnchorPane>
-      <TextField fx:id="typeId" layoutX="386.0" layoutY="75.0" prefHeight="25.0" prefWidth="174.0" />
-      <DatePicker fx:id="dateDebutId" layoutX="385.0" layoutY="196.0" />
-      <DatePicker fx:id="dateFinId" layoutX="385.0" layoutY="257.0" />
-      <TextField fx:id="prixId" layoutX="386.0" layoutY="137.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextField fx:id="etatId" layoutX="387.0" layoutY="316.0" prefHeight="25.0" prefWidth="174.0" />
-      <ComboBox fx:id="adherentId" layoutX="387.0" layoutY="372.0" prefHeight="25.0" prefWidth="174.0" />
-      <ComboBox fx:id="bilanFinancierId" layoutX="387.0" layoutY="433.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button fx:id="ajouterId" layoutX="576.0" layoutY="497.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+      </HBox>
+
    </children>
+
 </AnchorPane>
