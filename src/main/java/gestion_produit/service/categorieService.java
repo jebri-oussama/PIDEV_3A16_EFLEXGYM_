@@ -69,7 +69,7 @@ public class categorieService implements IService<categorie>{
             ste = conn.createStatement();
             ResultSet rs = ste.executeQuery(requete);
             while (rs.next()) {
-                type Type = type.valueOf(rs.getString(2));
+                type Type = type.valueOf(rs.getString("type"));
                 list.add(new categorie(rs.getInt(1), Type, rs.getString(3)));
             }
         } catch (SQLException e) {
