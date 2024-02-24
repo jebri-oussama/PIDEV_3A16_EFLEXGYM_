@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AjouterBilanFinancierController">
+   <children>
+      <DatePicker fx:id="dateDebutId" layoutX="43.0" layoutY="108.0" />
+      <DatePicker fx:id="dateFinId" layoutX="43.0" layoutY="175.0" />
+      <TextField fx:id="revenusAbonnementsId" layoutX="274.0" layoutY="108.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="prixLocationId" layoutX="43.0" layoutY="293.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="salairesCoachsId" layoutX="43.0" layoutY="234.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="revenusProduitsId" layoutX="274.0" layoutY="175.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="depensesId" layoutX="274.0" layoutY="234.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="profitId" layoutX="274.0" layoutY="293.0" prefHeight="25.0" prefWidth="174.0" />
+      <Text layoutX="252.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un nouveau bilan financier" />
+      <Text layoutX="284.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profit" />
+      <Text layoutX="284.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depenses" />
+      <Text layoutX="284.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenus des produits" />
+      <Text layoutX="284.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenus des abonnements" />
+      <Text layoutX="43.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix location" />
+      <Text layoutX="43.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salaires des coachs" />
+      <Text layoutX="43.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" />
+      <Text layoutX="43.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date debut" />
+      <Button layoutX="467.0" layoutY="338.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+   </children>
+</AnchorPane>

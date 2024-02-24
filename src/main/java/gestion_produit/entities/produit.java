@@ -1,17 +1,17 @@
 package gestion_produit.entities;
 
 import gestion_produit.entities.categorie;
-
+import GestionFinance.entites.BilanFinancier;
 public class produit {
-   private int id;
-   private String nom;
-   private String image;
-   private float prix;
-   private int quantite;
-   private String description;
-  private gestion_produit.entities.categorie categorie;
-  private   int id_bilan_financier;
-   private int id_admin;
+    private int id;
+    private String nom;
+    private String image;
+    private float prix;
+    private int quantite;
+    private String description;
+    private gestion_produit.entities.categorie categorie;
+    private   BilanFinancier id_bilan_financier;
+    private int id_admin;
 
 
 
@@ -21,7 +21,7 @@ public class produit {
     }
 
 
-    public produit( String nom, String image, float prix, int quantite, String description, categorie categorie, int id_bilan_financier, int id_admin) {
+    public produit( String nom, String image, float prix, int quantite, String description, categorie categorie, BilanFinancier id_bilan_financier, int id_admin) {
         this.nom = nom;
         this.image = image;
         this.prix = prix;
@@ -56,7 +56,7 @@ public class produit {
         return description;
     }
 
-    public int getId_bilan_financier() {
+    public BilanFinancier getId_bilan_financier() {
         return id_bilan_financier;
     }
     public int getId_admin() {
@@ -87,7 +87,7 @@ public class produit {
     public void setDescription(String description) {
         this.description = description;
     }
-    public void setId_bilan_financier(int id_bilan_financier) {
+    public void setId_bilan_financier(BilanFinancier id_bilan_financier) {
         this.id_bilan_financier = id_bilan_financier;
     }
     public void setId_admin(int id_admin) {
@@ -112,8 +112,8 @@ public class produit {
                 ", prix=" + prix +
                 ", quantite=" + quantite +
                 ", description='" + description + '\'' +
-                  categorie +
-                ", id_bilan_financier=" + id_bilan_financier +
+                categorie +
+                id_bilan_financier +
                 ", id_admin=" + id_admin +
                 '}';
     }

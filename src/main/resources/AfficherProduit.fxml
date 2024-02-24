@@ -2,91 +2,88 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AfficherProduitController">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AfficherProduitController" style="-fx-background-color: #000000;">
 
     <!-- Table of Reading (on the left) -->
     <TableView fx:id="tableViewProduit" layoutX="8.0" layoutY="18.0" prefHeight="364.0" prefWidth="300.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="18.0">
         <columns>
-            <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="nomColumn" prefWidth="139.0" text="Nom" />
+            <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="nomColumn" prefWidth="100.0" text="Nom" />
             <TableColumn fx:id="prixColumn" prefWidth="75.0" text="Prix" />
             <TableColumn fx:id="quantiteColumn" prefWidth="75.0" text="Quantité" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="139.0" text="Description" />
-            <TableColumn fx:id="categorieColumn" prefWidth="139.0" text="Catégorie" />
-            <TableColumn fx:id="idbilanfinancierColumn" prefWidth="139.0" text="ID Bilan Financier" />
-            <TableColumn fx:id="idadminColumn" prefWidth="139.0" text="ID Admin" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="150.0" text="Description" />
+            <TableColumn fx:id="categorieColumn" prefWidth="100.0" text="Catégorie" />
+            <TableColumn fx:id="idbilanfinancierColumn" prefWidth="100.0" text="ID Bilan Financier" />
+            <TableColumn fx:id="idadminColumn" prefWidth="100.0" text="ID Admin" />
             <TableColumn fx:id="deleteColumn" prefWidth="75.0" text="Supprimer" />
-            <TableColumn fx:id="selectColumn" prefWidth="75.0" text="Sélectionner" />
+            <TableColumn fx:id="selectColumn" prefWidth="100.0" text="Sélectionner" />
         </columns>
     </TableView>
 
-    <VBox layoutX="300.0" layoutY="38.0" spacing="10.0">
+    <!-- Form on the right -->
+    <VBox layoutX="320.0" layoutY="38.0" spacing="10.0">
         <children>
-            <TextField fx:id="txtId" editable="false" />
-
-
-            <HBox spacing="10.0">
-                <children>
-                    <Label text="Nom:" />
-                    <TextField fx:id="txtnom" />
-                </children>
-            </HBox>
-            <HBox spacing="10.0">
-                <children>
-                    <Label text="Image:" />
-                    <TextField fx:id="txtimage" />
-                    <ImageView fx:id="imageView" fitHeight="50" fitWidth="50" />
-                </children>
-            </HBox>
-            <HBox spacing="10.0">
-                <children>
-                    <Label text="Prix:" />
-                    <TextField fx:id="txtprix" />
-                </children>
-            </HBox>
-            <HBox spacing="10.0">
-                <children>
-                    <Label text="Quantite:" />
-                    <TextField fx:id="txtquantite" />
-                </children>
-            </HBox>
-            <HBox spacing="10.0">
-                <children>
-                    <Label text="Description:" />
-                    <TextField fx:id="txtdescription" />
-                </children>
-            </HBox>
-            <Label text="modifiercategory:" />
-            <TextField fx:id="txtcategorie" />
-
-           <HBox spacing="10.0">
-                <children>
-                    <Label text="Catégorie:" />
-                    <ToggleButton fx:id="chkAlimentaire" text="Alimentaire" />
-                    <ToggleButton fx:id="chkVestimentaire" text="Vestimentaire" />
-                </children>
-            </HBox>
-
-
+            <Label text="Détails du Produit" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #FFA500;" />
 
             <HBox spacing="10.0">
-                <children>
-                    <Label text="ID Bilan Financier:" />
-                    <TextField fx:id="txtid_bilan_financier" />
-                </children>
+                <Label text="ID:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtId" editable="false" />
+            </HBox>
+
+            <HBox spacing="10.0">
+                <Label text="Nom:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtnom" />
+            </HBox>
+
+            <HBox spacing="10.0">
+                <Label text="Image:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtimage" />
+                <ImageView fx:id="imageView" fitHeight="50" fitWidth="50" />
+            </HBox>
+
+            <HBox spacing="10.0">
+                <Label text="Prix:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtprix" />
+            </HBox>
+
+            <HBox spacing="10.0">
+                <Label text="Quantité:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtquantite" />
+            </HBox>
+
+            <HBox spacing="10.0">
+                <Label text="Description:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtdescription" />
             </HBox>
             <HBox spacing="10.0">
-                <children>
-                    <Label text="ID Admin:" />
-                    <TextField fx:id="txtid_admin" />
-                </children>
+                <Label text="Ctegorie " style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtcategorie" />
             </HBox>
-            <!-- Other form fields -->
-            <Button mnemonicParsing="false" onAction="#addProduit" text="Ajouter" />
-            <Button mnemonicParsing="false" onAction="#updateProduit" text="Appliquer les changements" />
+
+            <HBox spacing="10.0">
+                <Label text="Catégorie:" style="-fx-text-fill: #FFA500;" />
+                <ToggleButton fx:id="chkAlimentaire" text="Alimentaire" style="-fx-base: #FFA500;" />
+                <ToggleButton fx:id="chkVestimentaire" text="Vestimentaire" style="-fx-base: #FFA500;" />
+            </HBox>
+
+            <HBox spacing="10.0">
+                <Label text="ID Bilan Financier:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtid_bilan_financier" />
+            </HBox>
+
+            <HBox spacing="10.0">
+                <Label text="ID Admin:" style="-fx-text-fill: #FFA500;" />
+                <TextField fx:id="txtid_admin" />
+            </HBox>
+
+            <!-- Buttons -->
+            <HBox spacing="10.0">
+                <Button mnemonicParsing="false" onAction="#addProduit" text="Ajouter" style="-fx-background-color: #FFA500; -fx-text-fill: #000000;" />
+                <Button mnemonicParsing="false" onAction="#updateProduit" text="Appliquer les changements" style="-fx-background-color: #FFA500; -fx-text-fill: #000000;" />
+            </HBox>
 
         </children>
         <padding>

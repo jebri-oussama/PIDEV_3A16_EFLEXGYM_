@@ -1,6 +1,6 @@
 package Controllers;
 import java.sql.Connection;
-
+import GestionFinance.entites.BilanFinancier;
 import gestion_produit.entities.categorie;
 import gestion_produit.entities.produit;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -43,7 +43,7 @@ public class AfficherProduitController implements Initializable {
     private TableColumn<produit, Integer> categorieColumn;
 
     @FXML
-    private TableColumn<produit, String> idbilanfinancierColumn;
+    private TableColumn<produit, Integer> idbilanfinancierColumn;
 
     @FXML
     private TableColumn<produit, String> idadminColumn;
@@ -105,7 +105,10 @@ public class AfficherProduitController implements Initializable {
             int categoryId = data.getValue().getCategorie().getId();
             return new SimpleIntegerProperty(categoryId).asObject();
         });
-        idbilanfinancierColumn.setCellValueFactory(new PropertyValueFactory<>("id_bilan_financier"));
+        idbilanfinancierColumn.setCellValueFactory(data -> {
+            int bilanid = data.getValue().getId_bilan_financier().getId();
+            return new SimpleIntegerProperty(bilanid).asObject();
+        });
         idadminColumn.setCellValueFactory(new PropertyValueFactory<>("id_admin"));
 
 
@@ -147,7 +150,8 @@ public class AfficherProduitController implements Initializable {
                     txtdescription.setText(produit.getDescription());
                     int categoryId = produit.getCategorie().getId();
                     txtcategorie.setText(String.valueOf(categoryId));
-                    txtid_bilan_financier.setText(String.valueOf(produit.getId_bilan_financier()));
+                    int bilanid = produit.getId_bilan_financier().getId();
+                    txtid_bilan_financier.setText(String.valueOf(bilanid));
                     txtid_admin.setText(String.valueOf(produit.getId_admin()));
                 });
             }
@@ -206,12 +210,13 @@ public class AfficherProduitController implements Initializable {
         String description = txtdescription.getText();
         int categoryId = Integer.parseInt(txtcategorie.getText());
         categorie category = new categorie(categoryId,null,description);
-        int id_bilan_financier = Integer.parseInt(txtid_bilan_financier.getText());
+        int bilanid = Integer.parseInt(txtid_bilan_financier.getText());
+        BilanFinancier bilan = new BilanFinancier(bilanid,null,null,0,0,0,0,0,0);
         int id_admin = Integer.parseInt(txtid_admin.getText());
-        produit p = new produit(nom, image, prix, quantite, description, category, id_bilan_financier, id_admin);
+        produit p = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
 
         // Create a new produit object with updated data
-        produit updatedProduit = new produit(nom, image, prix, quantite, description, category, id_bilan_financier, id_admin);
+        produit updatedProduit = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
 
         // Update the produit in the database
         produitService.update(id, updatedProduit);
@@ -240,7 +245,8 @@ public class AfficherProduitController implements Initializable {
         float prix = Float.parseFloat(txtprix.getText());
         int quantite = Integer.parseInt(txtquantite.getText());
         String description = txtdescription.getText();
-        int id_bilan_financier = Integer.parseInt(txtid_bilan_financier.getText());
+        int bilanid = Integer.parseInt(txtid_bilan_financier.getText());
+        BilanFinancier bilan =new BilanFinancier(bilanid,null,null,0,0,0,0,0,0);
         int id_admin = Integer.parseInt(txtid_admin.getText());
 
         // Determine the category based on the user's selection
@@ -259,7 +265,7 @@ public class AfficherProduitController implements Initializable {
         categorie category = new categorie(categoryId, null, null);
 
         // Create the produit object with the selected category
-        produit p = new produit(nom, image, prix, quantite, description, category, id_bilan_financier, id_admin);
+        produit p = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
 
         // Add the produit to the database
         produitService.add(p);
@@ -281,7 +287,7 @@ public class AfficherProduitController implements Initializable {
         alert.showAndWait();
     }
     private void clearFields() {
-    txtId.setText("");
+        txtId.setText("");
         txtnom.setText("");
         txtimage.setText("");
         txtprix.setText("");

@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class mainfx extends Application {
+public class MainFx extends Application {
 
     public static void main(String[] args) {
         launch(args);
