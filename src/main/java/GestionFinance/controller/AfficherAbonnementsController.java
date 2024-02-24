@@ -14,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import GestionFinance.entites.Abonnement;
 import GestionFinance.service.AbonnementService;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,7 +28,6 @@ public class AfficherAbonnementsController implements Initializable {
     private TableColumn<Abonnement, Void> modifierColumn;
     @FXML
     private TableColumn<Abonnement, Void> supprimerColumn;
-
     @FXML
     private TableColumn<Abonnement, String> typeColumn;
     @FXML
@@ -76,7 +74,7 @@ public class AfficherAbonnementsController implements Initializable {
                 } else {
                     button.setOnAction(event -> {
                         Abonnement abonnement = getTableView().getItems().get(getIndex());
-                        openUpdateAbonnement(abonnement);
+                        updateAbonnement(abonnement);
                     });
                     setGraphic(button);
                     setText(null);
@@ -132,7 +130,7 @@ public class AfficherAbonnementsController implements Initializable {
         }
     }
 
-    private void openUpdateAbonnement(Abonnement abonnement) {
+    private void updateAbonnement(Abonnement abonnement) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateAbonnement.fxml"));
             Parent root = loader.load();

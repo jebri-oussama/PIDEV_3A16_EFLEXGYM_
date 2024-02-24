@@ -8,11 +8,12 @@ import java.time.LocalDate;
 
 import utils.DataSource;
 
+
 public class BilanFinancier {
     private Connection conn;
     private int id;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+    private LocalDate date_debut;
+    private LocalDate date_fin;
     private double salaires_coachs;
     private double prix_location;
     private double profit;
@@ -23,17 +24,17 @@ public class BilanFinancier {
     private PreparedStatement pst;
 
 
-    public BilanFinancier( int id,LocalDate dateDebut, LocalDate dateFin,double prix_location, double depenses) {
+    public BilanFinancier( int id,LocalDate date_debut, LocalDate date_fin,double prix_location, double depenses) {
         this.conn =   DataSource.getInstance().getCnx();
         this.id=id;
         this.prix_location = prix_location;
         this.depenses=depenses;
-        this.dateDebut=dateDebut;
-        this.dateFin=dateFin;
+        this.date_debut=date_debut;
+        this.date_fin=date_fin;
 
     }
 
-    public BilanFinancier(int id,LocalDate dateDebut,  LocalDate dateFin,double revenus_abonnements, double revenus_produits, double salaires_coachs, double prix_location, double depenses, double profit) {
+    public BilanFinancier(int id,LocalDate date_debut,  LocalDate date_fin,double revenus_abonnements, double revenus_produits, double salaires_coachs, double prix_location, double depenses, double profit) {
         this.conn =   DataSource.getInstance().getCnx();
         this.id = id;
         this.revenus_abonnements = revenus_abonnements;
@@ -42,8 +43,8 @@ public class BilanFinancier {
         this.prix_location = prix_location;
         this.depenses = depenses;
         this.profit = profit;
-        this.dateDebut=dateDebut;
-        this.dateFin=dateFin;
+        this.date_debut=date_debut;
+        this.date_fin=date_fin;
     }
 
     public BilanFinancier() {
@@ -53,31 +54,31 @@ public class BilanFinancier {
         this.id=id;
     }
 
-    public LocalDate getDateDebut() {
-        return dateDebut;
+    public LocalDate getDate_debut() {
+        return date_debut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
-        this.dateDebut = dateDebut;
+    public void setDate_debut(LocalDate date_debut) {
+        this.date_debut = date_debut;
     }
 
-    public LocalDate getDateFin() {
-        return dateFin;
+    public LocalDate getDate_fin() {
+        return date_fin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
-        this.dateFin = dateFin;
+    public void setDate_fin(LocalDate date_fin) {
+        this.date_fin = date_fin;
     }
 
-    public BilanFinancier(LocalDate dateDebut, LocalDate dateFin, double salaires_coachs, double prix_location, double profit, double revenus_abonnements, double revenus_produits, double depenses) {
+    public BilanFinancier(LocalDate date_debut, LocalDate date_fin, double salaires_coachs, double prix_location, double profit, double revenus_abonnements, double revenus_produits, double depenses) {
         this.salaires_coachs = salaires_coachs;
         this.prix_location = prix_location;
         this.profit = profit;
         this.revenus_abonnements = revenus_abonnements;
         this.revenus_produits = revenus_produits;
         this.depenses = depenses;
-        this.dateDebut=dateDebut;
-        this.dateFin=dateFin;
+        this.date_debut=date_debut;
+        this.date_fin=date_fin;
     }
 
     public double recupererRevenuAbonnements() {
@@ -211,22 +212,28 @@ public class BilanFinancier {
     public void setPst(PreparedStatement pst) {
         this.pst = pst;
     }
+    public double calculerProfit(double prixLocation, double depenses) {
+        return revenus_abonnements + revenus_produits - salaires_coachs - depenses - prixLocation;
+    }
     public double calculerProfit() {
         return revenus_abonnements + revenus_produits - salaires_coachs - depenses - prix_location;
     }
 
+
     @Override
     public String toString() {
         return "BilanFinancier{" +
-                "id=" + id +
-                ", dateDebut=" + dateDebut +
-                ", dateFin=" + dateFin +
+                "conn=" + conn +
+                ", id=" + id +
+                ", date_debut=" + date_debut +
+                ", date_fin=" + date_fin +
                 ", salaires_coachs=" + salaires_coachs +
                 ", prix_location=" + prix_location +
                 ", profit=" + profit +
                 ", revenus_abonnements=" + revenus_abonnements +
                 ", revenus_produits=" + revenus_produits +
                 ", depenses=" + depenses +
+                ", pst=" + pst +
                 '}';
     }
 }

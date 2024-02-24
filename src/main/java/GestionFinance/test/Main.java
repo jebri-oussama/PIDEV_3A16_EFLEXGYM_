@@ -62,5 +62,13 @@ public class Main {
          abs.update(a);
 
     }*/
+
+        BilanFinancier bf =bs.readById(1);
+       // System.out.println(bs.readById(1));
+       bf.setRevenus_abonnements(bf.recupererRevenuAbonnements());
+        bf.setRevenus_produits(bf.recupererRevenusProduits());
+        bf.setSalaires_coachs(bf.recupererSalairesCoachs());
+        System.out.println(bf.calculerProfit());
+
     }
 }
