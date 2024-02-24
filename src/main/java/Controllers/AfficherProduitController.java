@@ -1,23 +1,29 @@
 package Controllers;
+
 import java.sql.Connection;
-import GestionFinance.entites.BilanFinancier;
-import gestion_produit.entities.categorie;
-import gestion_produit.entities.produit;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import gestion_produit.service.produitService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import GestionFinance.entites.BilanFinancier;
+import gestion_produit.entities.categorie;
+import gestion_produit.entities.produit;
+import gestion_produit.service.produitService;
 import utils.DataSource;
-
-import java.net.URL;
-import java.sql.*;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class AfficherProduitController implements Initializable {
 
@@ -40,6 +46,8 @@ public class AfficherProduitController implements Initializable {
     private TableColumn<produit, String> descriptionColumn;
 
     @FXML
+    private TableColumn<produit, String> imageColumn;
+    @FXML
     private TableColumn<produit, Integer> categorieColumn;
 
     @FXML
@@ -53,6 +61,7 @@ public class AfficherProduitController implements Initializable {
 
     @FXML
     private TableColumn<produit, Void> selectColumn;
+
     @FXML
     private TextField txtId;
 
@@ -80,27 +89,68 @@ public class AfficherProduitController implements Initializable {
     @FXML
     private TextField txtid_admin;
 
-    private produitService produitService;
+    @FXML
+    private ComboBox<Integer> comboBoxBilan;
+
     @FXML
     private ToggleButton chkAlimentaire;
 
     @FXML
     private ToggleButton chkVestimentaire;
+
+    private produitService produitService;
     private Connection conn;
-    private Statement ste;
     private PreparedStatement pst;
 
     private final ObservableList<produit> produits = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         produitService = new produitService();
 
-        // Set up the columns
+        setupTableColumns();
+        refreshTable();
+        initializeChoiceBox();
+    }
+
+    public AfficherProduitController() {
+        conn = DataSource.getInstance().getCnx();
+    }
+
+    private void initializeChoiceBox() {
+        List<Integer> bilanIds = fetchBilanIdsFromDatabase();
+        comboBoxBilan.setItems(FXCollections.observableArrayList(bilanIds));
+    }
+
+    private List<Integer> fetchBilanIdsFromDatabase() {
+        List<Integer> bilanIds = new ArrayList<>();
+
+        try {
+            Connection connection = DataSource.getInstance().getCnx();
+            String query = "SELECT id FROM bilan_financier";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                bilanIds.add(id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bilanIds;
+    }
+
+    private void setupTableColumns() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
         prixColumn.setCellValueFactory(new PropertyValueFactory<>("prix"));
         quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+
         categorieColumn.setCellValueFactory(data -> {
             int categoryId = data.getValue().getCategorie().getId();
             return new SimpleIntegerProperty(categoryId).asObject();
@@ -111,68 +161,68 @@ public class AfficherProduitController implements Initializable {
         });
         idadminColumn.setCellValueFactory(new PropertyValueFactory<>("id_admin"));
 
-
-
-        // Create the "Supprimer" button column
-        deleteColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button("Supprimer");
-
-            {
-                deleteButton.setOnAction(event -> {
-                    produit produit = getTableView().getItems().get(getIndex());
-                    supprimerproduit(produit.getId());
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(deleteButton);
-                }
-            }
-        });
-
-        // Create the "Sélectionner" button column
-        selectColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button selectButton = new Button("Sélectionner");
-
-            {
-                selectButton.setOnAction(event -> {
-                    produit produit = getTableView().getItems().get(getIndex());
-                    txtId.setText(String.valueOf(produit.getId()));
-                    txtnom.setText(produit.getNom());
-                    txtimage.setText(produit.getImage());
-                    txtprix.setText(String.valueOf(produit.getPrix()));
-                    txtquantite.setText(String.valueOf(produit.getQuantite()));
-                    txtdescription.setText(produit.getDescription());
-                    int categoryId = produit.getCategorie().getId();
-                    txtcategorie.setText(String.valueOf(categoryId));
-                    int bilanid = produit.getId_bilan_financier().getId();
-                    txtid_bilan_financier.setText(String.valueOf(bilanid));
-                    txtid_admin.setText(String.valueOf(produit.getId_admin()));
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(selectButton);
-                }
-            }
-        });
-
-        // Load data from the database
-        refreshTable();
+        deleteColumn.setCellFactory(createDeleteButtonCellFactory());
+        selectColumn.setCellFactory(createSelectButtonCellFactory());
     }
 
-    public void supprimerproduit(int id) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    private Callback<TableColumn<produit, Void>, TableCell<produit, Void>> createDeleteButtonCellFactory() {
+        return new Callback<TableColumn<produit, Void>, TableCell<produit, Void>>() {
+            @Override
+            public TableCell<produit, Void> call(final TableColumn<produit, Void> param) {
+                return new TableCell<produit, Void>() {
+                    private final Button deleteButton = new Button("Supprimer");
+
+                    {
+                        deleteButton.setOnAction((ActionEvent event) -> {
+                            produit produit = getTableView().getItems().get(getIndex());
+                            supprimerProduit(produit.getId());
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(deleteButton);
+                        }
+                    }
+                };
+            }
+        };
+    }
+
+    private Callback<TableColumn<produit, Void>, TableCell<produit, Void>> createSelectButtonCellFactory() {
+        return new Callback<TableColumn<produit, Void>, TableCell<produit, Void>>() {
+            @Override
+            public TableCell<produit, Void> call(final TableColumn<produit, Void> param) {
+                return new TableCell<produit, Void>() {
+                    private final Button selectButton = new Button("Sélectionner");
+
+                    {
+                        selectButton.setOnAction((ActionEvent event) -> {
+                            produit produit = getTableView().getItems().get(getIndex());
+                            updateSelectedProductFields(produit);
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(selectButton);
+                        }
+                    }
+                };
+            }
+        };
+    }
+
+    private void supprimerProduit(int id) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to delete this product?");
@@ -185,23 +235,30 @@ public class AfficherProduitController implements Initializable {
         });
     }
 
-    private void refreshTable() {
-        produits.clear();
-        List<produit> produitList = produitService.readAll();
-        produits.addAll(produitList);
-        tableViewProduit.setItems(produits);
+    private void updateSelectedProductFields(produit produit) {
+        txtId.setText(String.valueOf(produit.getId()));
+        txtnom.setText(produit.getNom());
+        txtimage.setText(produit.getImage());
+        txtprix.setText(String.valueOf(produit.getPrix()));
+        txtquantite.setText(String.valueOf(produit.getQuantite()));
+        txtdescription.setText(produit.getDescription());
+        txtcategorie.setText(String.valueOf(produit.getCategorie().getId()));
+        int bilanId = produit.getId_bilan_financier().getId();
+
+        // Check if the ComboBox items contain the BilanFinancier ID
+        if (comboBoxBilan.getItems().contains(bilanId)) {
+            // Set the ComboBox value to the BilanFinancier ID
+            comboBoxBilan.setValue(bilanId);
+        } else {
+            // BilanFinancier ID not found in ComboBox items, display a message or handle accordingly
+            System.out.println("BilanFinancier ID not found in ComboBox items.");
+        }
+        txtid_admin.setText(String.valueOf(produit.getId_admin()));
     }
 
     @FXML
     public void updateProduit(ActionEvent event) {
-        // Get the selected product
         produit selectedProduit = tableViewProduit.getSelectionModel().getSelectedItem();
-      /*  if (selectedProduit == null) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Aucun produit sélectionné", "Veuillez sélectionner un produit à mettre à jour.");
-            return;
-        }*/
-
-        // Get data from text fields
         int id = Integer.parseInt(txtId.getText());
         String nom = txtnom.getText();
         String image = txtimage.getText();
@@ -209,68 +266,79 @@ public class AfficherProduitController implements Initializable {
         int quantite = Integer.parseInt(txtquantite.getText());
         String description = txtdescription.getText();
         int categoryId = Integer.parseInt(txtcategorie.getText());
-        categorie category = new categorie(categoryId,null,description);
-        int bilanid = Integer.parseInt(txtid_bilan_financier.getText());
-        BilanFinancier bilan = new BilanFinancier(bilanid,null,null,0,0,0,0,0,0);
+        categorie category = new categorie(categoryId, null, null);
+        Integer selectedBilanId = comboBoxBilan.getValue();
+        BilanFinancier bilan = new BilanFinancier(selectedBilanId, null, null, 0, 0, 0, 0, 0, 0);
         int id_admin = Integer.parseInt(txtid_admin.getText());
-        produit p = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
-
-        // Create a new produit object with updated data
         produit updatedProduit = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
-
-        // Update the produit in the database
         produitService.update(id, updatedProduit);
         txtId.setText("");
         clearFields();
-
-        // Refresh the table
         refreshTable();
     }
 
-
-    public AfficherProduitController() {
-        conn = DataSource.getInstance().getCnx();
-    }
     @FXML
-    void addProduit() {
-        // Check if the connection is initialized
-        if (conn == null) {
-            System.err.println("Connection is not initialized.");
+    void addProduit() throws SQLException {
+        // Check if the required fields are empty
+        if (txtnom.getText().isEmpty() || txtimage.getText().isEmpty() || txtprix.getText().isEmpty() ||
+                txtquantite.getText().isEmpty() || txtdescription.getText().isEmpty() ||
+                txtid_admin.getText().isEmpty()) {
+            showAlert(AlertType.ERROR, "Erreur", "Champ(s) vide(s)", "Veuillez remplir tous les champs.");
             return;
         }
 
-        // Get data from text fields
-        String nom = txtnom.getText();
-        String image = txtimage.getText();
-        float prix = Float.parseFloat(txtprix.getText());
-        int quantite = Integer.parseInt(txtquantite.getText());
-        String description = txtdescription.getText();
-        int bilanid = Integer.parseInt(txtid_bilan_financier.getText());
-        BilanFinancier bilan =new BilanFinancier(bilanid,null,null,0,0,0,0,0,0);
-        int id_admin = Integer.parseInt(txtid_admin.getText());
+        // Validate and parse the price
+        float prix;
+        try {
+            prix = Float.parseFloat(txtprix.getText());
+        } catch (NumberFormatException e) {
+            showAlert(AlertType.ERROR, "Erreur", "Prix invalide", "Veuillez saisir un prix valide.");
+            return;
+        }
 
-        // Determine the category based on the user's selection
+        // Validate and parse the quantity
+        int quantite;
+        try {
+            quantite = Integer.parseInt(txtquantite.getText());
+        } catch (NumberFormatException e) {
+            showAlert(AlertType.ERROR, "Erreur", "Quantité invalide", "Veuillez saisir une quantité valide.");
+            return;
+        }
+
+        // Validate and parse the admin ID
+        int id_admin;
+        try {
+            id_admin = Integer.parseInt(txtid_admin.getText());
+        } catch (NumberFormatException e) {
+            showAlert(AlertType.ERROR, "Erreur", "ID administrateur invalide", "Veuillez saisir un ID administrateur valide.");
+            return;
+        }
+
+        // Get the selected category ID
         int categoryId;
         if (chkAlimentaire.isSelected()) {
             categoryId = 7; // Assuming 7 is the ID for "alimentaire"
         } else if (chkVestimentaire.isSelected()) {
             categoryId = 6; // Assuming 6 is the ID for "vestimentaire"
         } else {
-            // No category selected
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Aucune catégorie sélectionnée", "Veuillez sélectionner une catégorie.");
+            showAlert(AlertType.ERROR, "Erreur", "Aucune catégorie sélectionnée", "Veuillez sélectionner une catégorie.");
             return;
         }
 
-        // Create the category object
+        // Validate and parse the selected bilan financier
+        Integer selectedBilan = comboBoxBilan.getValue();
+        if (selectedBilan == null || selectedBilan == 0) {
+            showAlert(AlertType.ERROR, "Erreur", "Aucun bilan financier sélectionné", "Veuillez sélectionner un bilan financier.");
+            return;
+        }
+
+        // Create the product object
         categorie category = new categorie(categoryId, null, null);
+        BilanFinancier bilan = new BilanFinancier(selectedBilan, null, null, 0, 0, 0, 0, 0, 0);
+        produit p = new produit(txtnom.getText(), txtimage.getText(), prix, quantite, txtdescription.getText(), category, bilan, id_admin);
 
-        // Create the produit object with the selected category
-        produit p = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
-
-        // Add the produit to the database
+        // Call the service to add the product
         produitService.add(p);
-
-        // Clear fields and refresh the table
         clearFields();
         refreshTable();
     }
@@ -278,14 +346,14 @@ public class AfficherProduitController implements Initializable {
 
 
 
-
-    private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
+    private void showAlert(AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
         alert.showAndWait();
     }
+
     private void clearFields() {
         txtId.setText("");
         txtnom.setText("");
@@ -296,5 +364,13 @@ public class AfficherProduitController implements Initializable {
         txtcategorie.setText("");
         txtid_bilan_financier.setText("");
         txtid_admin.setText("");
+        comboBoxBilan.getSelectionModel().clearSelection();
+    }
+
+    private void refreshTable() {
+        produits.clear();
+        List<produit> produitList = produitService.readAll();
+        produits.addAll(produitList);
+        tableViewProduit.setItems(produits);
     }
 }

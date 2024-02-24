@@ -12,6 +12,7 @@
         <columns>
             <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
             <TableColumn fx:id="nomColumn" prefWidth="100.0" text="Nom" />
+            <TableColumn fx:id="imageColumn" prefWidth="150.0" text="Image" />
             <TableColumn fx:id="prixColumn" prefWidth="75.0" text="Prix" />
             <TableColumn fx:id="quantiteColumn" prefWidth="75.0" text="Quantité" />
             <TableColumn fx:id="descriptionColumn" prefWidth="150.0" text="Description" />
@@ -68,12 +69,8 @@
                 <ToggleButton fx:id="chkAlimentaire" text="Alimentaire" style="-fx-base: #FFA500;" />
                 <ToggleButton fx:id="chkVestimentaire" text="Vestimentaire" style="-fx-base: #FFA500;" />
             </HBox>
-
-            <HBox spacing="10.0">
-                <Label text="ID Bilan Financier:" style="-fx-text-fill: #FFA500;" />
-                <TextField fx:id="txtid_bilan_financier" />
-            </HBox>
-
+            <Label text="ID bilan " style="-fx-text-fill: #FFA500;" />
+            <ComboBox fx:id="comboBoxBilan"   prefWidth="150.0" />
             <HBox spacing="10.0">
                 <Label text="ID Admin:" style="-fx-text-fill: #FFA500;" />
                 <TextField fx:id="txtid_admin" />

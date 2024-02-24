@@ -24,7 +24,7 @@ public class produitService implements gestion_produit.service.IService<produit>
     }
 
     public void add(produit p) {
-        String requete = "INSERT INTO produit (id, nom, image, prix, quantite, description, categorie, id_admin, id_bilan_financier) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String requete = "INSERT INTO produit (id, nom, image, prix, quantite, description, categorie, id_bilan_financier, id_admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, p.getId());
@@ -34,8 +34,8 @@ public class produitService implements gestion_produit.service.IService<produit>
             pst.setInt(5, p.getQuantite());
             pst.setString(6, p.getDescription().toString());
             pst.setInt(7,p.getCategorie().getId());
-            pst.setInt(9, p.getId_bilan_financier().getId());
-            pst.setInt(8, p.getId_admin());
+            pst.setInt(8, p.getId_bilan_financier().getId());
+            pst.setInt(9, p.getId_admin());
 
             pst.executeUpdate();
         } catch (SQLException e) {
