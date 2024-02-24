@@ -3,6 +3,7 @@ package gestion_evenement.Controllers;
 import gestion_evenement.entities.Evenement;
 import gestion_evenement.entities.EventBus;
 import gestion_evenement.service.EvenementService;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,8 +14,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
+import javafx.beans.property.SimpleStringProperty;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -37,6 +40,9 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
     @FXML
     private TableColumn<Evenement, String> dateFinColumn;
 
+    @FXML
+    private TableColumn<Evenement, String> imageColumn;
+
     private final ObservableList<Evenement> evenements = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Evenement, Void> deleteColumn;
@@ -44,20 +50,38 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
     private TableColumn<Evenement, Void> updateColumn;
     private EvenementService evenementService;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         evenementService = new EvenementService();
 
-        // Set up the columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("imagePath"));
+
+        imageColumn.setCellFactory(col -> new TableCell<>() {
+            private final ImageView imageView = new ImageView();
+
+            {
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                setGraphic(imageView);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+            }
+
+            @Override
+            protected void updateItem(String imagePath, boolean empty) {
+                super.updateItem(imagePath, empty);
+                if (empty || imagePath == null || imagePath.isEmpty()) {
+                    imageView.setImage(null);
+                } else {
+                    imageView.setImage(new Image(imagePath));
+                }
+            }
+        });
 
 
-        // Create the "Supprimer" button column
         deleteColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Supprimer");
 
@@ -79,7 +103,6 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
             }
         });
 
-        // Create the "Update" button column
         updateColumn.setCellFactory(param -> new TableCell<>() {
             private final Button updateButton = new Button("Modifier");
 
@@ -107,6 +130,7 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
         tableViewEvenements.setItems(evenements);
         EventBus.getInstance().register(this);
     }
+
     @Override
     public void onTableRefreshed() {
         refreshTable();
@@ -125,15 +149,13 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
             }
         });
     }
-   private void refreshTable() {
+
+    private void refreshTable() {
         evenements.clear();
         List<Evenement> evenementsList = evenementService.readAll();
         evenements.addAll(evenementsList);
-        tableViewEvenements.setItems(evenements);}
-
-
-
-
+        tableViewEvenements.setItems(evenements);
+    }
 
     public void redirectToAddEvent(ActionEvent event) {
         try {
@@ -161,5 +183,5 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }}
-
+    }
+}

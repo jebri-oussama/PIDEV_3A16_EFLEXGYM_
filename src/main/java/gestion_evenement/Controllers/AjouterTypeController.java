@@ -1,27 +1,26 @@
 package gestion_evenement.Controllers;
 
-import gestion_evenement.entities.Type;
 import gestion_evenement.entities.EventBus;
 import gestion_evenement.entities.Type;
-
 import gestion_evenement.service.TypeService;
-import javafx.collections.FXCollections;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-
-
-import java.util.List;
+import javafx.util.Duration;
 
 public class AjouterTypeController {
 
     @FXML
     private TextField txttypeName;
 
+    @FXML
+    private Label validationLabel;
 
     @FXML
     void addType(ActionEvent event) {
@@ -29,8 +28,6 @@ public class AjouterTypeController {
             return;
         }
         String typeName = txttypeName.getText();
-
-
 
         Type type = new Type(typeName);
 
@@ -42,11 +39,40 @@ public class AjouterTypeController {
     }
 
     private boolean validateInput() {
-        if (txttypeName.getText() == null) {
+        if (txttypeName.getText() == null || txttypeName.getText().isEmpty()) {
             System.out.println("Please insert a type.");
+            showValidationMessage("Please insert a type.");
             return false;
+        } else {
+            hideValidationMessage();
         }
-    return true;}
+        return true;
+    }
 
+    private void showValidationMessage(String message) {
+        validationLabel.setText(message);
+        validationLabel.setStyle("-fx-text-fill: red;");
+        fadeInValidationMessage();
+    }
+
+    private void hideValidationMessage() {
+        validationLabel.setText("");
+    }
+
+    private void fadeInValidationMessage() {
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(0.5),
+                        new KeyValue(validationLabel.opacityProperty(), 1)));
+        timeline.play();
+    }
+
+    private void fadeOutValidationMessage() {
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(0.5),
+                        new KeyValue(validationLabel.opacityProperty(), 0)));
+        timeline.setOnFinished(event -> hideValidationMessage());
+        timeline.play();
+    }
 }
-

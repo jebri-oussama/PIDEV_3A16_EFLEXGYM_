@@ -13,18 +13,12 @@
                 <TableColumn fx:id="typeColumn" text="Type" />
                 <TableColumn fx:id="dateDebutColumn" text="Date de début" />
                 <TableColumn fx:id="dateFinColumn" text="Date de fin" />
+                <TableColumn fx:id="imageColumn" text="Image" />
+
                 <TableColumn fx:id="deleteColumn" text="Supprimer" />
                 <TableColumn fx:id="updateColumn" text="Modifier" />
-
-
-
             </columns>
-
-
-
         </TableView>
         <Button text="Ajouter" layoutX="47.0" layoutY="360.0" onAction="#redirectToAddEvent" />
-
-
     </children>
 </AnchorPane>

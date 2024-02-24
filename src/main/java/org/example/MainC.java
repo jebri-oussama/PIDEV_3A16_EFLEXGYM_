@@ -52,7 +52,7 @@ public class MainC {
        EvenementService evenementService = new EvenementService();
 
         // ID of the Evenement you want to retrieve
-        int eventIdToRetrieve = 15; // Change this to the desired ID
+    /*    int eventIdToRetrieve = 15; // Change this to the desired ID
 
         // Retrieve the Evenement by ID and print it
         Evenement retrievedEvenement = evenementService.readById(eventIdToRetrieve);
@@ -60,29 +60,29 @@ public class MainC {
             System.out.println("Retrieved Evenement: " + retrievedEvenement);
         } else {
             System.out.println("No Evenement found with ID: " + eventIdToRetrieve);
-        }
+        }*/
    //EvenementService evenementService = new EvenementService();
 
-    TypeService typeService = new TypeService();
+   TypeService typeService = new TypeService();
 
-  //  int typeId = 1; // Replace your_type_id_here with the actual type ID
-  //  Type type = typeService.readById(typeId);
+    int typeId = 1; // Replace your_type_id_here with the actual type ID
+    Type type = typeService.readById(typeId);
 
-   // Evenement e1 = new Evenement(type, Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "20");
+    Evenement e1 = new Evenement(type, Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "hhh.png");
 
-//evenementService.update(15,e1);
+//evenementService.add(e1);
 
 
     //dynamic delete
         // ID of the Evenement you want to delete
-      /*  int eventIdToDelete = 5; // Change this to the desired ID
+    /*   int eventIdToDelete = 5; // Change this to the desired ID
         //E.delete(eventIdToDelete);
         System.out.println("Evenement with ID " + eventIdToDelete + " deleted successfully.");
 */
         //E.add(e1);
         // E.update(e1);
 
-     //  E.readAll().forEach(System.out::println);
+      evenementService.readAll().forEach(System.out::println);
 
 
 

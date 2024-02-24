@@ -8,13 +8,13 @@ public class Evenement {
     private Type type;
     private Timestamp date_debut;
     private Timestamp date_fin;
+    private String imagePath;
 
-
-    public Evenement(Type type, Timestamp date_debut, Timestamp date_fin ) {
+    public Evenement(Type type, Timestamp date_debut, Timestamp date_fin, String imagePath) {
         this.type = type;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
-
+        this.imagePath = imagePath;
     }
 
     public int getId() {
@@ -48,12 +48,20 @@ public class Evenement {
     public void setDate_fin(Timestamp date_fin) {
         this.date_fin = date_fin;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public String getDuration() {
         long durationInMillis = date_fin.getTime() - date_debut.getTime();
         long days = durationInMillis / (1000 * 60 * 60 * 24);
         long hours = (durationInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
         long minutes = (durationInMillis % (1000 * 60 * 60)) / (1000 * 60);
-
 
         return String.format("%d days, %d hours, %d minutes", days, hours, minutes);
     }
@@ -65,6 +73,7 @@ public class Evenement {
                 ", type=" + type +
                 ", date_debut=" + date_debut +
                 ", date_fin=" + date_fin +
+                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 }

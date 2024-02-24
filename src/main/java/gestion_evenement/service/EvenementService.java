@@ -24,12 +24,13 @@ public class EvenementService implements IServiceE<Evenement> {
 
     @Override
     public void add(Evenement e) {
-        String query = "INSERT INTO Evenement (type, date_debut, date_fin, duree) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Evenement (type, date_debut, date_fin, image) VALUES (?, ?, ?, ?)";
         try {
             pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, e.getType().getId());
             pst.setTimestamp(2, new java.sql.Timestamp(e.getDate_debut().getTime()));
             pst.setTimestamp(3, new java.sql.Timestamp(e.getDate_fin().getTime()));
+            pst.setString(4, e.getImagePath());
             pst.executeUpdate();
 
             ResultSet rs = pst.getGeneratedKeys();
@@ -43,6 +44,7 @@ public class EvenementService implements IServiceE<Evenement> {
             throw new RuntimeException(ex);
         }
     }
+
 
 
 
@@ -62,15 +64,15 @@ public class EvenementService implements IServiceE<Evenement> {
 
     @Override
     public void update(int id, Evenement evenement) {
-        String query = "UPDATE Evenement SET type = ?, date_debut = ?, date_fin = ?, duree = ? WHERE id = ?";
+        String query = "UPDATE Evenement SET type = ?, date_debut = ?, date_fin = ?, image = ? WHERE id = ?";
         try {
             pst = conn.prepareStatement(query);
             pst.setInt(1, evenement.getType().getId());
             pst.setTimestamp(2, new java.sql.Timestamp(evenement.getDate_debut().getTime()));
             pst.setTimestamp(3, new java.sql.Timestamp(evenement.getDate_fin().getTime()));
-            pst.setInt(4, id);
-            pst.executeUpdate();System.out.println("Type ID: " + id); // Add this line for debugging;
-
+            pst.setString(4, evenement.getImagePath());
+            pst.setInt(5, id);
+            pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -91,7 +93,8 @@ public class EvenementService implements IServiceE<Evenement> {
                 Evenement evenement = new Evenement(
                         type,
                         rs.getTimestamp("date_debut"),
-                        rs.getTimestamp("date_fin")
+                        rs.getTimestamp("date_fin"),
+                        rs.getString("image")
                 );
                 evenement.setId(rs.getInt("id"));
                 list.add(evenement);
@@ -116,7 +119,8 @@ public class EvenementService implements IServiceE<Evenement> {
                 Evenement evenement = new Evenement(
                         type,
                         rs.getTimestamp("date_debut"),
-                        rs.getTimestamp("date_fin")
+                        rs.getTimestamp("date_fin"),
+                        rs.getString("imagePath")
                 );
                 evenement.setId(rs.getInt("id")); // Set the ID here
                 return evenement;

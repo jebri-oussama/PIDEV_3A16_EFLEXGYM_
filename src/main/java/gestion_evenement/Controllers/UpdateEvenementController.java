@@ -10,12 +10,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.awt.*;
+import java.io.File;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 public class UpdateEvenementController {
 
     @FXML
@@ -29,8 +34,9 @@ public class UpdateEvenementController {
 
     @FXML
     private TextField txtdate_fin;
-
-
+    @FXML
+    private ImageView imageView;
+    private String imagePath;
     private EvenementService evenementService;
 
     public void initData(int eventId) {
@@ -55,7 +61,13 @@ public class UpdateEvenementController {
 
         txtdate_debut.setText(evenement.getDate_debut().toString());
         txtdate_fin.setText(evenement.getDate_fin().toString());
+        imagePath = evenement.getImagePath();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            Image image = new Image(imagePath);
+            imageView.setImage(image);
+        }
     }
+
 
 
 
@@ -71,16 +83,28 @@ public class UpdateEvenementController {
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
 
-
-        Evenement evenement = new Evenement(type, date_debut, date_fin);
+        Evenement evenement = new Evenement(type, date_debut, date_fin, imagePath);
         evenementService.update(id, evenement);
         EventBus.getInstance().notifyTableRefreshed();
-
 
         Stage stage = (Stage) txtid.getScene().getWindow();
         stage.close();
     }
 
+    @FXML
+    void selectImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            imagePath = selectedFile.toURI().toString();
+            Image image = new Image(imagePath);
+            imageView.setImage(image);
+        }
+
+    }
     private boolean validateInput() {
         if (typeComboBox.getValue() == null) {
             System.out.println("Please select a type.");

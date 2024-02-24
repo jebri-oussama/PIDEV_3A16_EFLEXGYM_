@@ -11,14 +11,21 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.awt.*;
+import java.io.File;
 import java.time.LocalDateTime;
 
 import java.sql.Timestamp;
 import java.util.List;
+import javafx.scene.image.Image;
 
 public class AjouterEvenementController {
 
+    public ImageView imageView;
     @FXML
     private ComboBox<Type> typeComboBox;
 
@@ -28,14 +35,14 @@ public class AjouterEvenementController {
 
     @FXML
     private TextField txtdate_fin;
-
+    private String imagePath;
     @FXML
     private void initialize() {
         populateTypeComboBox();
     }
     @FXML
     void addEvenement(ActionEvent event) {
-        // Validate input
+     
         if (!validateInput()) {
             return;
         }
@@ -44,19 +51,33 @@ public class AjouterEvenementController {
         String typeName = selectedType.getTypeName();
 
         TypeService typeService = new TypeService();
-        Type type = typeService.getTypeByName(typeName); // Implement getTypeByName method in TypeService
+        Type type = typeService.getTypeByName(typeName);
 
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
 
-
-        Evenement evenement = new Evenement(type, date_debut, date_fin);
+        String imagePath = this.imagePath;
+        Evenement evenement = new Evenement(type, date_debut, date_fin, imagePath);
 
         EvenementService evenementService = new EvenementService();
         evenementService.add(evenement);
         EventBus.getInstance().notifyTableRefreshed();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+    @FXML
+    void selectImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            imagePath = selectedFile.toURI().toString();
+            Image image = new Image(imagePath);
+            imageView.setImage(image);
+        }
+
     }
 
     private boolean validateInput() {
@@ -113,8 +134,8 @@ public class AjouterEvenementController {
 
 
     private void populateTypeComboBox() {
-        TypeService typeService = new TypeService(); // Assuming you have a TypeService class
-        List<Type> types = typeService.getAllTypes(); // Implement this method in your TypeService
+        TypeService typeService = new TypeService();
+        List<Type> types = typeService.getAllTypes();
         typeComboBox.setItems(FXCollections.observableArrayList(types));
     }
 
