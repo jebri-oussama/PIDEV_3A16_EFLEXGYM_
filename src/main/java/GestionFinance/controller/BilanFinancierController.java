@@ -3,8 +3,14 @@ package GestionFinance.controller;
 import GestionFinance.entites.BilanFinancier;
 import GestionFinance.service.BilanFinancierService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class BilanFinancierController {
     @FXML
@@ -18,6 +24,7 @@ public class BilanFinancierController {
 
     @FXML
     private Label salairesCoachsLabel;
+    private Scene currentScene;
 
     @FXML
     private Label profitLabel;
@@ -82,8 +89,39 @@ public class BilanFinancierController {
         bilanFinancierService.updateProfit(id, profit);
 
         profitLabel.setText(Double.toString(profit));
+        clearFields();
+
+        idField.getScene().getWindow().hide();
+
+        // Redirection vers l'interface Afficher Abonnements
+        redirectToAfficherBilanFinancier();
+    }
+    public void setCurrentScene(Scene scene) {
+        this.currentScene = scene;
     }
 
+    private void redirectToAfficherBilanFinancier() {
+        Stage stage = (Stage) currentScene.getWindow();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            AfficherBilanFinancierController controller = loader.getController();
+            controller.refreshTable();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void clearFields() {
+        idField.clear();
 
+    }
 }
+
+
+
+
+

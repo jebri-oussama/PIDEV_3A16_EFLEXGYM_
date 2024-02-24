@@ -1,5 +1,6 @@
 package GestionFinance.controller;
 
+import GestionFinance.entites.Abonnement;
 import GestionFinance.entites.BilanFinancier;
 import GestionFinance.service.BilanFinancierService;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,6 +49,8 @@ public class AfficherBilanFinancierController {
 
     @FXML
     private TableColumn<BilanFinancier, Double> profitColumn;
+    @FXML
+    private TableColumn<BilanFinancier, Void> modifierColumn;
 
     private final BilanFinancierService bilanFinancierService = new BilanFinancierService();
 
@@ -63,9 +67,30 @@ public class AfficherBilanFinancierController {
         profitColumn.setCellValueFactory(new PropertyValueFactory<>("profit"));
         // Load data into the table
         refreshTable();
+        modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
+        modifierColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button button = new Button("Modifier");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    button.setOnAction(event -> {
+                        BilanFinancier bilanFinancier = getTableView().getItems().get(getIndex());
+                        updateBilanFinancier(bilanFinancier);
+                    });
+                    setGraphic(button);
+                    setText(null);
+                }
+            }
+        });
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
         bilanFinanciers.clear();
         List<BilanFinancier> bilanFinancierList = bilanFinancierService.readAll();
         bilanFinanciers.addAll(bilanFinancierList);
@@ -82,6 +107,24 @@ public class AfficherBilanFinancierController {
 
             AjouterBilanFinancierController controller = loader.getController();
             controller.setCurrentScene(scene);
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateBilanFinancier(BilanFinancier bilanFinancier) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/BilanFinancier.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            BilanFinancierController controller = loader.getController();
+            controller.setCurrentScene(scene);
+           // controller.initData(bilanFinancier.getId());
 
             stage.show();
         } catch (IOException e) {
