@@ -5,17 +5,16 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.control.Accordion?>
 <HBox prefHeight="584.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherBilanFinancierController">
    <children>
 
@@ -39,7 +38,7 @@
                         <Insets left="50.0" />
                      </VBox.margin>
                   </Text>
-                  <Button fx:id="dashboardId" mnemonicParsing="false" text="Dashboard" style="-fx-background-color: #FFFFFF;">
+                  <Button fx:id="dashboardId" mnemonicParsing="false" prefHeight="28.0" prefWidth="187.0" style="-fx-background-color: #FFFFFF;" text="Dashboard">
                      <VBox.margin>
                         <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                      </VBox.margin>
@@ -47,7 +46,7 @@
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="MS Gothic" size="11.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -57,7 +56,7 @@
                         </InnerShadow>
                      </effect>
                   </Button>
-                  <Button fx:id="abonnementsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="156.0" text="Abonnements" style="-fx-background-color: #FFFFFF;">
+                  <Button fx:id="abonnementsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="156.0" style="-fx-background-color: #FFFFFF;" text="Abonnements">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
@@ -65,7 +64,7 @@
                         <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="MS Gothic" size="10.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -75,7 +74,7 @@
                         </InnerShadow>
                      </effect>
                   </Button>
-                  <Button fx:id="adherentsId" mnemonicParsing="false" text="Adherents" style="-fx-background-color: #FFFFFF;">
+                  <Button fx:id="adherentsId" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Adherents">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
@@ -83,7 +82,7 @@
                         <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="MS Gothic" size="11.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -93,7 +92,7 @@
                         </InnerShadow>
                      </effect>
                   </Button>
-                  <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="157.0" text="Coachs" style="-fx-background-color: #FFFFFF;">
+                  <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="157.0" style="-fx-background-color: #FFFFFF;" text="Coachs">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
@@ -101,7 +100,7 @@
                         <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="MS Gothic" size="11.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -121,64 +120,64 @@
          <children>
             <TableView fx:id="bilanFinancierTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="901.0">
                <columns>
-                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;"  text="Date Début">
+                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Date Début">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_debut" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;"  text="Date Fin">
+                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Date Fin">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_fin" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="salairesCoachsColumn" prefWidth="133.0" style="-fx-background-color: #F9E79F;"  text="Salaires Coachs">
+                  <TableColumn fx:id="salairesCoachsColumn" prefWidth="133.0" style="-fx-background-color: #F9E79F;" text="Salaires Coachs">
                      <cellValueFactory>
                         <PropertyValueFactory property="salaires_coachs" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="prixLocationColumn" prefWidth="67.0" style="-fx-background-color: #F9E79F;"  text="Prix Loyer">
+                  <TableColumn fx:id="prixLocationColumn" prefWidth="67.0" style="-fx-background-color: #F9E79F;" text="Prix Loyer">
                      <cellValueFactory>
                         <PropertyValueFactory property="prix_location" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="revenusAbonnementsColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;"  text="Revenus Abonnements">
+                  <TableColumn fx:id="revenusAbonnementsColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Revenus Abonnements">
                      <cellValueFactory>
                         <PropertyValueFactory property="revenus_abonnements" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="revenusProduitsColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;"  text="Revenus Produits">
+                  <TableColumn fx:id="revenusProduitsColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Revenus Produits">
                      <cellValueFactory>
                         <PropertyValueFactory property="revenus_produits" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="depensesColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;"  text="Dépenses">
+                  <TableColumn fx:id="depensesColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Dépenses">
                      <cellValueFactory>
                         <PropertyValueFactory property="depenses" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="profitColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;"  text="Profit">
+                  <TableColumn fx:id="profitColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Profit">
                      <cellValueFactory>
                         <PropertyValueFactory property="profit" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="modifierColumn" prefWidth="124.0" style="-fx-background-color: #F9E79F;"  text="Modifier">
+                  <TableColumn fx:id="modifierColumn" prefWidth="124.0" style="-fx-background-color: #F9E79F;" text="Modifier">
                      <cellFactory>
                         <PropertyValueFactory property="modifierButton" />
                      </cellFactory>
                   </TableColumn>
-                  <TableColumn fx:id="supprimerColumn" prefWidth="124.0" style="-fx-background-color: #F9E79F;"  text="Supprimer">
+                  <TableColumn fx:id="supprimerColumn" prefWidth="124.0" style="-fx-background-color: #F9E79F;" text="Supprimer">
                      <cellFactory>
                         <PropertyValueFactory property="supprimerButton" />
                      </cellFactory>
                   </TableColumn>
                </columns>
             </TableView>
-            <Button fx:id="ajouterBilanFinancierButton" layoutX="393.0" layoutY="508.0" onAction="#ajouter" text="Ajouter Bilan financier" style="-fx-background-color: #FFFFFF;" >
+            <Button fx:id="ajouterBilanFinancierButton" layoutX="393.0" layoutY="508.0" onAction="#ajouter" style="-fx-background-color: #FFFFFF;" text="Ajouter Bilan financier">
                <effect>
                   <InnerShadow>
                      <color>
