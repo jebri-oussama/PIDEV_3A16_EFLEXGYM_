@@ -1,10 +1,19 @@
 package Gestion_planing.service;
+import GestionFinance.entites.Abonnement;
+import GestionFinance.entites.BilanFinancier;
+import GestionFinance.entites.Etat;
+import GestionFinance.entites.Type;
+import GestionFinance.service.BilanFinancierService;
+import Gestion_planing.entities.TypeCours;
 import Gestion_planing.entities.cours;
 import Gestion_planing.entities.planning;
 import gestion_user.entities.Role;
+import gestion_user.entities.User;
+import gestion_user.service.UserService;
 import utils.DataSource;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,14 +79,47 @@ public  class PlanningService implements IntService<planning>{
 
     @Override
     public List<planning> readAll() {
-        return null;
+        List<planning> planningList = new ArrayList<>();
+        String query = "SELECT * FROM planning";
+        try {
+            ste = conn.createStatement();
+            ResultSet rs = ste.executeQuery(query);
+            while (rs.next()) {
+                int id_coach = rs.getInt(6);
+                UserService coachService = new UserService();
+                User coach = coachService.readById(id_coach);
+                int id_cour = rs.getInt(5);
+                CoursService coursService = new CoursService();
+                cours cour = coursService.readById(id_cour);
+                planningList.add(new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4),rs.getTime(5),cour,coach));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return planningList;
     }
 
     @Override
     public planning readById(int id) {
-        return null;
-    }
-}
+            String requete = "SELECT * FROM planning WHERE id_planing = ?";
+            try{
+                pst = conn.prepareStatement(requete);
+                pst.setInt(1, id);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()){
+                    int id_coach = rs.getInt(6);
+                    UserService coachService = new UserService();
+                    User coach = coachService.readById(id_coach);
+                    int id_cour = rs.getInt(5);
+                    CoursService coursService = new CoursService();
+                    cours cour = coursService.readById(id_cour);
+                    return new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4),rs.getTime(5),cour,coach);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
+    }}
    /* public List<planning> readAll() {
         String query = "SELECT * FROM planning";
         List<planning> list = new ArrayList<>();
