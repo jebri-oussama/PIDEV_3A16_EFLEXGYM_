@@ -49,10 +49,10 @@ public class UpdateAbonnementController {
     @FXML
     private TextField typeId;
 
-    private int abonnementId; // Variable pour stocker l'ID de l'abonnement
+    private int abonnementId;
 
     public void initData(int abonnementId) {
-        this.abonnementId = abonnementId; // Stocker l'ID de l'abonnement
+        this.abonnementId = abonnementId;
         Abonnement abonnement = abonnementService.readById(abonnementId);
         typeId.setText(abonnement.getType().toString());
         prixId.setText(String.valueOf(abonnement.getPrix()));
@@ -105,16 +105,15 @@ public class UpdateAbonnementController {
 
         Abonnement abonnement = new Abonnement(abonnementId, type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 
-        // Appel de la méthode update de AbonnementService pour mettre à jour l'abonnement dans la base de données
-        abonnementService.update(abonnement);
+         abonnementService.update(abonnement);
 
-        // Nettoyage des champs
+
         clearFields();
 
-        // Fermeture de la fenêtre
+
         typeId.getScene().getWindow().hide();
 
-        // Redirection vers l'interface Afficher Abonnements
+
         redirectToAfficherAbonnements();
     }
 
@@ -126,8 +125,8 @@ public class UpdateAbonnementController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             AfficherAbonnementsController controller = loader.getController();
-            controller.refreshTable(); // Actualiser la table des abonnements
-            stage.show(); // Assurez-vous d'afficher la nouvelle scène après la mise à jour
+            controller.refreshTable();
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

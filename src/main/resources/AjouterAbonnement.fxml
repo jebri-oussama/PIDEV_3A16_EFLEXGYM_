@@ -31,7 +31,7 @@
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
                            <font>
-                              <Font name="Impact" size="31.0" />
+                              <Font name="Arial" size="25.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="50.0" />
@@ -48,7 +48,7 @@
                               <Insets />
                            </opaqueInsets>
                            <font>
-                              <Font name="MS Gothic" size="11.0" />
+                              <Font name="Arial" size="11.0" />
                            </font>
                            <effect>
                               <InnerShadow>
@@ -69,7 +69,7 @@
                               <Insets />
                            </opaqueInsets>
                            <font>
-                              <Font name="MS Gothic" size="11.0" />
+                              <Font name="Arial" size="10.0" />
                            </font>
                            <effect>
                               <InnerShadow>
@@ -90,7 +90,7 @@
                               <Insets />
                            </opaqueInsets>
                            <font>
-                              <Font name="MS Gothic" size="11.0" />
+                              <Font name="Arial" size="11.0" />
                            </font>
                            <effect>
                               <InnerShadow>
@@ -111,7 +111,7 @@
                               <Insets />
                            </opaqueInsets>
                            <font>
-                              <Font name="MS Gothic" size="11.0" />
+                              <Font name="Arial" size="11.0" />
                            </font>
                            <effect>
                               <InnerShadow>
@@ -132,7 +132,7 @@
             <TextField fx:id="etatId" layoutX="394.0" layoutY="355.0" prefHeight="25.0" prefWidth="174.0" />
             <ComboBox fx:id="adherentId" layoutX="394.0" layoutY="409.0" prefHeight="25.0" prefWidth="174.0" />
             <ComboBox fx:id="bilanFinancierId" layoutX="394.0" layoutY="465.0" prefHeight="25.0" prefWidth="174.0" />
-            <Button fx:id="ajouterId" layoutX="662.0" layoutY="526.0" mnemonicParsing="false" onAction="#ajouter" style="-fx-background-color: FFFFFF;" text="Ajouter">
+            <Button fx:id="ajouterId" layoutX="662.0" layoutY="526.0" mnemonicParsing="false" onAction="#ajouter" style="-fx-background-color: FFFFFF; -fx-font: Arial" text="Ajouter">
                <VBox.margin>
                   <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                </VBox.margin>
@@ -143,7 +143,7 @@
                   <Insets />
                </opaqueInsets>
                <font>
-                  <Font name="MS Gothic" size="13.0" />
+                  <Font name="Arial" size="13.0" />
                </font>
                <effect>
                   <InnerShadow>
@@ -153,13 +153,13 @@
                   </InnerShadow>
                </effect>
             </Button>
-            <Text layoutX="258.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type d'abonnement" />
-                  <Text layoutX="258.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" />
-                  <Text layoutX="268.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat" />
-                  <Text layoutX="261.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de debut" />
-                  <Text layoutX="259.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
-                  <Text layoutX="263.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérent" />
-                  <Text layoutX="262.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilan financier" />
+            <Text layoutX="258.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Type d'abonnement" />
+                  <Text layoutX="258.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Date fin" />
+                  <Text layoutX="268.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Etat" />
+                  <Text layoutX="261.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Date de debut" />
+                  <Text layoutX="259.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Prix" />
+                  <Text layoutX="263.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Adhérent" />
+                  <Text layoutX="262.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Bilan financier" />
             <AnchorPane layoutX="222.0" prefHeight="74.0" prefWidth="652.0">
                <children>
                   <HBox layoutX="10.0" prefHeight="74.0" prefWidth="644.0" style="-fx-background-color: DCD6C5;">
@@ -170,7 +170,7 @@
                               <Insets bottom="10.0" left="30.0" right="10.0" top="15.0" />
                            </VBox.margin>
                            <font>
-                              <Font name="MS Gothic" size="24.0" />
+                              <Font name="Arial Bold" size="24.0" />
                            </font>
                            <HBox.margin>
                               <Insets top="15.0" />

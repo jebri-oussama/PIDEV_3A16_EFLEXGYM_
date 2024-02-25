@@ -111,21 +111,19 @@ public class AjouterAbonnementController {
         LocalDate dateFin = dateFinId.getValue();
         String etatString = etatId.getText();
         Etat etat = Etat.valueOf(etatString);
-        int adherentIdSelected = Integer.parseInt(adherentId.getValue()); // Convertir la chaîne en entier
-        int bilanFinancierIdSelected = Integer.parseInt(bilanFinancierId.getValue()); // Convertir la chaîne en entier
-        // Récupérer les objets User et BilanFinancier correspondants aux ID sélectionnés
+        int adherentIdSelected = Integer.parseInt(adherentId.getValue());
+        int bilanFinancierIdSelected = Integer.parseInt(bilanFinancierId.getValue());
         User user = userService.readById(adherentIdSelected);
         BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
-        // Création de l'abonnement avec les données récupérées
         Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 
-        // Ajout de l'abonnement à la base de données
+
         abonnementService.add(abonnement);
 
-        // Effacer les champs après l'ajout
+
         clearFields();
 
-        // Rediriger vers l'interface Afficher Abonnements
+
         redirectToAfficherAbonnements();
     }
     private void showAlert(String message){

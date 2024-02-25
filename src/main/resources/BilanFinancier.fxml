@@ -18,7 +18,7 @@
     <children>
         <AnchorPane layoutY="1.0" prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
             <children>
-                <VBox prefHeight="558.0" prefWidth="249.0" style="-fx-background-color: FFC300;">
+                <VBox prefHeight="558.0" prefWidth="249.0" style="-fx-background-color: ff8000;">
                     <children>
                         <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                             <image>
@@ -30,7 +30,7 @@
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
                             <font>
-                                <Font name="Impact" size="31.0" />
+                                <Font name="Arial" size="25.0" />
                             </font>
                             <VBox.margin>
                                 <Insets left="50.0" />
@@ -47,7 +47,7 @@
                                 <Insets />
                             </opaqueInsets>
                             <font>
-                                <Font name="MS Gothic" size="11.0" />
+                                <Font name="Arial" size="11.0" />
                             </font>
                             <effect>
                                 <InnerShadow>
@@ -68,7 +68,7 @@
                                 <Insets />
                             </opaqueInsets>
                             <font>
-                                <Font name="MS Gothic" size="11.0" />
+                                <Font name="Arial" size="10.0" />
                             </font>
                             <effect>
                                 <InnerShadow>
@@ -89,7 +89,7 @@
                                 <Insets />
                             </opaqueInsets>
                             <font>
-                                <Font name="MS Gothic" size="11.0" />
+                                <Font name="Arial" size="11.0" />
                             </font>
                             <effect>
                                 <InnerShadow>
@@ -110,7 +110,7 @@
                                 <Insets />
                             </opaqueInsets>
                             <font>
-                                <Font name="MS Gothic" size="11.0" />
+                                <Font name="Arial" size="11.0" />
                             </font>
                             <effect>
                                 <InnerShadow>
@@ -130,25 +130,25 @@
                   <padding>
                       <Insets bottom="20" left="20" right="20" top="20" />
                   </padding>
-                  <Label text="ID du Bilan Financier:" />
+                  <Label style="-fx-font: Arial" text="ID du Bilan Financier:" />
                   <TextField fx:id="idField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="159.0" />
       
-                  <Button onAction="#obtenirRevenusAbonnements" text="Obtenir Revenus Abonnements" />
+                  <Button onAction="#obtenirRevenusAbonnements" style="-fx-font: Arial" text="Obtenir Revenus Abonnements" />
       
-                  <Label fx:id="revenusAbonnementsLabel" text="Revenus Abonnements:" />
+                  <Label fx:id="revenusAbonnementsLabel" style="-fx-font: Arial" text="Revenus Abonnements:" />
       
-                  <Button onAction="#obtenirRevenusProduits" text="Obtenir Revenus Produits" />
+                  <Button onAction="#obtenirRevenusProduits" style="-fx-font: Arial" text="Obtenir Revenus Produits" />
       
-                  <Label fx:id="revenusProduitsLabel" text="Revenus Produits:" />
+                  <Label fx:id="revenusProduitsLabel" style="-fx-font: Arial" text="Revenus Produits:" />
       
-                  <Button onAction="#obtenirSalairesCoachs" text="Salaires des coachs" />
+                  <Button onAction="#obtenirSalairesCoachs" style="-fx-font: Arial" text="Salaires des coachs" />
       
-                  <Label fx:id="salairesCoachsLabel" text="Salaires des coachs:" />
+                  <Label fx:id="salairesCoachsLabel" style="-fx-font: Arial" text="Salaires des coachs:" />
       
       
-                  <Button onAction="#calculerProfit" text="Calculer Profit" />
+                  <Button onAction="#calculerProfit" style="-fx-font: Arial" text="Calculer Profit" />
       
-                  <Label fx:id="profitLabel" text="Profit:" />
+                  <Label fx:id="profitLabel" style="-fx-font: Arial" text="Profit:" />
               </VBox>
             <HBox prefHeight="81.0" prefWidth="642.0" style="-fx-background-color: DCD6C5;;">
                 <children>
@@ -158,7 +158,7 @@
                             <Insets bottom="10.0" left="30.0" right="10.0" top="15.0" />
                         </VBox.margin>
                         <font>
-                            <Font name="MS Gothic" size="24.0" />
+                            <Font name="Arial Bold" size="24.0" />
                         </font>
                         <HBox.margin>
                             <Insets top="15.0" />
