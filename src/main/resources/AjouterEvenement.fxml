@@ -15,7 +15,7 @@
         <String fx:value="stylesajouter.css" />
     </stylesheets>
     <children>
-        <VBox layoutX="105.0" layoutY="36.0" spacing="10.0" styleClass="vbox">
+        <VBox layoutX="105.0" layoutY="36.0" spacing="10.0" styleClass="form-container">
             <children>
                 <Label text="Ajouter" styleClass="title-label" />
                 <HBox spacing="10.0" styleClass="input-row">
@@ -43,7 +43,10 @@
                     </children>
                 </HBox>
                 <!-- Placeholder for image preview -->
-                <ImageView fx:id="imageView" fitWidth="100" fitHeight="100" />
+                <StackPane styleClass="image-preview-container">
+                    <ImageView fx:id="imageView" fitWidth="100" fitHeight="100" />
+                    <Label text="Image Preview" styleClass="image-preview-label" />
+                </StackPane>
                 <Button layoutX="321.0" layoutY="304.0" mnemonicParsing="false" onAction="#addEvenement" text="Ajouter" styleClass="add-button" />
             </children>
             <padding>
@@ -52,4 +55,3 @@
         </VBox>
     </children>
 </AnchorPane>
-
