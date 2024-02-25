@@ -56,7 +56,7 @@ public class AfficherBilanFinancierController {
 
     @FXML
     public void initialize() {
-        // Initialize table columns
+
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
         salairesCoachsColumn.setCellValueFactory(new PropertyValueFactory<>("salaires_coachs"));
@@ -65,7 +65,7 @@ public class AfficherBilanFinancierController {
         revenusProduitsColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_produits"));
         depensesColumn.setCellValueFactory(new PropertyValueFactory<>("depenses"));
         profitColumn.setCellValueFactory(new PropertyValueFactory<>("profit"));
-        // Load data into the table
+
         refreshTable();
         modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
         modifierColumn.setCellFactory(param -> new TableCell<>() {
@@ -146,7 +146,6 @@ public class AfficherBilanFinancierController {
 
             BilanFinancierController controller = loader.getController();
             controller.setCurrentScene(scene);
-           // controller.initData(bilanFinancier.getId());
 
             stage.show();
         } catch (IOException e) {

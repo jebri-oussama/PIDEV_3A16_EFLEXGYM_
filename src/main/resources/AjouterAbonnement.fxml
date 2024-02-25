@@ -15,22 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="590.0" prefWidth="1934.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AjouterAbonnementController">
-   <children>
-      <TextField fx:id="typeId" layoutX="394.0" layoutY="119.0" prefHeight="25.0" prefWidth="174.0" />
-      <DatePicker fx:id="dateDebutId" layoutX="394.0" layoutY="240.0" />
-      <DatePicker fx:id="dateFinId" layoutX="394.0" layoutY="297.0" />
-      <TextField fx:id="prixId" layoutX="394.0" layoutY="181.0" prefHeight="25.0" prefWidth="174.0" />
-      <TextField fx:id="etatId" layoutX="394.0" layoutY="355.0" prefHeight="25.0" prefWidth="174.0" />
-      <ComboBox fx:id="adherentId" layoutX="394.0" layoutY="409.0" prefHeight="25.0" prefWidth="174.0" />
-      <ComboBox fx:id="bilanFinancierId" layoutX="394.0" layoutY="465.0" prefHeight="25.0" prefWidth="174.0" />
-      <Button fx:id="ajouterId" layoutX="613.0" layoutY="507.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
-      <Text layoutX="258.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type d'abonnement" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+<AnchorPane prefHeight="584.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AjouterAbonnementController">
          <children>
-            <AnchorPane prefHeight="519.0" prefWidth="1266.0">
+            <AnchorPane layoutY="1.0" prefHeight="588.0" prefWidth="208.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="666.0">
                <children>
-                  <VBox layoutY="-5.0" prefHeight="593.0" prefWidth="222.0" style="-fx-background-color: FFC300;">
+                  <VBox layoutX="-24.0" prefHeight="588.0" prefWidth="256.0" style="-fx-background-color: FF8000;">
                      <children>
                         <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                            <image>
@@ -48,7 +37,7 @@
                               <Insets left="50.0" />
                            </VBox.margin>
                         </Text>
-                        <Button fx:id="dashboardId" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" style="-fx-background-color: FFFFFF;" text="Dashboard" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+                        <Button fx:id="dashboardId" mnemonicParsing="false" prefHeight="28.0" prefWidth="168.0" style="-fx-background-color: FFFFFF;" text="Dashboard">
                            <VBox.margin>
                               <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                            </VBox.margin>
@@ -59,7 +48,7 @@
                               <Insets />
                            </opaqueInsets>
                            <font>
-                              <Font name="MS Gothic" size="13.0" />
+                              <Font name="MS Gothic" size="11.0" />
                            </font>
                            <effect>
                               <InnerShadow>
@@ -69,33 +58,18 @@
                               </InnerShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="abonnementsId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="161.0" style="-fx-background-color: FFFFFF;" text="Abonnements">
-                           <padding>
-                              <Insets bottom="15.0" left="50.0" right="50.0" />
-                           </padding>
+                        <Button fx:id="abonnementsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="167.0" style="-fx-background-color: FFFFFF;" text="Abonnements">
                            <VBox.margin>
                               <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                            </VBox.margin>
-                           <font>
-                              <Font name="MS Gothic" size="13.0" />
-                           </font>
-                           <effect>
-                              <InnerShadow>
-                                 <color>
-                                    <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" opacity="0.9900000095367432" />
-                                 </color>
-                              </InnerShadow>
-                           </effect>
-                        </Button>
-                        <Button fx:id="adherentsId" mnemonicParsing="false" style="-fx-background-color: FFFFFF;" text="Adherents">
                            <padding>
                               <Insets bottom="15.0" left="50.0" right="50.0" />
                            </padding>
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                            <font>
-                              <Font name="MS Gothic" size="13.0" />
+                              <Font name="MS Gothic" size="11.0" />
                            </font>
                            <effect>
                               <InnerShadow>
@@ -105,15 +79,39 @@
                               </InnerShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="157.0" style="-fx-background-color: FFFFFF;" text="Coachs">
-                           <padding>
-                              <Insets bottom="15.0" left="50.0" right="50.0" />
-                           </padding>
+                        <Button fx:id="adherentsId" mnemonicParsing="false" prefHeight="28.0" prefWidth="167.0" style="-fx-background-color: FFFFFF;" text="Adherents">
                            <VBox.margin>
                               <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="15.0" left="50.0" right="50.0" />
+                           </padding>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                            <font>
-                              <Font name="MS Gothic" size="13.0" />
+                              <Font name="MS Gothic" size="11.0" />
+                           </font>
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="167.0" style="-fx-background-color: FFFFFF;" text="Coachs">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="15.0" left="50.0" right="50.0" />
+                           </padding>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font name="MS Gothic" size="11.0" />
                            </font>
                            <effect>
                               <InnerShadow>
@@ -125,34 +123,65 @@
                         </Button>
                      </children>
                   </VBox>
-                  <AnchorPane layoutX="221.0" prefHeight="62.0" prefWidth="1304.0">
-                     <children>
-                        <VBox prefHeight="62.0" prefWidth="1311.0" style="-fx-background-color: DCD6C5;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/home/Abonnements" textAlignment="JUSTIFY" wrappingWidth="241.029296875">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="30.0" right="10.0" top="15.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="MS Gothic" size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <TextField fx:id="typeId" layoutX="394.0" layoutY="119.0" prefHeight="25.0" prefWidth="174.0" />
+            <DatePicker fx:id="dateDebutId" layoutX="394.0" layoutY="240.0" />
+            <DatePicker fx:id="dateFinId" layoutX="394.0" layoutY="297.0" />
+            <TextField fx:id="prixId" layoutX="394.0" layoutY="181.0" prefHeight="25.0" prefWidth="174.0" />
+            <TextField fx:id="etatId" layoutX="394.0" layoutY="355.0" prefHeight="25.0" prefWidth="174.0" />
+            <ComboBox fx:id="adherentId" layoutX="394.0" layoutY="409.0" prefHeight="25.0" prefWidth="174.0" />
+            <ComboBox fx:id="bilanFinancierId" layoutX="394.0" layoutY="465.0" prefHeight="25.0" prefWidth="174.0" />
+            <Button fx:id="ajouterId" layoutX="662.0" layoutY="526.0" mnemonicParsing="false" onAction="#ajouter" style="-fx-background-color: FFFFFF;" text="Ajouter">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="50.0" right="50.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="MS Gothic" size="13.0" />
+               </font>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Text layoutX="258.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type d'abonnement" />
                   <Text layoutX="258.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin" />
                   <Text layoutX="268.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat" />
                   <Text layoutX="261.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de debut" />
                   <Text layoutX="259.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" />
                   <Text layoutX="263.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérent" />
                   <Text layoutX="262.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilan financier" />
+            <AnchorPane layoutX="222.0" prefHeight="74.0" prefWidth="652.0">
+               <children>
+                  <HBox layoutX="10.0" prefHeight="74.0" prefWidth="644.0" style="-fx-background-color: DCD6C5;">
+                     <children>
+
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/home/Abonnements" textAlignment="CENTER" wrappingWidth="241.029296875">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="30.0" right="10.0" top="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="MS Gothic" size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children></HBox>
+
+                  <HBox />
+
                </children>
-      
-                        </AnchorPane>
+            </AnchorPane>
+
          </children>
-      </HBox>
-
-   </children>
-
 </AnchorPane>

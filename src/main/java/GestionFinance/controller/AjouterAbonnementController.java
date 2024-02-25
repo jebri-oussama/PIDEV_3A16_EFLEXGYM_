@@ -14,10 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -63,19 +60,18 @@ public class AjouterAbonnementController {
     @FXML
     void initialize() {
         try {
-            // Récupérez la liste des adhérents et extrayez les identifiants
             List<User> users = userService.readAll();
             List<String> adherentIds = users.stream()
                     .map(User::getId)
-                    .map(String::valueOf) // Convertir les entiers en chaînes
+                    .map(String::valueOf)
                     .collect(Collectors.toList());
             adherentId.setItems(FXCollections.observableArrayList(adherentIds));
 
-            // Récupérez la liste des bilans financiers et extrayez les ID
+
             List<BilanFinancier> bilansFinanciers = bilanFinancierService.readAll();
             List<String> bilanFinancierIds = bilansFinanciers.stream()
                     .map(BilanFinancier::getId)
-                    .map(String::valueOf) // Convertir les entiers en chaînes
+                    .map(String::valueOf)
                     .collect(Collectors.toList());
             bilanFinancierId.setItems(FXCollections.observableArrayList(bilanFinancierIds));
         } catch (Exception e) {
@@ -85,6 +81,29 @@ public class AjouterAbonnementController {
 
     @FXML
     void ajouter() {
+        if(typeId.getText().isEmpty() || prixId.getText().isEmpty() ||dateDebutId.getValue()== null ||
+           dateFinId.getValue()== null || etatId.getText().isEmpty()|| adherentId.getValue() == null ||
+           bilanFinancierId.getValue()==null){
+            showAlert("Veuillez remplir tous les champs.");
+            return;
+        }
+
+        try{
+            double prix = Double.parseDouble(prixId.getText());
+            if (prix <= 0){
+                showAlert("Le prix doit etre supérieur à zéro");
+                return;
+            }
+        }catch(NumberFormatException e){
+            showAlert("Le prix doit etre un nombre valide");
+            return;
+        }
+
+
+
+
+
+
         String typeString = typeId.getText();
         Type type = Type.valueOf(typeString);
         double prix = Double.parseDouble(prixId.getText());
@@ -108,6 +127,13 @@ public class AjouterAbonnementController {
 
         // Rediriger vers l'interface Afficher Abonnements
         redirectToAfficherAbonnements();
+    }
+    private void showAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void clearFields() {
