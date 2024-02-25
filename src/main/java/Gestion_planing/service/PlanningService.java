@@ -35,7 +35,7 @@ public  class PlanningService implements IntService<planning>{
                 pst.setString(2, p.getSalle());
                 pst.setInt(3, p.getNb_place_max());
                 pst.setDate(4, p.getDate());
-                pst.setTime(5, p.getHeure());
+                pst.setString(5, p.getHeure());
                 pst.setInt(6, p.getCours().getId());
                 pst.setInt(7, p.getUser().getId());
                 pst.executeUpdate();
@@ -68,7 +68,7 @@ public  class PlanningService implements IntService<planning>{
                 pst.setString(1, p.getSalle());
                 pst.setInt(2, p.getNb_place_max());
                 pst.setDate(3, p.getDate());
-                pst.setTime(4, p.getHeure());
+                pst.setString(4, p.getHeure());
                 pst.setInt(5, p.getCours().getId());
                 pst.setInt(6, p.getUser().getId());
                 pst.setInt(7, p.getId());
@@ -91,7 +91,7 @@ public  class PlanningService implements IntService<planning>{
                 int id_cour = rs.getInt(5);
                 CoursService coursService = new CoursService();
                 cours cour = coursService.readById(id_cour);
-                planningList.add(new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4),rs.getTime(5),cour,coach));
+                planningList.add(new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4),rs.getString(5),cour,coach));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -113,81 +113,10 @@ public  class PlanningService implements IntService<planning>{
                     int id_cour = rs.getInt(5);
                     CoursService coursService = new CoursService();
                     cours cour = coursService.readById(id_cour);
-                    return new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4),rs.getTime(5),cour,coach);
+                    return new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4),rs.getString(5),cour,coach);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             return null;
     }}
-   /* public List<planning> readAll() {
-        String query = "SELECT * FROM planning";
-        List<planning> list = new ArrayList<>();
-        try {
-            pst = conn.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String salle = rs.getString("salle");
-                int nb_place_max = rs.getInt("nb_place_max");
-                Date date = rs.getDate("date");
-                Time heure = rs.getTime("heure");
-                cours  cours = rs.getInt.("id_cour");
-                int User= rs.getInt("id_user");
-            }
-    }
-    public planning readById(int id) {
-
-        return null;
-    }
-}*/
-
-   /* public List<planning> readAll() {
-        String query = "SELECT * FROM planning";
-        List<planning> list = new ArrayList<>();
-        try {
-            pst = conn.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String salle = rs.getString("salle");
-                int nb_place_max = rs.getInt("nb_place_max");
-                Date date = rs.getDate("date");
-                Time heure = rs.getTime("heure");
-                int  cours = rs.getInt("id_cour");
-                int User= rs.getInt("id_user");
-
-                planning planning = new planning(id, salle ,nb_place_max , date , heure , cours ,User );
-                list.add(planning);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
-    }
-
-    @Override
-    public planning readById(int id) {
-        String requete = "SELECT * FROM planning WHERE id = ?";
-        try{
-            pst = conn.prepareStatement(requete);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                String salle = rs.getString("salle");
-                int nb_place_max = rs.getInt("nb_place_max");
-                Date date = rs.getDate("date");
-                Time heure = rs.getTime("heure");
-                int id_cour = rs.getInt("id_cour");
-                int id_coach = rs.getInt("id_coach");
-
-                return new planning(id, salle ,nb_place_max , date , heure , id_cour , id_coach);
-            } else {
-                return null; // Course with the given ID not found//
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-}*/
-

@@ -14,7 +14,6 @@
 
 <AnchorPane prefHeight="589.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gestion_planing.Controllers.AfficherPlaningAdmineController">
    <children>
-      <Button layoutX="563.0" layoutY="468.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="270.0" text="planifier noveau cour" />
       <VBox layoutY="1.0" prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FFC300;">
          <children>
             <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
@@ -33,7 +32,7 @@
                   <Insets left="50.0" />
                </VBox.margin>
             </Text>
-            <Button fx:id="dashboardId" mnemonicParsing="false" text="Planing">
+            <Button fx:id="idplaning" mnemonicParsing="false" text="Planing">
                <VBox.margin>
                   <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                </VBox.margin>
@@ -41,7 +40,7 @@
                   <Insets bottom="15.0" left="50.0" right="50.0" />
                </padding>
             </Button>
-            <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="0.0" prefWidth="158.0" text="list des cours">
+            <Button fx:id="listcour" mnemonicParsing="false" prefHeight="0.0" prefWidth="158.0" text="list des cours">
                <padding>
                   <Insets bottom="15.0" left="50.0" right="50.0" />
                </padding>
@@ -54,7 +53,7 @@
             </Button>
          </children>
       </VBox>
-      <TableView fx:id="planingTable" layoutX="239.0" layoutY="54.0" prefHeight="354.0" prefWidth="919.0">
+      <TableView fx:id="planingTable" layoutX="238.0" layoutY="45.0" prefHeight="354.0" prefWidth="1257.0">
          <columns>
             <TableColumn fx:id="salleColumn" prefWidth="200.8000087738037" style="-fx-background-color: EEEE19;" styleClass="font" text="salle">
                <cellValueFactory>
@@ -76,17 +75,29 @@
                   <PropertyValueFactory property="modifierButton" />
                </cellFactory>
             </TableColumn>
-            <TableColumn fx:id="id_courColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_cour ">
+            <TableColumn fx:id="idcourColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_cour ">
                <cellFactory>
                   <PropertyValueFactory property="supprimerButton" />
                </cellFactory>
             </TableColumn>
-            <TableColumn fx:id="id_userColumn1" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_user">
+            <TableColumn fx:id="iduserColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_user">
+               <cellFactory>
+                  <PropertyValueFactory property="supprimerButton" />
+               </cellFactory>
+            </TableColumn>
+            <TableColumn fx:id="modifierColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Modifier">
+               <cellFactory>
+                  <PropertyValueFactory property="supprimerButton" />
+               </cellFactory>
+            </TableColumn>
+            <TableColumn fx:id="supprimerColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Supprimer">
                <cellFactory>
                   <PropertyValueFactory property="supprimerButton" />
                </cellFactory>
             </TableColumn>
          </columns>
       </TableView>
+      <Button fx:id="ajouterplaning" layoutX="702.0" layoutY="458.0" onAction="#ajouterplaning" prefHeight="44.0" prefWidth="267.0" text="planifier noveau cour" />
+      <AnchorPane prefHeight="62.0" prefWidth="1089.0" />
    </children>
 </AnchorPane>

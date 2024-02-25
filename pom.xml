@@ -45,7 +45,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>
-                        tests.mainfx
+                        Gestion_planing.test.MainFX
                     </mainClass>
                 </configuration>
             </plugin>

@@ -2,7 +2,6 @@ package Gestion_planing.entities;
 
 import gestion_user.entities.User;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class planning {
@@ -10,15 +9,24 @@ public class planning {
     private String salle;
     private int nb_place_max;
     private Date date;
-    private Time heure;
+    private String heure;
     private cours cours;
     private User user;
 
     public planning() {
     }
 
-    public planning(int id, String salle, int nb_place_max, Date date, Time heure, cours cours, User user) {
+    public planning(int id, String salle, int nb_place_max, Date date, String heure, cours cours, User user) {
         this.id = id;
+        this.salle = salle;
+        this.nb_place_max = nb_place_max;
+        this.date = date;
+        this.heure = heure;
+        this.cours = cours;
+        this.user = user;
+    }
+
+    public planning(String salle, int nb_place_max, Date date, String heure, Gestion_planing.entities.cours cours, User user) {
         this.salle = salle;
         this.nb_place_max = nb_place_max;
         this.date = date;
@@ -35,9 +43,6 @@ public class planning {
         return salle;
     }
 
-    public java.sql.Date getDate() {
-        return (java.sql.Date) date;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -45,18 +50,6 @@ public class planning {
 
     public void setSalle(String salle) {
         this.salle = salle;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Time getHeure() {
-        return heure;
-    }
-
-    public void setHeure(Time heure) {
-        this.heure = heure;
     }
 
     public int getNb_place_max() {
@@ -81,6 +74,22 @@ public class planning {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public java.sql.Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getHeure() {
+        return heure;
+    }
+
+    public void setHeure(String heure) {
+        this.heure = heure;
     }
 
     @Override
