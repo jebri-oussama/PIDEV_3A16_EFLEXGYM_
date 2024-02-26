@@ -62,11 +62,6 @@
                 <TextField fx:id="txtdescription" />
             </HBox>
             <HBox spacing="10.0">
-                <Label text="Ctegorie " style="-fx-text-fill: #FFA500;" />
-                <TextField fx:id="txtcategorie" />
-            </HBox>
-
-            <HBox spacing="10.0">
                 <Label text="Catégorie:" style="-fx-text-fill: #FFA500;" />
                 <ToggleButton fx:id="chkAlimentaire" text="Alimentaire" style="-fx-base: #FFA500;" />
                 <ToggleButton fx:id="chkVestimentaire" text="Vestimentaire" style="-fx-base: #FFA500;" />

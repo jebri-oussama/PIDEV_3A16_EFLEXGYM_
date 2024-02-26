@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import gestion_produit.service.produitService;
 
 public class UpdateProduitController {
-    @FXML
+  /*  @FXML
     private TextField txtid;
     @FXML
     private TextField txtnom;
@@ -72,6 +72,6 @@ public class UpdateProduitController {
             System.out.println(e.getMessage());
         }*/
     }
-}
+
 
 

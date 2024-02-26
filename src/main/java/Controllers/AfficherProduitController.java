@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gestion_produit.entities.type;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -54,7 +56,7 @@ public class AfficherProduitController implements Initializable {
     @FXML
     private TableColumn<produit, String> imageColumn;
     @FXML
-    private TableColumn<produit, Integer> categorieColumn;
+    private TableColumn<produit, type> categorieColumn;
 
     @FXML
     private TableColumn<produit, Integer> idbilanfinancierColumn;
@@ -189,8 +191,8 @@ private ImageView imageView;
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         categorieColumn.setCellValueFactory(data -> {
-            int categoryId = data.getValue().getCategorie().getId();
-            return new SimpleIntegerProperty(categoryId).asObject();
+            type categoryType = data.getValue().getCategorie().getType();
+            return new SimpleObjectProperty(categoryType);
         });
         idbilanfinancierColumn.setCellValueFactory(data -> {
             int bilanid = data.getValue().getId_bilan_financier().getId();
@@ -280,7 +282,11 @@ private ImageView imageView;
         txtprix.setText(String.valueOf(produit.getPrix()));
         txtquantite.setText(String.valueOf(produit.getQuantite()));
         txtdescription.setText(produit.getDescription());
-        txtcategorie.setText(String.valueOf(produit.getCategorie().getId()));
+
+        ToggleButton toggleButton = getToggleButtonForCategoryType(produit.getCategorie().getType());
+        if (toggleButton != null) {
+            toggleButton.setSelected(true);
+        }
         int bilanId = produit.getId_bilan_financier().getId();
 
         // Set the ComboBox value to the BilanFinancier ID
@@ -292,6 +298,14 @@ private ImageView imageView;
         Image img = new Image(image);
         imageView.setImage(img);
     }
+    private ToggleButton getToggleButtonForCategoryType(type categoryType) {
+        if (categoryType == type.alimentaire) {
+            return chkAlimentaire;
+        } else if (categoryType == type.vestimentaire) {
+            return chkVestimentaire;
+        }
+        return null;
+    }
 
 
     @FXML
@@ -302,7 +316,15 @@ private ImageView imageView;
         float prix = Float.parseFloat(txtprix.getText());
         int quantite = Integer.parseInt(txtquantite.getText());
         String description = txtdescription.getText();
-        int categoryId = Integer.parseInt(txtcategorie.getText());
+        int categoryId;
+        if (chkAlimentaire.isSelected()) {
+            categoryId = 7; // Assuming 7 is the ID for "alimentaire"
+        } else if (chkVestimentaire.isSelected()) {
+            categoryId = 6; // Assuming 6 is the ID for "vestimentaire"
+        } else {
+            showAlert(AlertType.ERROR, "Erreur", "Aucune catégorie sélectionnée", "Veuillez sélectionner une catégorie.");
+            return;
+        }
         categorie category = new categorie(categoryId, null, null);
         Integer selectedBilanId = comboBoxBilan.getValue();
         BilanFinancier bilan = new BilanFinancier(selectedBilanId, null, null, 0, 0, 0, 0, 0, 0);
@@ -414,7 +436,6 @@ private ImageView imageView;
         txtprix.setText("");
         txtquantite.setText("");
         txtdescription.setText("");
-        txtcategorie.setText("");
 imageView.setImage(null);
         txtid_admin.setText("");
         comboBoxBilan.getSelectionModel().clearSelection();
