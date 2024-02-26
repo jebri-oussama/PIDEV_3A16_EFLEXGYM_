@@ -18,7 +18,7 @@ public class SupprimerAbonnementController {
 
     @FXML
     private void initialize() {
-        // Vous pouvez éventuellement ajouter des éléments d'interface utilisateur ici
+
     }
 
     @FXML
@@ -31,7 +31,6 @@ public class SupprimerAbonnementController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             abonnementService.delete(abonnement);
-            // Vous pouvez ajouter des actions supplémentaires après la suppression ici
-        }
+             }
     }
 }

@@ -19,7 +19,7 @@
    <children>
       <AnchorPane layoutY="1.0" prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
          <children>
-            <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FFC300;">
+            <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FB8000;">
                <children>
                   <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                      <image>
@@ -31,7 +31,7 @@
                   </ImageView>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
                      <font>
-                        <Font name="Impact" size="31.0" />
+                        <Font name="Arial" size="26.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="50.0" />
@@ -48,7 +48,7 @@
                         <Insets />
                      </opaqueInsets>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="Arial" size="11.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -66,7 +66,7 @@
                         <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="Arial" size="9.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -84,7 +84,7 @@
                         <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="Arial" size="12.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -102,7 +102,7 @@
                         <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="MS Gothic" size="13.0" />
+                        <Font name="Arial" size="11.0" />
                      </font>
                      <effect>
                         <InnerShadow>
@@ -116,57 +116,57 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="584.0" prefWidth="400.0">
+      <AnchorPane prefHeight="584.0" prefWidth="400.0" style="-fx-background-color: white;">
          <children>
-            <TableView fx:id="abonnementsTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="997.0">
+            <TableView fx:id="abonnementsTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="997.0" style="-fx-background-color: FF8000;">
                <columns>
-                  <TableColumn fx:id="typeColumn" prefWidth="133.0" style="-fx-background-color: #F9E79F;" styleClass="font" text="Type">
+                  <TableColumn fx:id="typeColumn" prefWidth="133.0" style="-fx-background-color: white; -fx-font: Arial;" styleClass="font" text="Type">
                      <cellValueFactory>
                         <PropertyValueFactory property="type" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="prixColumn" prefWidth="67.0" style="-fx-background-color: #F9E79F;" text="Prix">
+                  <TableColumn fx:id="prixColumn" prefWidth="67.0" style="-fx-background-color: white; -fx-font: Arial;" text="Prix">
                      <cellValueFactory>
                         <PropertyValueFactory property="prix" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Date Début">
+                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Date Début">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_debut" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Date Fin">
+                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Date Fin">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_fin" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="etatColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="Etat">
+                  <TableColumn fx:id="etatColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Etat">
                      <cellValueFactory>
                         <PropertyValueFactory property="etat" />
                      </cellValueFactory>
                   </TableColumn>
 
 
-                  <TableColumn fx:id="idAdherentColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F;" text="ID Adhérent">
+                  <TableColumn fx:id="idAdherentColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="ID Adhérent">
                      <cellValueFactory>
                         <PropertyValueFactory property="id_adherent" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="idBilanFinancierColumn" prefWidth="153.0" style="-fx-background-color: #F9E79F;" text="ID Bilan Financier">
+                  <TableColumn fx:id="idBilanFinancierColumn" prefWidth="153.0" style="-fx-background-color: white; -fx-font: Arial;" text="ID Bilan Financier">
                      <cellValueFactory>
                         <PropertyValueFactory property="id_bilan_financier" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="modifierColumn" prefWidth="124.0" style="-fx-background-color: #F9E79F;" text="Modifier">
+                  <TableColumn fx:id="modifierColumn" prefWidth="124.0" style="-fx-background-color: white; -fx-font: Arial;" text="Modifier">
                      <cellFactory>
                         <PropertyValueFactory property="modifierButton" />
                      </cellFactory>
                   </TableColumn>
-                  <TableColumn fx:id="supprimerColumn" prefWidth="119.0" style="-fx-background-color: #F9E79F;" text="Supprimer">
+                  <TableColumn fx:id="supprimerColumn" prefWidth="119.0" style="-fx-background-color: white; -fx-font: Arial;" text="Supprimer">
                      <cellFactory>
                         <PropertyValueFactory property="supprimerButton" />
                      </cellFactory>
@@ -194,7 +194,7 @@
                               <Insets bottom="10.0" left="30.0" right="10.0" top="15.0" />
                            </VBox.margin>
                            <font>
-                              <Font name="MS Gothic" size="24.0" />
+                              <Font name="Arial Bold" size="24.0" />
                            </font>
                         </Text>
                      </children></VBox>

@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -48,10 +49,10 @@ public class UpdateAbonnementController {
     @FXML
     private TextField typeId;
 
-    private int abonnementId; // Variable pour stocker l'ID de l'abonnement
+    private int abonnementId;
 
     public void initData(int abonnementId) {
-        this.abonnementId = abonnementId; // Stocker l'ID de l'abonnement
+        this.abonnementId = abonnementId;
         Abonnement abonnement = abonnementService.readById(abonnementId);
         typeId.setText(abonnement.getType().toString());
         prixId.setText(String.valueOf(abonnement.getPrix()));
@@ -68,34 +69,51 @@ public class UpdateAbonnementController {
 
     @FXML
     void update(ActionEvent event) {
-        // Récupération des valeurs des champs et des sélecteurs
-        String typeString = typeId.getText(); // Utiliser getText() pour les champs de texte
+
+        if (typeId.getText().isEmpty() || prixId.getText().isEmpty() || dateDebutId.getValue() == null ||
+                dateFinId.getValue() == null || etatId.getText().isEmpty() || adherentId.getValue() == null ||
+                bilanFinancierId.getValue() == null) {
+            showAlert("Veuillez remplir tous les champs.");
+            return;
+        }
+        try {
+            double prix = Double.parseDouble(prixId.getText());
+            if (prix <= 0) {
+                showAlert("Le prix doit être supérieur à zéro.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Le prix doit être un nombre valide.");
+            return;
+        }
+
+
+        String typeString = typeId.getText();
         Type type = Type.valueOf(typeString);
         double prix = Double.parseDouble(prixId.getText());
         LocalDate dateDebut = dateDebutId.getValue();
         LocalDate dateFin = dateFinId.getValue();
-        String etatString = etatId.getText(); // Utiliser getText() pour les champs de texte
+        String etatString = etatId.getText();
         Etat etat = Etat.valueOf(etatString);
         int adherentIdSelected = adherentId.getValue();
         int bilanFinancierIdSelected = bilanFinancierId.getValue();
 
-        // Lecture des entités Adherent et BilanFinancier à partir de leur ID
+
         User user = userService.readById(adherentIdSelected);
         BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
 
-        // Création de l'objet Abonnement avec les valeurs récupérées
+
         Abonnement abonnement = new Abonnement(abonnementId, type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 
-        // Appel de la méthode update de AbonnementService pour mettre à jour l'abonnement dans la base de données
-        abonnementService.update(abonnement);
+         abonnementService.update(abonnement);
 
-        // Nettoyage des champs
+
         clearFields();
 
-        // Fermeture de la fenêtre
+
         typeId.getScene().getWindow().hide();
 
-        // Redirection vers l'interface Afficher Abonnements
+
         redirectToAfficherAbonnements();
     }
 
@@ -107,11 +125,18 @@ public class UpdateAbonnementController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             AfficherAbonnementsController controller = loader.getController();
-            controller.refreshTable(); // Actualiser la table des abonnements
-            stage.show(); // Assurez-vous d'afficher la nouvelle scène après la mise à jour
+            controller.refreshTable();
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private void showAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void clearFields() {

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -59,6 +60,15 @@ public class AjouterBilanFinancierController {
         double revenusProduits = Double.parseDouble(revenusProduitsId.getText());
         double depenses = Double.parseDouble(depensesId.getText());
         double profit = Double.parseDouble(profitId.getText());
+        if (salairesCoachs < 0 || prixLocation < 0 || revenusAbonnements < 0 || revenusProduits < 0 || depenses < 0 || profit < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("Les valeurs ne peuvent pas être négatives.");
+            alert.showAndWait();
+            return;
+        }
+
 
         BilanFinancier bilanFinancier = new BilanFinancier(dateDebut, dateFin, salairesCoachs,prixLocation,revenusAbonnements,revenusProduits,depenses,profit );
 
@@ -66,7 +76,7 @@ public class AjouterBilanFinancierController {
         bs.add(bilanFinancier);
         clearFields();
 
-        // Rediriger vers l'interface Afficher Abonnements
+
         redirectToAfficherBilanFinancier();
 
     }

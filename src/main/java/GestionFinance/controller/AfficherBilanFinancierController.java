@@ -10,15 +10,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class AfficherBilanFinancierController {
     private final ObservableList<BilanFinancier> bilanFinanciers = FXCollections.observableArrayList();
@@ -51,12 +49,14 @@ public class AfficherBilanFinancierController {
     private TableColumn<BilanFinancier, Double> profitColumn;
     @FXML
     private TableColumn<BilanFinancier, Void> modifierColumn;
+    @FXML
+    private TableColumn<BilanFinancier, Void> supprimerColumn;
 
     private final BilanFinancierService bilanFinancierService = new BilanFinancierService();
 
     @FXML
     public void initialize() {
-        // Initialize table columns
+
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
         salairesCoachsColumn.setCellValueFactory(new PropertyValueFactory<>("salaires_coachs"));
@@ -65,7 +65,7 @@ public class AfficherBilanFinancierController {
         revenusProduitsColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_produits"));
         depensesColumn.setCellValueFactory(new PropertyValueFactory<>("depenses"));
         profitColumn.setCellValueFactory(new PropertyValueFactory<>("profit"));
-        // Load data into the table
+
         refreshTable();
         modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
         modifierColumn.setCellFactory(param -> new TableCell<>() {
@@ -88,7 +88,29 @@ public class AfficherBilanFinancierController {
                 }
             }
         });
+        supprimerColumn.setCellValueFactory(new PropertyValueFactory<>("supprimerButton"));
+        supprimerColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button button = new Button("Supprimer");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    button.setOnAction(event -> {
+                        BilanFinancier bilanFinancier = getTableView().getItems().get(getIndex());
+                        deleteBilanFinancier(bilanFinancier);
+                    });
+                    setGraphic(button);
+                    setText(null);
+                }
+            }
+        });
     }
+
 
     public void refreshTable() {
         bilanFinanciers.clear();
@@ -124,11 +146,22 @@ public class AfficherBilanFinancierController {
 
             BilanFinancierController controller = loader.getController();
             controller.setCurrentScene(scene);
-           // controller.initData(bilanFinancier.getId());
 
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    private void deleteBilanFinancier(BilanFinancier bilanFinancier) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Êtes-vous sûr de vouloir supprimer ce bilan ?");
+        alert.setContentText("Cette action est irréversible.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            bilanFinancierService.delete(bilanFinancier);
+            refreshTable();
         }
     }
 }

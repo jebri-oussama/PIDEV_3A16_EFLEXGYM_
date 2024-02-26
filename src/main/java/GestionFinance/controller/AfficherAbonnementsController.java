@@ -49,7 +49,6 @@ public class AfficherAbonnementsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         abonnementService = new AbonnementService();
-
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         prixColumn.setCellValueFactory(new PropertyValueFactory<>("prix"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
