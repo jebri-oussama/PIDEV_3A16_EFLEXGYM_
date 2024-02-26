@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -83,17 +84,17 @@ public class AjouterEvenementController {
     private boolean validateInput() {
         if (typeComboBox.getValue() == null) {
 
-            System.out.println("Please select a type.");
+            displayErrorMessage("Please select a type.");
             return false;
         }
 
         if (!isValidTimestamp(txtdate_debut.getText())) {
-            System.out.println("Invalid date format for Date de début. Use yyyy-MM-dd HH:mm:ss");
+            displayErrorMessage("Invalid date format for Date de début. Use yyyy-MM-dd HH:mm:ss");
             return false;
         }
 
         if (!isValidTimestamp(txtdate_fin.getText())) {
-            System.out.println("Invalid date format for Date de fin. Use yyyy-MM-dd HH:mm:ss");
+            displayErrorMessage("Invalid date format for Date de fin. Use yyyy-MM-dd HH:mm:ss");
             return false;
         }
 
@@ -102,19 +103,19 @@ public class AjouterEvenementController {
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
 
         if (date_debut.before(Timestamp.valueOf(LocalDateTime.now()))) {
-            System.out.println("Date de début should not be less than today's date.");
+            displayErrorMessage("Date de début should not be less than today's date.");
             return false;
         }
 
 
         if (date_fin.before(date_debut)) {
-            System.out.println("Date de fin should not be less than Date de début.");
+            displayErrorMessage("Date de fin should not be less than Date de début.");
             return false;
         }
 
 
         if (date_debut.equals(date_fin) ) {
-            System.out.println("If Date de début and Date de fin are equal, Durée should not be empty.");
+            displayErrorMessage("If Date de début and Date de fin are equal, Durée should not be empty.");
             return false;
         }
 
@@ -130,7 +131,13 @@ public class AjouterEvenementController {
             return false;
         }
     }
-
+    private void displayErrorMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur de saisie");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 
     private void populateTypeComboBox() {

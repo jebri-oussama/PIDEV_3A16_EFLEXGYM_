@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_evenement.Controllers.AfficherEvenementController">
+<AnchorPane prefHeight="396.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_evenement.Controllers.AfficherEvenementController">
     <children>
-        <Label layoutX="47.0" layoutY="40.0" text="Evenements List" />
+        <ImageView fitHeight="92.0" fitWidth="122.0">
+            <image>
+                <Image url="@logo.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="252.0" layoutY="14.0" text="Evenements List">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font></Label>
 
-        <TableView fx:id="tableViewEvenements" layoutX="47.0" layoutY="80.0" prefWidth="506.0" prefHeight="270.0">
+        <TableView fx:id="tableViewEvenements" layoutX="125.0" layoutY="86.0" prefHeight="261.0" prefWidth="489.0">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" />
                 <TableColumn fx:id="typeColumn" text="Type" />
@@ -19,6 +29,6 @@
                 <TableColumn fx:id="updateColumn" text="Modifier" />
             </columns>
         </TableView>
-        <Button text="Ajouter" layoutX="47.0" layoutY="360.0" onAction="#redirectToAddEvent" />
+        <Button layoutX="125.0" layoutY="347.0" onAction="#redirectToAddEvent" text="Ajouter" />
     </children>
 </AnchorPane>

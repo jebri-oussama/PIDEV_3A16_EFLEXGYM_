@@ -120,7 +120,7 @@ public class EvenementService implements IServiceE<Evenement> {
                         type,
                         rs.getTimestamp("date_debut"),
                         rs.getTimestamp("date_fin"),
-                        rs.getString("imagePath")
+                        rs.getString("image")
                 );
                 evenement.setId(rs.getInt("id")); // Set the ID here
                 return evenement;

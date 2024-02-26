@@ -12,7 +12,7 @@
     -fx-border-radius: 10px;
     -fx-border-color: #dddddd;
     -fx-border-width: 1px;
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 10,0,0,1 );
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 1);
 }
 
 .title-label {
@@ -41,17 +41,17 @@
 }
 
 .add-button {
-    -fx-background-color: #ff9900;
+    -fx-background-color: #fb800; /* Orange color */
     -fx-text-fill: #ffffff;
     -fx-font-size: 16px;
     -fx-pref-width: 100px;
     -fx-pref-height: 40px;
     -fx-border-radius: 5px;
-    -fx-border-color: #ff9900;
+    -fx-border-color: #fb800;
     -fx-border-width: 1px;
 }
 
 .add-button:hover {
-    -fx-background-color: #ff6600;
-    -fx-border-color: #ff6600;
+    -fx-background-color: #ff9900; /* Darker orange color */
+    -fx-border-color: #ff9900;
 }
