@@ -46,6 +46,8 @@ public class PlanifierUnCourController {
     private final PlanningService planningService = new PlanningService();
     private final UserService userService = new UserService();
     private final CoursService coursService = new CoursService();
+
+
     private Scene currentScene;
 
     @FXML
@@ -67,7 +69,7 @@ public class PlanifierUnCourController {
         int nbplace;
         Date date;
         String heure = tempId.getText();
-        int coachIdSelected;
+        int coachIdSelected ;
         int courIdSelected;
 
         try {

@@ -23,7 +23,7 @@
                 </Text>
                 <Text layoutX="80.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID cour de cour" wrappingWidth="107.39691162109375" />
                 <Text layoutX="381.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nombre de place d'un cour" />
-                <Button fx:id="ajouterId" layoutX="203.0" layoutY="337.0" mnemonicParsing="false" onAction="#confirmer" prefHeight="39.0" prefWidth="155.0" text="Ajouter" />
+                <Button fx:id="ajouterId" layoutX="203.0" layoutY="337.0" mnemonicParsing="false" onAction="#update" prefHeight="39.0" prefWidth="155.0" text="Ajouter" />
                 <Text layoutX="430.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date " />
                 <DatePicker fx:id="dateId" layoutX="364.0" layoutY="112.0" />
                 <ComboBox fx:id="courId" layoutX="50.0" layoutY="112.0" prefHeight="25.0" prefWidth="174.0" />

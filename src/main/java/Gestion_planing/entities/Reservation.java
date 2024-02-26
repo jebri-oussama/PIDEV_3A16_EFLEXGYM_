@@ -5,13 +5,20 @@ import gestion_user.entities.User;
 
 public class Reservation {
     private int id_reservation;
-    private planning planing;
     private User user;
 
-    public Reservation(int id_reservation, planning planing, User user) {
+    private planning planing;
+
+    public Reservation(int id_reservation, User user , planning planing) {
         this.id_reservation = id_reservation;
-        this.planing = planing;
         this.user = user;
+        this.planing = planing;
+    }
+
+    public Reservation( User user ,  planning planing) {
+        this.user = user;
+        this.planing = planing;
+
     }
 
     public int getId_reservation() {
@@ -42,8 +49,8 @@ public class Reservation {
     public String toString() {
         return "Reservation{" +
                 "id_reservation=" + id_reservation +
-                ", planing=" + planing +
                 ", user=" + user +
+                ", planing=" + planing +
                 '}';
     }
 }

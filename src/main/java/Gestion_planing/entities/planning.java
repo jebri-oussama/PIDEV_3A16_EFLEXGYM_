@@ -2,6 +2,7 @@ package Gestion_planing.entities;
 
 import gestion_user.entities.User;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class planning {
@@ -13,7 +14,7 @@ public class planning {
     private cours cours;
     private User user;
 
-    public planning() {
+    public planning(int anInt, User aderant, planning planing) {
     }
 
     public planning(int id, String salle, int nb_place_max, Date date, String heure, cours cours, User user) {
@@ -75,7 +76,7 @@ public class planning {
         this.user = user;
     }
 
-    public java.sql.Date getDate() {
+    public LocalDate getDate() {
         return (java.sql.Date) date;
     }
 

@@ -7,6 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gestion_planing.Controllers.ReserverUnCourController">
    <children>
       <Label layoutX="198.0" layoutY="28.0" prefHeight="36.0" prefWidth="203.0" text="Reserver un cour" textFill="#f2c11f">
@@ -14,8 +15,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="67.0" layoutY="135.0" prefHeight="36.0" prefWidth="223.0" />
+      <ComboBox fx:id="planingId" layoutX="67.0" layoutY="135.0" prefHeight="36.0" prefWidth="223.0" />
       <Label layoutX="139.0" layoutY="109.0" text="choisir un cour" />
-      <Button layoutX="384.0" layoutY="320.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="128.0" text="Reserver" />
+      <Button fx:id="reserverId" layoutX="384.0" layoutY="320.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="128.0" text="Reserver" onAction="#reserver" />
    </children>
 </AnchorPane>
