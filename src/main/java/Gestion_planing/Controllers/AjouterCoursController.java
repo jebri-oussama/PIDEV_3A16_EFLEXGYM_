@@ -1,80 +1,70 @@
 package Gestion_planing.Controllers;
 
-import Gestion_planing.entities.TypeCours;
-import Gestion_planing.entities.cours;
-import Gestion_planing.service.CoursService;
+import Gestion_planing.Controllers.AfficherCourController;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-import javafx.scene.control.Alert;
+import Gestion_planing.entities.TypeCours;
+import Gestion_planing.entities.cours;
+import Gestion_planing.service.CoursService;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AjouterCoursController {
 
-        private final CoursService coursService = new CoursService();
+    private final CoursService coursService = new CoursService();
+    private Scene currentScene;
+    @FXML private TextField nomId;
+    @FXML private ComboBox<TypeCours> typeId;
+    @FXML private TextField duréeId;
+    @FXML private Button ajouterId;
 
-        private Scene currentScene;
+    public void setCurrentScene(Scene scene) {
+        this.currentScene = scene;
+    }
+    void initialize() {
+        typeId.setItems(FXCollections.observableArrayList(TypeCours.values()));
+        // Make sure the ComboBox is not disabled or locked
+        typeId.setDisable(false);
+        typeId.setCache(false);
 
+    }
+    @FXML
+    void ajouter() {
+        String nom = nomId.getText();
+        TypeCours selectedType = typeId.getValue();
+        String duree = duréeId.getText();
 
-        @FXML
-        private TextField nomId;
-
-
-        @FXML
-        private ComboBox<TypeCours> typeeId;
-
-
-        @FXML
-        private TextField duréeId;
-
-        @FXML
-        private Button ajouterId;
-
-        public void setCurrentScene(Scene scene) {
-            this.currentScene = scene;
+        // Validate input
+        if (nom.isEmpty() || duree.isEmpty() || selectedType == null) {
+            showAlert("Error", "All fields are required.");
+            return;
         }
 
+        // Create new course with the retrieved data
+        cours cour = new cours(nom, selectedType, duree);
 
-        @FXML
-        void ajouter() {
-            String nom = nomId.getText();
-            TypeCours selectedType = typeeId.getValue();
-            String duree = duréeId.getText();
-            // Validate input
-            if (nom.isEmpty() || duree.isEmpty() || selectedType == null ) {
-                showAlert("Error", "All fields are required.");
-                return;
-            }
+        // Add the course to the database
+        coursService.add(cour);
 
+        // Clear fields after adding
+        clearFields();
 
-            // Création de l'abonnement avec les données récupérées
-            cours cour = new cours(nom, selectedType, duree );
-
-            // Ajout de l'abonnement à la base de données
-            coursService.add(cour);
-
-            // Effacer les champs après l'ajout
-            clearFields();
-
-            // Rediriger vers l'interface Afficher Abonnements
-            redirectToAfficherCour();
-        }
+        // Redirect to the "AfficherCour.fxml" interface
+        redirectToAfficherCour();
+    }
 
     private void clearFields() {
         nomId.clear();
-        typeeId.getSelectionModel().clearSelection();
+        typeId.getSelectionModel().clearSelection();
         duréeId.clear();
     }
 
@@ -89,19 +79,15 @@ public class AjouterCoursController {
             controller.refreshTable();
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert("Error", "Failed to redirect to AfficherCour.fxml");
         }
-        
     }
 
-    private void showAlert(String error, String s) {
+    private void showAlert(String error, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(error);
         alert.setHeaderText(null); // No header text
-        alert.setContentText(s);
+        alert.setContentText(message);
         alert.showAndWait();
     }
-    
-    }
-
-
-
+}

@@ -26,7 +26,7 @@ public class planning {
         this.user = user;
     }
 
-    public planning(String salle, int nb_place_max, Date date, String heure, Gestion_planing.entities.cours cours, User user) {
+    public planning(String salle, int nb_place_max, Date date, String heure, cours cours, User user) {
         this.salle = salle;
         this.nb_place_max = nb_place_max;
         this.date = date;
@@ -42,7 +42,6 @@ public class planning {
     public String getSalle() {
         return salle;
     }
-
 
     public void setId(int id) {
         this.id = id;
@@ -77,7 +76,7 @@ public class planning {
     }
 
     public java.sql.Date getDate() {
-        return date;
+        return (java.sql.Date) date;
     }
 
     public void setDate(Date date) {
@@ -99,7 +98,7 @@ public class planning {
                 ", salle='" + salle + '\'' +
                 ", nb_place_max=" + nb_place_max +
                 ", date=" + date +
-                ", heure=" + heure +
+                ", heure='" + heure + '\'' +
                 ", cours=" + cours +
                 ", user=" + user +
                 '}';

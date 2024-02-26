@@ -1,8 +1,11 @@
 package Gestion_planing.entities;
 
 public enum TypeCours {
-        Presentiel,
-        En_Ligne;
+    Presentiel,
+    En_Ligne;
 
-    public String toString;
+    @Override
+    public String toString() {
+        return name(); // You can change this to customize the display value if needed
+    }
 }

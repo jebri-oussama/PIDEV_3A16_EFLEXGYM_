@@ -77,13 +77,13 @@ public class CoursService implements IntService<cours> {
 
     public cours readById(int id) {
         String requete = "SELECT * FROM cours WHERE id = ?";
-        try{
+        try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 TypeCours type = TypeCours.valueOf(rs.getString(3));
-                return new cours(rs.getInt(rs.getInt(1)), rs.getString(2), type, rs.getString(4));
+                return new cours(rs.getInt(1), rs.getString(2), type, rs.getString(4)); // Correction de l'index ici
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

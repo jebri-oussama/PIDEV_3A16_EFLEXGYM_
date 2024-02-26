@@ -12,16 +12,13 @@ import static javafx.application.Application.launch;
 
 public class MainFX extends Application {
 
-
-/*
-
-    public void start(Stage primaryStage) {
+  /*  public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("/as=A.fxml")); // Changer le chemin du fichier FXML
+                .getResource("/as=AfficherCour.fxml")); // Changer le chemin du fichier FXML
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            primaryStage.setTitle("a Adherent"); // Changer le titre de la fenêtre
+            primaryStage.setTitle("a affiche"); // Changer le titre de la fenêtre
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
@@ -33,7 +30,7 @@ public class MainFX extends Application {
     }*/
 public void start(Stage primaryStage) throws Exception {
     // Charger le fichier FXML
-    Parent root = FXMLLoader.load(getClass().getResource("AfficherCour.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/AfiicherPlaningAdmine.fxml"));
 
     // Créer la scène
     Scene scene = new Scene(root);

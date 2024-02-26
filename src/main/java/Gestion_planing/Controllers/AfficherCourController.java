@@ -40,9 +40,9 @@ public class AfficherCourController implements Initializable {
         private final ObservableList<cours> cour = FXCollections.observableArrayList();
         private CoursService courService;
 
-        @Override
         public void initialize(URL location, ResourceBundle resources) {
-            CoursService courservice = new CoursService();
+            // Assignez la nouvelle instance de CoursService à courService
+            courService = new CoursService();
 
             nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
             typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -95,7 +95,7 @@ public class AfficherCourController implements Initializable {
             });
         }
 
-        public void refreshTable() {
+    public void refreshTable() {
             cour.clear();
             List<cours> courList = courService.readAll();
             cour.addAll(courList);

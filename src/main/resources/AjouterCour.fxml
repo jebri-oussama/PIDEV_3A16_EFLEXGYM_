@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <AnchorPane prefHeight="584.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gestion_planing.Controllers.AjouterCoursController">
     <children>
         <AnchorPane layoutY="1.0" prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
@@ -55,10 +56,11 @@
         </AnchorPane>
         <TextField fx:id="nomId" layoutX="386.0" layoutY="75.0" prefHeight="25.0" prefWidth="174.0" />
         <TextField fx:id="duréeId" layoutX="387.0" layoutY="310.0" prefHeight="25.0" prefWidth="174.0" />
-        <ComboBox fx:id="typeeId" layoutX="387.0" layoutY="182.0" prefHeight="25.0" prefWidth="174.0" />
+        <ComboBox fx:id="typeId" layoutX="387.0" layoutY="182.0" prefHeight="25.0" prefWidth="174.0"  />
         <Button fx:id="ajouterId" layoutX="571.0" layoutY="490.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="39.0" prefWidth="155.0" text="Ajouter" />
-      <Text layoutX="438.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de cour" />
-      <Text layoutX="461.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
-      <Text layoutX="435.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée du cour" />
+        <Text layoutX="438.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de cour" />
+        <Text layoutX="461.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+        <Text layoutX="435.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durée du cour" />
+
     </children>
 </AnchorPane>
