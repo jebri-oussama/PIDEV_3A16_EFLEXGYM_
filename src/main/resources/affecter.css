@@ -1,0 +1,15 @@
+
+
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+.button {
+    -fx-background-color: #fb8000;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Arial Bold";
+}
+
+.button:hover {
+    -fx-background-color: #ff9900;
+}

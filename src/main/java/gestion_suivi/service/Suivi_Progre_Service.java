@@ -1,19 +1,17 @@
 package gestion_suivi.service;
 
-import gestion_suivi.entitis.Role;
-import gestion_suivi.entitis.Sexe;
 import gestion_suivi.entitis.Suivi_Progre;
-import gestion_suivi.entitis.User;
+import gestion_user.entities.User;
+import gestion_user.entities.Role;
+import gestion_user.entities.Sexe;
+import gestion_user.service.UserService;
 import utils.DataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Suivi_Progre_Service implements IService<Suivi_Progre> {
+public class Suivi_Progre_Service implements ISuiviService<Suivi_Progre> {
     private Connection conn;
     private PreparedStatement pst;
 
@@ -22,39 +20,75 @@ public class Suivi_Progre_Service implements IService<Suivi_Progre> {
     }
 
     @Override
-    public void add(Suivi_Progre s) {
-        if (s.getIdUser().getRole().equals(Role.adherant)) {
-            String requete = "INSERT INTO suivi_progre ( nom, prenom, age, taille, poids, tour_de_taille, sexe, idUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            try {
-                pst = conn.prepareStatement(requete);
-                pst.setString(1, s.getNom());
-                pst.setString(2, s.getPrenom());
-                pst.setInt(3, s.getAge());
-                pst.setDouble(4, s.getTaille());
-                pst.setDouble(5, s.getPoids());
-                pst.setDouble(6, s.getTour_de_taille());
-                pst.setString(7, s.getSexe().toString());
-                pst.setInt(8, s.getIdUser().getId());
+    public int add(Suivi_Progre s) {
+        if (s == null)
+            return -1; // Return -1 to indicate failure
 
-                pst.executeUpdate();
-                System.out.println(s.getIdUser().getId());
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
+        PreparedStatement pst = null;
+        ResultSet generatedKeys = null;
+
+        try {
+            pst = conn.prepareStatement(
+                    "INSERT INTO suivi_progre ( nom, prenom, age, taille, poids, tour_de_taille, sexe, idUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, s.getNom());
+            pst.setString(2, s.getPrenom());
+            pst.setInt(3, s.getAge());
+            pst.setDouble(4, s.getTaille());
+            pst.setDouble(5, s.getPoids());
+            pst.setDouble(6, s.getTour_de_taille());
+            pst.setString(7, s.getSexe().toString());
+            pst.setInt(8, s.getIdUser().getId());
+
+            int n = pst.executeUpdate();
+
+            if (n == 1) {
+                // Retrieve the auto-generated keys
+                generatedKeys = pst.getGeneratedKeys();
+
+                if (generatedKeys.next()) {
+                    int suiviId = generatedKeys.getInt(1); // Retrieve the auto-generated club ID
+                    System.out.println("The Club has been added with ID: " + suiviId);
+                    return suiviId; // Return the generated club ID
+                } else {
+                    System.out.println("Failed to retrieve club ID");
+                    return -1; // Return -1 if club ID retrieval fails
+                }
+            } else {
+                System.out.println("No club has been added");
+                return -1; // Return -1 to indicate failure
             }
-        } else {
-            System.out.println("L'utilisateur n'a pas le droit d'ajouter un suivi.");
+
+        } catch (SQLException e1) {
+            System.out.println("The  club addition failed: " + e1.getMessage());
+            return -1; // Return -1 to indicate failure
+        } finally {
+            // Close resources
+            if (generatedKeys != null) {
+                try {
+                    generatedKeys.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-
-
     @Override
-    public void delete(Suivi_Progre s) {
+    public boolean delete(Suivi_Progre s) {
         String requete = "DELETE FROM suivi_progre WHERE id = ?";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, s.getId());
             pst.executeUpdate();
+            return true ;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -80,16 +114,18 @@ public class Suivi_Progre_Service implements IService<Suivi_Progre> {
     }
 
     @Override
-    public  List<Suivi_Progre> readAll() {
+    public List<Suivi_Progre> readAll() {
         String requete = "SELECT * FROM suivi_progre";
         List<Suivi_Progre> list = new ArrayList<>();
         try {
             pst = conn.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Sexe s = Sexe.valueOf(rs.getString(8));
-                User u = new User();
-                u.setId(rs.getInt(9));
+                String s = rs.getString("Sexe");
+
+                int idAdherent = rs.getInt("idUser");
+                UserService userService = new UserService();
+                User adherent = userService.readAdherentById(idAdherent);
                 list.add(new Suivi_Progre(
                         rs.getInt(1),
                         rs.getString(2),
@@ -99,7 +135,7 @@ public class Suivi_Progre_Service implements IService<Suivi_Progre> {
                         rs.getDouble(6),
                         rs.getDouble(7),
                         s,
-                        u
+                        adherent
                 ));
             }
         } catch (SQLException e) {
@@ -116,9 +152,10 @@ public class Suivi_Progre_Service implements IService<Suivi_Progre> {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                Sexe s = Sexe.valueOf(rs.getString(8));
-                User u = new User();
-                u.setId(rs.getInt(9));
+                String s = rs.getString(8);
+                int idAdherent = rs.getInt("idUser");
+                UserService userService = new UserService();
+                User adherent = userService.readAdherentById(idAdherent);
                 return new Suivi_Progre(
                         rs.getInt(1),
                         rs.getString(2),
@@ -128,7 +165,7 @@ public class Suivi_Progre_Service implements IService<Suivi_Progre> {
                         rs.getDouble(6),
                         rs.getDouble(7),
                         s,
-                        u
+                        adherent
                 );
             }
         } catch (SQLException e) {

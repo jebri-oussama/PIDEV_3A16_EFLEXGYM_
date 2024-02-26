@@ -1,0 +1,29 @@
+/* exercice.css */
+
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+.label {
+    -fx-text-fill: #fb8000;
+    -fx-font-family: "Arial Bold";
+    -fx-font-size: 14px;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.button {
+    -fx-background-color: #fb8000;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Arial Bold";
+}
+
+.button:hover {
+    -fx-background-color: #ff9900;
+}

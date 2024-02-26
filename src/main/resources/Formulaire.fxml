@@ -8,11 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Formulaire">
     <children>
-        <Label id="titre" layoutX="259.0" layoutY="14.0" text="Mes Mesures" />
+        <Label id="titre" layoutX="259.0" layoutY="14.0" text="Mes Mesures" textFill="#85685d" underline="true" />
 
         <Group layoutX="20.0" layoutY="20.0">
             <children>
@@ -23,49 +22,28 @@
                 </ImageView>
             </children>
         </Group>
-        <Label layoutX="184.0" layoutY="69.0" text="Nom:" textFill="#fb8000">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <TextField fx:id="nomField" layoutX="269.0" layoutY="66.0" prefHeight="25.0" prefWidth="200.0" />
-        <Label layoutX="174.0" layoutY="124.0" text="Prénom:" textFill="#fb8000">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <TextField fx:id="prenomField" layoutX="269.0" layoutY="121.0" prefHeight="25.0" prefWidth="200.0" />
-        <Label layoutX="187.0" layoutY="180.0" text="Âge:" textFill="#fb8000">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <TextField fx:id="ageField" layoutX="300.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0" />
-        <Label layoutX="184.0" layoutY="231.0" text="Sexe:" textFill="#fb8000">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <RadioButton fx:id="hommeRadioButton" layoutX="268.0" layoutY="232.0" mnemonicParsing="false" text="Homme" textFill="#fb8000" />
-        <RadioButton fx:id="femmeRadioButton" layoutX="393.0" layoutY="232.0" mnemonicParsing="false" text="Femme" textFill="#fb8000" />
-        <Label layoutX="166.0" layoutY="269.0" text="Poids (kg):" textFill="#fb8000">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <TextField fx:id="poidsField" layoutX="310.0" layoutY="266.0" prefHeight="25.0" prefWidth="100.0" />
-        <Label layoutX="165.0" layoutY="303.0" text="Taille (cm):" textFill="#fb8000">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <TextField fx:id="tailleField" layoutX="310.0" layoutY="300.0" prefHeight="25.0" prefWidth="100.0" />
-        <Label layoutX="139.0" layoutY="336.0" text="Tour de taille (cm):" textFill="#fb8000">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <TextField fx:id="tourDeTailleField" layoutX="310.0" layoutY="333.0" prefHeight="25.0" prefWidth="100.0" />
-        <Button layoutX="439.0" layoutY="357.0" mnemonicParsing="false" onAction="#enregistrerButtonClicked" prefHeight="25.0" prefWidth="100.0" text="Enregistrer" textFill="#d91f1f" />
+        <Label layoutX="156.0" layoutY="56.0" text="Nom:" />
+        <TextField fx:id="nomField" layoutX="233.0" layoutY="53.0" prefHeight="25.0" prefWidth="200.0" />
+        <Label layoutX="146.0" layoutY="111.0" text="Prénom:" />
+        <TextField fx:id="prenomField" layoutX="233.0" layoutY="108.0" prefHeight="25.0" prefWidth="200.0" />
+        <Label layoutX="159.0" layoutY="180.0" text="Âge:" />
+        <TextField fx:id="ageField" layoutX="233.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0" />
+        <Label layoutX="156.0" layoutY="231.0" text="Sexe:" />
+        <RadioButton fx:id="hommeRadioButton" layoutX="268.0" layoutY="232.0" mnemonicParsing="false" text="Homme" />
+        <RadioButton fx:id="femmeRadioButton" layoutX="393.0" layoutY="232.0" mnemonicParsing="false" text="Femme" />
+        <Label layoutX="146.0" layoutY="269.0" text="Poids (kg):" />
+        <TextField fx:id="poidsField" layoutX="273.0" layoutY="266.0" prefHeight="25.0" prefWidth="100.0" />
+        <Label layoutX="138.0" layoutY="303.0" text="Taille (cm):" />
+        <TextField fx:id="tailleField" layoutX="273.0" layoutY="300.0" prefHeight="25.0" prefWidth="100.0" />
+        <Label layoutX="112.0" layoutY="336.0" text="Tour de taille (cm):" />
+        <TextField fx:id="tourDeTailleField" layoutX="273.0" layoutY="333.0" prefHeight="25.0" prefWidth="100.0" />
+        <Button layoutX="485.0" layoutY="366.0" mnemonicParsing="false" onAction="#enregistrerButtonClicked" prefHeight="25.0" prefWidth="100.0" text="Enregistrer" />
+
+        <!-- Image "taille.png" -->
+        <ImageView fitHeight="80.0" fitWidth="60.0" layoutX="495.0" layoutY="239.0">
+            <image>
+                <Image url="@taille.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

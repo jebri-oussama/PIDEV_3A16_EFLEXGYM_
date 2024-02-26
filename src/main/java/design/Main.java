@@ -25,13 +25,12 @@ public class Main extends Application {
         primaryStage.show();*/
         @Override
         public void start(Stage primaryStage) throws Exception {
-            Parent root = FXMLLoader.load(getClass().getResource("/AfficherFormulaire.fxml"));
-            primaryStage.setScene(new Scene(root));
+            Parent root = FXMLLoader.load(getClass().getResource("/AffecterExercice.fxml"));
+            Scene scene = new Scene(root, 900, 500);
+            primaryStage.setScene(scene);
             primaryStage.setTitle("Affichage Suivi Prog");
             primaryStage.show();
         }
-
-
 
 
     public static void main(String[] args) {

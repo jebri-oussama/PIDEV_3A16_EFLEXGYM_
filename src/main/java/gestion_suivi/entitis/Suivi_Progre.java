@@ -1,5 +1,8 @@
 package gestion_suivi.entitis;
 
+import gestion_user.entities.User;
+import  gestion_user.entities.Sexe;
+
 public class Suivi_Progre {
     private int id;
     private String nom;
@@ -8,11 +11,10 @@ public class Suivi_Progre {
     private double taille;
     private double poids;
     private double tour_de_taille;
-    private Sexe sexe;
+    private String sexe;
     private User idUser; // Remplacement de l'attribut id_user par l'objet User
 
-    public Suivi_Progre(int id, String nom, String prenom, int age, double taille, double poids, double tour_de_taille, Sexe sexe, User idUser) {
-
+    public Suivi_Progre(int id, String nom, String prenom, int age, double taille, double poids, double tour_de_taille, String sexe, User idUser) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -23,8 +25,8 @@ public class Suivi_Progre {
         this.sexe = sexe;
         this.idUser = idUser;
     }
-    public Suivi_Progre( String nom, String prenom, int age, double taille, double poids, double tour_de_taille, Sexe sexe, User idUser) {
 
+    public Suivi_Progre(String nom, String prenom, int age, double taille, double poids, double tour_de_taille, String sexe, User idUser) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
@@ -40,44 +42,57 @@ public class Suivi_Progre {
     }
 
     public double getIMG() {
-        return (1.2 * getIMC()) + (0.23 * age) - (10.8 * (sexe == Sexe.homme ? 1 : 0)) - 5.4;
+        return (1.2 * getIMC()) + (0.23 * age) - (10.8 * (sexe.equals("homme") ? 1 : 0)) - 5.4;
     }
 
     public String getEvaluation() {
         double imc = getIMC();
         double img = getIMG();
-        String message = "Votre IMC est " + imc + " et votre IMG est " + img + ". ";
-        if (sexe == Sexe.homme) {
-            if (imc < 20) {
-                message += "Votre IMC est faible, vous devez prendre de la masse. Voir le programme 3. Courage!";
-            } else if (imc < 25) {
-                message += "Votre IMC est normal, vous devez vous mettre en forme. Voir le programme 2. Courage!";
-            } else {
-                message += "Votre IMC est élevé, vous devez perdre du poids. Voir le programme 1. Courage!";
-            }
-            if (img < 15) {
-                message += " Votre IMG est faible, vous devez prendre de la masse. Voir le programme 3. Courage!";
-            } else if (img < 20) {
-                message += " Votre IMG est normal, vous devez vous mettre en forme. Voir le programme 2. Courage!";
-            } else {
-                message += " Votre IMG est élevé, vous devez perdre du poids. Voir le programme 1. Courage!";
-            }
-        } else { // femme
-            if (imc < 19) {
-                message += "Votre IMC est faible, vous devez prendre de la masse. Voir le programme 3. Courage!";
-            } else if (imc < 24) {
-                message += "Votre IMC est normal, vous devez vous mettre en forme. Voir le programme 2. Courage!";
-            } else {
-                message += "Votre IMC est élevé, vous devez perdre du poids. Voir le programme 1. Courage!";
-            }
-            if (img < 25) {
-                message += " Votre IMG est faible, vous devez prendre de la masse. Voir le programme 3. Courage!";
-            } else if (img < 30) {
-                message += " Votre IMG est normal, vous devez vous mettre en forme. Voir le programme 2. Courage!";
-            } else {
-                message += " Votre IMG est élevé, vous devez perdre du poids. Voir le programme 1. Courage!";
-            }
+        String imcEvaluation = "";
+        String imgEvaluation = "";
+
+        // Évaluation de l'IMC
+        if (imc < 20) {
+            imcEvaluation = "faible";
+        } else if (imc < 25) {
+            imcEvaluation = "normal";
+        } else {
+            imcEvaluation = "élevé";
         }
+
+        // Évaluation de l'IMG
+        if (img < 15) {
+            imgEvaluation = "faible";
+        } else if (img < 20) {
+            imgEvaluation = "normal";
+        } else {
+            imgEvaluation = "élevé";
+        }
+
+        // Construction du message d'évaluation
+        String message = "Votre IMC est " + imc + " (" + imcEvaluation + ") et votre IMG est " + img + " (" + imgEvaluation + "). ";
+
+        // Déterminer le programme en fonction de l'évaluation combinée de l'IMC et de l'IMG
+        String programme = "";
+        if (imcEvaluation.equals("faible") && imgEvaluation.equals("faible")) {
+            programme = "3";
+        } else if (imcEvaluation.equals("normal") && imgEvaluation.equals("normal")) {
+            programme = "2";
+        } else {
+            programme = "1";
+        }
+
+        // Ajouter le message final
+        message += "Vous devez ";
+        if (imcEvaluation.equals("faible") || imgEvaluation.equals("faible")) {
+            message += "prendre de la masse";
+        } else if (imcEvaluation.equals("normal") || imgEvaluation.equals("normal")) {
+            message += "vous mettre en forme";
+        } else {
+            message += "perdre du poids";
+        }
+        message += ". Voir le programme " + programme + ". Courage!";
+
         return message;
     }
 
@@ -155,11 +170,11 @@ public class Suivi_Progre {
         this.tour_de_taille = tour_de_taille;
     }
 
-    public Sexe getSexe() {
+    public String getSexe() {
         return sexe;
     }
 
-    public void setSexe(Sexe sexe) {
+    public void setSexe(String sexe) {
         this.sexe = sexe;
     }
 

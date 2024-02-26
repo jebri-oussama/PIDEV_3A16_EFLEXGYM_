@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AfficherSuiviProgresController">
     <children>
@@ -13,51 +14,50 @@
             <image>
                 <Image url="@logo.png" />
             </image>
-
         </ImageView>
-        <TableView layoutX="50.0" layoutY="150.0" prefHeight="200.0" prefWidth="500.0" fx:id="tableView">
+
+        <!-- Fin du titre -->
+        <TableView fx:id="suivitableView" layoutX="42.0" layoutY="138.0" prefHeight="200.0" prefWidth="532.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="Nom">
+                <TableColumn fx:id="nomColumn" prefWidth="47.19997787475586" text="Nom">
                     <cellValueFactory>
                         <PropertyValueFactory property="nom" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="Prénom">
+                <TableColumn fx:id="prenomColumn" prefWidth="57.600006103515625" text="Prénom">
                     <cellValueFactory>
                         <PropertyValueFactory property="prenom" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="Âge">
+                <TableColumn fx:id="ageColumn" prefWidth="47.99993896484375" text="Âge">
                     <cellValueFactory>
                         <PropertyValueFactory property="age" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="Taille">
+                <TableColumn fx:id="tailleColumn" prefWidth="47.199951171875" text="Taille">
                     <cellValueFactory>
                         <PropertyValueFactory property="taille" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="Poids">
+                <TableColumn fx:id="poidsColumn" prefWidth="52.79994201660156" text="Poids">
                     <cellValueFactory>
                         <PropertyValueFactory property="poids" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="Tour de taille">
+                <TableColumn fx:id="tourDeTailleColumn" prefWidth="110.39996337890625" text="Tour de taille">
                     <cellValueFactory>
                         <PropertyValueFactory property="tour_de_taille" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="Sexe">
+                <TableColumn fx:id="sexeColumn" prefWidth="51.199951171875" text="Sexe">
                     <cellValueFactory>
                         <PropertyValueFactory property="sexe" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="User">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="user" />
-                    </cellValueFactory>
-                </TableColumn>
+                <TableColumn fx:id="actionsColumn" prefWidth="112.800048828125" text="Actions" />
             </columns>
         </TableView>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fill="#fb8000" layoutX="200.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les informations corporelles des adherants " textAlignment="CENTER" underline="true" wrappingWidth="201.1331787109375" />
     </children>
 </AnchorPane>

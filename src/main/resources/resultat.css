@@ -1,0 +1,99 @@
+.root {
+    -fx-background-color: #fb8000; /* Couleur de fond orange */
+}
+
+.bold-label {
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-text-fill: black; /* Couleur du texte en noir */
+}
+
+/* Bordure du tableau en noir et gras */
+.list-view {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+.evaluation-text {
+    -fx-font-family: Arial;
+    -fx-font-size: 18px;
+    -fx-white-space: pre-line;
+}
+/* résultat.css */
+
+/* Style pour le texte d'évaluation */
+.evaluation-text {
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+}
+
+
+/* Style pour la liste des exercices */
+.exercices-list {
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+}
+.exercices-table {
+    -fx-background-color: white;
+}
+
+.evaluation-text {
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+}
+
+.programme-text {
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+}
+/* Sous-lignage et centrage du texte "Votre évaluation" */
+#titre {
+    -fx-underline: true;
+    -fx-alignment: center;
+}
+
+/* Retour à la ligne après "Éleve" */
+.evaluation-text {
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+.root {
+    -fx-background-color: #fb8000; /* Couleur de fond orange */
+}
+
+.bold-label {
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-text-fill: black; /* Couleur du texte en noir */
+}
+
+/* Bordure du tableau en noir et gras */
+.list-view {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+.evaluation-text {
+    -fx-font-family: Arial;
+    -fx-font-size: 18px;
+    -fx-white-space: pre-line;
+}
+
+/* Sous-lignage et centrage du texte "Votre évaluation" */
+#titre {
+    -fx-underline: true;
+    -fx-alignment: center;
+}
+
+/* Retour à la ligne après "Éleve" */
+.evaluation-text {
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+/* Images */
+.image-view {
+    -fx-padding: 10px; /* Espacement autour de l'image */
+}
