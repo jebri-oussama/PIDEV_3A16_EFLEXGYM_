@@ -55,6 +55,14 @@ public class UpdateAdherentController {
     private TextField Salaire;
     @FXML
     private ChoiceBox<Integer> idBilanChoiceBox;
+    @FXML
+    private ToggleGroup sexeGroup;
+
+    @FXML
+    private RadioButton rbFemelle;
+
+    @FXML
+    private RadioButton rbMale;
 
 
 
@@ -65,7 +73,12 @@ public class UpdateAdherentController {
         mot_de_passe.setText(selectedAdherent.getMot_de_passe());
         email.setText(selectedAdherent.getEmail());
         dateNaissance.setValue(LocalDate.parse(selectedAdherent.getFormattedDateNaissance()));
-        sexe.setText(selectedAdherent.getSexe().toString());
+
+        if(selectedAdherent.getSexe().toString().equals("male")){
+            rbMale.fire();
+        } else {
+            rbFemelle.fire(); }
+
         if(selectedAdherent.getRole().toString().equals("Adherent")){
                 rbA.fire();}
         else if (selectedAdherent.getRole().toString().equals("Coach")){
@@ -88,8 +101,7 @@ public class UpdateAdherentController {
         String adherentMotDePasse = mot_de_passe.getText();
         String adherentEmail = email.getText();
         Date adherentDateNaissance = Date.valueOf(dateNaissance.getValue().toString());
-        String SexeString = sexe.getText();
-        Sexe sexe1 = Sexe.valueOf(SexeString);
+            Sexe sexe1 = getSelectedSexe();
         String selectedRole = getSelectedRole();
             if ("Coach".equals(selectedRole)){
               Integer  id_bilan = idBilanChoiceBox.getValue();
@@ -108,6 +120,15 @@ public class UpdateAdherentController {
         Stage stage = (Stage) Confirm.getScene().getWindow();
         stage.close();
             }
+    }
+    private Sexe getSelectedSexe() {
+        RadioButton selectedRadioButton = (RadioButton) sexeGroup.getSelectedToggle();
+        if (selectedRadioButton != null) {
+            return Sexe.valueOf(selectedRadioButton.getText());
+        } else {
+            // Handle the case when no RadioButton is selected
+            return null;
+        }
     }
 
     private String getSelectedRole() {

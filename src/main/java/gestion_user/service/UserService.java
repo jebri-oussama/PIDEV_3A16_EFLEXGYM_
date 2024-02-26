@@ -158,4 +158,18 @@ public class UserService implements IService<User> {
         return user;
     }*/
 
+    public boolean connexion(String username, String password) {
+        String query = "SELECT * FROM admin WHERE username = ? AND mot_de_passe = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setString(1, username);
+            pst.setString(2, password);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Connexion échoué", e);
+        }
+    }
+
 }

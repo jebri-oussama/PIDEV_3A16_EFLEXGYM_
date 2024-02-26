@@ -31,6 +31,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 
 public class AdherentController {
     @FXML
@@ -126,7 +127,13 @@ public class AdherentController {
 
     private ObservableList<User> adherentList = FXCollections.observableArrayList();
 
-    // Add methods to handle Adherent form interactions
+    @FXML
+    private ToggleGroup sexeGroup;
+    @FXML
+    private RadioButton femelle;
+    @FXML
+    private RadioButton male;
+
     private Connection conn;
     private Statement ste;
     private PreparedStatement pst;
@@ -139,7 +146,6 @@ public class AdherentController {
 
             return "Coach";
         } else {
-            // Handle the case when neither is selected
             return "";
         }
     }
@@ -161,8 +167,7 @@ public class AdherentController {
         String adherentMotDePasse = mot_de_passe.getText();
         String adherentEmail = email.getText();
         Date adherentDateNaissance = Date.valueOf(dateNaissance.getValue().toString());
-        String SexeString = sexe.getText();
-        Sexe sexe1 = Sexe.valueOf(SexeString);
+        Sexe sexe1 = getSelectedSexe();
         String selectedRole = getSelectedRole();
         if ("Coach".equals(selectedRole)){
             Integer idBilan = idBilanFinanciersChoiceBox.getValue();
@@ -180,6 +185,15 @@ public class AdherentController {
         adherentList.add(a1);}
 
     };
+
+    private Sexe getSelectedSexe() {
+        RadioButton selectedRadioButton = (RadioButton) sexeGroup.getSelectedToggle();
+        if (selectedRadioButton != null) {
+            return Sexe.valueOf(selectedRadioButton.getText());
+        } else {
+            return null;
+        }
+    }
     @FXML
     void handleRoleSelection(ActionEvent event) {
         updateAdditionalFieldsVisibility();
@@ -220,11 +234,10 @@ public class AdherentController {
     private void initializeIdBilanFinanciersChoiceBox() {
         List<Integer> idBilanFinanciersChoices = BilanFinancierService.getAllIdBilanFinancier();
         idBilanFinanciersChoiceBox.getItems().addAll(idBilanFinanciersChoices);
-        System.out.println("ID Bilan Financiers Choices: " + idBilanFinanciersChoices);
+        System.out.println("ID Bilan Financiers: " + idBilanFinanciersChoices);
 
 
         if (!idBilanFinanciersChoices.isEmpty()) {
-            // Optionally, set a default value if needed
             idBilanFinanciersChoiceBox.setValue(idBilanFinanciersChoices.get(0));
         }
     }
@@ -260,20 +273,22 @@ public class AdherentController {
         colBilan.setCellValueFactory(new PropertyValueFactory<>("BilanFinancier"));
         colSalaire.setCellValueFactory(new PropertyValueFactory<>("salaire"));
 
-        // Set TableView items
         list.setItems(adherentList);
+        list.setStyle("-fx-background-color: #000000; -fx-text-fill: #f19a00;");
         addButtonColumns();
 
+
     }
+
 
 
 
         private void addButtonColumns() {
 
             colUpdate.setCellFactory(param -> new TableCell<>() {
-                private final Button updateButton = new Button("Update");
+                private final Button updateButton = new Button("Modifier");
 
-                {
+                {  updateButton.setStyle("-fx-text-fill: #f19a00; -fx-background-color: #000000;");
                     updateButton.setOnAction(event -> {
                         User selectedAdherent = getTableView().getItems().get(getIndex());
                         openUpdatePage(selectedAdherent);
@@ -291,12 +306,13 @@ public class AdherentController {
             });
 
         colDelete.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button("Delete");
+            private final Button deleteButton = new Button("Supprimer");
 
             {
+                deleteButton.setStyle("-fx-text-fill: #f19a00; -fx-background-color: #000000;");
+
                 deleteButton.setOnAction(event -> {
                     User adherent = getTableView().getItems().get(getIndex());
-                    // Handle delete action for the selected adherent
                     handleDeleteAction(adherent);
                 });
             }
@@ -310,24 +326,48 @@ public class AdherentController {
                     setGraphic(deleteButton);
                 }
             }
+
+
         });
+
+            list.setRowFactory(tv -> new TableRow<User>() {
+                @Override
+                protected void updateItem(User item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setStyle("");
+                    } else {
+                        setStyle("-fx-background-color: #ffb311;");
+                    }
+                }
+            });
+
 
 
 
     }
 
     private void handleDeleteAction(User adherent) {
-        // Implement your logic for delete action
-        // You may show a confirmation dialog before deleting
-        adherentList.remove(adherent);
-        UserService as = new UserService();
-        as.deleteAdherent(adherent.getId());
-        System.out.println("Delete Action for Adherent ID: " + adherent.getId());
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression ");
+        alert.setHeaderText("Supprimer User");
+        alert.setContentText("Vous etes sure de supprimer ce user avec l'ID " + adherent.getId() + "?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+
+            adherentList.remove(adherent);
+            UserService as = new UserService();
+            as.deleteAdherent(adherent.getId());
+            System.out.println("User supprimée: " + adherent.getId());
+        } else {
+            System.out.println("Suppression annulé: " + adherent.getId());
+        }
     }
 
 
         private void readAllAdherents() {
-        // Read all Adherents from the database and populate the TableView
         List<User> adherents = new UserService().readAllAdherent();
         adherentList.addAll(adherents);
 
@@ -357,6 +397,7 @@ public class AdherentController {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle("Modifier un User");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
