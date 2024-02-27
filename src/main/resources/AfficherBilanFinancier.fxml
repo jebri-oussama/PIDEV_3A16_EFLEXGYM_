@@ -118,59 +118,59 @@
 
       <AnchorPane prefHeight="584.0" prefWidth="400.0">
          <children>
-            <TableView fx:id="bilanFinancierTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="901.0">
+            <TableView fx:id="bilanFinancierTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="1044.0" style="-fx-background-color: ff8000;">
                <columns>
-                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Date Début">
+                  <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Date Début">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_debut" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Date Fin">
+                  <TableColumn fx:id="dateFinColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Date Fin">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_fin" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="salairesCoachsColumn" prefWidth="133.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Salaires Coachs">
+                  <TableColumn fx:id="salairesCoachsColumn" prefWidth="133.0" style="-fx-background-color: white; -fx-font: Arial;" text="Salaires Coachs">
                      <cellValueFactory>
                         <PropertyValueFactory property="salaires_coachs" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="prixLocationColumn" prefWidth="67.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Prix Loyer">
+                  <TableColumn fx:id="prixLocationColumn" prefWidth="67.0" style="-fx-background-color: white; -fx-font: Arial;" text="Prix Loyer">
                      <cellValueFactory>
                         <PropertyValueFactory property="prix_location" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="revenusAbonnementsColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Revenus Abonnements">
+                  <TableColumn fx:id="revenusAbonnementsColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Revenus Abonnements">
                      <cellValueFactory>
                         <PropertyValueFactory property="revenus_abonnements" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="revenusProduitsColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Revenus Produits">
+                  <TableColumn fx:id="revenusProduitsColumn" prefWidth="141.0" style="-fx-background-color: white; -fx-font: Arial;" text="Revenus Produits">
                      <cellValueFactory>
                         <PropertyValueFactory property="revenus_produits" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="depensesColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Dépenses">
+                  <TableColumn fx:id="depensesColumn" prefWidth="118.0" style="-fx-background-color: white; -fx-font: Arial;" text="Dépenses">
                      <cellValueFactory>
                         <PropertyValueFactory property="depenses" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="profitColumn" prefWidth="100.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Profit">
+                  <TableColumn fx:id="profitColumn" prefWidth="95.0" style="-fx-background-color: white; -fx-font: Arial;" text="Profit">
                      <cellValueFactory>
                         <PropertyValueFactory property="profit" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="modifierColumn" prefWidth="124.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Modifier">
+                  <TableColumn fx:id="modifierColumn" prefWidth="97.0" style="-fx-background-color: white; -fx-font: Arial;" text="Modifier">
                      <cellFactory>
                         <PropertyValueFactory property="modifierButton" />
                      </cellFactory>
                   </TableColumn>
-                  <TableColumn fx:id="supprimerColumn" prefWidth="124.0" style="-fx-background-color: #F9E79F; -fx-font: Arial" text="Supprimer">
+                  <TableColumn fx:id="supprimerColumn" prefWidth="97.0" style="-fx-background-color: white; -fx-font: Arial;" text="Supprimer">
                      <cellFactory>
                         <PropertyValueFactory property="supprimerButton" />
                      </cellFactory>
