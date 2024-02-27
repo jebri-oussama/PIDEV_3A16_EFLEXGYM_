@@ -9,31 +9,29 @@ public class planning {
     private int id;
     private String salle;
     private int nb_place_max;
-    private Date date;
+    private LocalDate date;
     private String heure;
-    private cours cours;
-    private User user;
+    private cours id_cour;
+    private User id_coach;
 
-    public planning(int anInt, User aderant, planning planing) {
-    }
 
-    public planning(int id, String salle, int nb_place_max, Date date, String heure, cours cours, User user) {
+    public planning(int id, String salle, int nb_place_max, LocalDate date, String heure, cours id_cour, User id_coach) {
         this.id = id;
         this.salle = salle;
         this.nb_place_max = nb_place_max;
         this.date = date;
         this.heure = heure;
-        this.cours = cours;
-        this.user = user;
+        this.id_cour = id_cour;
+        this.id_coach = id_coach;
     }
 
-    public planning(String salle, int nb_place_max, Date date, String heure, cours cours, User user) {
+    public planning(String salle, int nb_place_max, LocalDate date, String heure, cours id_cour, User id_coach) {
         this.salle = salle;
         this.nb_place_max = nb_place_max;
         this.date = date;
         this.heure = heure;
-        this.cours = cours;
-        this.user = user;
+        this.id_cour = id_cour;
+        this.id_coach = id_coach;
     }
 
     public int getId() {
@@ -60,28 +58,28 @@ public class planning {
         this.nb_place_max = nb_place_max;
     }
 
-    public cours getCours() {
-        return cours;
+    public cours getId_cour() {
+        return id_cour;
     }
 
-    public void setCours(cours cours) {
-        this.cours = cours;
+    public void setId_cour(cours id_cour) {
+        this.id_cour = id_cour;
     }
 
-    public User getUser() {
-        return user;
+    public User getId_coach() {
+        return id_coach;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setId_coach(User id_coach) {
+        this.id_coach = id_coach;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public LocalDate getDate() {
-        return (java.sql.Date) date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+        return date;
     }
 
     public String getHeure() {
@@ -100,8 +98,8 @@ public class planning {
                 ", nb_place_max=" + nb_place_max +
                 ", date=" + date +
                 ", heure='" + heure + '\'' +
-                ", cours=" + cours +
-                ", user=" + user +
+                ", cours=" + id_cour +
+                ", user=" + id_coach +
                 '}';
     }
 }

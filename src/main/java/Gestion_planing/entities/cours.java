@@ -7,6 +7,9 @@ public class cours {
     private TypeCours type; // Variable de type enum pour le type de cours
     private String duree;
 
+    public cours() {
+    }
+
     public cours(int id, String nom, TypeCours type, String duree) {
         this.id = id;
         this.nom = nom;

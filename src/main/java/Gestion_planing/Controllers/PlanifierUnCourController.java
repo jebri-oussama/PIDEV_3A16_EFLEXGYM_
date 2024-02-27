@@ -67,14 +67,14 @@ public class PlanifierUnCourController {
     void ajouter(ActionEvent event) {
         String salle = salleId.getText();
         int nbplace;
-        Date date;
+        LocalDate date;
         String heure = tempId.getText();
         int coachIdSelected ;
         int courIdSelected;
 
         try {
             nbplace = Integer.parseInt(nbplaceId.getText());
-            date = Date.valueOf(dateId.getValue());
+            date = Date.valueOf(dateId.getValue()).toLocalDate();
             coachIdSelected = coachId.getValue();
             courIdSelected = courId.getValue();
         } catch (NumberFormatException | NullPointerException e) {
@@ -105,7 +105,7 @@ public class PlanifierUnCourController {
 
         clearFields();
 
-        Stage stage = (Stage) ajouterId.getScene().getWindow();
+        Stage stage = (Stage) tempId.getScene().getWindow();
         stage.close(); // Close the planning window after adding
     }
 

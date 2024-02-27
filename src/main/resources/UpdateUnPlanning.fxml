@@ -15,7 +15,7 @@
         <AnchorPane layoutY="14.0" prefHeight="400.0" prefWidth="600.0">
             <children>
                 <TextField fx:id="nbplaceId" layoutX="364.0" layoutY="200.0" prefHeight="25.0" prefWidth="174.0" />
-                <TextField fx:id="salleId" layoutX="47.0" layoutY="200.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField fx:id="salle" layoutX="47.0" layoutY="200.0" prefHeight="25.0" prefWidth="174.0" />
                 <Text fill="#f4b609" layoutX="203.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Planifier un cour" textAlignment="CENTER">
                     <font>
                         <Font size="27.0" />

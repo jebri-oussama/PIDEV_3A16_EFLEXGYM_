@@ -9,25 +9,27 @@ import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
+public class UpdateUnPlaning implements Initializable {
 
-public class UpdateUnPlaning {
-    private final PlanningService planningServiceng = new PlanningService();
-    private final CoursService coursService = new CoursService();
-    private final UserService userService = new UserService();
 
     private Scene currentScene;
 
-    private TextField salleId;
+    @FXML
+    private TextField salle;
 
     @FXML
     private TextField nbplaceId;
@@ -48,15 +50,30 @@ public class UpdateUnPlaning {
     private Button ajouterId;
     private int planingId;
 
-    public void initData(int planingId) {
-        this.planingId = planingId;
+    public   PlanningService planningServiceng = new PlanningService();
+    public   CoursService coursService = new CoursService();
+    public   UserService userService = new UserService();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<User> users = userService.readAll();
+        List<Integer> coachIds = users.stream().map(User::getId).toList();
+        coachId.getItems().addAll(coachIds);
+
+        List<cours> coursList = coursService.readAll();
+        List<Integer> courIds = coursList.stream().map(cours::getId).toList();
+        courId.getItems().addAll(courIds);
+
+        dateId.setValue(LocalDate.now());
+    }
+    public void initData(int planingI) {
+        this.planingId = planingI;
         planning p = planningServiceng.readById(planingId);
-        salleId.setText(p.getSalle());
+        salle.setText(p.getSalle());
         nbplaceId.setText(String.valueOf(p.getNb_place_max()));
         dateId.setValue(p.getDate());
         tempId.setText(p.getHeure());
-        courId.setValue(p.getCours().getId());
-        coachId.setValue(p.getUser().getId());
+        //courId.setValue(p.getId_cour().getId());
+        //coachId.setValue(p.getId_coach().getId());
 
     }
     public void setCurrentScene(Scene scene) {
@@ -72,27 +89,29 @@ public class UpdateUnPlaning {
                 return;
             }*/
 
-            Integer nbplacemax = Integer.parseInt(nbplaceId.getText());
-            Date date = Date.valueOf(dateId.getValue());
-            String salle = salleId.getText();
+            int nbplacemax = Integer.parseInt(nbplaceId.getText());
+            LocalDate localDate = dateId.getValue();
+            Date date = Date.valueOf(localDate);
+        String sall = salle.getText();
             String heur = tempId.getText();
             int coachIdSelected = coachId.getValue();
             int courIdSelected = courId.getValue();
-
 
             User user = userService.readById(coachIdSelected);
             cours cour = coursService.readById(courIdSelected);
 
 
-            planning p = new planning(salle, nbplacemax, date, heur, cour, user);
+            planning p = new planning(planingId,sall, nbplacemax, date.toLocalDate(), heur, cour, user);
 
             planningServiceng.update(p);
 
 
-            clearFields();
 
 
-            redirectToAfficherPlaningAdmine();
+
+        Stage stage = (Stage) salle.getScene().getWindow();
+
+        stage.close();
         }
 
 
@@ -100,23 +119,13 @@ public class UpdateUnPlaning {
 
 
     private void redirectToAfficherPlaningAdmine() {
-        Stage stage = (Stage) currentScene.getWindow();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlaningAdmine.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            AfficherPlaningAdmineController controller = loader.getController();
-            controller.refreshTable();
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
     }
 
     private void clearFields() {
 
-        salleId.clear();
+        salle.clear();
         nbplaceId.clear();
         dateId.getEditor().clear();
         tempId.clear();
@@ -124,6 +133,10 @@ public class UpdateUnPlaning {
         coachId.getSelectionModel().clearSelection();
 
     }
+
+
+
+
 }
 
 

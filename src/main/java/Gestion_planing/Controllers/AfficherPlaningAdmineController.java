@@ -2,12 +2,14 @@ package Gestion_planing.Controllers;
 
 import Gestion_planing.entities.planning;
 import Gestion_planing.service.PlanningService;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AfficherPlaningAdmineController {
+public class AfficherPlaningAdmineController  implements Initializable {
 
     @FXML
     private TableView<planning> planingTable;
@@ -40,6 +42,7 @@ public class AfficherPlaningAdmineController {
     private TableColumn<planning, Integer> nbplacemaxColumn;
     @FXML
     private TableColumn<planning, String> dateColumn;
+    @FXML
     private TableColumn<planning, String> heureColumn;
 
     @FXML
@@ -52,19 +55,30 @@ public class AfficherPlaningAdmineController {
 
     public void initialize(URL location, ResourceBundle resources) {
         planningService = new PlanningService();
-
         salleColumn.setCellValueFactory(new PropertyValueFactory<>("salle"));
         nbplacemaxColumn.setCellValueFactory(new PropertyValueFactory<>("nb_place_max"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        heureColumn.setCellValueFactory(new PropertyValueFactory<>("heur"));
-        idcourColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getCours().getId()).asObject());
-        iduserColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getUser().getId()).asObject());
-
+        heureColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
+        idcourColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_cour().getId()).asObject());
+        iduserColumn.setCellValueFactory(cellData -> {
+            planning planning = cellData.getValue();
+            IntegerProperty property = new SimpleIntegerProperty();
+            if (planning.getId_coach() != null) {
+                property.set(planning.getId_coach().getId());
+            }
+            return property.asObject();
+        });
         refreshTable();
 
-        modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
-        modifierColumn.setCellFactory(param -> new TableCell<>() {
+        modifierColumn.setCellFactory(param -> new TableCell<planning, Void>() {
             private final Button button = new Button("Modifier");
+
+            {
+                button.setOnAction(event -> {
+                    planning p = getTableView().getItems().get(getIndex());
+                    openUpdatePlaning(p);
+                });
+            }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
@@ -74,19 +88,21 @@ public class AfficherPlaningAdmineController {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    button.setOnAction(event -> {
-                        planning p = getTableView().getItems().get(getIndex());
-                        openUpdatePlaning(p);
-                    });
                     setGraphic(button);
                     setText(null);
                 }
             }
         });
 
-        supprimerColumn.setCellValueFactory(new PropertyValueFactory<>("supprimerButton"));
-        supprimerColumn.setCellFactory(param -> new TableCell<>() {
+        supprimerColumn.setCellFactory(param -> new TableCell<planning, Void>() {
             private final Button button = new Button("Supprimer");
+
+            {
+                button.setOnAction(event -> {
+                    planning p = getTableView().getItems().get(getIndex());
+                    deletePlaning(p);
+                });
+            }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
@@ -96,10 +112,6 @@ public class AfficherPlaningAdmineController {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    button.setOnAction(event -> {
-                        planning p = getTableView().getItems().get(getIndex());
-                        deletePlaning(p);
-                    });
                     setGraphic(button);
                     setText(null);
                 }
@@ -113,7 +125,6 @@ public class AfficherPlaningAdmineController {
         plannings.addAll(planningList);
         planingTable.setItems(plannings);
     }
-
     @FXML
     public void ajouterplaning(ActionEvent actionEvent) {
         try {
@@ -123,10 +134,10 @@ public class AfficherPlaningAdmineController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
 
-            PlanifierUnCourController controller = loader.getController();
-            controller.setCurrentScene(scene);
 
-            stage.show();
+
+            stage.showAndWait();
+            refreshTable();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,15 +147,14 @@ public class AfficherPlaningAdmineController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUnPlanning.fxml"));
             Parent root = loader.load();
+            UpdateUnPlaning controller = loader.getController();
+            controller.initData(p.getId());
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.showAndWait();
+            refreshTable();
 
-            UpdateCourController controller = loader.getController();
-            controller.setCurrentScene(scene);
-            controller.initData(p.getId());
-
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

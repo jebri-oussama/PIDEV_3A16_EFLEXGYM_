@@ -8,6 +8,7 @@ import gestion_user.service.UserService;
 import utils.DataSource;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,22 +23,24 @@ public class PlanningService implements IntService<planning> {
     @Override
     public void add(planning p) {
         // Vérifier si l'utilisateur associé au planning est null
-        if (p.getUser() == null) {
+       /* if (p.getId_coach() == null) {
             throw new IllegalArgumentException("User associated with the planning cannot be null");
-        }
+        }*/
 
         // Maintenant, vous pouvez appeler la méthode getRole() en toute sécurité
-        String role = String.valueOf(p.getUser().getRole());
+        String role = String.valueOf(p.getId_coach().getRole());
 
-        String query = "INSERT INTO planning (salle, nbplace, date, heur, cours_id, coach_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO planning (salle, nb_place_max, date, heure, id_cour, id_coach) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             pst = conn.prepareStatement(query);
             pst.setString(1, p.getSalle());
             pst.setInt(2, p.getNb_place_max());
-            pst.setDate(3, p.getDate());
+            LocalDate localDate = p.getDate();
+            java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+            pst.setDate(3, sqlDate);
             pst.setString(4, p.getHeure());
-            pst.setInt(5, p.getCours().getId());
-            pst.setInt(6, p.getUser().getId());
+            pst.setInt(5, p.getId_cour().getId());
+            pst.setInt(6, p.getId_coach().getId());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -58,16 +61,20 @@ public class PlanningService implements IntService<planning> {
 
     @Override
     public void update(planning p) {
-        if (p.getUser().getRole() != null && p.getUser().getRole().equals(Role.Coach)) {
+        {
+            //String requete="update planning set salle='"+p.getSalle()+"',nb_place_max='"+p.getNb_place_max()+"',date='"+p.getDate()+"',heure="+p.getHeure()+",id_cour='"+p.getId_cour()+"',id_coach='"+p.getId_coach()+"' where id='"+p.getId()+"'";
+
             String requete = "UPDATE planning SET salle = ?, nb_place_max = ?, date = ?, heure = ?, id_cour = ?, id_coach = ? WHERE id = ?";
             try {
                 pst = conn.prepareStatement(requete);
                 pst.setString(1, p.getSalle());
                 pst.setInt(2, p.getNb_place_max());
-                pst.setDate(3, new java.sql.Date(p.getDate().getTime()));
+                LocalDate localDate = p.getDate();
+                java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+                pst.setDate(3, sqlDate);
                 pst.setString(4, p.getHeure());
-                pst.setInt(5, p.getCours().getId());
-                pst.setInt(6, p.getUser().getId());
+                pst.setInt(5, p.getId_cour().getId());
+                pst.setInt(6, p.getId_coach().getId());
                 pst.setInt(7, p.getId());
                 pst.executeUpdate();
             } catch (SQLException e) {
@@ -84,13 +91,15 @@ public class PlanningService implements IntService<planning> {
             Statement ste = conn.createStatement();
             ResultSet rs = ste.executeQuery(query);
             while (rs.next()) {
-                int id_coach = rs.getInt(6);
+                int id_cour = rs.getInt(6);
+                int id_coach = rs.getInt(7);
+                CoursService coursService = new CoursService();
                 UserService coachService = new UserService();
                 User coach = coachService.readById(id_coach);
-                int id_cour = rs.getInt(5);
-                CoursService coursService = new CoursService();
                 cours cour = coursService.readById(id_cour);
-                planningList.add(new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getString(5), cour, coach));
+                LocalDate date = rs.getDate(4).toLocalDate();
+                String heur = rs.getString(5);
+                planningList.add(new planning(rs.getInt(1), rs.getString(2), rs.getInt(3),date, heur, cour, coach));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -100,7 +109,7 @@ public class PlanningService implements IntService<planning> {
 
     @Override
     public planning readById(int id) {
-        String requete = "SELECT * FROM planning WHERE id_planing = ?";
+        String requete = "SELECT * FROM planning WHERE id = ?";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, id);
@@ -112,7 +121,8 @@ public class PlanningService implements IntService<planning> {
                 int id_cour = rs.getInt(5);
                 CoursService coursService = new CoursService();
                 cours cour = coursService.readById(id_cour);
-                return new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4), rs.getString(5), cour, coach);
+                LocalDate date = rs.getDate(4).toLocalDate();
+                return new planning(rs.getInt(1), rs.getString(2), rs.getInt(3), date, rs.getString(5), cour, coach);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

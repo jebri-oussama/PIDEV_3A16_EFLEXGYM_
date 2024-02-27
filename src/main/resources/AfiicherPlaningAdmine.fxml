@@ -4,26 +4,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane prefHeight="589.0" prefWidth="1230.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gestion_planing.Controllers.AfficherPlaningAdmineController">
    <children>
       <VBox layoutY="1.0" prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FFC300;">
          <children>
-            <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
-               <image>
-                  <Image url="@logo.png" />
-               </image>
-               <VBox.margin>
-                  <Insets left="70.0" />
-               </VBox.margin>
-            </ImageView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
                <font>
                   <Font name="Impact" size="31.0" />
@@ -40,7 +30,7 @@
                   <Insets bottom="15.0" left="50.0" right="50.0" />
                </padding>
             </Button>
-            <Button fx:id="listcour" mnemonicParsing="false" prefHeight="0.0" prefWidth="158.0" text="list des cours">
+            <Button fx:id="listcour" mnemonicParsing="false" prefHeight="0.0" prefWidth="158.0" text="Liste des cours">
                <padding>
                   <Insets bottom="15.0" left="50.0" right="50.0" />
                </padding>
@@ -55,49 +45,41 @@
       </VBox>
       <TableView fx:id="planingTable" layoutX="238.0" layoutY="45.0" prefHeight="354.0" prefWidth="1257.0">
          <columns>
-            <TableColumn fx:id="salleColumn" prefWidth="200.8000087738037" style="-fx-background-color: EEEE19;" styleClass="font" text="salle">
+            <TableColumn fx:id="salleColumn" prefWidth="200.8000087738037" style="-fx-background-color: EEEE19;" text="Salle">
                <cellValueFactory>
-                  <PropertyValueFactory property="type" />
+                  <PropertyValueFactory property="salle" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="nbplacemaxColumn" minWidth="0.0" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="nb_place_max">
+            <TableColumn fx:id="nbplacemaxColumn" minWidth="0.0" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="Nombre de places max">
                <cellValueFactory>
-                  <PropertyValueFactory property="prix" />
+                  <PropertyValueFactory property="nb_place_max" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="date">
+            <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="Date">
                <cellValueFactory>
-                  <PropertyValueFactory property="date_debut" />
+                  <PropertyValueFactory property="date" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="heureColumn" minWidth="0.0" prefWidth="186.39993286132812" style="-fx-background-color: EEEE19;" text="heure">
-               <cellFactory>
-                  <PropertyValueFactory property="modifierButton" />
-               </cellFactory>
+            <TableColumn fx:id="heureColumn" minWidth="0.0" prefWidth="186.39993286132812" style="-fx-background-color: EEEE19;" text="Heure">
+               <cellValueFactory>
+                  <PropertyValueFactory property="heure" />
+               </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="idcourColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_cour ">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
+            <TableColumn fx:id="idcourColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="ID Cours">
+               <cellValueFactory>
+                  <PropertyValueFactory property="cours.id" />
+               </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="iduserColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_user">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
+            <TableColumn fx:id="iduserColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="ID Utilisateur">
+               <cellValueFactory>
+                  <PropertyValueFactory property="user.id" />
+               </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="modifierColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Modifier">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
-            </TableColumn>
-            <TableColumn fx:id="supprimerColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Supprimer">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
-            </TableColumn>
+            <TableColumn fx:id="modifierColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Modifier" />
+            <TableColumn fx:id="supprimerColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Supprimer" />
          </columns>
       </TableView>
-      <Button fx:id="ajouterplaning" layoutX="702.0" layoutY="458.0" onAction="#ajouterplaning" prefHeight="44.0" prefWidth="267.0" text="planifier noveau cour" />
+      <Button fx:id="ajouterplaning" layoutX="702.0" layoutY="458.0" onAction="#ajouterplaning" prefHeight="44.0" prefWidth="267.0" text="Planifier un nouveau cours" />
       <AnchorPane prefHeight="62.0" prefWidth="1089.0" />
    </children>
 </AnchorPane>

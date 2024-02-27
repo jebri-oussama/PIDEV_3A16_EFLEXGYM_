@@ -3,6 +3,7 @@ package Gestion_planing.Controllers;
 import Gestion_planing.Controllers.AfficherCourController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AjouterCoursController {
+public class AjouterCoursController implements Initializable {
 
     private final CoursService coursService = new CoursService();
     private Scene currentScene;
@@ -30,7 +31,7 @@ public class AjouterCoursController {
     public void setCurrentScene(Scene scene) {
         this.currentScene = scene;
     }
-    void initialize() {
+    public void initialize(URL location, ResourceBundle resources) {
         typeId.setItems(FXCollections.observableArrayList(TypeCours.values()));
         // Make sure the ComboBox is not disabled or locked
         typeId.setDisable(false);

@@ -51,8 +51,8 @@ public class AfficherPlaningAdherentController {
             nbplacemaxColumn.setCellValueFactory(new PropertyValueFactory<>("nb_place_max"));
             dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
             heureColumn.setCellValueFactory(new PropertyValueFactory<>("heur"));
-            idcourColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getCours().getId()).asObject());
-            iduserColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getUser().getId()).asObject());
+            idcourColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_cour().getId()).asObject());
+            iduserColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_coach().getId()).asObject());
 
             refreshTable();
 
