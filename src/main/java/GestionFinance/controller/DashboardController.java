@@ -5,12 +5,13 @@ import GestionFinance.service.BilanFinancierService;
 import gestion_user.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.text.Text;
 import gestion_user.entities.Role;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.fx.ChartViewer;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +26,7 @@ public class DashboardController implements Initializable {
     private Text coachsText;
 
     @FXML
-    private BarChart<String, Number> bilanFinancierChart;
+    private ChartViewer chartViewer; // Utilisation de ChartViewer pour afficher le graphique
 
     private UserService userService;
     private BilanFinancierService bilanFinancierService;
@@ -44,17 +45,24 @@ public class DashboardController implements Initializable {
     }
 
     private void initializeBilanFinancierChart() {
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        bilanFinancierChart = new BarChart<>(xAxis, yAxis);
-        List<BilanFinancier> bilans = bilanFinancierService.readAll();
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        for (BilanFinancier bilan : bilans) {
-            series.getData().add(new XYChart.Data<>(String.valueOf(bilan.getId()), bilan.getProfit()));
-        }
-        bilanFinancierChart.getData().add(series);
-    }
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
+        // Charger les données du service
+        List<BilanFinancier> bilans = bilanFinancierService.readAll();
+        for (BilanFinancier bilan : bilans) {
+            dataset.addValue(bilan.getProfit(), "Profit", String.valueOf(bilan.getId()));
+        }
+
+        // Créer le graphique
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Bilan Financier", // Titre du graphique
+                "ID", // Axe X
+                "Profit", // Axe Y
+                dataset); // Données
+
+        // Définir le graphique dans le ChartViewer
+        chartViewer.setChart(chart);
+    }
 
     private void updateAdherents(int count) {
         adherentsText.setText(String.valueOf(count));
