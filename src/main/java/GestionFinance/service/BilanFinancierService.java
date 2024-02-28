@@ -12,6 +12,7 @@ import java.util.List;
 public class BilanFinancierService implements IService<BilanFinancier> {
 
     private static  Connection conn;
+
     private Statement ste;
     private PreparedStatement pst;
 

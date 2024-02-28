@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Dashboard"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
+    <children>
+        <Text layoutX="53.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérents :" textAlignment="CENTER" wrappingWidth="84.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text layoutX="53.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coachs :" textAlignment="CENTER" wrappingWidth="84.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text fx:id="adherentsText" layoutX="143.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text fx:id="coachsText" layoutX="143.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <BarChart fx:id="bilanFinancierChart" layoutX="290.0" layoutY="55.0" prefHeight="300.0" prefWidth="300.0" />
+    </children>
 </AnchorPane>

@@ -148,5 +148,17 @@ public class UserService implements IService<User> {
         }
         return user;
     }
+    public int countByRole(Role role) throws SQLException {
+        String query = "SELECT COUNT(*) AS count FROM user WHERE role = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setString(1, role.toString());
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+        }
+        return 0;
+    }
+
 
 }
