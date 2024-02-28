@@ -33,6 +33,8 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
 
     @FXML
     private TableColumn<Evenement, String> typeColumn;
+    @FXML
+    private TableColumn<Evenement, String> eventNameColumn;
 
     @FXML
     private TableColumn<Evenement, String> dateDebutColumn;
@@ -56,6 +58,7 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("event_name"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("imagePath"));

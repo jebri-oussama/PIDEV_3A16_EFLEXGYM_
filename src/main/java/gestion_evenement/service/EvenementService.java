@@ -24,19 +24,19 @@ public class EvenementService implements IServiceE<Evenement> {
 
     @Override
     public void add(Evenement e) {
-        String query = "INSERT INTO Evenement (type, date_debut, date_fin, image) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Evenement (type,event_name , date_debut, date_fin, image) VALUES (?,?, ?, ?, ?)";
         try {
             pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, e.getType().getId());
-            pst.setTimestamp(2, new java.sql.Timestamp(e.getDate_debut().getTime()));
-            pst.setTimestamp(3, new java.sql.Timestamp(e.getDate_fin().getTime()));
-            pst.setString(4, e.getImagePath());
+            pst.setString(2, e.getEvent_name());
+            pst.setTimestamp(3, new java.sql.Timestamp(e.getDate_debut().getTime()));
+            pst.setTimestamp(4, new java.sql.Timestamp(e.getDate_fin().getTime()));
+            pst.setString(5, e.getImagePath());
             pst.executeUpdate();
 
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 int generatedId = rs.getInt(1);
-                System.out.println("Generated ID: " + generatedId);
             }
         } catch (SQLException ex) {
             System.err.println("Error adding event: " + ex.getMessage());
@@ -64,14 +64,15 @@ public class EvenementService implements IServiceE<Evenement> {
 
     @Override
     public void update(int id, Evenement evenement) {
-        String query = "UPDATE Evenement SET type = ?, date_debut = ?, date_fin = ?, image = ? WHERE id = ?";
+        String query = "UPDATE Evenement SET type = ?,event_name = ?, date_debut = ?, date_fin = ?, image = ? WHERE id = ?";
         try {
             pst = conn.prepareStatement(query);
             pst.setInt(1, evenement.getType().getId());
-            pst.setTimestamp(2, new java.sql.Timestamp(evenement.getDate_debut().getTime()));
-            pst.setTimestamp(3, new java.sql.Timestamp(evenement.getDate_fin().getTime()));
-            pst.setString(4, evenement.getImagePath());
-            pst.setInt(5, id);
+            pst.setString(2, evenement.getEvent_name());
+            pst.setTimestamp(3, new java.sql.Timestamp(evenement.getDate_debut().getTime()));
+            pst.setTimestamp(4, new java.sql.Timestamp(evenement.getDate_fin().getTime()));
+            pst.setString(5, evenement.getImagePath());
+            pst.setInt(6, id);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -92,6 +93,7 @@ public class EvenementService implements IServiceE<Evenement> {
                 Type type = readTypeById(typeId);
                 Evenement evenement = new Evenement(
                         type,
+                        rs.getString("event_name"),
                         rs.getTimestamp("date_debut"),
                         rs.getTimestamp("date_fin"),
                         rs.getString("image")
@@ -118,6 +120,7 @@ public class EvenementService implements IServiceE<Evenement> {
                 Type type = readTypeById(typeId);
                 Evenement evenement = new Evenement(
                         type,
+                        rs.getString("event_name"),
                         rs.getTimestamp("date_debut"),
                         rs.getTimestamp("date_fin"),
                         rs.getString("image")

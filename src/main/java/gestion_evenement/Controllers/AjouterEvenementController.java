@@ -29,8 +29,8 @@ public class AjouterEvenementController {
     public ImageView imageView;
     @FXML
     private ComboBox<Type> typeComboBox;
-
-
+    @FXML
+    private TextField txtevent_name;
     @FXML
     private TextField txtdate_debut;
 
@@ -53,12 +53,13 @@ public class AjouterEvenementController {
 
         TypeService typeService = new TypeService();
         Type type = typeService.getTypeByName(typeName);
+        String event_name = txtevent_name.getText();
 
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
 
         String imagePath = this.imagePath;
-        Evenement evenement = new Evenement(type, date_debut, date_fin, imagePath);
+        Evenement evenement = new Evenement(type,event_name, date_debut, date_fin, imagePath);
 
         EvenementService evenementService = new EvenementService();
         evenementService.add(evenement);
@@ -86,6 +87,9 @@ public class AjouterEvenementController {
 
             displayErrorMessage("Please select a type.");
             return false;
+        }
+        if (txtevent_name.getText() == null ) {
+            displayErrorMessage("Please type a name for the event.");
         }
 
         if (!isValidTimestamp(txtdate_debut.getText())) {

@@ -1,18 +1,18 @@
-package gestion_evenement.service;
+    package gestion_evenement.service;
 
-import java.util.List;
+    import java.util.List;
 
-public interface IService<T> {
+    public interface IService<T> {
 
-    void add(T t);
+        void add(T t);
 
-    void delete(int id);
+        void delete(int id);
 
-    void update(int id, T t);
+        void update(int id, T t);
 
-    List<T> readAll();
+        List<T> readAll();
 
-    T readById(int id);
-    List<T> getAllTypes();
-    T getTypeByName(String typeName);
-}
+        T readById(int id);
+        List<T> getAllTypes();
+        T getTypeByName(String typeName);
+    }

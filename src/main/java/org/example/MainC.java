@@ -68,7 +68,7 @@ public class MainC {
     int typeId = 1; // Replace your_type_id_here with the actual type ID
     Type type = typeService.readById(typeId);
 
-    Evenement e1 = new Evenement(type, Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "hhh.png");
+    Evenement e1 = new Evenement(type,"a", Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "hhh.png");
 
 //evenementService.add(e1);
 

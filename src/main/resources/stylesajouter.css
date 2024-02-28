@@ -41,13 +41,13 @@
 }
 
 .add-button {
-    -fx-background-color: #fb800; /* Orange color */
+    -fx-background-color: #ff8000; /* Orange color */
     -fx-text-fill: #ffffff;
     -fx-font-size: 16px;
     -fx-pref-width: 100px;
     -fx-pref-height: 40px;
     -fx-border-radius: 5px;
-    -fx-border-color: #fb800;
+    -fx-border-color: #ff8000;
     -fx-border-width: 1px;
 }
 

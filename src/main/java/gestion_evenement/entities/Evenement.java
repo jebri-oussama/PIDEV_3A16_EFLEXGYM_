@@ -9,9 +9,11 @@ public class Evenement {
     private Timestamp date_debut;
     private Timestamp date_fin;
     private String imagePath;
+    private String event_name;
 
-    public Evenement(Type type, Timestamp date_debut, Timestamp date_fin, String imagePath) {
+    public Evenement(Type type,String event_name, Timestamp date_debut, Timestamp date_fin, String imagePath) {
         this.type = type;
+        this.event_name = event_name;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.imagePath = imagePath;
@@ -32,6 +34,8 @@ public class Evenement {
     public void setType(Type type) {
         this.type = type;
     }
+    public String getEvent_name(){return event_name;}
+    public String setEvent_name(String event_name){return this.event_name;}
 
     public Timestamp getDate_debut() {
         return date_debut;
@@ -71,6 +75,7 @@ public class Evenement {
         return "Evenement{" +
                 "id=" + id +
                 ", type=" + type +
+                ", event_name='" + event_name +
                 ", date_debut=" + date_debut +
                 ", date_fin=" + date_fin +
                 ", imagePath='" + imagePath + '\'' +

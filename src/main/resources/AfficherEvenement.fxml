@@ -21,6 +21,7 @@
             <columns>
                 <TableColumn fx:id="idColumn" text="ID" />
                 <TableColumn fx:id="typeColumn" text="Type" />
+                <TableColumn fx:id="eventNameColumn" text="Nom" />
                 <TableColumn fx:id="dateDebutColumn" text="Date de début" />
                 <TableColumn fx:id="dateFinColumn" text="Date de fin" />
                 <TableColumn fx:id="imageColumn" text="Image" />

@@ -33,6 +33,12 @@
                 </HBox>
                 <HBox spacing="10.0" styleClass="input-row">
                     <children>
+                        <Label styleClass="input-label" text="Date de début:" />
+                        <TextField fx:id="txtevent_name" styleClass="text-field" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
                         <Label text="Date de début:" />
                         <TextField fx:id="txtdate_debut" />
                     </children>

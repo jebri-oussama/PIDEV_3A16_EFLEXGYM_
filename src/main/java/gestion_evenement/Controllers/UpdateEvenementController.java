@@ -29,6 +29,8 @@ public class UpdateEvenementController {
 
     @FXML
     private ComboBox<Type> typeComboBox;
+    @FXML
+    private TextField txtevent_name;
 
     @FXML
     private TextField txtdate_debut;
@@ -59,7 +61,7 @@ public class UpdateEvenementController {
 
             typeComboBox.setValue(selectedType);
         }
-
+        txtevent_name.setText(evenement.getEvent_name());
         txtdate_debut.setText(evenement.getDate_debut().toString());
         txtdate_fin.setText(evenement.getDate_fin().toString());
         imagePath = evenement.getImagePath();
@@ -80,11 +82,11 @@ public class UpdateEvenementController {
 
         int id = Integer.parseInt(txtid.getText());
         Type type = typeComboBox.getValue();
-
+        String event_name = txtevent_name.getText();
         Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
         Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
 
-        Evenement evenement = new Evenement(type, date_debut, date_fin, imagePath);
+        Evenement evenement = new Evenement(type,event_name, date_debut, date_fin, imagePath);
         evenementService.update(id, evenement);
         EventBus.getInstance().notifyTableRefreshed();
 
@@ -111,7 +113,9 @@ public class UpdateEvenementController {
             displayErrorMessage("Please select a type.");
             return false;
         }
-
+        if (txtevent_name.getText() == null ){
+            displayErrorMessage("Please type a name for the event.");
+        }
         if (!isValidTimestamp(txtdate_debut.getText())) {
             displayErrorMessage("Invalid date format for Date de début. Use yyyy-MM-dd HH:mm:ss");
             return false;
