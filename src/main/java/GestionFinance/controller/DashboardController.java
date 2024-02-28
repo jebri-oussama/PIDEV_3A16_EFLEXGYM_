@@ -1,7 +1,10 @@
 package GestionFinance.controller;
 
+import GestionFinance.pdf.PdfGenerator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -12,6 +15,7 @@ import GestionFinance.entites.BilanFinancier;
 import GestionFinance.service.BilanFinancierService;
 import gestion_user.service.UserService;
 import gestion_user.entities.Role;
+
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -34,6 +38,11 @@ public class DashboardController implements Initializable {
 
     @FXML
     private ChartViewer oscillationsChartViewer;
+    @FXML
+    private AnchorPane root;
+
+    @FXML
+    private Button generatePDFButton; // Ajout du bouton pour générer le PDF
 
     private UserService userService;
     private BilanFinancierService bilanFinancierService;
@@ -50,7 +59,12 @@ public class DashboardController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        // Assurez-vous que root est correctement initialisé avant d'appeler generatePDF()
+        root = (AnchorPane) adherentsText.getParent();
+        generatePDFButton.setOnAction(event -> generatePDF());
     }
+
 
     private void initializeBilanFinancierChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -112,4 +126,10 @@ public class DashboardController implements Initializable {
     private void updateCoachs(int count) {
         coachsText.setText(String.valueOf(count));
     }
+
+    private void generatePDF() {
+        String outputPath = "dashboard.pdf"; // Chemin où enregistrer le fichier PDF
+        PdfGenerator.generatePdf(root, outputPath); // Passer le nœud racine de la scène
+    }
+
 }
