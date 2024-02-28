@@ -63,38 +63,44 @@ public class BilanFinancierController {
         int id = Integer.parseInt(idField.getText());
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
 
-
+        // Récupération des valeurs des revenus et des salaires
         double nouveauxRevenusAbonnements = bilanFinancier.recupererRevenuAbonnements();
         double nouveauxRevenusProduits = bilanFinancier.recupererRevenusProduits();
         double nouveauxSalairesCoachs = bilanFinancier.recupererSalairesCoachs();
 
+        // Mise à jour des champs du bilan financier
         bilanFinancier.setRevenus_abonnements(nouveauxRevenusAbonnements);
         bilanFinancier.setRevenus_produits(nouveauxRevenusProduits);
         bilanFinancier.setSalaires_coachs(nouveauxSalairesCoachs);
 
-
+        // Mise à jour des valeurs dans le service
         bilanFinancierService.updateRevenusAbonnements(id, nouveauxRevenusAbonnements);
         bilanFinancierService.updateRevenusProduits(id, nouveauxRevenusProduits);
         bilanFinancierService.updateSalairesCoachs(id, nouveauxSalairesCoachs);
 
-
-        double prixLocation = bilanFinancier.getPrix_location();
+        // Calcul du profit
         double depenses = bilanFinancier.getDepenses();
+        double prixLocation = bilanFinancier.getPrix_location();
+        double profit = bilanFinancier.calculerProfit(prixLocation, depenses);
 
-
-        double profit = bilanFinancier.calculerProfit();
-
-
+        // Mise à jour du profit dans le bilan financier
+        bilanFinancier.setProfit(profit);
         bilanFinancierService.updateProfit(id, profit);
 
+        // Affichage du profit dans le label
         profitLabel.setText(Double.toString(profit));
+
+        // Nettoyage des champs
         clearFields();
 
+        // Fermeture de la fenêtre actuelle
         idField.getScene().getWindow().hide();
 
-
+        // Redirection vers la vue AfficherBilanFinancier
         redirectToAfficherBilanFinancier();
     }
+
+
     public void setCurrentScene(Scene scene) {
         this.currentScene = scene;
     }

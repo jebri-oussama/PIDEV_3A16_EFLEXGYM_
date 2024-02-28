@@ -1,20 +1,24 @@
 package GestionFinance.controller;
 
-import GestionFinance.entites.BilanFinancier;
-import GestionFinance.service.BilanFinancierService;
-import gestion_user.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
-import gestion_user.entities.Role;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.fx.ChartViewer;
+import GestionFinance.entites.BilanFinancier;
+import GestionFinance.service.BilanFinancierService;
+import gestion_user.service.UserService;
+import gestion_user.entities.Role;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -26,7 +30,10 @@ public class DashboardController implements Initializable {
     private Text coachsText;
 
     @FXML
-    private ChartViewer chartViewer; // Utilisation de ChartViewer pour afficher le graphique
+    private ChartViewer bilanChartViewer;
+
+    @FXML
+    private ChartViewer oscillationsChartViewer;
 
     private UserService userService;
     private BilanFinancierService bilanFinancierService;
@@ -39,6 +46,7 @@ public class DashboardController implements Initializable {
             updateAdherents(userService.countByRole(Role.Adherent));
             updateCoachs(userService.countByRole(Role.Coach));
             initializeBilanFinancierChart();
+            initializeOscillationsChart();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -47,21 +55,54 @@ public class DashboardController implements Initializable {
     private void initializeBilanFinancierChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        // Charger les données du service
+        // Charger les données du service pour le bilan financier
         List<BilanFinancier> bilans = bilanFinancierService.readAll();
         for (BilanFinancier bilan : bilans) {
-            dataset.addValue(bilan.getProfit(), "Profit", String.valueOf(bilan.getId()));
+            LocalDate date = bilan.getDate_debut();
+            Month month = date.getMonth();
+            String mois = month.getDisplayName(java.time.format.TextStyle.FULL, Locale.FRENCH);
+            dataset.addValue(bilan.getProfit(), "Profit", mois);
         }
 
-        // Créer le graphique
+        // Créer le graphique à barres pour le bilan financier
         JFreeChart chart = ChartFactory.createBarChart(
                 "Bilan Financier", // Titre du graphique
-                "ID", // Axe X
+                "Mois", // Axe X
                 "Profit", // Axe Y
                 dataset); // Données
 
-        // Définir le graphique dans le ChartViewer
-        chartViewer.setChart(chart);
+        // Afficher le graphique dans ChartViewer
+        bilanChartViewer.setChart(chart);
+    }
+
+    private void initializeOscillationsChart() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // Charger les données du service pour les oscillations des revenus
+        List<BilanFinancier> bilans = bilanFinancierService.readAll();
+        for (BilanFinancier bilan : bilans) {
+            LocalDate date = bilan.getDate_debut();
+            Month month = date.getMonth();
+            String mois = month.getDisplayName(java.time.format.TextStyle.FULL, Locale.FRENCH);
+            // Vous devez obtenir les revenus des abonnements et des produits par mois
+            // par exemple, vous pourriez avoir des méthodes dans BilanFinancierService pour récupérer ces données
+            // et les ajouter au dataset
+            double revenusAbonnements = bilan.getRevenus_abonnements();
+            double revenusProduits = bilan.getRevenus_produits();
+
+            dataset.addValue(revenusAbonnements, "Revenus Abonnements", mois);
+            dataset.addValue(revenusProduits, "Revenus Produits", mois);
+        }
+
+        // Créer le graphique en courbes pour les oscillations des revenus
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Oscillations des Revenus", // Titre du graphique
+                "Mois", // Axe X
+                "Revenus", // Axe Y
+                dataset); // Données
+
+        // Afficher le graphique dans ChartViewer
+        oscillationsChartViewer.setChart(chart);
     }
 
     private void updateAdherents(int count) {

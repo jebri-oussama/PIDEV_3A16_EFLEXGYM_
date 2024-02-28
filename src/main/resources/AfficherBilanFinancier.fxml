@@ -131,20 +131,21 @@
                         <PropertyValueFactory property="date_fin" />
                      </cellValueFactory>
                   </TableColumn>
+                  <TableColumn fx:id="prixLocationColumn" prefWidth="67.0" style="-fx-background-color: white; -fx-font: Arial;" text="Prix Loyer">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="revenus_abonnements" />
+                     </cellValueFactory>
+                  </TableColumn>
+
                   <TableColumn fx:id="salairesCoachsColumn" prefWidth="133.0" style="-fx-background-color: white; -fx-font: Arial;" text="Salaires Coachs">
                      <cellValueFactory>
                         <PropertyValueFactory property="salaires_coachs" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="prixLocationColumn" prefWidth="67.0" style="-fx-background-color: white; -fx-font: Arial;" text="Prix Loyer">
-                     <cellValueFactory>
-                        <PropertyValueFactory property="prix_location" />
-                     </cellValueFactory>
-                  </TableColumn>
 
                   <TableColumn fx:id="revenusAbonnementsColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Revenus Abonnements">
                      <cellValueFactory>
-                        <PropertyValueFactory property="revenus_abonnements" />
+                        <PropertyValueFactory property="prix_location" />
                      </cellValueFactory>
                   </TableColumn>
 
@@ -153,6 +154,7 @@
                         <PropertyValueFactory property="revenus_produits" />
                      </cellValueFactory>
                   </TableColumn>
+
 
                   <TableColumn fx:id="depensesColumn" prefWidth="118.0" style="-fx-background-color: white; -fx-font: Arial;" text="Dépenses">
                      <cellValueFactory>

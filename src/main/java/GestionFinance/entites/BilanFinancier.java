@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
 import utils.DataSource;
 
 
@@ -82,39 +81,31 @@ public class BilanFinancier {
     }
 
     public double recupererRevenuAbonnements() {
-        double prixTotalAbonnements = 0;
-
-        String requete = "SELECT SUM(A.prix) AS revenus_abonnements FROM abonnement A JOIN bilan_financier B ON A.id_bilan_financier = B.id WHERE B.id = ?";
+        double revenusAbonnements = 0;
+        String requete = "SELECT SUM(prix) AS revenus_abonnements FROM abonnement WHERE id_bilan_financier = ?";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, getId());
-
             ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-                prixTotalAbonnements += rs.getDouble("revenus_abonnements");
+            if (rs.next()) {
+                revenusAbonnements = rs.getDouble("revenus_abonnements");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return prixTotalAbonnements;
+        return revenusAbonnements;
     }
 
 
     public double recupererSalairesCoachs() {
         double salairesCoachs = 0;
-        String requete = "SELECT SUM(U.salaire) AS salaires_coachs " +
-                "FROM user U " +
-                "JOIN bilan_financier B ON U.id_bilan_financier = B.id " +
-                "WHERE U.role = 'COACH' AND B.id = ?";
+        String requete = "SELECT SUM(salaire) AS salaires_coachs FROM user WHERE role = 'COACH' AND id_bilan_financier = ?";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, getId());
-
             ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-                salairesCoachs += rs.getDouble("salaires_coachs");
+            if (rs.next()) {
+                salairesCoachs = rs.getDouble("salaires_coachs");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -122,24 +113,22 @@ public class BilanFinancier {
         return salairesCoachs;
     }
 
+
     public double recupererRevenusProduits() {
-        double prixTotalProduits = 0;
-        String requete = "SELECT SUM(quantite * prix) AS revenus_produits FROM produit  P JOIN bilan_financier B on P.id_bilan_financier = B.id  WHERE B.id = ?";
+        double revenusProduits = 0;
+        String requete = "SELECT SUM(quantite * prix) AS revenus_produits FROM produit WHERE id_bilan_financier = ?";
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, getId());
             ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-                prixTotalProduits += rs.getDouble("revenus_produits");
+            if (rs.next()) {
+                revenusProduits = rs.getDouble("revenus_produits");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return prixTotalProduits;
+        return revenusProduits;
     }
-
-
 
     public Connection getConn() {
         return conn;

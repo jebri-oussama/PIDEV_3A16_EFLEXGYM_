@@ -59,12 +59,13 @@ public class AfficherBilanFinancierController {
 
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
-        salairesCoachsColumn.setCellValueFactory(new PropertyValueFactory<>("salaires_coachs"));
-        prixLocationColumn.setCellValueFactory(new PropertyValueFactory<>("prix_location"));
-        revenusAbonnementsColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_abonnements"));
-        revenusProduitsColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_produits"));
+        salairesCoachsColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_abonnements")); // Afficher les revenus des abonnements dans la colonne des salaires des coachs
+        prixLocationColumn.setCellValueFactory(new PropertyValueFactory<>("revenus_produits")); // Afficher les revenus des produits dans la colonne de la location
+        revenusAbonnementsColumn.setCellValueFactory(new PropertyValueFactory<>("salaires_coachs")); // Afficher les salaires des coachs dans la colonne des revenus des abonnements
+        revenusProduitsColumn.setCellValueFactory(new PropertyValueFactory<>("prix_location")); // Afficher le prix de la location dans la colonne des revenus des produits
         depensesColumn.setCellValueFactory(new PropertyValueFactory<>("depenses"));
         profitColumn.setCellValueFactory(new PropertyValueFactory<>("profit"));
+
 
         refreshTable();
         modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
