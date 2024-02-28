@@ -1,5 +1,8 @@
 package GestionFinance.test;
 
+import GestionFinance.controller.ConsulterAbonnementController;
+import GestionFinance.entites.Abonnement;
+import GestionFinance.service.AbonnementService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -48,12 +51,32 @@ public class MainFx extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Bilan Financier");
         primaryStage.show();*/
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+       /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Dashboard");
-        primaryStage.show();
+        primaryStage.show();*/
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsulterAbonnement.fxml"));
+        Parent root = loader.load();
+
+        // Récupérez l'abonnement de la base de données (simulé pour le test)
+        AbonnementService abonnementService = new AbonnementService();
+        Abonnement abonnement = abonnementService.readById(2); // Remplacez idAbonnement par l'ID de l'abonnement à tester
+
+        // Récupérez le contrôleur de l'interface
+        ConsulterAbonnementController controller = loader.getController();
+
+        // Passez l'abonnement récupéré au contrôleur
+        controller.setAbonnement(abonnement);
+
+        // Affichez l'interface
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Consulter Abonnement");
+        primaryStage.show();
     }
+
+
 }
