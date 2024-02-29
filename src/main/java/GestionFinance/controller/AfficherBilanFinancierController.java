@@ -23,6 +23,12 @@ public class AfficherBilanFinancierController {
 
     @FXML
     private TableView<BilanFinancier> bilanFinancierTable;
+    @FXML
+    private Button dashboardId;
+    @FXML
+    private Button bilanFinancierId;
+    @FXML
+    private Button abonnementsId;
 
     @FXML
     private TableColumn<BilanFinancier, String> dateDebutColumn;
@@ -163,6 +169,40 @@ public class AfficherBilanFinancierController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             bilanFinancierService.delete(bilanFinancier);
             refreshTable();
+        }
+    }
+
+    @FXML
+    void afficherBilanFinancier() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherAbonnements() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

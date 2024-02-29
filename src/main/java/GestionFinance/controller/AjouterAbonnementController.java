@@ -37,6 +37,12 @@ public class AjouterAbonnementController {
 
     @FXML
     private TextField etatId;
+    @FXML
+    private Button dashboardId;
+    @FXML
+    private Button bilanFinancierId1;
+    @FXML
+    private Button abonnementsId;
 
     @FXML
     private TextField prixId;
@@ -153,6 +159,39 @@ public class AjouterAbonnementController {
             stage.setScene(scene);
             AfficherAbonnementsController controller = loader.getController();
             controller.refreshTable();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherBilanFinancier() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherAbonnements() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

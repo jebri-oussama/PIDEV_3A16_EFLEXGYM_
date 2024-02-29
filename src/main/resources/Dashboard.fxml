@@ -1,34 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Button?>
-<?import org.jfree.chart.fx.ChartViewer?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.jfree.chart.fx.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
     <children>
-        <Text layoutX="53.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérents :" textAlignment="CENTER" wrappingWidth="84.0">
+        <Text layoutX="306.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérents :" textAlignment="CENTER" wrappingWidth="84.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Text layoutX="53.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coachs :" textAlignment="CENTER" wrappingWidth="84.0">
+        <Text layoutX="314.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coachs :" textAlignment="CENTER" wrappingWidth="84.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Text fx:id="adherentsText" layoutX="143.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+        <Text fx:id="adherentsText" layoutX="410.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Text fx:id="coachsText" layoutX="143.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+        <Text fx:id="coachsText" layoutX="410.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <ChartViewer fx:id="bilanChartViewer" layoutX="53.0" layoutY="200.0" prefHeight="300.0" prefWidth="350.0" />
-        <ChartViewer fx:id="oscillationsChartViewer" layoutX="453.0" layoutY="200.0" prefHeight="300.0" prefWidth="350.0" />
-        <Button fx:id="generatePDFButton" layoutX="342.0" layoutY="21.0" mnemonicParsing="false" text="Générer PDF" />
+        <ChartViewer fx:id="bilanChartViewer" layoutX="227.0" layoutY="186.0" prefHeight="300.0" prefWidth="350.0" />
+        <ChartViewer fx:id="oscillationsChartViewer" layoutX="600.0" layoutY="192.0" prefHeight="300.0" prefWidth="350.0" />
+        <Button fx:id="generatePDFButton" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" text="Générer PDF" />
+        <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FB8000;">
+            <children>
+                <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                    <image>
+                        <Image url="@logo.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="70.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
+                    <font>
+                        <Font name="Arial" size="26.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="50.0" />
+                    </VBox.margin>
+                </Text>
+                <Button fx:id="dashboardId" mnemonicParsing="false" onAction="#afficherDashboard" prefHeight="29.0" prefWidth="238.0" style="-fx-background-color: fb8000;" text="Dashboard" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <font>
+                        <Font name="Arial" size="22.0" />
+                    </font>
+                </Button>
+                <Button fx:id="abonnementsId" alignment="CENTER" onAction="#afficherAbonnements" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial" size="19.0" />
+                    </font>
+                </Button>
+                <Button fx:id="adherentsId" mnemonicParsing="false" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: fb8000;" text="Adherents">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial" size="20.0" />
+                    </font>
+                </Button>
+                <Button fx:id="coachsId" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="32.0" prefWidth="218.0" style="-fx-background-color: fb8000;" text="Coachs" textAlignment="JUSTIFY">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="25.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial" size="21.0" />
+                    </font>
+                </Button>
+                <Button fx:id="bilanFinancierId" mnemonicParsing="false" onAction="#afficherBilanFinancier" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="Arial" size="19.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+
     </children>
 </AnchorPane>

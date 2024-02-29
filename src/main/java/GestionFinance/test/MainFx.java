@@ -39,12 +39,12 @@ public class MainFx extends Application {
         primaryStage.setTitle("Mise à jour Bilan Financier");
         primaryStage.show();*/
 
-   /*  FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Afficher Abonnements");
-            primaryStage.show();*/
+            primaryStage.show();
     /* FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -58,7 +58,7 @@ public class MainFx extends Application {
         primaryStage.setTitle("Dashboard");
         primaryStage.show();*/
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsulterAbonnement.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsulterAbonnement.fxml"));
         Parent root = loader.load();
 
         // Récupérez l'abonnement de la base de données (simulé pour le test)
@@ -75,7 +75,7 @@ public class MainFx extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Consulter Abonnement");
-        primaryStage.show();
+        primaryStage.show();*/
     }
 
 

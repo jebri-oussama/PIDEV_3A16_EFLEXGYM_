@@ -25,6 +25,12 @@ public class AfficherAbonnementsController implements Initializable {
     @FXML
     private TableView<Abonnement> abonnementsTable;
     @FXML
+    private Button dashboardId;
+    @FXML
+    private Button bilanFinancierId;
+    @FXML
+    private Button abonnementsId;
+    @FXML
     private TableColumn<Abonnement, Void> modifierColumn;
     @FXML
     private TableColumn<Abonnement, Void> supprimerColumn;
@@ -102,6 +108,41 @@ public class AfficherAbonnementsController implements Initializable {
                 }
             }
         });
+
+
+    }
+    @FXML
+    void afficherBilanFinancier() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherAbonnements() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void refreshTable() {

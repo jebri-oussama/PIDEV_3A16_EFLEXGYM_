@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -41,6 +42,13 @@ public class AjouterBilanFinancierController {
 
     @FXML
     private TextField revenusProduitsId;
+
+    @FXML
+    private Button dashboardId;
+    @FXML
+    private Button bilanFinancierId;
+    @FXML
+    private Button abonnementsId;
 
     @FXML
     private TextField salairesCoachsId;
@@ -100,6 +108,40 @@ public class AjouterBilanFinancierController {
             stage.setScene(scene);
             AfficherAbonnementsController controller = loader.getController();
             controller.refreshTable();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void afficherBilanFinancier() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherAbonnements() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -12,10 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
@@ -45,6 +42,12 @@ public class UpdateAbonnementController {
 
     @FXML
     private ComboBox<Integer> bilanFinancierId;
+    @FXML
+    private Button dashboardId;
+    @FXML
+    private Button bilanFinancierId1;
+    @FXML
+    private Button abonnementsId;
 
     @FXML
     private TextField typeId;
@@ -147,5 +150,39 @@ public class UpdateAbonnementController {
         etatId.clear();
         adherentId.getSelectionModel().clearSelection();
         bilanFinancierId.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    void afficherBilanFinancier() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherAbonnements() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

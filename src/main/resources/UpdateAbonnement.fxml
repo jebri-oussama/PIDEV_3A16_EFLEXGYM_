@@ -5,21 +5,19 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.UpdateAbonnementController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="869.0" style="-fx-background-color: black; " xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.UpdateAbonnementController">
     <children>
         <AnchorPane layoutY="1.0" prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
             <children>
-                <VBox layoutY="59.0" prefHeight="542.0" prefWidth="222.0" style="-fx-background-color: FB8000;">
+                <VBox layoutY="53.0" prefHeight="535.0" prefWidth="222.0" style="-fx-background-color: FB8000;">
                     <children>
                         <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                             <image>
@@ -31,15 +29,15 @@
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
                             <font>
-                                <Font name="Arial" size="23.0" />
+                                <Font name="Arial" size="26.0" />
                             </font>
                             <VBox.margin>
                                 <Insets left="50.0" />
                             </VBox.margin>
                         </Text>
-                        <Button fx:id="dashboardId" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" style="-fx-background-color: FFFFFF;" text="Dashboard">
+                        <Button fx:id="dashboardId" mnemonicParsing="false"  onAction="#afficherDashboard" prefHeight="29.0" prefWidth="238.0" style="-fx-background-color: fb8000;" text="Dashboard" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
                             <VBox.margin>
-                                <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                                <Insets top="25.0" />
                             </VBox.margin>
                             <padding>
                                 <Insets bottom="15.0" left="50.0" right="50.0" />
@@ -48,78 +46,49 @@
                                 <Insets />
                             </opaqueInsets>
                             <font>
-                                <Font name="Arial" size="11.0" />
+                                <Font name="Arial" size="22.0" />
                             </font>
-                            <effect>
-                                <InnerShadow>
-                                    <color>
-                                        <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
-                                    </color>
-                                </InnerShadow>
-                            </effect>
                         </Button>
-                        <Button fx:id="abonnementsId" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" style="-fx-background-color: FFFFFF;" text="Abonnements">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                            </VBox.margin>
+                        <Button fx:id="abonnementsId" alignment="CENTER" onAction="#afficherAbonnements" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements">
                             <padding>
                                 <Insets bottom="15.0" left="50.0" right="50.0" />
                             </padding>
-                            <opaqueInsets>
-                                <Insets />
-                            </opaqueInsets>
+                            <VBox.margin>
+                                <Insets top="25.0" />
+                            </VBox.margin>
                             <font>
-                                <Font name="Arial" size="10.0" />
+                                <Font name="Arial" size="19.0" />
                             </font>
-                            <effect>
-                                <InnerShadow>
-                                    <color>
-                                        <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
-                                    </color>
-                                </InnerShadow>
-                            </effect>
                         </Button>
-                        <Button fx:id="adherentsId" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" style="-fx-background-color: FFFFFF;" text="Adherents">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                            </VBox.margin>
+                        <Button fx:id="adherentsId" mnemonicParsing="false" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: fb8000;" text="Adherents">
                             <padding>
                                 <Insets bottom="15.0" left="50.0" right="50.0" />
                             </padding>
-                            <opaqueInsets>
-                                <Insets />
-                            </opaqueInsets>
+                            <VBox.margin>
+                                <Insets top="25.0" />
+                            </VBox.margin>
                             <font>
-                                <Font name="Arial" size="12.0" />
+                                <Font name="Arial" size="20.0" />
                             </font>
-                            <effect>
-                                <InnerShadow>
-                                    <color>
-                                        <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
-                                    </color>
-                                </InnerShadow>
-                            </effect>
                         </Button>
-                        <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" style="-fx-background-color: FFFFFF;" text="Coachs">
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
-                            </VBox.margin>
+                        <Button fx:id="coachsId" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="32.0" prefWidth="218.0" style="-fx-background-color: fb8000;" text="Coachs" textAlignment="JUSTIFY">
                             <padding>
                                 <Insets bottom="15.0" left="50.0" right="50.0" />
                             </padding>
-                            <opaqueInsets>
-                                <Insets />
-                            </opaqueInsets>
+                            <VBox.margin>
+                                <Insets bottom="10.0" top="25.0" />
+                            </VBox.margin>
                             <font>
-                                <Font name="Arial" size="12.0" />
+                                <Font name="Arial" size="21.0" />
                             </font>
-                            <effect>
-                                <InnerShadow>
-                                    <color>
-                                        <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
-                                    </color>
-                                </InnerShadow>
-                            </effect>
+                        </Button>
+                        <Button fx:id="bilanFinancierId1" mnemonicParsing="false" onAction="#afficherBilanFinancier" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer">
+                            <padding>
+                                <Insets bottom="15.0" left="50.0" right="50.0" />
+                            </padding>
+                            <font>
+                                <Font name="Arial" size="19.0" />
+                            </font>
                         </Button>
                     </children>
                 </VBox>
@@ -150,24 +119,24 @@
               </Text>
           </children>
       </HBox>
-      <Text layoutX="264.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de l'abonnement">
+      <Text fill="#fb8000" layoutX="264.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de l'abonnement">
          <font>
             <Font name="Arial" size="12.0" />
          </font></Text>
-      <Text layoutX="264.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix">
+      <Text fill="#fb8000" layoutX="264.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix">
          <font>
             <Font name="Arial" size="12.0" />
          </font></Text>
-      <Text layoutX="264.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de debut">
+      <Text fill="#fb8000" layoutX="263.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de debut">
          <font>
             <Font name="Arial" size="12.0" />
          </font></Text>
-      <Text layoutX="264.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin">
+      <Text fill="#fb8000" layoutX="264.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date fin">
          <font>
             <Font name="Arial" size="12.0" />
          </font></Text>
-      <Text layoutX="264.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Etat" />
-      <Text layoutX="264.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="adhérent" />
-      <Text layoutX="264.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Bilan financier" />
+      <Text fill="#fb8000" layoutX="264.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Etat" />
+      <Text fill="#fb8000" layoutX="264.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="adhérent" />
+      <Text fill="#fb8000" layoutX="264.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font: Arial" text="Bilan financier" />
     </children>
 </AnchorPane>

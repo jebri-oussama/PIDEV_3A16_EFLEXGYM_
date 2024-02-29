@@ -37,9 +37,9 @@
                         <Insets left="50.0" />
                      </VBox.margin>
                   </Text>
-                  <Button fx:id="dashboardId" mnemonicParsing="false" prefHeight="28.0" prefWidth="163.0" style="-fx-background-color: FFFFFF;" text="Dashboard" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+                  <Button fx:id="dashboardId" mnemonicParsing="false" prefHeight="29.0" prefWidth="238.0" style="-fx-background-color: fb8000;" text="Dashboard" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS" onAction="#afficherDashboard">
                      <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
@@ -48,75 +48,55 @@
                         <Insets />
                      </opaqueInsets>
                      <font>
-                        <Font name="Arial" size="11.0" />
+                        <Font name="Arial" size="22.0" />
                      </font>
-                     <effect>
-                        <InnerShadow>
-                           <color>
-                              <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
-                           </color>
-                        </InnerShadow>
-                     </effect>
                   </Button>
-                  <Button fx:id="abonnementsId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="161.0" style="-fx-background-color: FFFFFF;" text="Abonnements">
+                  <Button fx:id="abonnementsId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements" onAction="#afficherAbonnements">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Arial" size="9.0" />
+                        <Font name="Arial" size="19.0" />
                      </font>
-                     <effect>
-                        <InnerShadow>
-                           <color>
-                              <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" opacity="0.9900000095367432" />
-                           </color>
-                        </InnerShadow>
-                     </effect>
                   </Button>
-                  <Button fx:id="adherentsId" mnemonicParsing="false" style="-fx-background-color: FFFFFF;" text="Adherents">
+                  <Button fx:id="adherentsId" mnemonicParsing="false" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: fb8000;" text="Adherents">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial" size="20.0" />
                      </font>
-                     <effect>
-                        <InnerShadow>
-                           <color>
-                              <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
-                           </color>
-                        </InnerShadow>
-                     </effect>
                   </Button>
-                  <Button fx:id="coachsId" mnemonicParsing="false" prefHeight="32.0" prefWidth="157.0" style="-fx-background-color: FFFFFF;" text="Coachs">
+                  <Button fx:id="coachsId" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="32.0" prefWidth="218.0" style="-fx-background-color: fb8000;" text="Coachs" textAlignment="JUSTIFY">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+                        <Insets bottom="10.0" top="25.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Arial" size="11.0" />
+                        <Font name="Arial" size="21.0" />
                      </font>
-                     <effect>
-                        <InnerShadow>
-                           <color>
-                              <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
-                           </color>
-                        </InnerShadow>
-                     </effect>
+                  </Button>
+                  <Button fx:id="bilanFinancierId" onAction="#afficherBilanFinancier" mnemonicParsing="false" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer">
+                     <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                     </padding>
+                     <font>
+                        <Font name="Arial" size="19.0" />
+                     </font>
                   </Button>
                </children>
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="584.0" prefWidth="400.0" style="-fx-background-color: white;">
+      <AnchorPane prefHeight="584.0" prefWidth="400.0" style="-fx-background-color: black;">
          <children>
             <TableView fx:id="abonnementsTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="997.0" style="-fx-background-color: FF8000;">
                <columns>
