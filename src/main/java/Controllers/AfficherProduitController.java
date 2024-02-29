@@ -183,7 +183,7 @@ private ImageView imageView;
     }
 
     private void setupTableColumns() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+       // idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
         prixColumn.setCellValueFactory(new PropertyValueFactory<>("prix"));
@@ -318,9 +318,9 @@ private ImageView imageView;
         String description = txtdescription.getText();
         int categoryId;
         if (chkAlimentaire.isSelected()) {
-            categoryId = 7; // Assuming 7 is the ID for "alimentaire"
+            categoryId = 7;
         } else if (chkVestimentaire.isSelected()) {
-            categoryId = 6; // Assuming 6 is the ID for "vestimentaire"
+            categoryId = 6;
         } else {
             showAlert(AlertType.ERROR, "Erreur", "Aucune catégorie sélectionnée", "Veuillez sélectionner une catégorie.");
             return;
@@ -341,15 +341,13 @@ private ImageView imageView;
 
     @FXML
     void addProduit() throws SQLException {
-        // Check if the required fields are empty
+
         if (txtnom.getText().isEmpty()  || txtprix.getText().isEmpty() ||
                 txtquantite.getText().isEmpty() || txtdescription.getText().isEmpty() ||
                 txtid_admin.getText().isEmpty()) {
             showAlert(AlertType.ERROR, "Erreur", "Champ(s) vide(s)", "Veuillez remplir tous les champs.");
             return;
         }
-
-        // Validate and parse the price
         float prix;
         try {
             prix = Float.parseFloat(txtprix.getText());
@@ -357,8 +355,6 @@ private ImageView imageView;
             showAlert(AlertType.ERROR, "Erreur", "Prix invalide", "Veuillez saisir un prix valide.");
             return;
         }
-
-        // Validate and parse the quantity
         int quantite;
         try {
             quantite = Integer.parseInt(txtquantite.getText());
@@ -376,26 +372,22 @@ private ImageView imageView;
             return;
         }
 
-        // Get the selected category ID
+
         int categoryId;
         if (chkAlimentaire.isSelected()) {
-            categoryId = 7; // Assuming 7 is the ID for "alimentaire"
+            categoryId = 7;
         } else if (chkVestimentaire.isSelected()) {
-            categoryId = 6; // Assuming 6 is the ID for "vestimentaire"
+            categoryId = 6;
         } else {
             showAlert(AlertType.ERROR, "Erreur", "Aucune catégorie sélectionnée", "Veuillez sélectionner une catégorie.");
             return;
         }
-
-        // Validate and parse the selected bilan financier
         Integer selectedBilan = comboBoxBilan.getValue();
         if (selectedBilan == null || selectedBilan == 0) {
             showAlert(AlertType.ERROR, "Erreur", "Aucun bilan financier sélectionné", "Veuillez sélectionner un bilan financier.");
             return;
         }
         String image=this.image;
-
-        // Create the product object
         categorie category = new categorie(categoryId, null, null);
         BilanFinancier bilan = new BilanFinancier(selectedBilan, null, null, 0, 0, 0, 0, 0, 0);
         produit p = new produit(txtnom.getText(), image, prix, quantite, txtdescription.getText(), category, bilan, id_admin);

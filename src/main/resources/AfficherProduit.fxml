@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AfficherProduitController" style="-fx-background-color: #000000;">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AfficherProduitController" style="-fx-background-color: #FFFFFF;">
+    <ImageView fitWidth="100" fitHeight="100" layoutX="600.0" layoutY="10.0">
+        <image>
+            <Image url="@logo.png" />
+        </image>
+    </ImageView>
 
     <!-- Table of Reading (on the left) -->
     <TableView fx:id="tableViewProduit" layoutX="8.0" layoutY="18.0" prefHeight="364.0" prefWidth="300.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="18.0">
         <columns>
-            <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+
             <TableColumn fx:id="nomColumn" prefWidth="100.0" text="Nom" />
             <TableColumn fx:id="imageColumn" prefWidth="150.0" text="Image" />
             <TableColumn fx:id="prixColumn" prefWidth="75.0" text="Prix" />
@@ -67,7 +72,7 @@
                 <ToggleButton fx:id="chkVestimentaire" text="Vestimentaire" style="-fx-base: #FFA500;" />
             </HBox>
             <Label text="ID bilan " style="-fx-text-fill: #FFA500;" />
-            <ComboBox fx:id="comboBoxBilan"   prefWidth="150.0" />
+            <ComboBox fx:id="comboBoxBilan" prefWidth="150.0" />
             <HBox spacing="10.0">
                 <Label text="ID Admin:" style="-fx-text-fill: #FFA500;" />
                 <TextField fx:id="txtid_admin" />
