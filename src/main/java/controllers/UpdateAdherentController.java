@@ -1,6 +1,7 @@
 package controllers;
 
 import GestionFinance.service.BilanFinancierService;
+import gestion_user.entities.ProfileUpdateEvent;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
@@ -109,7 +110,10 @@ public class UpdateAdherentController {
                 User a1 = new User(adherentId, adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1, Role.valueOf(selectedRole),salaire,id_bilan);
                 as.updateAdherent(adherentId,a1);
                 // Implement logic for the update action when confirming changes
+
+
                 Stage stage = (Stage) Confirm.getScene().getWindow();
+
                 stage.close();
             } else
         // Get the values from the text fields
@@ -185,6 +189,5 @@ public class UpdateAdherentController {
             idBilanChoiceBox.setValue(idBilanFinanciers.get(0));
         }
     }
-
 
 }

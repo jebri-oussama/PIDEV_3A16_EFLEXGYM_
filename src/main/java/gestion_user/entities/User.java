@@ -177,7 +177,9 @@ public class User {
         this.idBilanFinancier = idBilanFinancier;
     }
 
-
+    public String getFullName() {
+        return this.nom + " " + this.prenom;
+    }
     @Override
     public String toString() {
         return "User{" +

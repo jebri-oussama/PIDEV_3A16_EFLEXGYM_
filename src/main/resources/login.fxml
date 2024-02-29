@@ -4,23 +4,58 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="489.0" prefWidth="504.0" style="-fx-background-color: #fb8000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<AnchorPane prefHeight="489.0" prefWidth="590.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
-      <Label layoutX="135.0" layoutY="231.0" style="-fx-background-color: #fb8000;" stylesheets="@style.css" text="Username:" />
-      <Label layoutX="118.0" layoutY="279.0" style="-fx-background-color: #fb8000;" stylesheets="@style.css" text="Mot de passe:" />
-      <TextField fx:id="username" layoutX="230.0" layoutY="227.0" style="-fx-background-color: #fb8000;" stylesheets="@style.css" />
-      <Label layoutX="197.0" layoutY="364.0" text="Mot de passe oublié" underline="true" />
-      <Button fx:id="loginButton" layoutX="216.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" stylesheets="@style.css" text="Connexion" />
-      <ImageView fitHeight="167.0" fitWidth="214.0" layoutX="154.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@eflexGYM.png" />
-         </image>
-      </ImageView>
-      <PasswordField fx:id="password" layoutX="231.0" layoutY="273.0" stylesheets="@style.css" />
-      <Label fx:id="status" alignment="CENTER" layoutX="155.0" layoutY="392.0" prefHeight="47.0" prefWidth="196.0" stylesheets="@style.css" textAlignment="CENTER" />
+      <Label layoutX="267.0" layoutY="174.0" text="Email :" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="15.0" />
+         </font></Label>
+      <Label layoutX="268.0" layoutY="218.0" prefHeight="18.0" prefWidth="99.0" text="Mot de passe :" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="15.0" />
+         </font></Label>
+      <TextField fx:id="username" layoutX="380.0" layoutY="168.0" style="-fx-background-color: #d08617;">
+         <effect>
+            <InnerShadow />
+         </effect></TextField>
+      <Label layoutX="355.0" layoutY="312.0" stylesheets="@style.css" text="Mot de passe oublié" underline="true" />
+      <Button fx:id="loginButton" layoutX="366.0" layoutY="270.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #d08617;" text="Connexion">
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <PasswordField fx:id="password" layoutX="380.0" layoutY="214.0" style="-fx-background-color: #d08617;">
+         <effect>
+            <InnerShadow />
+         </effect></PasswordField>
+      <Label fx:id="status" alignment="CENTER" layoutX="287.0" layoutY="339.0" prefHeight="78.0" prefWidth="244.0" textAlignment="CENTER" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="16.0" />
+         </font></Label>
+      <AnchorPane prefHeight="489.0" prefWidth="234.0" style="-fx-background-color: #d08617;">
+         <children>
+            <ImageView fitHeight="156.0" fitWidth="179.0" layoutX="28.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@eflexGYM.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="328.0" layoutY="60.0" text="EFLEX GYM" textAlignment="CENTER" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="36.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
    </children>
 </AnchorPane>

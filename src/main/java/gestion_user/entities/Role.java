@@ -1,3 +1,3 @@
 package gestion_user.entities;
 
-public enum Role { Adherent, Coach}
+public enum Role { Adherent, Coach, Admin}

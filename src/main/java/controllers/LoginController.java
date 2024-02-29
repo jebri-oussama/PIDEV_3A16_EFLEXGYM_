@@ -1,5 +1,9 @@
 package controllers;
 
+import gestion_user.entities.Role;
+import gestion_user.entities.Sexe;
+import gestion_user.entities.User;
+import gestion_user.entities.UserSession;
 import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,8 +12,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import utils.DataSource;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 public class LoginController {
     @FXML
@@ -23,19 +32,61 @@ public class LoginController {
 
     @FXML
     private void login(ActionEvent event) {
-        String u = username.getText();
+        String email = username.getText();
         String p = password.getText();
 
         UserService us =new UserService();
-       if (us.connexion(u,p)){
+       if (us.connexion(email,p)){
+           User loggedInUser = UserService.getUserByEmail(email);
+           UserSession.setLoggedInUser(loggedInUser);
 
-        loadAjouterAdherentPage();
+           // Redirect based on the role
+           if (loggedInUser.getRole().toString().equals("Adherent")) {
+               // Redirect to Adherent profile
+               loadAdherentProfile();
+           } else if (loggedInUser.getRole().toString().equals("Coach")) {
+               // Redirect to Coach profile
+               loadCoachProfile();
+           } else {
+
+        loadAjouterAdherentPage();}
     } else {
         status.setText("Authentification échouée. \n" +
                         "Veuillez vérifier vos informations .");
     }
 
     }
+
+
+
+    private void loadCoachProfile() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Coach.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) username.getScene().getWindow();
+            stage.setTitle("Profile Coach");
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAdherentProfile() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Adherent.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) username.getScene().getWindow();
+            stage.setTitle("Profile Adherent");
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void loadAjouterAdherentPage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouterAdherent.fxml"));
@@ -48,5 +99,25 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+    /*private void loadUserInfo() {
+        // Retrieve user information from UserSession
+        Double userSalaire = null;
+        String userEmail = UserSession.getInstance().getUserEmail();
+         String userRole = UserSession.getInstance().getUserRole();
+        String userNom =UserSession.getInstance().getUserNom();
+        String userPrenom=UserSession.getInstance().getUserPrenom();
+        String userMDP=UserSession.getInstance().getUserMDP();
+        Date userDateNaissance=UserSession.getInstance().getUserDateNaissance();
+        String userSexe=UserSession.getInstance().getUserSexe();
+        userSalaire=UserSession.getInstance().getUserSalaire();
 
+loadAdherentProfile(userEmail,userNom,userPrenom,userMDP,userDateNaissance, Sexe.valueOf(userSexe), Role.valueOf(userRole),userSalaire);
+
+        // Fetch additional information about the user from the database
+        // You can use userEmail and userRole to fetch specific data
+
+        // For example:
+        // AdditionalUserInfo userInfo = userService.fetchAdditionalUserInfo(userEmail, userRole);
+        // Display or store the additional information as needed
+    }*/
 }

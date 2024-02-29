@@ -7,10 +7,11 @@
 
 }
 .label{
-    -fx-font-family:"Century Gothic";
-    -fx-font-size: 12px;
+    -fx-font-family:"Bauhaus 93";
+    -fx-font-size: 16px;
     -fx-font-style: Bold ;
 }
+
 .table-view{
     -fx-background-color:#fb8000;
     -fx-border-color: #13100e;
