@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="qr code avec participation">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="sms">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/WeatherApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/AfficherEvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/AfficherEvenementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/AjouterEvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/AjouterEvenementController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/ParticiperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/ParticiperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/UpdateEvenementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/UpdateEvenementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/entities/Evenement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/entities/Evenement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/service/EvenementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/service/EvenementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AfficherEvenement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AfficherEvenement.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterEvenement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterEvenement.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/UpdateEvenement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UpdateEvenement.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +77,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709263082279</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="sms">
+      <option name="closed" value="true" />
+      <created>1709322466250</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709322466250</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -93,6 +93,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="qr code avec participation" />
-    <option name="LAST_COMMIT_MESSAGE" value="qr code avec participation" />
+    <MESSAGE value="sms" />
+    <option name="LAST_COMMIT_MESSAGE" value="sms" />
   </component>
 </project>

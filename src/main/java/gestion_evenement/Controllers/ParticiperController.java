@@ -24,12 +24,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -131,6 +139,18 @@ public class ParticiperController implements Initializable {
         }
     }
 
+    private JSONObject getWeatherForEventDate(JSONArray weatherData, LocalDate eventDate) {
+        for (int i = 0; i < weatherData.length(); i++) {
+            JSONObject weather = weatherData.getJSONObject(i);
+            long timestamp = weather.getLong("dt");
+            LocalDate date = Instant.ofEpochSecond(timestamp).atZone(ZoneId.systemDefault()).toLocalDate();
+            if (date.equals(eventDate)) {
+                return weather;
+            }
+        }
+        return null;
+    }
+
     private void showEventDetailsPopup(Evenement evenement) {
         Stage detailsStage = new Stage();
         detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -147,16 +167,63 @@ public class ParticiperController implements Initializable {
         Label dateFinLabel = new Label("End Date: " + evenement.getDate_fin().toString());
 
         // Retrieve the number of participants for the event directly
-        ParticipationService participationService=new ParticipationService();
+        ParticipationService participationService = new ParticipationService();
         int numberOfParticipants = participationService.getNumberOfParticipants(evenement.getId());
         Label nbrDeParticipantLabel = new Label("Number of Participants: " + numberOfParticipants);
 
         detailsBox.getChildren().addAll(eventNameLabel, typeNameLabel, dateDebutLabel, dateFinLabel, nbrDeParticipantLabel);
+        String city = evenement.getPlace(); // Replace with the event's city
+        LocalDate eventDate = evenement.getDate_debut().toLocalDate();
+
+        String apiKey = "b8bddb9d6a6442d8ffc85697230418a0"; // Replace with your OpenWeatherMap API key
+        String apiUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // Parse the JSON response to extract weather details
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            JSONArray weatherData = jsonResponse.getJSONArray("list");
+            JSONObject weather = getWeatherForEventDate(weatherData, eventDate);
+            if (weather != null) {
+                JSONObject main = weather.getJSONObject("main");
+
+                double temperatureKelvin = main.getDouble("temp");
+                double temperatureCelsius = temperatureKelvin - 273.15;
+                String formattedTemperature = String.format("%.2f", temperatureCelsius);
+
+                Label weatherLabel = new Label("Temperature on Event Day: " + formattedTemperature + "°C");
+
+
+
+
+                detailsBox.getChildren().add(weatherLabel);
+            } else {
+                Label errorLabel = new Label("Weather data not found for the event date");
+                detailsBox.getChildren().add(errorLabel);
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            Label errorLabel = new Label("Error fetching weather data");
+            detailsBox.getChildren().add(errorLabel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         Scene detailsScene = new Scene(detailsBox, 300, 200);
         detailsStage.setScene(detailsScene);
         detailsStage.show();
     }
+
     private void sendMessage(String number, int selectedEventId) {
        System.out.println(selectedEventId);
         if (!isValidPhoneNumber(number)) {
