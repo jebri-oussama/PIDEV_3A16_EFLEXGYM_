@@ -1,7 +1,9 @@
 package org.example;
 import gestion_evenement.entities.Evenement;
+import gestion_evenement.entities.Participation;
 import gestion_evenement.entities.Type;
 import gestion_evenement.service.EvenementService;
+import gestion_evenement.service.ParticipationService;
 import gestion_evenement.service.TypeService;
 
 import java.sql.Timestamp;
@@ -9,8 +11,14 @@ import java.sql.Timestamp;
 public class MainC {
 
     public static void main(String[] args) {
-
-
+        EvenementService E = new EvenementService();
+        int typeId = 28; // Replace your_type_id_here with the actual type ID
+        Evenement evenement = E.readById(typeId);
+        ParticipationService P = new ParticipationService();
+       // Participation p = new Participation(evenement,3);
+       // P.add(p);
+     P.getParticipationByEvenementId(28);
+        //System.out.println("Number of Participants: " + numberOfParticipants);
         /*DataSource ds1 = DataSource.getInstance();
       System.out.println(ds1);*/
    /*    TypeService R = new TypeService();
@@ -49,7 +57,7 @@ public class MainC {
 
 
         //READ BY ID
-       EvenementService evenementService = new EvenementService();
+    //   EvenementService evenementService = new EvenementService();
 
         // ID of the Evenement you want to retrieve
     /*    int eventIdToRetrieve = 15; // Change this to the desired ID
@@ -63,14 +71,14 @@ public class MainC {
         }*/
    //EvenementService evenementService = new EvenementService();
 
-   TypeService typeService = new TypeService();
+  /* TypeService typeService = new TypeService();
 
     int typeId = 1; // Replace your_type_id_here with the actual type ID
     Type type = typeService.readById(typeId);
 
     Evenement e1 = new Evenement(type,"a", Timestamp.valueOf("2924-03-09 12:30:00"), Timestamp.valueOf("2024-02-09 14:00:00"), "hhh.png");
 
-//evenementService.add(e1);
+//evenementService.add(e1);*/
 
 
     //dynamic delete
@@ -82,7 +90,7 @@ public class MainC {
         //E.add(e1);
         // E.update(e1);
 
-      evenementService.readAll().forEach(System.out::println);
+     // evenementService.readAll().forEach(System.out::println);
 
 
 

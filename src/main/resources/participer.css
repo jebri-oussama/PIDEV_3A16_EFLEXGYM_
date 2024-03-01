@@ -1,0 +1,43 @@
+/* Add this CSS to your styles.css file */
+.event-box {
+    -fx-background-color: #f9f9f9;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #333333;
+    -fx-border-width: 1px;
+}
+
+.event-image {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+}
+
+.event-name {
+    -fx-font-size: 18px;
+    -fx-text-fill: #333333;
+}
+
+.participer-button {
+    -fx-background-color: #ff6600;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.participer-button:hover {
+    -fx-background-color: #cc5500;
+}
+/* Add this CSS to your styles.css file */
+.details-button {
+    -fx-background-color: #ff6600;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.details-button:hover {
+    -fx-background-color: #cc5500;
+}
