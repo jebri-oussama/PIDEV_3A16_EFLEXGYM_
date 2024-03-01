@@ -21,7 +21,7 @@ public class MainFX extends Application {
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Gestion des Users"); // Changer le titre de la fenêtre
+            primaryStage.setTitle("Login EFLEXGYM"); // Changer le titre de la fenêtre
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

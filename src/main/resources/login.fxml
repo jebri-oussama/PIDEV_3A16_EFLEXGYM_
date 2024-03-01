@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -24,7 +25,6 @@
          <effect>
             <InnerShadow />
          </effect></TextField>
-      <Label layoutX="355.0" layoutY="312.0" stylesheets="@style.css" text="Mot de passe oublié" underline="true" />
       <Button fx:id="loginButton" layoutX="366.0" layoutY="270.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #d08617;" text="Connexion">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
@@ -57,5 +57,10 @@
             <InnerShadow />
          </effect>
       </Label>
+      <Hyperlink fx:id="forgotPassword" layoutX="328.0" layoutY="304.0" onAction="#handleForgotPassword" text="Mot de passe oublié">
+         <font>
+            <Font name="Bauhaus 93" size="16.0" />
+         </font>
+      </Hyperlink>
    </children>
 </AnchorPane>

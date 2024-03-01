@@ -1,9 +1,6 @@
 package controllers;
 
-import gestion_user.entities.Role;
-import gestion_user.entities.Sexe;
-import gestion_user.entities.User;
-import gestion_user.entities.UserSession;
+import gestion_user.entities.*;
 import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +15,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 public class LoginController {
@@ -120,4 +119,20 @@ loadAdherentProfile(userEmail,userNom,userPrenom,userMDP,userDateNaissance, Sexe
         // AdditionalUserInfo userInfo = userService.fetchAdditionalUserInfo(userEmail, userRole);
         // Display or store the additional information as needed
     }*/
+
+@FXML
+    private void handleForgotPassword() {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/forgotPassword.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) username.getScene().getWindow();
+            stage.setTitle("Forgot Password");
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

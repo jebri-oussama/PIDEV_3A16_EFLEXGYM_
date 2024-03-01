@@ -53,7 +53,7 @@
                   <InnerShadow />
                </effect>
             </Label>
-            <Button fx:id="logoutButton" layoutX="27.0" layoutY="435.0" mnemonicParsing="false" onAction="#logout" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Se déconnecter">
+            <Button fx:id="logoutButton" layoutX="27.0" layoutY="435.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Se déconnecter">
                <font>
                   <Font name="Bauhaus 93" size="13.0" />
                </font>
@@ -104,7 +104,7 @@
             <Font name="Bauhaus 93" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="logoutButton1" layoutX="411.0" layoutY="350.0" mnemonicParsing="false" onAction="#logout" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Editer Profile">
+      <Button fx:id="logoutButton1" layoutX="411.0" layoutY="350.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Editer Profile">
          <font>
             <Font name="Bauhaus 93" size="13.0" />
          </font>
