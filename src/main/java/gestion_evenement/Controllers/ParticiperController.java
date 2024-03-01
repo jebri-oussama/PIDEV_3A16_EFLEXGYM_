@@ -7,15 +7,16 @@ import gestion_evenement.QRCodeGenerator;
 import gestion_evenement.entities.Evenement;
 import gestion_evenement.service.EvenementService;
 import gestion_evenement.service.ParticipationService;
-
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -30,15 +31,25 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static com.twilio.example.ValidationExample.ACCOUNT_SID;
+import static com.twilio.example.ValidationExample.AUTH_TOKEN;
 
 public class ParticiperController implements Initializable {
 
     @FXML
     private FlowPane eventContainer;
+        private int selectedEventId;
 
     private EvenementService evenementService;
-
+    private static final String ACCOUNT_SID = "AC8c0d46d6a42b027f40aafca7cb712bd2";
+    private static final String AUTH_TOKEN = "adaf7a80490a5fe576d18a07a2443c51";
+    private static final String TWILIO_NUMBER = "12768810802";
+    static {
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         evenementService = new EvenementService();
@@ -70,12 +81,12 @@ public class ParticiperController implements Initializable {
                 alert.setTitle("Confirm Participation");
                 alert.setHeaderText(null);
                 alert.setContentText("Are you sure you want to participate in this event?");
-
+                ParticipationService participationService = new ParticipationService();
+                int selectedEventId = participationService.getNumberOfParticipants(evenement.getId())+1;
                 // Show the confirmation dialog and wait for user response
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
                         // User clicked OK, proceed with adding participation
-                        ParticipationService participationService = new ParticipationService();
                         participationService.addParticipation(evenement.getId());
 
                         // Generate QR code
@@ -94,6 +105,17 @@ public class ParticiperController implements Initializable {
                         qrCodeStage.show();
                     }
                 });
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Enter Number");
+                dialog.setHeaderText(null);
+                dialog.setContentText("Please enter your number:");
+
+                Optional<String> result = dialog.showAndWait();
+                result.ifPresent(number -> {
+                    // Send the message using the messaging API
+                    sendMessage(number,selectedEventId);
+                });
+
             });
 
             Button detailsButton = new Button("Details");
@@ -135,4 +157,33 @@ public class ParticiperController implements Initializable {
         detailsStage.setScene(detailsScene);
         detailsStage.show();
     }
+    private void sendMessage(String number, int selectedEventId) {
+       System.out.println(selectedEventId);
+        if (!isValidPhoneNumber(number)) {
+            showAlert("Invalid Phone Number", "Please enter a valid phone number.");
+            return;
+        }
+
+        Message message = Message.creator(
+                new PhoneNumber(number),
+                new PhoneNumber(TWILIO_NUMBER),
+                "You are the " + selectedEventId + " participant"
+        ).create();
+
+        showAlert("Message Sent", "Message sent to " + number);
+    }
+
+    private boolean isValidPhoneNumber(String number) {
+        // Check if the number is not null and matches the E.164 format
+        return number != null && number.matches("^\\+[1-9]\\d{1,14}$");
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
+

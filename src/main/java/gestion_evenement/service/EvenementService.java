@@ -24,15 +24,19 @@ public class EvenementService implements IServiceE<Evenement> {
 
     @Override
     public void add(Evenement e) {
-        String query = "INSERT INTO Evenement (type,event_name , date_debut, date_fin, image) VALUES (?,?, ?, ?, ?)";
+        String query = "INSERT INTO Evenement (type,event_name , date_debut, date_fin,duration, image,place) VALUES (?,?,?,?,?,?,?)";
         try {
             pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, e.getType().getId());
             pst.setString(2, e.getEvent_name());
-            pst.setTimestamp(3, new java.sql.Timestamp(e.getDate_debut().getTime()));
-            pst.setTimestamp(4, new java.sql.Timestamp(e.getDate_fin().getTime()));
-            pst.setString(5, e.getImagePath());
+            pst.setDate(3, e.getDate_debut());
+            pst.setDate(4, e.getDate_fin());
+            pst.setString(5, e.getDuration());
+            pst.setString(6, e.getImagePath());
+
+            pst.setString(7, e.getPlace());
             pst.executeUpdate();
+
 
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
@@ -64,15 +68,17 @@ public class EvenementService implements IServiceE<Evenement> {
 
     @Override
     public void update(int id, Evenement evenement) {
-        String query = "UPDATE Evenement SET type = ?,event_name = ?, date_debut = ?, date_fin = ?, image = ? WHERE id = ?";
+        String query = "UPDATE Evenement SET type = ?,event_name = ?, date_debut = ?, date_fin = ?, duration = ?, image = ?,place = ? WHERE id = ?";
         try {
-            pst = conn.prepareStatement(query);
+            pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pst.setInt(1, evenement.getType().getId());
-            pst.setString(2, evenement.getEvent_name());
-            pst.setTimestamp(3, new java.sql.Timestamp(evenement.getDate_debut().getTime()));
-            pst.setTimestamp(4, new java.sql.Timestamp(evenement.getDate_fin().getTime()));
-            pst.setString(5, evenement.getImagePath());
-            pst.setInt(6, id);
+            pst.setString(2,evenement.getEvent_name());
+            pst.setDate(3, evenement.getDate_debut());
+            pst.setDate(4, evenement.getDate_fin());
+            pst.setString(5, evenement.getDuration());
+            pst.setString(6, evenement.getImagePath());
+            pst.setString(7, evenement.getPlace());
+            pst.setInt(8, id);
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -94,9 +100,11 @@ public class EvenementService implements IServiceE<Evenement> {
                 Evenement evenement = new Evenement(
                         type,
                         rs.getString("event_name"),
-                        rs.getTimestamp("date_debut"),
-                        rs.getTimestamp("date_fin"),
-                        rs.getString("image")
+                        rs.getDate("date_debut"),
+                        rs.getDate("date_fin"),
+                        rs.getString("duration"),
+                        rs.getString("image"),
+                        rs.getString("place")
                 );
                 evenement.setId(rs.getInt("id"));
                 list.add(evenement);
@@ -121,9 +129,11 @@ public class EvenementService implements IServiceE<Evenement> {
                 Evenement evenement = new Evenement(
                         type,
                         rs.getString("event_name"),
-                        rs.getTimestamp("date_debut"),
-                        rs.getTimestamp("date_fin"),
-                        rs.getString("image")
+                        rs.getDate("date_debut"),
+                        rs.getDate("date_fin"),
+                        rs.getString("duration"),
+                        rs.getString("image"),
+                        rs.getString("place")
                 );
                 evenement.setId(rs.getInt("id")); // Set the ID here
                 return evenement;

@@ -24,7 +24,9 @@
                 <TableColumn fx:id="eventNameColumn" text="Nom" />
                 <TableColumn fx:id="dateDebutColumn" text="Date de début" />
                 <TableColumn fx:id="dateFinColumn" text="Date de fin" />
+                <TableColumn fx:id="durationColumn" text="Duration" />
                 <TableColumn fx:id="imageColumn" text="Image" />
+                <TableColumn fx:id="placeColumn" text="Place" />
 
                 <TableColumn fx:id="deleteColumn" text="Supprimer" />
                 <TableColumn fx:id="updateColumn" text="Modifier" />

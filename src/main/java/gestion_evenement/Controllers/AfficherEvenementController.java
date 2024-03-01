@@ -41,10 +41,12 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
 
     @FXML
     private TableColumn<Evenement, String> dateFinColumn;
-
+    @FXML
+    private TableColumn<Evenement, String> durationColumn;
     @FXML
     private TableColumn<Evenement, String> imageColumn;
-
+    @FXML
+    private TableColumn<Evenement, String> placeColumn;
     private final ObservableList<Evenement> evenements = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Evenement, Void> deleteColumn;
@@ -61,7 +63,9 @@ public class AfficherEvenementController implements Initializable, EventBus.Even
         eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("event_name"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         dateFinColumn.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("imagePath"));
+        placeColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
 
         imageColumn.setCellFactory(col -> new TableCell<>() {
             private final ImageView imageView = new ImageView();

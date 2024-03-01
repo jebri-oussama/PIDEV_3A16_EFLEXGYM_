@@ -33,20 +33,32 @@
                 </HBox>
                 <HBox spacing="10.0" styleClass="input-row">
                     <children>
-                        <Label styleClass="input-label" text="Date de début:" />
+                        <Label styleClass="input-label" text="nom:" />
                         <TextField fx:id="txtevent_name" styleClass="text-field" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0" styleClass="input-row">
                     <children>
                         <Label text="Date de début:" />
-                        <TextField fx:id="txtdate_debut" />
+                        <DatePicker fx:id="datePickerDebut" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0" styleClass="input-row">
                     <children>
                         <Label text="Date de fin:" />
-                        <TextField fx:id="txtdate_fin" />
+                        <DatePicker fx:id="datePickerFin" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Duration:" />
+                        <TextField fx:id="txtduration" styleClass="text-field" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Place:" />
+                        <TextField fx:id="txtplace" styleClass="text-field" />
                     </children>
                 </HBox>
                 <HBox spacing="10.0" styleClass="input-row">

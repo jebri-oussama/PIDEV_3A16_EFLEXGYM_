@@ -1,22 +1,26 @@
 package gestion_evenement.entities;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Evenement {
 
     private int id;
     private Type type;
-    private Timestamp date_debut;
-    private Timestamp date_fin;
+    private Date date_debut;
+    private Date date_fin;
     private String imagePath;
     private String event_name;
+    private String duration;
+    private String place;
 
-    public Evenement(Type type,String event_name, Timestamp date_debut, Timestamp date_fin, String imagePath) {
+    public Evenement(Type type, String event_name, Date date_debut, Date date_fin,String duration, String imagePath,  String place) {
         this.type = type;
         this.event_name = event_name;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
+        this.duration = duration;
         this.imagePath = imagePath;
+        this.place = place;
     }
 
     public int getId() {
@@ -34,22 +38,20 @@ public class Evenement {
     public void setType(Type type) {
         this.type = type;
     }
-    public String getEvent_name(){return event_name;}
-    public String setEvent_name(String event_name){return this.event_name;}
 
-    public Timestamp getDate_debut() {
+    public Date getDate_debut() {
         return date_debut;
     }
 
-    public void setDate_debut(Timestamp date_debut) {
+    public void setDate_debut(Date date_debut) {
         this.date_debut = date_debut;
     }
 
-    public Timestamp getDate_fin() {
+    public Date getDate_fin() {
         return date_fin;
     }
 
-    public void setDate_fin(Timestamp date_fin) {
+    public void setDate_fin(Date date_fin) {
         this.date_fin = date_fin;
     }
 
@@ -61,13 +63,28 @@ public class Evenement {
         this.imagePath = imagePath;
     }
 
-    public String getDuration() {
-        long durationInMillis = date_fin.getTime() - date_debut.getTime();
-        long days = durationInMillis / (1000 * 60 * 60 * 24);
-        long hours = (durationInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-        long minutes = (durationInMillis % (1000 * 60 * 60)) / (1000 * 60);
+    public String getEvent_name() {
+        return event_name;
+    }
 
-        return String.format("%d days, %d hours, %d minutes", days, hours, minutes);
+    public void setEvent_name(String event_name) {
+        this.event_name = event_name;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     @Override
@@ -75,10 +92,12 @@ public class Evenement {
         return "Evenement{" +
                 "id=" + id +
                 ", type=" + type +
-                ", event_name='" + event_name +
+                ", event_name='" + event_name + '\'' +
                 ", date_debut=" + date_debut +
                 ", date_fin=" + date_fin +
+                ", duration='" + duration + '\'' +
                 ", imagePath='" + imagePath + '\'' +
+                ", place='" + place + '\'' +
                 '}';
     }
 }

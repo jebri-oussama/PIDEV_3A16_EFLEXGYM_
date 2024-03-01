@@ -5,19 +5,31 @@ import gestion_evenement.entities.EventBus;
 import gestion_evenement.entities.Type;
 import gestion_evenement.service.EvenementService;
 import gestion_evenement.service.TypeService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import javafx.concurrent.Worker;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebEvent;
+import javafx.scene.web.WebView;
 import java.awt.*;
 import java.io.File;
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import java.sql.Timestamp;
@@ -25,22 +37,33 @@ import java.util.List;
 import javafx.scene.image.Image;
 
 public class AjouterEvenementController {
+    @FXML
+    private Label lblPlace;
 
+    @FXML
+    private WebView webView;
+
+    private WebEngine webEngine;
     public ImageView imageView;
     @FXML
     private ComboBox<Type> typeComboBox;
     @FXML
     private TextField txtevent_name;
     @FXML
-    private TextField txtdate_debut;
+    private DatePicker datePickerDebut;
 
     @FXML
-    private TextField txtdate_fin;
+    private DatePicker datePickerFin;
+    @FXML
+    private TextField txtduration;
     private String imagePath;
+    @FXML
+    private TextField txtplace;
     @FXML
     private void initialize() {
         populateTypeComboBox();
     }
+
     @FXML
     void addEvenement(ActionEvent event) {
      
@@ -55,11 +78,13 @@ public class AjouterEvenementController {
         Type type = typeService.getTypeByName(typeName);
         String event_name = txtevent_name.getText();
 
-        Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
-        Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
+        Date date_debut = Date.valueOf(datePickerDebut.getValue());
+        Date date_fin = Date.valueOf(datePickerFin.getValue());
+        String duration = txtduration.getText();
 
         String imagePath = this.imagePath;
-        Evenement evenement = new Evenement(type,event_name, date_debut, date_fin, imagePath);
+        String place = txtplace.getText();
+        Evenement evenement = new Evenement(type,event_name, date_debut, date_fin,duration, imagePath,place);
 
         EvenementService evenementService = new EvenementService();
         evenementService.add(evenement);
@@ -84,52 +109,47 @@ public class AjouterEvenementController {
 
     private boolean validateInput() {
         if (typeComboBox.getValue() == null) {
-
             displayErrorMessage("Please select a type.");
             return false;
         }
-        if (txtevent_name.getText() == null ) {
+        if (txtevent_name.getText() == null || txtevent_name.getText().isEmpty()) {
             displayErrorMessage("Please type a name for the event.");
-        }
-
-        if (!isValidTimestamp(txtdate_debut.getText())) {
-            displayErrorMessage("Invalid date format for Date de début. Use yyyy-MM-dd HH:mm:ss");
             return false;
         }
 
-        if (!isValidTimestamp(txtdate_fin.getText())) {
-            displayErrorMessage("Invalid date format for Date de fin. Use yyyy-MM-dd HH:mm:ss");
+        if (datePickerDebut.getValue() == null || datePickerFin.getValue() == null) {
+            displayErrorMessage("Please select a date for Date de début and Date de fin.");
             return false;
         }
 
+        Date date_debut = Date.valueOf(datePickerDebut.getValue());
+        Date date_fin = Date.valueOf(datePickerFin.getValue());
 
-        Timestamp date_debut = Timestamp.valueOf(txtdate_debut.getText());
-        Timestamp date_fin = Timestamp.valueOf(txtdate_fin.getText());
-
-        if (date_debut.before(Timestamp.valueOf(LocalDateTime.now()))) {
+        if (date_debut.before(new java.sql.Date(System.currentTimeMillis()))) {
             displayErrorMessage("Date de début should not be less than today's date.");
             return false;
         }
-
 
         if (date_fin.before(date_debut)) {
             displayErrorMessage("Date de fin should not be less than Date de début.");
             return false;
         }
 
-
-        if (date_debut.equals(date_fin) ) {
+        if (date_debut.equals(date_fin) && txtduration.getText().isEmpty()) {
             displayErrorMessage("If Date de début and Date de fin are equal, Durée should not be empty.");
             return false;
         }
 
         return true;
     }
-
-
-    private boolean isValidTimestamp(String value) {
+    @FXML
+    void selectPlace(ActionEvent event) {
+        // Reload the map to clear previous selections
+        webEngine.reload();
+    }
+    private boolean isValidDate(String value) {
         try {
-            Timestamp.valueOf(value);
+            Date.valueOf(value);
             return true;
         } catch (IllegalArgumentException e) {
             return false;
