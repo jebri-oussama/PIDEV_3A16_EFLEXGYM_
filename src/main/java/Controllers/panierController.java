@@ -1,81 +1,130 @@
 package Controllers;
 
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
+import gestion_produit.entities.panier;
+import gestion_produit.service.panierService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import utils.DataSource;
 
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
 public class panierController implements Initializable {
+    private final ObservableList<panier> paniers = FXCollections.observableArrayList();
+    private panierService ps;
 
     @FXML
-    private VBox panierBox;
+    private TableView<panier> panierTable;
 
     @FXML
     private Label subtotalLabel;
 
-    // Declare the connection object at the class level
-    private Connection conn;
+    @FXML
+    private TableColumn<panier, Integer> idCol;
+
+    @FXML
+    private TableColumn<panier, String> nomCol;
+
+    @FXML
+    private TableColumn<panier, Float> prixCol;
+
+    @FXML
+    private TableColumn<panier, Void> deleteCol;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Fetch products from the database when the controller is initialized
-        fetchProductsFromDatabase();
+       // idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        deleteCol.setCellFactory(createDeleteButtonCellFactory());
+        ps = new panierService();
+        refreshTable();
     }
 
-    // Method to fetch products from the database
-    private void fetchProductsFromDatabase() {
-        double subtotal = 0;
-        try {
-            // Use the connection object declared at the class level
-            conn = DataSource.getInstance().getCnx();
-            PreparedStatement statement = conn.prepareStatement("SELECT nom, prix FROM panier");
-            ResultSet resultSet = statement.executeQuery();
+    private Callback<TableColumn<panier, Void>, TableCell<panier, Void>> createDeleteButtonCellFactory() {
+        return new Callback<TableColumn<panier, Void>, TableCell<panier, Void>>() {
+            @Override
+            public TableCell<panier, Void> call(final TableColumn<panier, Void> param) {
+                return new TableCell<panier, Void>() {
+                    private final Button deleteButton = new Button("Supprimer");
 
-            while (resultSet.next()) {
-                String productName = resultSet.getString("nom");
-                Float productPrice = resultSet.getFloat("prix");
-                // Create and add product label to the VBox
-                Label productLabel = new Label(productName + " - $" + productPrice);
-                panierBox.getChildren().add(productLabel);
-                // Calculate subtotal
-                subtotal += productPrice;
+                    {
+                        deleteButton.setOnAction((ActionEvent event) -> {
+                            panier panier = getTableView().getItems().get(getIndex());
+                            supprimerProduit(panier.getId());
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(deleteButton);
+                        }
+                    }
+                };
             }
-
-            // Update subtotal label
-            subtotalLabel.setText("Subtotal: $" + subtotal);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        };
     }
 
-    // Event handler for the button to go back to products
+    private void supprimerProduit(int id) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this product?");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                ps.delete(id);
+                refreshTable();
+            }
+        });
+    }
+
     @FXML
     private void goBackToProducts(ActionEvent event) {
-        // Close the current window (panier) to go back to the products page
-        Stage stage = (Stage) panierBox.getScene().getWindow();
+        Stage stage = (Stage) panierTable.getScene().getWindow();
         stage.close();
     }
 
-    // Method to close the connection when the controller is destroyed or no longer needed
     public void closeConnection() {
         try {
+            Connection conn = DataSource.getInstance().getCnx();
             if (conn != null && !conn.isClosed()) {
                 conn.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    private float calculateTotalPrice() {
+        float totalPrice = 0.0f;
+        for (panier p : paniers) {
+            totalPrice += p.getPrix();
+        }
+        return totalPrice;
+    }
+    @FXML
+    private void updateSubtotalLabel() {
+        subtotalLabel.setText("Subtotal: " + calculateTotalPrice());
+    }
+
+    private void refreshTable() {
+        paniers.clear();
+        paniers.addAll(ps.readAll());
+        panierTable.setItems(paniers);
+        updateSubtotalLabel();
     }
 }
