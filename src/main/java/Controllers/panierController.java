@@ -118,7 +118,7 @@ public class panierController implements Initializable {
     }
     @FXML
     private void updateSubtotalLabel() {
-        subtotalLabel.setText("Subtotal: " + calculateTotalPrice());
+        subtotalLabel.setText("Subtotal: $ " + calculateTotalPrice());
     }
 
     private void refreshTable() {

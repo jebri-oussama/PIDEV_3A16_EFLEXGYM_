@@ -16,7 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,8 +34,6 @@ public class userInterfaceController implements Initializable {
     @FXML
     private FlowPane productsPane;
 
-
-
     // Declare the connection object
     private Connection conn;
 
@@ -41,9 +41,8 @@ public class userInterfaceController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the connection
         conn = DataSource.getInstance().getCnx();
-
-
     }
+
     // Method to create product element
     private VBox createProductBox(String name, String price, String description, String imageURL) {
         VBox productBox = new VBox(10);
@@ -66,9 +65,7 @@ public class userInterfaceController implements Initializable {
 
         // Add button to add product to cart
         Button addButton = new Button("Ajouter");
-
-        addButton.setOnAction(this::addToCartHandler);
-
+        addButton.setOnAction(event -> addToCartHandler(name, price));
 
         // Add elements to productBox
         productBox.getChildren().addAll(imageView, nameLabel, priceLabel, descriptionLabel, addButton);
@@ -77,15 +74,30 @@ public class userInterfaceController implements Initializable {
     }
 
     // Method to add product to cart (insert into the panier table)
+    // Method to handle adding a product to the cart
+    private void addToCartHandler(String productName, String productPrice) {
+        // Show confirmation alert
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to add this product to the cart?\n\n"
+                + "Product: " + productName + "\n"
+                + "Price: " + productPrice);
+
+        // Handle the user's response
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                addToCart(productName, productPrice);
+            }
+        });
+    }
+
     private void addToCart(String productName, String productPrice) {
         try {
             PreparedStatement statement = conn.prepareStatement("INSERT INTO panier (nom, prix) VALUES (?, ?)");
-
-            // Set the product name and price as parameters for the prepared statement
             statement.setString(1, productName);
             statement.setString(2, productPrice);
 
-            // Execute the query
             int rowsInserted = statement.executeUpdate();
 
             if (rowsInserted > 0) {
@@ -99,61 +111,27 @@ public class userInterfaceController implements Initializable {
         }
     }
 
-    // Event handler for "Ajouter" button
-    @FXML
-    private void addToCartHandler(ActionEvent event) {
-        Button addButton = (Button) event.getSource();
-        VBox productBox = (VBox) addButton.getParent();
-        Label nameLabel = (Label) productBox.getChildren().get(1);
-        Label priceLabel = (Label) productBox.getChildren().get(2);
-        String productName = nameLabel.getText();
-        String productPrice = priceLabel.getText().replace("Price: ", ""); // Remove "Price: " prefix
-
-        addToCart(productName, productPrice);
-    }
-
     // Method to handle Alimentaire button click
     @FXML
     private void handleAlimentaireAction(ActionEvent event) {
-        // Clear existing products from the pane
-        productsPane.getChildren().clear();
-
-        // Fetch products with category 7 (Alimentaire) from the data source
-        try {
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit WHERE categorie = ?");
-            statement.setInt(1, 7); // Set category filter
-            ResultSet resultSet = statement.executeQuery();
-
-            // Iterate through the results and create product elements
-            while (resultSet.next()) {
-                String productName = resultSet.getString("nom");
-                String productPrice = resultSet.getString("prix");
-                String productDescription = resultSet.getString("description");
-                String productImageURL = resultSet.getString("image");
-
-                // Create and add product element to the FlowPane
-                VBox productBox = createProductBox(productName, productPrice, productDescription, productImageURL);
-                productsPane.getChildren().add(productBox);
-
-            }
-            Button gobackButton = new Button("products");
-            gobackButton.setOnAction(this::loadMainInterface);
-            productsPane.getChildren().add(gobackButton);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        fetchProducts(7); // Category for Alimentaire
     }
+
+    // Method to handle Vestimentaire button click
     @FXML
     private void handleVestimentaireAction(ActionEvent event) {
-        // Clear existing products from the pane
-        productsPane.getChildren().clear();
+        fetchProducts(6); // Category for Vestimentaire
+    }
 
-        // Fetch products with category 7 (Alimentaire) from the data source
+    // Method to fetch products from the database based on category
+    private void fetchProducts(int category) {
         try {
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit WHERE categorie = ?");
-            statement.setInt(1, 6); // Set category filter
+            statement.setInt(1, category);
             ResultSet resultSet = statement.executeQuery();
+
+            // Clear existing products from the pane
+            productsPane.getChildren().clear();
 
             // Iterate through the results and create product elements
             while (resultSet.next()) {
@@ -162,20 +140,23 @@ public class userInterfaceController implements Initializable {
                 String productDescription = resultSet.getString("description");
                 String productImageURL = resultSet.getString("image");
 
-
                 // Create and add product element to the FlowPane
                 VBox productBox = createProductBox(productName, productPrice, productDescription, productImageURL);
                 productsPane.getChildren().add(productBox);
-
             }
-            Button gobackButton = new Button("products");
-            gobackButton.setOnAction(this::loadMainInterface);
-            productsPane.getChildren().add(gobackButton);
+
+            // Add button to go back to the main interface
+            Button backButton = new Button("Back to Main Interface");
+            backButton.setStyle("-fx-background-color: #FB8000; -fx-text-fill: white; -fx-font-size: 14pt;");
+            backButton.setOnAction(this::loadMainInterface);
+            productsPane.getChildren().add(backButton);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    // Method to load the main interface
     private void loadMainInterface(ActionEvent event) {
         // Get the reference to the stage
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -192,7 +173,6 @@ public class userInterfaceController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     // Event handler for "Panier" button to redirect to panier.fxml
     @FXML
