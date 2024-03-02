@@ -6,6 +6,7 @@ import GestionFinance.service.AbonnementService;
 import GestionFinance.service.BilanFinancierService;
 import gestion_user.entities.User;
 
+import gestion_user.service.UserService;
 import utils.DataSource;
 
 import java.time.LocalDate;
@@ -63,12 +64,18 @@ public class Main {
 
     }*/
 
-        BilanFinancier bf =bs.readById(1);
+      /*  BilanFinancier bf =bs.readById(1);
        // System.out.println(bs.readById(1));
 bf.setRevenus_abonnements(bf.recupererRevenuAbonnements());
       bf.setRevenus_produits(bf.recupererRevenusProduits());
        bf.setSalaires_coachs(bf.recupererSalairesCoachs());
-        System.out.println(bf.calculerProfit());
+        System.out.println(bf.calculerProfit());*/
+
+        AbonnementService as = new AbonnementService();
+        System.out.println(as.readById(15));
+
+        UserService us = new UserService();
+        System.out.println(us.readById(14));
 
     }
 }

@@ -1,19 +1,23 @@
 package GestionFinance.service;
 
-import GestionFinance.entites.Abonnement;
-import GestionFinance.entites.BilanFinancier;
-import GestionFinance.entites.Etat;
-import GestionFinance.entites.Type;
+import GestionFinance.entites.*;
 import gestion_user.entities.Role;
 import gestion_user.entities.User;
 import gestion_user.service.UserService;
+import org.testng.annotations.Test;
 import utils.DataSource;
+
+
+import javax.mail.MessagingException;
 
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 
 public class AbonnementService implements IService<Abonnement> {
 
@@ -140,4 +144,68 @@ public class AbonnementService implements IService<Abonnement> {
         }
         return null;
     }
+
+
+
+    public long calculerTempsRestant(Abonnement abonnement) {
+        LocalDate dateFinAbonnement = abonnement.getDate_fin();
+        LocalDate dateActuelle = LocalDate.now();
+        return ChronoUnit.DAYS.between(dateActuelle, dateFinAbonnement);
+    }
+
+    // Méthode pour notifier un adhérent lorsque son abonnement expire bientôt
+    public void notifierAdherent(Abonnement abonnement) {
+        long joursRestants = calculerTempsRestant(abonnement);
+        if (joursRestants <= 2) {
+            User adherent = abonnement.getId_adherent();
+            if (adherent != null) {
+                System.out.println("ID de l'adhérent associé à l'abonnement : " + adherent.getId());
+                String sujet = "Notification d'abonnement";
+                String message = "Bonjour " + adherent.getNom() + ",\n\nVotre abonnement expire dans " + joursRestants + " jours. Veuillez renouveler votre abonnement dès que possible.\n\nCordialement,\nVotre salle de sport";
+                String destinataire = adherent.getEmail();
+                try {
+                    MailAPI.sendMail(destinataire, sujet, message);
+                    System.out.println("Notification envoyée à l'adhérent : " + destinataire);
+                } catch (MessagingException e) {
+                    System.out.println("Erreur lors de l'envoi de la notification : " + e.getMessage());
+                    e.printStackTrace(); // Imprimez la trace de la pile pour plus d'informations sur l'erreur
+                }
+            } else {
+                System.out.println("Impossible d'envoyer la notification : adhérent non trouvé.");
+            }
+        }
+    }
+
+
+
+    public void notifierTousAdherents() {
+        List<Abonnement> abonnements = readAll();
+        for (Abonnement abonnement : abonnements) {
+            notifierAdherent(abonnement);
+        }
+    }
+
+    // Méthode de test pour calculer le temps restant d'un abonnement
+    public void testCalculerTempsRestant() {
+        Abonnement abonnement = new Abonnement();
+        abonnement.setDate_fin(LocalDate.now().plusDays(2)); // Abonnement expirant dans 2 jours
+
+        long tempsRestant = calculerTempsRestant(abonnement);
+
+        System.out.println("Temps restant de l'abonnement : " + tempsRestant + " jours");
+    }
+
+    // Méthode de test pour envoyer un email à un adhérent
+    public void testNotifierAdherent() {
+        Abonnement abonnement = new Abonnement();
+        abonnement.setId(1); // ID de l'abonnement
+        abonnement.setDate_fin(LocalDate.now().plusDays(2)); // Abonnement expirant dans 2 jours
+        User adherent = new User();
+        adherent.setNom("Nom de l'adhérent");
+        adherent.setEmail("email@domaine.com");
+
+        notifierAdherent(abonnement);
+    }
 }
+
+

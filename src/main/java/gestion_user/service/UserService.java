@@ -99,6 +99,7 @@ public class UserService implements IService<User> {
         } return list;
     }
 
+
     @Override
     public void delete(int id) {
         String requete = "DELETE FROM user WHERE id = ? and role='Adherent'";
@@ -117,9 +118,10 @@ public class UserService implements IService<User> {
 
 
 
-   @Override
+    @Override
     public User readById(int id) {
         String requete = "SELECT * FROM user WHERE id = ? and role='Adherent'";
+        System.out.println("Requête SQL pour récupérer l'utilisateur avec l'ID : " + id);
         User user = null;
         try (PreparedStatement pst = conn.prepareStatement(requete)) {
             pst.setInt(1, id);
@@ -136,7 +138,6 @@ public class UserService implements IService<User> {
                             rs.getDate(6),
                             sexe,
                             role
-
                     );
                     user.setId(rs.getInt(1));
                 }
@@ -148,6 +149,7 @@ public class UserService implements IService<User> {
         }
         return user;
     }
+
     public int countByRole(Role role) throws SQLException {
         String query = "SELECT COUNT(*) AS count FROM user WHERE role = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {
@@ -162,3 +164,4 @@ public class UserService implements IService<User> {
 
 
 }
+
