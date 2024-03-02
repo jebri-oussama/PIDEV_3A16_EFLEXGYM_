@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
 <?import java.lang.String?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_evenement.Controllers.ParticiperController">
     <stylesheets>
@@ -12,10 +7,12 @@
     </stylesheets>
     <children>
         <ScrollPane fitToWidth="true" fitToHeight="true">
-            <FlowPane fx:id="eventContainer" prefHeight="400.0" prefWidth="600.0" hgap="10.0" vgap="10.0">
+            <VBox>
+                <Pagination fx:id="pagination" />
+                <FlowPane fx:id="eventContainer" prefHeight="400.0" prefWidth="600.0" hgap="10.0" vgap="10.0">
 
-            </FlowPane>
+                </FlowPane>
+            </VBox>
         </ScrollPane>
     </children>
 </AnchorPane>
-

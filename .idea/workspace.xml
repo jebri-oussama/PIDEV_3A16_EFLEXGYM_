@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="sms">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/WeatherApp.java" afterDir="false" />
+    <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="api meteo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/ParticiperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/ParticiperController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Participer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Participer.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "oussema",
+    "last_opened_file_path": "C:/Users/Oussama/IdeaProjects/Pidev_3A29_Dynamic_Developers_Desktop_JavaFx-main",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -85,7 +85,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709322466250</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="api meteo">
+      <option name="closed" value="true" />
+      <created>1709327087073</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709327087074</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,6 +102,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="qr code avec participation" />
     <MESSAGE value="sms" />
-    <option name="LAST_COMMIT_MESSAGE" value="sms" />
+    <MESSAGE value="api meteo" />
+    <option name="LAST_COMMIT_MESSAGE" value="api meteo" />
   </component>
 </project>

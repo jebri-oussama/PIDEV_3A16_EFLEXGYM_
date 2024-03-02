@@ -50,7 +50,7 @@ public class ParticiperController implements Initializable {
     @FXML
     private FlowPane eventContainer;
         private int selectedEventId;
-
+    @FXML private Pagination pagination;
     private EvenementService evenementService;
     private static final String ACCOUNT_SID = "AC8c0d46d6a42b027f40aafca7cb712bd2";
     private static final String AUTH_TOKEN = "adaf7a80490a5fe576d18a07a2443c51";
@@ -58,86 +58,104 @@ public class ParticiperController implements Initializable {
     static {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
+    private static final int ITEMS_PER_PAGE = 4;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         evenementService = new EvenementService();
 
         List<Evenement> evenements = evenementService.readAll();
 
-        for (Evenement evenement : evenements) {
-            VBox eventBox = new VBox(5);
-            eventBox.getStyleClass().add("event-box");
+        int pageCount = (int) Math.ceil((double) evenements.size() / ITEMS_PER_PAGE);
+        pagination.setPageCount(pageCount);
 
-            ImageView imageView = new ImageView();
-            imageView.setFitWidth(265);
-            imageView.setFitHeight(265);
-            imageView.getStyleClass().add("event-image");
-            try {
-                String imagePath = evenement.getImagePath();
-                Image image = new Image(imagePath);
-                imageView.setImage(image);
-            } catch (Exception e) {
-                e.printStackTrace();
+        pagination.setPageFactory(pageIndex -> {
+            eventContainer.getChildren().clear();
+
+            int startIndex = pageIndex * ITEMS_PER_PAGE;
+            int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, evenements.size());
+            List<Evenement> sublist = evenements.subList(startIndex, endIndex);
+
+            for (Evenement evenement : sublist) {
+
+                    VBox eventBox = new VBox(5);
+                    eventBox.getStyleClass().add("event-box");
+
+                    ImageView imageView = new ImageView();
+                    imageView.setFitWidth(265);
+                    imageView.setFitHeight(265);
+                    imageView.getStyleClass().add("event-image");
+                    try {
+                        String imagePath = evenement.getImagePath();
+                        Image image = new Image(imagePath);
+                        imageView.setImage(image);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Label eventNameLabel = new Label(evenement.getEvent_name());
+                    eventNameLabel.getStyleClass().add("event-name");
+                    Button participerButton = new Button("Participer");
+                    participerButton.setOnAction(event -> {
+                        // Create a confirmation dialog
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Confirm Participation");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Are you sure you want to participate in this event?");
+                        ParticipationService participationService = new ParticipationService();
+                        int selectedEventId = participationService.getNumberOfParticipants(evenement.getId())+1;
+                        // Show the confirmation dialog and wait for user response
+                        alert.showAndWait().ifPresent(response -> {
+                            if (response == ButtonType.OK) {
+                                // User clicked OK, proceed with adding participation
+                                participationService.addParticipation(evenement.getId());
+
+                                // Generate QR code
+                                String qrData = "You are the " + (participationService.getNumberOfParticipants(evenement.getId())) + " participant";
+                                ImageView qrCodeImageView = QRCodeGenerator.generateQRCodeImage(qrData, 200, 200);
+
+                                // Show QR code in a new stage
+                                Stage qrCodeStage = new Stage();
+                                qrCodeStage.initModality(Modality.APPLICATION_MODAL);
+                                qrCodeStage.setTitle("QR Code");
+                                VBox qrCodeBox = new VBox(10);
+                                qrCodeBox.setPadding(new Insets(20));
+                                qrCodeBox.getChildren().add(qrCodeImageView);
+                                Scene qrCodeScene = new Scene(qrCodeBox, 300, 300);
+                                qrCodeStage.setScene(qrCodeScene);
+                                qrCodeStage.show();
+                            }
+                        });
+                        TextInputDialog dialog = new TextInputDialog();
+                        dialog.setTitle("Enter Number");
+                        dialog.setHeaderText(null);
+                        dialog.setContentText("Please enter your number:");
+
+                        Optional<String> result = dialog.showAndWait();
+                        result.ifPresent(number -> {
+                            // Send the message using the messaging API
+                            sendMessage(number,selectedEventId);
+                        });
+
+                    });
+
+                    Button detailsButton = new Button("Details");
+                    detailsButton.setOnAction(event -> {
+                        showEventDetailsPopup(evenement);
+                    });
+
+                    HBox buttonBox = new HBox(5);
+                    buttonBox.getChildren().addAll(participerButton, detailsButton);
+
+                    eventBox.getChildren().addAll(imageView, eventNameLabel, buttonBox);
+                    eventContainer.getChildren().add(eventBox);
+
             }
 
-            Label eventNameLabel = new Label(evenement.getEvent_name());
-            eventNameLabel.getStyleClass().add("event-name");
-            Button participerButton = new Button("Participer");
-            participerButton.setOnAction(event -> {
-                // Create a confirmation dialog
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirm Participation");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to participate in this event?");
-                ParticipationService participationService = new ParticipationService();
-                int selectedEventId = participationService.getNumberOfParticipants(evenement.getId())+1;
-                // Show the confirmation dialog and wait for user response
-                alert.showAndWait().ifPresent(response -> {
-                    if (response == ButtonType.OK) {
-                        // User clicked OK, proceed with adding participation
-                        participationService.addParticipation(evenement.getId());
-
-                        // Generate QR code
-                        String qrData = "You are the " + (participationService.getNumberOfParticipants(evenement.getId())) + " participant";
-                        ImageView qrCodeImageView = QRCodeGenerator.generateQRCodeImage(qrData, 200, 200);
-
-                        // Show QR code in a new stage
-                        Stage qrCodeStage = new Stage();
-                        qrCodeStage.initModality(Modality.APPLICATION_MODAL);
-                        qrCodeStage.setTitle("QR Code");
-                        VBox qrCodeBox = new VBox(10);
-                        qrCodeBox.setPadding(new Insets(20));
-                        qrCodeBox.getChildren().add(qrCodeImageView);
-                        Scene qrCodeScene = new Scene(qrCodeBox, 300, 300);
-                        qrCodeStage.setScene(qrCodeScene);
-                        qrCodeStage.show();
-                    }
-                });
-                TextInputDialog dialog = new TextInputDialog();
-                dialog.setTitle("Enter Number");
-                dialog.setHeaderText(null);
-                dialog.setContentText("Please enter your number:");
-
-                Optional<String> result = dialog.showAndWait();
-                result.ifPresent(number -> {
-                    // Send the message using the messaging API
-                    sendMessage(number,selectedEventId);
-                });
-
-            });
-
-            Button detailsButton = new Button("Details");
-            detailsButton.setOnAction(event -> {
-                showEventDetailsPopup(evenement);
-            });
-
-            HBox buttonBox = new HBox(5);
-            buttonBox.getChildren().addAll(participerButton, detailsButton);
-
-            eventBox.getChildren().addAll(imageView, eventNameLabel, buttonBox);
-            eventContainer.getChildren().add(eventBox);
-        }
+            return new VBox(); // Return any Node, since the content is already added to eventContainer
+        });
     }
+
 
     private JSONObject getWeatherForEventDate(JSONArray weatherData, LocalDate eventDate) {
         for (int i = 0; i < weatherData.length(); i++) {
