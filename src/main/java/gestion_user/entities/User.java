@@ -1,5 +1,8 @@
 package gestion_user.entities;
 
+
+import javafx.beans.property.IntegerProperty;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -16,7 +19,11 @@ public class User {
 
     private double salaire;
 
-    private int id_bilan_financier;
+    private int idBilanFinancier;
+
+
+
+
 
 
     public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, double aDouble, int anInt) {
@@ -58,7 +65,7 @@ public class User {
         this.role=role;
     }
 
-    public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, int id_bilan_financier, double salaire) {
+    public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, int idBilanFinancier, double salaire) {
         this.nom = nom;
         this.prenom = prenom;
         this.mot_de_passe = mot_de_passe;
@@ -66,11 +73,11 @@ public class User {
         this.date_de_naissance = date_de_naissance;
         this.sexe = sexe;
         this.role=role;
-        this.id_bilan_financier=id_bilan_financier;
+        this.idBilanFinancier=idBilanFinancier;
         this.salaire=salaire;
     }
 
-    public User(int anInt, String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, double salaire, int id_bilan_financier) {
+    public User(int anInt, String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, double salaire, int idBilanFinancier) {
 
         this.nom = nom;
         this.prenom = prenom;
@@ -79,7 +86,7 @@ public class User {
         this.date_de_naissance = date_de_naissance;
         this.sexe = sexe;
         this.role=role;
-        this.id_bilan_financier=id_bilan_financier;
+        this.idBilanFinancier=idBilanFinancier;
         this.salaire=salaire;
 
     }
@@ -162,14 +169,17 @@ public class User {
         this.salaire = salaire;
     }
 
-    public int getId_bilan_financier() {
-        return id_bilan_financier;
+    public int getBilanFinancier() {
+        return idBilanFinancier;
     }
 
-    public void setId_bilan_financier(int id_bilan_financier) {
-        this.id_bilan_financier = id_bilan_financier;
+    public void setBilanFinancier(int idBilanFinancier) {
+        this.idBilanFinancier = idBilanFinancier;
     }
 
+    public String getFullName() {
+        return this.nom + " " + this.prenom;
+    }
     @Override
     public String toString() {
         return "User{" +
@@ -182,7 +192,7 @@ public class User {
                 ", sexe=" + sexe +
                 ", role=" + role +
                 ", salaire=" + salaire +
-                ", id_bilan_financier=" + id_bilan_financier +
+                ", idBilanFinancier=" + idBilanFinancier +
                 '}';
     }
 }

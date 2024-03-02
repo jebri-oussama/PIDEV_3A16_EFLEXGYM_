@@ -6,16 +6,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import utils.DataSource;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class panierController implements Initializable {
@@ -43,11 +48,12 @@ public class panierController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       // idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        // idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
         deleteCol.setCellFactory(createDeleteButtonCellFactory());
         ps = new panierService();
+        updateSubtotalLabel();
         refreshTable();
     }
 
@@ -121,10 +127,35 @@ public class panierController implements Initializable {
         subtotalLabel.setText("Subtotal: $ " + calculateTotalPrice());
     }
 
-    private void refreshTable() {
+    public void refreshTable() {
         paniers.clear();
         paniers.addAll(ps.readAll());
         panierTable.setItems(paniers);
         updateSubtotalLabel();
+
+    }
+
+    @FXML
+    private void openPaymentForm(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/paymentForm.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller
+            PaymentController paymentFormController = loader.getController();
+            Stage panierStage = (Stage) panierTable.getScene().getWindow();
+            panierStage.close();
+            // You might need to pass data to the payment form controller if necessary
+            paymentFormController.setAmountToPay(calculateTotalPrice());
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Payment");
+            stage.show();
+            refreshTable();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

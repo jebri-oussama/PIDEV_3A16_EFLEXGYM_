@@ -80,14 +80,14 @@ public class UpdateAbonnementController {
         int bilanFinancierIdSelected = bilanFinancierId.getValue();
 
         // Lecture des entités Adherent et BilanFinancier à partir de leur ID
-        User user = userService.readById(adherentIdSelected);
+       // User user = userService.readById(adherentIdSelected);
         BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
 
         // Création de l'objet Abonnement avec les valeurs récupérées
-        Abonnement abonnement = new Abonnement(abonnementId, type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
+      //  Abonnement abonnement = new Abonnement(abonnementId, type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 
         // Appel de la méthode update de AbonnementService pour mettre à jour l'abonnement dans la base de données
-        abonnementService.update(abonnement);
+       // abonnementService.update(abonnement);
 
         // Nettoyage des champs
         clearFields();

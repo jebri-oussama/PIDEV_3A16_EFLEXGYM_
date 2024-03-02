@@ -99,11 +99,11 @@ public class AbonnementService implements IService<Abonnement> {
                 Etat etat = Etat.valueOf(rs.getString("etat"));
                 int idAdherent = rs.getInt("id_adherent");
                 UserService adherentService = new UserService();
-                User adherent = adherentService.readById(idAdherent);
+               // User adherent = adherentService.readById(idAdherent);
                 int idBilanFinancier = rs.getInt("id_bilan_financier");
                 BilanFinancierService bilanFinancierService = new BilanFinancierService();
                 BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
-                list.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
+               // list.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -127,13 +127,13 @@ public class AbonnementService implements IService<Abonnement> {
 
                 int idAdherent = rs.getInt("id_adherent");
                 UserService adherentService = new UserService();
-                User adherent = adherentService.readById(idAdherent);
+             //   User adherent = adherentService.readById(idAdherent);
 
                 int idBilanFinancier = rs.getInt("id_bilan_financier");
                 BilanFinancierService bilanFinancierService = new BilanFinancierService();
                 BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
 
-                return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+              //  return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

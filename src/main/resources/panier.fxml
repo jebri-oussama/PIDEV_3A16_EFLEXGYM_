@@ -32,7 +32,7 @@
 
             <!-- Subtotal Value -->
             <Label fx:id="subtotalLabel" text="0.00" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-padding: 0 10px;" />
-
+            <Button text="payer en ligne" onAction="#openPaymentForm" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
             <!-- Continue Shopping Button -->
             <Button text="Continue le Shopping" onAction="#goBackToProducts" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
         </HBox>

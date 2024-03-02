@@ -60,16 +60,16 @@ public class AjouterAbonnementController {
         this.currentScene = scene;
     }
 
-    @FXML
-    void initialize() {
+
+   void initialize() {
         try {
             // Récupérez la liste des adhérents et extrayez les identifiants
-            List<User> users = userService.readAll();
-            List<String> adherentIds = users.stream()
-                    .map(User::getId)
-                    .map(String::valueOf) // Convertir les entiers en chaînes
-                    .collect(Collectors.toList());
-            adherentId.setItems(FXCollections.observableArrayList(adherentIds));
+            //List<User> users = userService.readAll();
+           // List<String> adherentIds = users.stream()
+                 //   .map(User::getId)
+                   // .map(String::valueOf) // Convertir les entiers en chaînes
+                  //  .collect(Collectors.toList());
+            //adherentId.setItems(FXCollections.observableArrayList(adherentIds));
 
             // Récupérez la liste des bilans financiers et extrayez les ID
             List<BilanFinancier> bilansFinanciers = bilanFinancierService.readAll();
@@ -96,14 +96,14 @@ public class AjouterAbonnementController {
         int bilanFinancierIdSelected = Integer.parseInt(bilanFinancierId.getValue()); // Convertir la chaîne en entier
 
         // Récupérer les objets User et BilanFinancier correspondants aux ID sélectionnés
-        User user = userService.readById(adherentIdSelected);
+        //User user = userService.readById(adherentIdSelected);
         BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
 
         // Création de l'abonnement avec les données récupérées
-        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
+       // Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
 
         // Ajout de l'abonnement à la base de données
-        abonnementService.add(abonnement);
+       // abonnementService.add(abonnement);
 
         // Effacer les champs après l'ajout
         clearFields();

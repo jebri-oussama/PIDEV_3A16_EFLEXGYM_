@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -29,7 +30,8 @@ public class ProductController implements Initializable {
 
     // Declare the connection object
     private Connection conn;
-
+    @FXML
+    private TextField searchField;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the connection
@@ -145,4 +147,73 @@ public class ProductController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void searchByName(ActionEvent event) {
+        String searchTerm = searchField.getText().trim();
+
+        // Clear existing products in the FlowPane
+        productsPane.getChildren().clear();
+
+        try {
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit WHERE nom LIKE ?");
+            statement.setString(1, "%" + searchTerm + "%");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String productName = resultSet.getString("nom");
+                String productPrice = resultSet.getString("prix");
+                String productDescription = resultSet.getString("description");
+                String productImageURL = resultSet.getString("image");
+                // Create and add product element to the FlowPane
+                VBox productBox = createProductBox(productName, productPrice, productDescription, productImageURL);
+                productsPane.getChildren().add(productBox);
+
+            }
+            searchField.setText("");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleAlimentaireAction(ActionEvent event) {
+        fetchProducts(7); // Category for Alimentaire
+    }
+
+    // Method to handle Vestimentaire button click
+    @FXML
+    private void handleVestimentaireAction(ActionEvent event) {
+        fetchProducts(6); // Category for Vestimentaire
+    }
+
+    // Method to fetch products from the database based on category
+    private void fetchProducts(int category) {
+        try {
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit WHERE categorie = ?");
+            statement.setInt(1, category);
+            ResultSet resultSet = statement.executeQuery();
+
+            // Clear existing products from the pane
+            productsPane.getChildren().clear();
+
+            // Iterate through the results and create product elements
+            while (resultSet.next()) {
+                String productName = resultSet.getString("nom");
+                String productPrice = resultSet.getString("prix");
+                String productDescription = resultSet.getString("description");
+                String productImageURL = resultSet.getString("image");
+
+                // Create and add product element to the FlowPane
+                VBox productBox = createProductBox(productName, productPrice, productDescription, productImageURL);
+                productsPane.getChildren().add(productBox);
+            }
+
+            // Add button to go back to the main interface
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
