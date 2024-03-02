@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="api meteo">
+    <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="pagination">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/ParticiperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/Controllers/ParticiperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Participer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Participer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_evenement/tests/MainFxx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_evenement/tests/MainFxx.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +48,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "oussema",
-    "last_opened_file_path": "C:/Users/Oussama/IdeaProjects/Pidev_3A29_Dynamic_Developers_Desktop_JavaFx-main",
+    "last_opened_file_path": "C:/Users/Oussama/IdeaProjects/PIDEV_3A16_EFLEXGYM_",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -68,6 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1709136982453</updated>
       <workItem from="1709136984478" duration="74000" />
+      <workItem from="1709406120166" duration="1579000" />
     </task>
     <task id="LOCAL-00001" summary="qr code avec participation">
       <option name="closed" value="true" />
@@ -93,7 +93,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709327087074</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="pagination">
+      <option name="closed" value="true" />
+      <created>1709342432472</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709342432472</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,6 +111,7 @@
     <MESSAGE value="qr code avec participation" />
     <MESSAGE value="sms" />
     <MESSAGE value="api meteo" />
-    <option name="LAST_COMMIT_MESSAGE" value="api meteo" />
+    <MESSAGE value="pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="pagination" />
   </component>
 </project>
