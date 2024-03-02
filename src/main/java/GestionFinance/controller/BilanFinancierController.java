@@ -2,6 +2,7 @@ package GestionFinance.controller;
 
 import GestionFinance.entites.BilanFinancier;
 import GestionFinance.service.BilanFinancierService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,32 +16,31 @@ import java.io.IOException;
 
 public class BilanFinancierController {
     @FXML
-    private TextField idField;
-
-    @FXML
     private Label revenusAbonnementsLabel;
 
     @FXML
     private Label revenusProduitsLabel;
+    @FXML
+    private Button dashboardId;
+    @FXML
+    private Button bilanFinancierId1;
+    @FXML
+    private Button abonnementsId;
 
     @FXML
     private Label salairesCoachsLabel;
     private Scene currentScene;
-    @FXML
-    private Button dashboardId;
-    @FXML
-    private Button bilanFinancierId;
-    @FXML
-    private Button abonnementsId;
 
     @FXML
     private Label profitLabel;
 
     private BilanFinancierService bilanFinancierService = new BilanFinancierService();
 
+    private int bilanFinancierId; // Ajouter cet attribut pour stocker l'ID du bilan financier
+
     @FXML
     public void obtenirRevenusAbonnements() {
-        int id = Integer.parseInt(idField.getText());
+        int id = bilanFinancierId; // Utiliser l'ID du bilan financier stocké
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
         double nouveauxRevenusAbonnements = bilanFinancier.recupererRevenuAbonnements();
         revenusAbonnementsLabel.setText(Double.toString(nouveauxRevenusAbonnements));
@@ -49,7 +49,7 @@ public class BilanFinancierController {
 
     @FXML
     public void obtenirRevenusProduits() {
-        int id = Integer.parseInt(idField.getText());
+        int id = bilanFinancierId; // Utiliser l'ID du bilan financier stocké
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
         double nouveauxRevenusProduits = bilanFinancier.recupererRevenusProduits();
         revenusProduitsLabel.setText(Double.toString(nouveauxRevenusProduits));
@@ -58,7 +58,7 @@ public class BilanFinancierController {
 
     @FXML
     public void obtenirSalairesCoachs() {
-        int id = Integer.parseInt(idField.getText());
+        int id = bilanFinancierId; // Utiliser l'ID du bilan financier stocké
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
         double nouveauxSalairesCoachs = bilanFinancier.recupererSalairesCoachs();
         salairesCoachsLabel.setText(Double.toString(nouveauxSalairesCoachs));
@@ -67,7 +67,7 @@ public class BilanFinancierController {
 
     @FXML
     public void calculerProfit() {
-        int id = Integer.parseInt(idField.getText());
+        int id = bilanFinancierId; // Utiliser l'ID du bilan financier stocké
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
 
         // Récupération des valeurs des revenus et des salaires
@@ -101,7 +101,7 @@ public class BilanFinancierController {
         clearFields();
 
         // Fermeture de la fenêtre actuelle
-        idField.getScene().getWindow().hide();
+        profitLabel.getScene().getWindow().hide();
 
         // Redirection vers la vue AfficherBilanFinancier
         redirectToAfficherBilanFinancier();
@@ -110,6 +110,10 @@ public class BilanFinancierController {
 
     public void setCurrentScene(Scene scene) {
         this.currentScene = scene;
+    }
+
+    public void setBilanFinancierId(int id) {
+        this.bilanFinancierId = id;
     }
 
     private void redirectToAfficherBilanFinancier() {
@@ -128,9 +132,10 @@ public class BilanFinancierController {
     }
 
     private void clearFields() {
-        idField.clear();
+
 
     }
+
     @FXML
     void afficherBilanFinancier() {
         try {
@@ -165,8 +170,4 @@ public class BilanFinancierController {
         }
     }
 }
-
-
-
-
 

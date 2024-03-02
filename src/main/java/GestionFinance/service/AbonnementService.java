@@ -11,6 +11,7 @@ import utils.DataSource;
 import javax.mail.MessagingException;
 
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -154,7 +155,7 @@ public class AbonnementService implements IService<Abonnement> {
     }
 
     // Méthode pour notifier un adhérent lorsque son abonnement expire bientôt
-    public void notifierAdherent(Abonnement abonnement) {
+  /*  public void notifierAdherent(Abonnement abonnement) {
         long joursRestants = calculerTempsRestant(abonnement);
         if (joursRestants <= 2) {
             User adherent = abonnement.getId_adherent();
@@ -169,6 +170,8 @@ public class AbonnementService implements IService<Abonnement> {
                 } catch (MessagingException e) {
                     System.out.println("Erreur lors de l'envoi de la notification : " + e.getMessage());
                     e.printStackTrace(); // Imprimez la trace de la pile pour plus d'informations sur l'erreur
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             } else {
                 System.out.println("Impossible d'envoyer la notification : adhérent non trouvé.");
@@ -205,7 +208,7 @@ public class AbonnementService implements IService<Abonnement> {
         adherent.setEmail("email@domaine.com");
 
         notifierAdherent(abonnement);
-    }
+    }*/
 }
 
 

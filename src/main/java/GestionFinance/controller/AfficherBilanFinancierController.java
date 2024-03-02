@@ -144,6 +144,7 @@ public class AfficherBilanFinancierController {
     }
 
     private void updateBilanFinancier(BilanFinancier bilanFinancier) {
+        int id = bilanFinancier.getId(); // Récupérer l'ID du bilan financier
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/BilanFinancier.fxml"));
             Parent root = loader.load();
@@ -153,6 +154,7 @@ public class AfficherBilanFinancierController {
 
             BilanFinancierController controller = loader.getController();
             controller.setCurrentScene(scene);
+            controller.setBilanFinancierId(id); // Passer l'ID du bilan financier
 
             stage.show();
         } catch (IOException e) {
@@ -206,4 +208,3 @@ public class AfficherBilanFinancierController {
         }
     }
 }
-

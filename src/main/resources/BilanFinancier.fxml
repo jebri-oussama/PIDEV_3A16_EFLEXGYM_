@@ -81,7 +81,7 @@
                                 <Font name="Arial" size="21.0" />
                             </font>
                         </Button>
-                        <Button fx:id="bilanFinancierId" mnemonicParsing="false" onAction="#afficherBilanFinancier" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer">
+                        <Button fx:id="bilanFinancierId1" mnemonicParsing="false" onAction="#afficherBilanFinancier" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer">
                             <padding>
                                 <Insets bottom="15.0" left="50.0" right="50.0" />
                             </padding>
@@ -99,24 +99,22 @@
                   <padding>
                       <Insets bottom="20" left="20" right="20" top="20" />
                   </padding>
-                  <Label style="-fx-font: Arial" text="ID du Bilan Financier:" textFill="#fb8000" />
-                  <TextField fx:id="idField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="159.0" />
-      
+
                   <Button onAction="#obtenirRevenusAbonnements" style="-fx-font: Arial" text="Obtenir Revenus Abonnements" />
-      
+
                   <Label fx:id="revenusAbonnementsLabel" style="-fx-font: Arial" text="Revenus Abonnements:" textFill="#fb8000" />
-      
+
                   <Button onAction="#obtenirRevenusProduits" style="-fx-font: Arial" text="Obtenir Revenus Produits" />
-      
+
                   <Label fx:id="revenusProduitsLabel" style="-fx-font: Arial" text="Revenus Produits:" textFill="#fb8000" />
-      
+
                   <Button onAction="#obtenirSalairesCoachs" style="-fx-font: Arial" text="Salaires des coachs" />
-      
+
                   <Label fx:id="salairesCoachsLabel" style="-fx-font: Arial" text="Salaires des coachs:" textFill="#fb8000" />
-      
-      
+
+
                   <Button onAction="#calculerProfit" style="-fx-font: Arial" text="Calculer Profit" />
-      
+
                   <Label fx:id="profitLabel" style="-fx-font: Arial" text="Profit:" textFill="#fb8000" />
               </VBox>
             <HBox prefHeight="81.0" prefWidth="642.0" style="-fx-background-color: DCD6C5;;">
