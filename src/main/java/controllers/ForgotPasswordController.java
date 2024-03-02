@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -23,6 +24,8 @@ public class ForgotPasswordController {
     private TextField emailField;
     @FXML
     private TextField token;
+    @FXML
+    private Label verifemail;
 
     private String tokenGenerated;
 
@@ -31,22 +34,28 @@ public class ForgotPasswordController {
     private void resetPassword(ActionEvent event) {
         // Get the user's email
         String userEmail = emailField.getText();
-        // Generate a random password reset token
-        String resetToken = generateRandomToken();
+                    UserService as = new UserService();
 
-        // Calculate the expiration time (e.g., 1 hour from now)
-        LocalDateTime expirationTime = LocalDateTime.now().plusHours(1);
+        if (as.isEmailExists(userEmail)) {
+            verifemail.setVisible(false);
 
-        // Store the reset token in the database
-        new UserService().storeResetToken(userEmail, resetToken, expirationTime);
+            // Generate a random password reset token
+            String resetToken = generateRandomToken();
 
-        // Send an email with the reset link using JavaMail API
-        sendPasswordResetEmail(userEmail, resetToken);
+            // Calculate the expiration time (e.g., 1 hour from now)
+            LocalDateTime expirationTime = LocalDateTime.now().plusHours(1);
 
-        // Optionally, show a message to the user indicating that an email has been sent
-        System.out.println("Password reset email sent to: " + userEmail);
+            // Store the reset token in the database
+            new UserService().storeResetToken(userEmail, resetToken, expirationTime);
+
+            // Send an email with the reset link using JavaMail API
+            sendPasswordResetEmail(userEmail, resetToken);
+
+            // Optionally, show a message to the user indicating that an email has been sent
+            System.out.println("Password reset email sent to: " + userEmail);
+        } else { verifemail.setText("Aucun compte se registrer avec ce Email");
+        return;}
     }
-
     private String generateRandomToken() {
         // Implement logic to generate a random token (e.g., using UUID)
         return UUID.randomUUID().toString();

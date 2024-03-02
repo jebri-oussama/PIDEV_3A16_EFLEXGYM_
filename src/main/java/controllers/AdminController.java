@@ -181,18 +181,20 @@ public class AdminController {
             checkEmail.setText("Format invalid,\n email doit avoir '@' et '.'");
             checkEmail.setVisible(true);
             return;
-        }
+        }else {checkEmail.setVisible(false);}
+
         if (as.isEmailExists(adherentEmail)) {
             checkEmail.setText("Email déjà existe");
             checkEmail.setVisible(true);
             return;
-        }
+        }else {checkEmail.setVisible(false);}
+
         String adherentMotDePasse = mot_de_passe.getText();
         if (!validatePassword(adherentMotDePasse)) {
             motdepaase.setText("Mot de passe invalide. Veuillez respecter les critères.");
             motdepaase.setVisible(true);
             return;
-        }
+        }else {motdepaase.setVisible(false);}
 
 
         Date adherentDateNaissance = Date.valueOf(dateNaissance.getValue().toString());
