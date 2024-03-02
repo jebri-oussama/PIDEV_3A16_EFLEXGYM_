@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import utils.BadWordFilter;
 import utils.DataSource;
 
 public class ProductController implements Initializable {
@@ -152,9 +153,15 @@ public class ProductController implements Initializable {
     private void searchByName(ActionEvent event) {
         String searchTerm = searchField.getText().trim();
 
+        // Check if search term contains bad words
+        if (BadWordFilter.filterText(searchTerm)) {
+            System.out.println("Search term contains bad words.");
+            return; // Exit search if bad words found
+        }
+
         // Clear existing products in the FlowPane
         productsPane.getChildren().clear();
-
+searchField.setText("");
         try {
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit WHERE nom LIKE ?");
             statement.setString(1, "%" + searchTerm + "%");
@@ -165,12 +172,15 @@ public class ProductController implements Initializable {
                 String productPrice = resultSet.getString("prix");
                 String productDescription = resultSet.getString("description");
                 String productImageURL = resultSet.getString("image");
+
                 // Create and add product element to the FlowPane
                 VBox productBox = createProductBox(productName, productPrice, productDescription, productImageURL);
                 productsPane.getChildren().add(productBox);
-
             }
-            searchField.setText("");
+
+            // Clear search field after search
+            searchField.clear();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
