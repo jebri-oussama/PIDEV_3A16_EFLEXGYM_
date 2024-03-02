@@ -50,6 +50,10 @@ public class UpdateAdherentController {
     @FXML
     private RadioButton rbC;
     @FXML
+    private RadioButton rbAdmin;
+
+
+    @FXML
     private Label labelBilan;
 
     @FXML
@@ -92,7 +96,7 @@ public class UpdateAdherentController {
             rbC.fire();
             initializeIdBilanChoiceBox();
             idBilanChoiceBox.setValue(Integer.valueOf(selectedAdherent.getBilanFinancier()));            Salaire.setText(String.valueOf(Double.valueOf(selectedAdherent.getSalaire())));
-        }
+        }else{rbAdmin.fire();}
 
 
     }
@@ -122,7 +126,7 @@ public class UpdateAdherentController {
 
                 stage.close();
 
-            } else
+            } else if ("Adherent".equals(selectedRole))
         // Get the values from the text fields
 
             { User a1 = new User(adherentId, adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1, Role.valueOf(selectedRole));
@@ -131,6 +135,13 @@ public class UpdateAdherentController {
 
         Stage stage = (Stage) Confirm.getScene().getWindow();
         stage.close();
+            }else if ("Admin".equals(selectedRole)) {
+                User a1 = new User(adherentId, adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1, Role.valueOf(selectedRole));
+                as.updateAdherent(adherentId,a1);
+                // Implement logic for the update action when confirming changes
+
+                Stage stage = (Stage) Confirm.getScene().getWindow();
+                stage.close();
             }
     }
 
@@ -164,7 +175,10 @@ public class UpdateAdherentController {
         } else if (rbC.isSelected()) {
 
             return "Coach";
-        } else {
+        }else if (rbAdmin.isSelected()){
+            return "Admin";
+        }
+        else {
             // Handle the case when neither is selected
             return "";
         }
@@ -193,6 +207,11 @@ public class UpdateAdherentController {
         updateAdditionalFieldsVisibility1();
     }
 
+    @FXML
+    void handleRoleSelectedAdmin(ActionEvent event){
+        updateAdditionalFieldsVisibility2();
+    }
+
     private void updateAdditionalFieldsVisibility1() {
         String selectedRole = getSelectedRole();
         boolean isCoachSelected = "Adherent".equals(selectedRole);
@@ -202,6 +221,16 @@ public class UpdateAdherentController {
         labelSalaire.setVisible(false);
         Salaire.setVisible(false);
     }
+    private void updateAdditionalFieldsVisibility2() {
+        String selectedRole = getSelectedRole();
+        boolean isCoachSelected = "Admin".equals(selectedRole);
+
+        labelBilan.setVisible(false);
+        idBilanChoiceBox.setVisible(false);
+        labelSalaire.setVisible(false);
+        Salaire.setVisible(false);
+    }
+
     private void initializeIdBilanChoiceBox() {
         // Fetch the list of BilanFinancier IDs and add them to the choice box
         List<Integer> idBilanFinanciers = BilanFinancierService.getAllIdBilanFinancier();

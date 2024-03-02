@@ -1,9 +1,7 @@
 
 
 .text-field{
-    -fx-border-radius: 30px;
-    -fx-border-color:  #000000;
-    -fx-background-color:#fb8000;
+    -fx-background-color:#000000;
 
 }
 .label{
@@ -12,11 +10,7 @@
     -fx-font-style: Bold ;
 }
 
-.table-view{
-    -fx-background-color:#fb8000;
-    -fx-border-color: #13100e;
-    -fx-border-radius: 15px;
-}
+
 .button{
     -fx-text-fill: #f19a00;
     -fx-background-color: #000000;

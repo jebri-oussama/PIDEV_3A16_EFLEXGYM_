@@ -106,6 +106,8 @@ public class AdminController {
 
     @FXML
     private RadioButton rbCoach;
+    @FXML
+    private RadioButton rbAdmin;
 
 
 
@@ -151,7 +153,10 @@ public class AdminController {
         } else if (rbCoach.isSelected()) {
 
             return "Coach";
-        } else {
+        }else if (rbAdmin.isSelected()){
+            return "Admin";
+        }
+        else {
             return "";
         }
     }

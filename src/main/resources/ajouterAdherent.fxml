@@ -11,12 +11,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="940.0" style="-fx-background-color: #fb8000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="940.0" style="-fx-background-color: #d08617;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
    <children>
       <Label layoutX="25.0" layoutY="26.0" stylesheets="@style.css" text="Nom:" />
       <Label layoutX="199.0" layoutY="24.0" stylesheets="@style.css" text="Prenom:" />
@@ -27,15 +29,56 @@
             <Font name="System Bold" size="12.0" />
          </font></Label>
       <Label layoutX="29.0" layoutY="96.0" stylesheets="@style.css" text="Sexe:" />
-      <TextField fx:id="nom" layoutX="70.0" layoutY="19.0" prefHeight="25.0" prefWidth="91.0" stylesheets="@style.css" />
-      <TextField fx:id="prenom" layoutX="265.0" layoutY="20.0" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #fb8000; -fx-border-color: #000000;" stylesheets="@style.css" />
-      <TextField fx:id="mot_de_passe" layoutX="743.0" layoutY="20.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #fb8000; -fx-border-color: #000000;" stylesheets="@style.css" />
-      <TextField fx:id="email" layoutX="448.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #fb8000; -fx-border-color: #000000;" stylesheets="@style.css" />
-      <DatePicker fx:id="dateNaissance" layoutX="419.0" layoutY="89.0" prefHeight="29.0" prefWidth="149.0" style="-fx-background-color: #fb8000; -fx-border-color: #fb8000;" stylesheets="@style.css" />
+      <TextField fx:id="nom" layoutX="70.0" layoutY="19.0" prefHeight="25.0" prefWidth="91.0" stylesheets="@style.css">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.7763158082962036" green="0.4582419693470001" blue="0.14016813039779663" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+      <TextField fx:id="prenom" layoutX="265.0" layoutY="20.0" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #000000;" stylesheets="@style.css">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.7763158082962036" green="0.4582419693470001" blue="0.14016813039779663" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+      <TextField fx:id="mot_de_passe" layoutX="744.0" layoutY="20.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #000000;" stylesheets="@style.css">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.7763158082962036" green="0.4582419693470001" blue="0.14016813039779663" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+      <TextField fx:id="email" layoutX="448.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #000000;" stylesheets="@style.css">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.7763158082962036" green="0.4582419693470001" blue="0.14016813039779663" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+      <DatePicker fx:id="dateNaissance" layoutX="419.0" layoutY="89.0" prefHeight="29.0" prefWidth="149.0" style="-fx-background-color: #fb8000;" stylesheets="@style.css">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.7368420958518982" green="0.5700292587280273" blue="0.1807992160320282" />
+               </color>
+            </InnerShadow>
+         </effect></DatePicker>
        <Label layoutX="161.0" layoutY="374.0" text="Role" />
-      <Button fx:id="ajout" layoutX="584.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajouterAdherent" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Ajouter" />
+      <Button fx:id="ajout" layoutX="584.0" layoutY="165.0" mnemonicParsing="false" onAction="#ajouterAdherent" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Ajouter">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font></Button>
        <Group fx:id="role" layoutX="506.0" layoutY="94.0" />
-      <TableView fx:id="list" layoutX="18.0" layoutY="210.0" prefHeight="309.0" prefWidth="902.0" style="-fx-background-color: #fb8000;" stylesheets="@style.css">
+      <TableView fx:id="list" layoutX="18.0" layoutY="210.0" prefHeight="309.0" prefWidth="902.0" style="-fx-background-color: #d08617;" stylesheets="@style.css">
         <columns>
           <TableColumn fx:id="colId" prefWidth="35.0" text="ID" visible="false" />
           <TableColumn fx:id="colNom" prefWidth="59.0" text="Nom" />
@@ -61,17 +104,30 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TableView>
-      <Button fx:id="refreshButton" layoutX="679.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Refresh" />
-       <TextField fx:id="salaire" layoutX="385.0" layoutY="162.0" prefHeight="27.0" prefWidth="107.0" stylesheets="@style.css" visible="false" />
+      <Button fx:id="refreshButton" layoutX="679.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Refresh">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font></Button>
+       <TextField fx:id="salaire" layoutX="385.0" layoutY="162.0" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #000000;" stylesheets="@style.css" visible="false">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.6578947305679321" green="0.46407976746559143" blue="0.1522904485464096" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
        <ChoiceBox fx:id="idBilanFinanciersChoiceBox" layoutX="178.0" layoutY="163.0" prefHeight="25.0" prefWidth="72.0" stylesheets="@style.css" visible="false" />
        <Label fx:id="labelBilan" layoutX="38.0" layoutY="170.0" stylesheets="@style.css" text="ID Bilan Fiancier:" visible="false" />
       <Label fx:id="labelSalaire" layoutX="315.0" layoutY="168.0" stylesheets="@style.css" text="Salaire:" visible="false" />
-         <RadioButton fx:id="rbAdherent" layoutX="682.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleRoleSelectionAD" prefHeight="17.0" prefWidth="72.0" stylesheets="@style.css" text="Adherent">
+         <RadioButton fx:id="rbAdherent" layoutX="664.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleRoleSelectionAD" prefHeight="17.0" prefWidth="72.0" stylesheets="@style.css" text="Adherent">
              <toggleGroup>
             <ToggleGroup fx:id="TGR" />
          </toggleGroup>
       </RadioButton>
-         <RadioButton fx:id="rbCoach" layoutX="767.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleRoleSelection" text="Coach" toggleGroup="$TGR" />
+         <RadioButton fx:id="rbCoach" layoutX="754.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleRoleSelection" text="Coach" toggleGroup="$TGR" />
       <RadioButton fx:id="male" layoutX="94.0" layoutY="96.0" mnemonicParsing="false" stylesheets="@style.css" text="male">
          <toggleGroup>
             <ToggleGroup fx:id="sexeGroup" />
@@ -80,15 +136,22 @@
             <Font name="Bauhaus 93" size="12.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="femelle" layoutX="159.0" layoutY="97.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="72.0" text="femelle" toggleGroup="$sexeGroup">
+      <RadioButton fx:id="femelle" layoutX="159.0" layoutY="94.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="72.0" text="femelle" toggleGroup="$sexeGroup">
          <font>
             <Font size="13.0" />
          </font></RadioButton>
       <Label layoutX="616.0" layoutY="97.0" text="Role:" />
-      <Button fx:id="logout" layoutX="825.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Logout" />
+      <Button fx:id="logout" layoutX="798.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Se déconnecter">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font></Button>
       <Label fx:id="checkEmail" layoutX="370.0" layoutY="52.0" prefHeight="29.0" prefWidth="248.0" textFill="RED" visible="false" />
       <Label fx:id="NonPrenom" layoutX="52.0" layoutY="60.0" prefHeight="19.0" prefWidth="260.0" textFill="RED" visible="false" />
       <Label fx:id="motdepaase" layoutX="613.0" layoutY="51.0" prefHeight="40.0" prefWidth="319.0" textFill="RED" visible="false" />
+      <RadioButton fx:id="rbAdmin" layoutX="827.0" layoutY="97.0" mnemonicParsing="false" text="Admin" toggleGroup="$TGR" />
 
 
    </children>
