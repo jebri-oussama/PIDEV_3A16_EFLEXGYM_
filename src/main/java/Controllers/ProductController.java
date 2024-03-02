@@ -13,9 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -155,13 +153,29 @@ public class ProductController implements Initializable {
 
         // Check if search term contains bad words
         if (BadWordFilter.filterText(searchTerm)) {
-            System.out.println("Search term contains bad words.");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Bad Words Found");
+            alert.setHeaderText("Search term contains bad words.");
+            alert.setContentText("Please enter a different search term.");
+
+            // Add "OK" button to the alert dialog
+            ButtonType okButton = new ButtonType("OK");
+            alert.getButtonTypes().setAll(okButton);
+
+            // Show the alert and wait for user response
+            alert.showAndWait().ifPresent(response -> {
+                if (response == okButton) {
+                    // Clear search field after user clicks "OK"
+                    searchField.clear();
+                }
+            });
+
             return; // Exit search if bad words found
         }
 
         // Clear existing products in the FlowPane
         productsPane.getChildren().clear();
-searchField.setText("");
+
         try {
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit WHERE nom LIKE ?");
             statement.setString(1, "%" + searchTerm + "%");
