@@ -8,6 +8,6 @@
             prefHeight="600.0" prefWidth="800.0">
 
     <children>
-        <WebView fx:id="webView" prefHeight="600.0" prefWidth="800.0"/>
+        <WebView fx:id="webView" prefHeight="570.0" prefWidth="800.0"/>
     </children>
 </AnchorPane>
