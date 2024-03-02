@@ -3,6 +3,7 @@ package controllers;
 
 import gestion_user.entities.User;
 import gestion_user.entities.UserSession;
+import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +49,7 @@ public class AdherentController {
     User loggedInUser = UserSession.getLoggedInUser();
     public void initialize() {
 
-            User loggedInUser = UserSession.getLoggedInUser();
+           // User loggedInUser = UserSession.getLoggedInUser();
             NomPrenom.setText(loggedInUser.getFullName());
             nom.setText(loggedInUser.getNom());
             prenom.setText(loggedInUser.getPrenom());
@@ -73,17 +74,15 @@ public class AdherentController {
         try {
             Parent root = loader.load();
 
-            UpdateAdherentController updateController = loader.getController();
+           UpdateAdherentController updateController = loader.getController();
             updateController.initData(selectedAdherent);
-
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Modifier un User");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
+        }}
 
     @FXML
     void handleLogout(ActionEvent event) {
@@ -116,5 +115,27 @@ public class AdherentController {
 
         // Optionally, you might want to reload additional data or perform other actions
         // based on your application's requirements.
+    }
+
+    @FXML
+    void handleRefresh(ActionEvent event) {
+        try {
+            // Your existing refresh logic...
+
+
+            User refreshedUser =  UserService.getUserByEmail(loggedInUser.getEmail());
+
+            nom.setText(refreshedUser.getNom());
+            prenom.setText(refreshedUser.getPrenom());
+            email.setText(refreshedUser.getEmail());
+            mdp.setText(refreshedUser.getMot_de_passe());
+            dn.setText(refreshedUser.getDate_de_naissance().toString());
+            sexe.setText(refreshedUser.getSexe().toString());
+            NomPrenom.setText(refreshedUser.getFullName());
+
+            // You can perform additional actions or reload data as needed
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

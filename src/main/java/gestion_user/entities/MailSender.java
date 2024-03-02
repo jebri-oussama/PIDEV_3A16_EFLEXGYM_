@@ -22,7 +22,8 @@ public class MailSender {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com"); // Use your SMTP server
-        props.put("mail.smtp.port", "587"); // Use your SMTP port
+        props.put("mail.smtp.port", "587"); // Use your SM.0
+        // TP port
 
         Session session = Session.getInstance(props, new Authenticator() {
             @Override

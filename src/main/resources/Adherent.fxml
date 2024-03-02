@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdherentController">
+<AnchorPane prefHeight="489.0" prefWidth="717.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdherentController">
     <children>
         <Label layoutX="268.0" layoutY="120.0" text="Nom :" textFill="#d08617">
             <font>
@@ -108,7 +108,7 @@
                 <Font name="Bauhaus 93" size="15.0" />
             </font>
         </Label>
-        <Button fx:id="editerProfile" layoutX="411.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleUpadate" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Editer Profile">
+        <Button fx:id="editerProfile" layoutX="552.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleUpadate" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Editer Profile">
             <font>
                 <Font name="Bauhaus 93" size="13.0" />
             </font>
@@ -121,35 +121,43 @@
                 <Font name="Bauhaus 93" size="33.0" />
             </font>
         </Label>
-      <Label fx:id="nom" layoutX="385.0" layoutY="118.0" prefHeight="17.0" prefWidth="133.0" textFill="#d08617">
+      <Label fx:id="nom" layoutX="385.0" layoutY="118.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="prenom" layoutX="387.0" layoutY="149.0" prefHeight="17.0" prefWidth="133.0" textFill="#d08617">
+      <Label fx:id="prenom" layoutX="387.0" layoutY="149.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="email" layoutX="387.0" layoutY="184.0" prefHeight="17.0" prefWidth="133.0" textFill="#d08617">
+      <Label fx:id="email" layoutX="387.0" layoutY="184.0" prefHeight="24.0" prefWidth="298.0" textFill="#d08617">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="mdp" layoutX="386.0" layoutY="222.0" prefHeight="17.0" prefWidth="133.0" textFill="#d08617">
+      <Label fx:id="mdp" layoutX="386.0" layoutY="222.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="sexe" layoutX="386.0" layoutY="258.0" prefHeight="17.0" prefWidth="133.0" textFill="#d08617">
+      <Label fx:id="sexe" layoutX="386.0" layoutY="258.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Label>
-      <Label fx:id="dn" layoutX="417.0" layoutY="294.0" prefHeight="17.0" prefWidth="133.0" textFill="#d08617">
+      <Label fx:id="dn" layoutX="417.0" layoutY="294.0" prefHeight="24.0" prefWidth="252.0" textFill="#d08617">
          <font>
             <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Label>
+      <Button fx:id="refresh" layoutX="552.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Refresh ">
+         <font>
+            <Font name="Bauhaus 93" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
     </children>
 </AnchorPane>

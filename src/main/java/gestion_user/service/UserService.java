@@ -30,11 +30,7 @@ public class UserService implements IService<User> {
     public void addAdherent(User c) {
         String requete = "INSERT INTO user (nom, prenom, mot_de_passe, email, date_de_naissance, sexe, role,salaire, id_bilan_financier) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
         try {
-            if (isEmailTaken(c.getEmail())) {
 
-                System.out.println("\n" +
-                        "Email est déjà pris. Veuillez en choisir un autre.");
-            } else {
             pst = conn.prepareStatement(requete);
             pst.setString(1, c.getNom());
             pst.setString(2, c.getPrenom());
@@ -47,7 +43,7 @@ public class UserService implements IService<User> {
             int idBilanFinancier = bilanFinancierService.getIdBilanFinancier();
             pst.setInt(9, idBilanFinancier);
 
-            pst.executeUpdate();}
+            pst.executeUpdate();
 
 
         } catch (SQLException e) {
@@ -198,7 +194,7 @@ public class UserService implements IService<User> {
     }
 
 
-    private boolean isEmailTaken(String email) {
+    public boolean isEmailExists(String email) {
         String query = "SELECT * FROM user WHERE email = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {
             pst.setString(1, email);
@@ -245,6 +241,7 @@ public class UserService implements IService<User> {
             throw new RuntimeException("Error storing reset token in the database", e);
         }
     }
+
 
 }
 

@@ -8,10 +8,14 @@ import gestion_user.entities.User;
 import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import utils.DataSource;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -64,6 +68,8 @@ public class UpdateAdherentController {
 
     @FXML
     private RadioButton rbMale;
+    @FXML
+    private Button refresh;
 
 
 
@@ -115,15 +121,32 @@ public class UpdateAdherentController {
                 Stage stage = (Stage) Confirm.getScene().getWindow();
 
                 stage.close();
+
             } else
         // Get the values from the text fields
 
             { User a1 = new User(adherentId, adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1, Role.valueOf(selectedRole));
         as.updateAdherent(adherentId,a1);
         // Implement logic for the update action when confirming changes
+
         Stage stage = (Stage) Confirm.getScene().getWindow();
         stage.close();
             }
+    }
+
+    private void openAdherentControllerStage() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Adherent.fxml"));
+        try {
+            Parent root = loader.load();
+            AdherentController adherentController = loader.getController();
+            adherentController.initialize();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Gestion des Users");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private Sexe getSelectedSexe() {
         RadioButton selectedRadioButton = (RadioButton) sexeGroup.getSelectedToggle();

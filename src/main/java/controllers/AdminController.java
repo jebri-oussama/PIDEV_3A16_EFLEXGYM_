@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdminController {
     @FXML
@@ -115,6 +117,15 @@ public class AdminController {
     private Label labelSalaire;
 
     @FXML
+    private Label checkEmail;
+
+    @FXML
+    private Label NonPrenom;
+
+    @FXML
+    private Label motdepaase;
+
+    @FXML
     private TextField salaire;
 
     @FXML
@@ -158,8 +169,32 @@ public class AdminController {
         //int adherentId = Integer.parseInt(id_adherent.getText());
         String adherentNom = nom.getText();
         String adherentPrenom = prenom.getText();
-        String adherentMotDePasse = mot_de_passe.getText();
+        if (!isValidName(adherentNom) || !isValidName(adherentPrenom)) {
+
+            NonPrenom.setText("Premier lettre Maj et contenir que des lettres");
+            NonPrenom.setVisible(true);
+            return;
+        }
+
         String adherentEmail = email.getText();
+        if (!isValidEmail(adherentEmail)) {
+            checkEmail.setText("Format invalid,\n email doit avoir '@' et '.'");
+            checkEmail.setVisible(true);
+            return;
+        }
+        if (as.isEmailExists(adherentEmail)) {
+            checkEmail.setText("Email déjà existe");
+            checkEmail.setVisible(true);
+            return;
+        }
+        String adherentMotDePasse = mot_de_passe.getText();
+        if (!validatePassword(adherentMotDePasse)) {
+            motdepaase.setText("Mot de passe invalide. Veuillez respecter les critères.");
+            motdepaase.setVisible(true);
+            return;
+        }
+
+
         Date adherentDateNaissance = Date.valueOf(dateNaissance.getValue().toString());
         Sexe sexe1 = getSelectedSexe();
         String selectedRole = getSelectedRole();
@@ -180,6 +215,22 @@ public class AdminController {
         adherentList.add(a1);}
 
     };
+    private boolean isValidEmail(String email) {
+        return email.contains("@") && email.contains(".") ;
+    }
+    private boolean isValidName(String name) {
+        return name.matches("[A-Z][a-zA-Z]*");
+    }
+    private boolean validatePassword(String password) {
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%/*^&+=!])(?=\\S+$).{8,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+
+        if (!(matcher.matches())) {
+
+            return false;
+        } return true;
+    }
 
     private Sexe getSelectedSexe() {
         RadioButton selectedRadioButton = (RadioButton) sexeGroup.getSelectedToggle();

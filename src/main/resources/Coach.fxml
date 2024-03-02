@@ -21,7 +21,7 @@
                   <Image url="@coach.png" />
                </image>
             </ImageView>
-            <Label layoutX="28.0" layoutY="299.0" text="Cours" textAlignment="CENTER">
+            <Label layoutX="28.0" layoutY="298.0" text="Cours" textAlignment="CENTER">
                <font>
                   <Font name="Bauhaus 93" size="25.0" />
                </font>
@@ -37,9 +37,9 @@
                   <InnerShadow />
                </effect>
             </Label>
-            <Label layoutX="27.0" layoutY="187.0" text="Coach ;" textAlignment="CENTER">
+            <Label layoutX="15.0" layoutY="185.0" prefHeight="20.0" prefWidth="81.0" text="Adherent :" textAlignment="CENTER">
                <font>
-                  <Font name="Bauhaus 93" size="25.0" />
+                  <Font name="Bauhaus 93" size="16.0" />
                </font>
                <effect>
                   <InnerShadow />
@@ -53,7 +53,7 @@
                   <InnerShadow />
                </effect>
             </Label>
-            <Button fx:id="logoutButton" layoutX="27.0" layoutY="435.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Se déconnecter">
+            <Button fx:id="logout" layoutX="27.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Se déconnecter">
                <font>
                   <Font name="Bauhaus 93" size="13.0" />
                </font>
@@ -61,7 +61,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Label layoutX="28.0" layoutY="342.0" text="Boite Mail" textAlignment="CENTER">
+            <Label layoutX="28.0" layoutY="341.0" text="Boite Mail" textAlignment="CENTER">
                <font>
                   <Font name="Bauhaus 93" size="25.0" />
                </font>
@@ -77,6 +77,10 @@
                   <InnerShadow />
                </effect>
             </Label>
+            <Label fx:id="NomPrenom" layoutX="44.0" layoutY="216.0" prefHeight="17.0" prefWidth="133.0">
+               <font>
+                  <Font name="Bauhaus 93" size="21.0" />
+               </font></Label>
          </children>
       </AnchorPane>
       <Label layoutX="268.0" layoutY="157.0" text="Prenom :" textFill="#d08617">
@@ -104,7 +108,7 @@
             <Font name="Bauhaus 93" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="logoutButton1" layoutX="411.0" layoutY="350.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Editer Profile">
+      <Button fx:id="editerProfile" layoutX="552.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleUpadate" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Editer Profile">
          <font>
             <Font name="Bauhaus 93" size="13.0" />
          </font>
@@ -115,6 +119,54 @@
       <Label layoutX="264.0" layoutY="49.0" text="Mon Profile" textAlignment="CENTER" textFill="#d08617">
          <font>
             <Font name="Bauhaus 93" size="33.0" />
+         </font>
+      </Label>
+      <Label fx:id="nom" layoutX="385.0" layoutY="118.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="prenom" layoutX="387.0" layoutY="149.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="email" layoutX="387.0" layoutY="184.0" prefHeight="24.0" prefWidth="298.0" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="mdp" layoutX="386.0" layoutY="222.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="sexe" layoutX="386.0" layoutY="258.0" prefHeight="24.0" prefWidth="258.0" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="dn" layoutX="417.0" layoutY="294.0" prefHeight="24.0" prefWidth="252.0" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="refresh" layoutX="552.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Refresh ">
+         <font>
+            <Font name="Bauhaus 93" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <Label layoutX="268.0" layoutY="334.0" text="Salaire :" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="salaire" layoutX="348.0" layoutY="331.0" prefHeight="24.0" prefWidth="189.0" textFill="#d08617">
+         <font>
+            <Font name="Bauhaus 93" size="21.0" />
          </font>
       </Label>
    </children>
