@@ -3,15 +3,11 @@ package GestionFinance.service;
 import GestionFinance.entites.*;
 import gestion_user.entities.Role;
 import gestion_user.entities.User;
+import gestion_user.entities.UserSession;
 import gestion_user.service.UserService;
-import org.testng.annotations.Test;
 import utils.DataSource;
 
 
-import javax.mail.MessagingException;
-
-
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -146,7 +142,74 @@ public class AbonnementService implements IService<Abonnement> {
         return null;
     }
 
+    @Override
+    public Abonnement readAbonnementForLoggedInUser() {
+        String query = "SELECT * FROM Abonnement " +
+                "INNER JOIN User ON Abonnement.id_adherent = User.id " +
+                "WHERE User.id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, UserSession.getLoggedInUser().getId());
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    // Extract abonnement details from the result set
+                    int id = rs.getInt("id");
+                    Type type = Type.valueOf(rs.getString("type"));
+                    double prix = rs.getDouble("prix");
+                    LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
+                    LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
+                    Etat etat = Etat.valueOf(rs.getString("etat"));
 
+                    // Create User object for the adherent
+                    User adherent = new User();
+                    adherent.setId(rs.getInt("id_adherent"));
+                    // You might need to set other properties of the adherent here
+
+                    // Create BilanFinancier object (assuming you have a method to retrieve it)
+                    BilanFinancierService bilanFinancierService = new BilanFinancierService();
+                    BilanFinancier bilanFinancier = bilanFinancierService.readById(rs.getInt("id_bilan_financier"));
+
+                    // Create and return the Abonnement object
+                    return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+
+
+    @Override
+    public List<Abonnement> readByUserId(int userId) {
+        String requete = "SELECT * FROM Abonnement WHERE id_adherent = ?";
+        List<Abonnement> abonnements = new ArrayList<>();
+        try {
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                Type type = Type.valueOf(rs.getString("type"));
+                double prix = rs.getDouble("prix");
+                LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
+                LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
+                Etat etat = Etat.valueOf(rs.getString("etat"));
+
+                UserService adherentService = new UserService();
+                User adherent = adherentService.readById(userId);
+
+                int idBilanFinancier = rs.getInt("id_bilan_financier");
+                BilanFinancierService bilanFinancierService = new BilanFinancierService();
+                BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
+
+                abonnements.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return abonnements;
+    }
 
     public long calculerTempsRestant(Abonnement abonnement) {
         LocalDate dateFinAbonnement = abonnement.getDate_fin();

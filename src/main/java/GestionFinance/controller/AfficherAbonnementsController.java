@@ -27,6 +27,8 @@ public class AfficherAbonnementsController implements Initializable {
     @FXML
     private Button dashboardId;
     @FXML
+    private Button adherentsId;
+    @FXML
     private Button bilanFinancierId;
     @FXML
     private Button abonnementsId;
@@ -218,4 +220,16 @@ public class AfficherAbonnementsController implements Initializable {
             refreshTable();
         }
     }
+
+    public void afficherAdherents(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAdherents.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

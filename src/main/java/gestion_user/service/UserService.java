@@ -1,12 +1,13 @@
 package gestion_user.service;
 
 
-import GestionFinance.entites.BilanFinancier;
+import GestionFinance.entites.Abonnement;
+import GestionFinance.service.AbonnementService;
 import GestionFinance.service.BilanFinancierService;
-import gestion_user.entities.PasswordHashing;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
+import gestion_user.entities.UserSession;
 import utils.DataSource;
 
 import java.sql.*;
@@ -25,6 +26,27 @@ public class UserService implements IService<User> {
     public UserService() {
         conn = DataSource.getInstance().getCnx();
         bilanFinancierService = new BilanFinancierService();
+
+    }
+
+    @Override
+    public void add(User user) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void update(int id, User user) {
+
+    }
+
+    @Override
+    public List<User> readAll() {
+        return null;
     }
 
     @Override
@@ -245,6 +267,59 @@ public class UserService implements IService<User> {
             throw new RuntimeException("Error storing reset token in the database", e);
         }
     }
+    @Override
+    public User readById(int id) {
+        String requete = "SELECT * FROM user WHERE id = ? and role='Adherent'";
+        System.out.println("Requête SQL pour récupérer l'utilisateur avec l'ID : " + id);
+        User user = null;
+        try (PreparedStatement pst = conn.prepareStatement(requete)) {
+            pst.setInt(1, id);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    Sexe sexe = Sexe.valueOf(rs.getString(7));
+                    Role role = Role.valueOf(rs.getString(8));
+                    user = new User(
+                            rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getDate(6),
+                            sexe,
+                            role
+                    );
+                    user.setId(rs.getInt(1));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        }
+        return user;
+    }
+
+    @Override
+    public User readAdherentById(int id) {
+        return null;
+    }
+
+    public int countByRole(Role role) throws SQLException {
+        String query = "SELECT COUNT(*) AS count FROM user WHERE role = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setString(1, role.toString());
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+        }
+        return 0;
+    }
+
+
+
+
+    // Method to get the Abonnement of the logged-in user
 
 
 }

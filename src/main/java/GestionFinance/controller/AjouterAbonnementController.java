@@ -79,7 +79,7 @@ public class AjouterAbonnementController {
         etatId.setItems(FXCollections.observableArrayList(Etat.values()));
         try {
             // Fetch only users with the role "Adherent"
-            List<User> adherents = userService.readAllAdherents();
+            List<User> adherents = userService.readAllAdherent();
             adherentId.setItems(FXCollections.observableArrayList(adherents));
 
             // Set up the StringConverter to display user names

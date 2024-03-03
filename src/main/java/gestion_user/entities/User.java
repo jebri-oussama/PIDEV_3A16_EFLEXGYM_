@@ -1,6 +1,7 @@
 package gestion_user.entities;
 
 
+import GestionFinance.entites.Abonnement;
 import javafx.beans.property.IntegerProperty;
 
 import java.sql.Date;
@@ -20,6 +21,8 @@ public class User {
     private double salaire;
 
     private int idBilanFinancier;
+
+    private Abonnement abonnement;
 
 
 
@@ -88,6 +91,10 @@ public class User {
         this.role=role;
         this.idBilanFinancier=idBilanFinancier;
         this.salaire=salaire;
+
+    }
+
+    public User() {
 
     }
 
@@ -194,5 +201,14 @@ public class User {
                 ", salaire=" + salaire +
                 ", idBilanFinancier=" + idBilanFinancier +
                 '}';
+    }
+
+
+    public Abonnement getAbonnement() {
+        return abonnement;
+    }
+
+    public void setAbonnement(Abonnement abonnement) {
+        this.abonnement = abonnement;
     }
 }

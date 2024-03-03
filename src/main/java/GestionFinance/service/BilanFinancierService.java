@@ -1,6 +1,7 @@
 package GestionFinance.service;
 
 
+import GestionFinance.entites.Abonnement;
 import GestionFinance.entites.BilanFinancier;
 import utils.DataSource;
 
@@ -122,6 +123,17 @@ public class BilanFinancierService implements IService<BilanFinancier> {
         }
         return null;
     }
+
+    @Override
+    public Abonnement readAbonnementForLoggedInUser() {
+        return null;
+    }
+
+    @Override
+    public List<Abonnement> readByUserId(int userId) {
+        return null;
+    }
+
     public int getIdBilanFinancier() {
         List<BilanFinancier> bilanFinanciers = readAll();
         if (!bilanFinanciers.isEmpty()) {
