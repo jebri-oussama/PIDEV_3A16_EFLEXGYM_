@@ -1,4 +1,5 @@
 package Gestion_planing.Controllers;
+
 import Gestion_planing.entities.TypeCours;
 import Gestion_planing.entities.cours;
 import Gestion_planing.service.CoursService;
@@ -9,89 +10,79 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class UpdateCourController {
-        private final CoursService coursService = new CoursService();
+    private final CoursService coursService = new CoursService();
 
-        @FXML
-        private Scene currentScene;
+    @FXML
+    private Scene currentScene;
 
+    @FXML
+    private TextField nomId;
 
-        @FXML
-        private TextField nomId;
+    @FXML
+    private ComboBox<TypeCours> typeeId;
 
+    @FXML
+    private TextField duréeId;
 
-        @FXML
-        private ComboBox<TypeCours> typeeId;
+    @FXML
+    private Button confirmerId;
 
+    public void initData(int id) {
+        cours cour = coursService.readById(id);
+        nomId.setText(cour.getNom().toString());
+        typeeId.setValue(cour.getType());
+        duréeId.setText(cour.getDuree().toString());
+    }
 
-        @FXML
-        private TextField duréeId;
+    public void setCurrentScene(Scene scene) {
+        this.currentScene = scene;
+    }
 
-        @FXML
-        private Button confirmerId;
+    public void update(ActionEvent actionEvent) {
+        // Récupération des valeurs des champs et des sélecteurs
+        String nom = nomId.getText();
+        TypeCours selectedType = typeeId.getValue();
+        String duree = duréeId.getText();
 
-        public void initData(int id) {
-            cours cour = coursService.readById(id);
-            nomId.setText(cour.getNom().toString());
-            typeeId.setValue(cour.getType());
-            duréeId.setText(cour.getDuree().toString());
-        }
-        public void setCurrentScene(Scene scene) {
-            this.currentScene = scene;
-        }
+        // Création de l'objet Abonnement avec les valeurs récupérées
+        cours cour = new cours(nom, selectedType, duree);
 
+        // Appel de la méthode update de CourService pour mettre à jour le cour dans la base de données
+        coursService.update(cour);
 
+        // Nettoyage des champs
+        clearFields();
 
-        public void update(ActionEvent actionEvent) {
-            // Récupération des valeurs des champs et des sélecteurs
-            String nom = nomId.getText();
-            TypeCours selectedType = typeeId.getValue();
-            String duree = duréeId.getText();
+        // Fermeture de la fenêtre
+        Stage stage = (Stage) confirmerId.getScene().getWindow();
+        stage.close();
 
-            // Création de l'objet Abonnement avec les valeurs récupérées
-            cours cour = new cours(nom, selectedType, duree);
+        // Redirection vers l'interface Afficher cour
+        redirectToAfficherCour();
+    }
 
-            // Appel de la méthode update de CourService pour mettre à jour le cour dans la base de données
-            coursService.update(cour);
-
-            // Nettoyage des champs
-            clearFields();
-
-            // Fermeture de la fenêtre
-            nomId.getScene().getWindow().hide();
-
-            // Redirection vers l'interface Afficher cour
-            redirectToAfficherCour();
-
-        }
-
-
-        private void redirectToAfficherCour() {
-            Stage stage = (Stage) currentScene.getWindow();
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                AfficherCourController controller = loader.getController();
-                controller.refreshTable(); // Actualiser la table des abonnements
-                stage.show(); // Assurez-vous d'afficher la nouvelle scène après la mise à jour
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        private void clearFields() {
-            nomId.clear();
-            typeeId.getSelectionModel().clearSelection();
-            duréeId.clear();
+    private void redirectToAfficherCour() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherCour.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
+    private void clearFields() {
+        nomId.clear();
+        typeeId.getSelectionModel().clearSelection();
+        duréeId.clear();
+    }
+}

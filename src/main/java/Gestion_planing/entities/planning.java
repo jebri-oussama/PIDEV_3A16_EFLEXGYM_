@@ -14,6 +14,8 @@ public class planning {
     private cours id_cour;
     private User id_coach;
 
+    public planning() {
+    }
 
     public planning(int id, String salle, int nb_place_max, LocalDate date, String heure, cours id_cour, User id_coach) {
         this.id = id;
@@ -33,6 +35,7 @@ public class planning {
         this.id_cour = id_cour;
         this.id_coach = id_coach;
     }
+
 
     public int getId() {
         return id;

@@ -1,10 +1,12 @@
 package Gestion_planing.test;
 
+import Gestion_planing.entities.Reservation;
 import Gestion_planing.entities.TypeCours;
 import Gestion_planing.entities.cours;
 import Gestion_planing.entities.planning;
 import Gestion_planing.service.CoursService;
 import Gestion_planing.service.PlanningService;
+import Gestion_planing.service.ReservationService;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
@@ -14,6 +16,8 @@ import utils.DataSource;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+
+import static Gestion_planing.entities.TypeCours.Presentiel;
 
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -33,7 +37,7 @@ public class Main {
         PlanningService PS = new PlanningService() ;
         PS.readAll().forEach(System.out::println);*/
 
-        User user=new User();
+       /* User user=new User();
         cours cour=new cours();
         CoursService cs= new CoursService();
         UserService us =new UserService();
@@ -47,7 +51,22 @@ public class Main {
 
         planning p1=new planning(2,"s2",4,LocalDate.parse("2024-02-10"),"44",cour,user);
 PlanningService pla=new PlanningService();
-pla.update(p1);
+pla.update(p1);*/
+       /* cours cour = new cours("abdo",Presentiel,"3h");
+        CoursService cs = new CoursService();
+        //cs.add(cour);
+        cours c1 = new cours(2,"Zomba",Presentiel,"1h");
+        cs.update(c1);*/
+        User u=new User();
+        planning plan=new planning();
+        PlanningService p= new PlanningService();
+        UserService us =new UserService();
+        u=us.readById(3);
+        plan=p.readById(4);
+        Reservation r=new Reservation(u,plan,"22554446");
+        ReservationService rs=new ReservationService();
+        //rs.add(r);
+        System.out.println(rs.readById(1));
 
 
 

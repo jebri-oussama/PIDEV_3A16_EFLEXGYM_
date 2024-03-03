@@ -92,7 +92,7 @@ public class UpdateUnPlaning implements Initializable {
             int nbplacemax = Integer.parseInt(nbplaceId.getText());
             LocalDate localDate = dateId.getValue();
             Date date = Date.valueOf(localDate);
-        String sall = salle.getText();
+            String sall = salle.getText();
             String heur = tempId.getText();
             int coachIdSelected = coachId.getValue();
             int courIdSelected = courId.getValue();

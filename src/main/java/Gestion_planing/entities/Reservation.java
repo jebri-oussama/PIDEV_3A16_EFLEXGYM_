@@ -5,20 +5,23 @@ import gestion_user.entities.User;
 
 public class Reservation {
     private int id_reservation;
-    private User user;
+    private User id_user	;
 
-    private planning planing;
+    private planning id_planing;
+    private String num_tell;
 
-    public Reservation(int id_reservation, User user , planning planing) {
+    public Reservation(int id_reservation, User id_user, planning id_planing, String num_tell) {
         this.id_reservation = id_reservation;
-        this.user = user;
-        this.planing = planing;
+        this.id_user = id_user;
+        this.id_planing = id_planing;
+        this.num_tell = num_tell;
     }
 
-    public Reservation( User user ,  planning planing) {
-        this.user = user;
-        this.planing = planing;
 
+    public Reservation(User id_user, planning id_planing, String num_tell) {
+        this.id_user = id_user;
+        this.id_planing = id_planing;
+        this.num_tell = num_tell;
     }
 
     public int getId_reservation() {
@@ -29,28 +32,37 @@ public class Reservation {
         this.id_reservation = id_reservation;
     }
 
-    public planning getPlaning() {
-        return planing;
+    public User getId_user() {
+        return id_user;
     }
 
-    public void setPlaning(planning planing) {
-        this.planing = planing;
+    public void setId_user(User id_user) {
+        this.id_user = id_user;
     }
 
-    public User getUser() {
-        return user;
+    public planning getId_planing() {
+        return id_planing;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setId_planing(planning id_planing) {
+        this.id_planing = id_planing;
+    }
+
+    public String getNum_tell() {
+        return num_tell;
+    }
+
+    public void setNum_tell(String num_tell) {
+        this.num_tell = num_tell;
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "id_reservation=" + id_reservation +
-                ", user=" + user +
-                ", planing=" + planing +
+                ", id_user=" + id_user +
+                ", id_planing=" + id_planing +
+                ", num_tell='" + num_tell + '\'' +
                 '}';
     }
 }

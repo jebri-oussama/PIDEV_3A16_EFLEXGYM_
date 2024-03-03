@@ -16,13 +16,12 @@ public class CoursService implements IntService<cours> {
         conn= DataSource.getInstance().getCnx();
     }
     public void add(cours c){
-        String requete = "INSERT INTO cours (id, nom, type, duree) VALUES (?, ?, ?, ?)";
+        String requete = "INSERT INTO cours ( nom, type, duree) VALUES (?, ?, ?)";
         try {
             pst = conn.prepareStatement(requete);
-            pst.setInt(1, c.getId());
-            pst.setString(2, c.getNom());
-            pst.setString(3,c.getType().toString());
-            pst.setString(4, c.getDuree());
+            pst.setString(1, c.getNom());
+            pst.setString(2,c.getType().toString());
+            pst.setString(3, c.getDuree());
 
             pst.executeUpdate();
         } catch (SQLException e) {

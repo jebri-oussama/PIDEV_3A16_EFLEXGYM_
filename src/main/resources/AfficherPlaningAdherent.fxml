@@ -53,7 +53,7 @@
             </Button>
          </children>
       </VBox>
-      <TableView fx:id="planingTable" layoutX="238.0" layoutY="45.0" prefHeight="354.0" prefWidth="1257.0">
+      <TableView fx:id="planingTable" layoutX="238.0" layoutY="45.0" prefHeight="354.0" prefWidth="1096.0">
          <columns>
             <TableColumn fx:id="salleColumn" prefWidth="200.8000087738037" style="-fx-background-color: EEEE19;" styleClass="font" text="salle">
                <cellValueFactory>
@@ -62,42 +62,32 @@
             </TableColumn>
             <TableColumn fx:id="nbplacemaxColumn" minWidth="0.0" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="nb_place_max">
                <cellValueFactory>
-                  <PropertyValueFactory property="prix" />
+                  <PropertyValueFactory property="nbplace" />
                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="100.0" style="-fx-background-color: EEEE19;" text="date">
                <cellValueFactory>
-                  <PropertyValueFactory property="date_debut" />
+                  <PropertyValueFactory property="date" />
                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="heureColumn" minWidth="0.0" prefWidth="186.39993286132812" style="-fx-background-color: EEEE19;" text="heure">
-               <cellFactory>
-                  <PropertyValueFactory property="modifierButton" />
-               </cellFactory>
+               <cellValueFactory>
+                  <PropertyValueFactory property="heure" />
+               </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="idcourColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_cour ">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
+               <cellValueFactory>
+                  <PropertyValueFactory property="idcour" />
+               </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="iduserColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="id_user">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
+               <cellValueFactory>
+                  <PropertyValueFactory property="iduser" />
+               </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="modifierColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Modifier">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
-            </TableColumn>
-            <TableColumn fx:id="supprimerColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Supprimer">
-               <cellFactory>
-                  <PropertyValueFactory property="supprimerButton" />
-               </cellFactory>
-            </TableColumn>
+            <TableColumn fx:id="ReserverColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Reserver"/>
          </columns>
       </TableView>
-      <Button fx:id="reserver" layoutX="702.0" layoutY="458.0" onAction="#reserver" prefHeight="44.0" prefWidth="267.0" text="reserver" />
       <AnchorPane prefHeight="62.0" prefWidth="1089.0" />
    </children>
 </AnchorPane>

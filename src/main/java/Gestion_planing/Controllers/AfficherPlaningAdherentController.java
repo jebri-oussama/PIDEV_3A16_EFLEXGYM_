@@ -1,32 +1,33 @@
 package Gestion_planing.Controllers;
 
+import Gestion_planing.entities.Reservation;
 import Gestion_planing.entities.planning;
 import Gestion_planing.service.PlanningService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AfficherPlaningAdherentController {
+public class AfficherPlaningAdherentController implements Initializable {
         @FXML
         private TableView<planning> planingTable;
         @FXML
-        private TableColumn<planning, Void> modifierColumn;
-        @FXML
-        private TableColumn<planning, Void> supprimerColumn;
+        private TableColumn<planning, Void> ReserverColumn;
 
         @FXML
         private TableColumn<planning, String> salleColumn;
@@ -34,6 +35,7 @@ public class AfficherPlaningAdherentController {
         private TableColumn<planning, Integer> nbplacemaxColumn;
         @FXML
         private TableColumn<planning, String> dateColumn;
+        @FXML
         private TableColumn<planning, String> heureColumn;
 
         @FXML
@@ -50,33 +52,36 @@ public class AfficherPlaningAdherentController {
             salleColumn.setCellValueFactory(new PropertyValueFactory<>("salle"));
             nbplacemaxColumn.setCellValueFactory(new PropertyValueFactory<>("nb_place_max"));
             dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-            heureColumn.setCellValueFactory(new PropertyValueFactory<>("heur"));
+            heureColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
             idcourColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_cour().getId()).asObject());
             iduserColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_coach().getId()).asObject());
-
             refreshTable();
 
-            modifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifierButton"));
-            modifierColumn.setCellFactory(param -> new TableCell<>() {
-                private final Button button = new Button("Modifier");
-            });
+            ReserverColumn.setCellFactory(param -> new TableCell<planning, Void>() {
+                private final Button button = new Button("Reserver");
 
-            supprimerColumn.setCellValueFactory(new PropertyValueFactory<>("supprimerButton"));
-            supprimerColumn.setCellFactory(param -> new TableCell<>() {
-                private final Button button = new Button("Supprimer");
+                {
+                    button.setOnAction(event -> {
+                        planning p = getTableView().getItems().get(getIndex());
+                        ReserverPlaning(p);
+                    });
+                }
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
 
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        setGraphic(button);
+                        setText(null);
+                    }
+                }
             });
         }
-
-        public void refreshTable() {
-            plannings.clear();
-            List<planning> planningList = planningService.readAll();
-            plannings.addAll(planningList);
-            planingTable.setItems(plannings);
-        }
-
         @FXML
-        public void reserver (ActionEvent actionEvent) {
+        public void ReserverPlaning(planning p) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReserverUnCour.fxml"));
                 Parent root = loader.load();
@@ -84,14 +89,20 @@ public class AfficherPlaningAdherentController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
 
-                PlanifierUnCourController controller = loader.getController();
+                ReserverUnCourController controller = loader.getController();
                 controller.setCurrentScene(scene);
-
                 stage.show();
+                refreshTable();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
+    public void refreshTable() {
+        plannings.clear();
+        List<planning> planningList = planningService.readAll();
+        plannings.addAll(planningList);
+        planingTable.setItems(plannings);
     }
+    }
+
 

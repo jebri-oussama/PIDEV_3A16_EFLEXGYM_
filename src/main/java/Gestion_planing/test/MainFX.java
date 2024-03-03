@@ -30,7 +30,7 @@ public class MainFX extends Application {
     }*/
 public void start(Stage primaryStage) throws Exception {
     // Charger le fichier FXML
-    Parent root = FXMLLoader.load(getClass().getResource("/AfiicherPlaningAdmine.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/AfficherPlaningAdherent.fxml"));
 
     // Créer la scène
     Scene scene = new Scene(root);
