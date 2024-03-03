@@ -35,6 +35,7 @@
             <Button text="payer en ligne" onAction="#openPaymentForm" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
             <!-- Continue Shopping Button -->
             <Button text="Continue le Shopping" onAction="#goBackToProducts" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
+            <Button text="livraison" onAction="#gotomap" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
         </HBox>
     </bottom>
 </BorderPane>

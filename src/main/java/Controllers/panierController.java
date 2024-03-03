@@ -158,4 +158,27 @@ public class panierController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void gotomap(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/userInterface.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller
+            userInterfaceController userInterfaceController = loader.getController();
+            Stage panierStage = (Stage) panierTable.getScene().getWindow();
+            panierStage.close();
+
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("your location");
+            stage.show();
+            refreshTable();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
