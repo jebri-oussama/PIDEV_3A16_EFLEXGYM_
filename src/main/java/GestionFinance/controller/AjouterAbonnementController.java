@@ -20,9 +20,9 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class AjouterAbonnementController {
     private final AbonnementService abonnementService = new AbonnementService();
@@ -30,6 +30,7 @@ public class AjouterAbonnementController {
     private final BilanFinancierService bilanFinancierService = new BilanFinancierService();
 
     private Scene currentScene;
+    private Map<String, Integer> moisBilanFinancierMap; // Map pour associer chaque nom de mois à un ID de bilan financier
 
     @FXML
     private DatePicker dateDebutId;
@@ -38,7 +39,10 @@ public class AjouterAbonnementController {
     private DatePicker dateFinId;
 
     @FXML
-    private TextField etatId;
+    private ComboBox<Type> typeId;
+
+    @FXML
+    private ComboBox<Etat> etatId;
 
     @FXML
     private Button dashboardId;
@@ -58,8 +62,7 @@ public class AjouterAbonnementController {
     @FXML
     private ComboBox<String> bilanFinancierId;
 
-    @FXML
-    private TextField typeId;
+
 
     @FXML
     private Button ajouterId;
@@ -70,13 +73,20 @@ public class AjouterAbonnementController {
 
     @FXML
     void initialize() {
+        typeId.setItems(FXCollections.observableArrayList(Type.values()));
+
+        // Remplir la ComboBox etatId avec les valeurs de l'énumération Etat
+        etatId.setItems(FXCollections.observableArrayList(Etat.values()));
         try {
-            List<User> users = userService.readAll();
-            adherentId.setItems(FXCollections.observableArrayList(users));
+            // Fetch only users with the role "Adherent"
+            List<User> adherents = userService.readAllAdherents();
+            adherentId.setItems(FXCollections.observableArrayList(adherents));
+
+            // Set up the StringConverter to display user names
             adherentId.setConverter(new StringConverter<User>() {
                 @Override
                 public String toString(User user) {
-                    return user.getNom();
+                    return (user != null) ? user.getNom() : ""; // Check if user is null
                 }
 
                 @Override
@@ -87,15 +97,22 @@ public class AjouterAbonnementController {
 
             List<String> mois = Arrays.asList("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
             bilanFinancierId.setItems(FXCollections.observableArrayList(mois));
+
+            // Initialize the map to associate each month name with a financial statement ID
+            moisBilanFinancierMap = new HashMap<>();
+            for (int i = 0; i < mois.size(); i++) {
+                moisBilanFinancierMap.put(mois.get(i), i + 1); // IDs start from 1
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+
     @FXML
     void ajouter() {
-        if(typeId.getText().isEmpty() || prixId.getText().isEmpty() || dateDebutId.getValue() == null ||
-                dateFinId.getValue() == null || etatId.getText().isEmpty() || adherentId.getValue() == null ||
+        if(typeId.getValue()==null || prixId.getText().isEmpty() || dateDebutId.getValue() == null ||
+                dateFinId.getValue() == null || etatId.getValue()==null || adherentId.getValue() == null ||
                 bilanFinancierId.getValue() == null){
             showAlert("Veuillez remplir tous les champs.");
             return;
@@ -112,13 +129,15 @@ public class AjouterAbonnementController {
             return;
         }
 
-        Type type = Type.valueOf(typeId.getText());
+        Type type = Type.valueOf(String.valueOf(typeId.getValue()));
         double prix = Double.parseDouble(prixId.getText());
         LocalDate dateDebut = dateDebutId.getValue();
         LocalDate dateFin = dateFinId.getValue();
-        Etat etat = Etat.valueOf(etatId.getText());
+        Etat etat = Etat.valueOf(String.valueOf(etatId.getValue()));
         User adherent = adherentId.getValue();
-        BilanFinancier bilanFinancier = bilanFinancierService.readById(Integer.parseInt(bilanFinancierId.getValue()));
+        String moisSelectionne = bilanFinancierId.getValue();
+        int idBilanFinancier = moisBilanFinancierMap.get(moisSelectionne); // Obtenir l'ID associé au mois sélectionné
+        BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
         Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
 
         abonnementService.add(abonnement);
@@ -137,11 +156,11 @@ public class AjouterAbonnementController {
     }
 
     private void clearFields() {
-        typeId.clear();
+        typeId.getSelectionModel().clearSelection();
         prixId.clear();
         dateDebutId.getEditor().clear();
         dateFinId.getEditor().clear();
-        etatId.clear();
+        etatId.getSelectionModel().clearSelection();
         adherentId.getSelectionModel().clearSelection();
         bilanFinancierId.getSelectionModel().clearSelection();
     }

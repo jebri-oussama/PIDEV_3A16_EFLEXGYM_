@@ -1,34 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.jfree.chart.fx.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
+<?import org.jfree.chart.fx.ChartViewer?>
+<AnchorPane prefHeight="500.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
     <children>
-        <Text layoutX="306.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérents :" textAlignment="CENTER" wrappingWidth="84.0">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Text>
-        <Text layoutX="314.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coachs :" textAlignment="CENTER" wrappingWidth="84.0">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Text>
-        <Text fx:id="adherentsText" layoutX="410.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Text>
-        <Text fx:id="coachsText" layoutX="410.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Text>
         <ChartViewer fx:id="bilanChartViewer" layoutX="227.0" layoutY="186.0" prefHeight="300.0" prefWidth="350.0" />
         <ChartViewer fx:id="oscillationsChartViewer" layoutX="600.0" layoutY="192.0" prefHeight="300.0" prefWidth="350.0" />
         <Button fx:id="generatePDFButton" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" text="Générer PDF" />
@@ -64,7 +47,7 @@
                         <Font name="Arial" size="22.0" />
                     </font>
                 </Button>
-                <Button fx:id="abonnementsId" alignment="CENTER" onAction="#afficherAbonnements" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements">
+                <Button fx:id="abonnementsId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#afficherAbonnements" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements">
                     <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                     </padding>
@@ -107,6 +90,36 @@
                 </Button>
             </children>
         </VBox>
+        <Text layoutX="373.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérents" textAlignment="CENTER" wrappingWidth="84.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text fx:id="adherentsText" layoutX="395.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text layoutX="743.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coachs " textAlignment="CENTER" wrappingWidth="84.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text fx:id="coachsText" layoutX="765.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+      <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="281.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@adherent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="112.0" layoutX="643.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@coach.png" />
+         </image>
+      </ImageView>
 
     </children>
 </AnchorPane>

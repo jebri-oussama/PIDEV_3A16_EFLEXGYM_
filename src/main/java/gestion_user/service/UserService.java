@@ -150,6 +150,28 @@ public class UserService implements IService<User> {
         return user;
     }
 
+    public List<User> readAllAdherents() {
+        String requete = "SELECT * FROM user WHERE role = 'Adherent'";
+        List<User> adherents = new ArrayList<>();
+        try {
+            ste = conn.createStatement();
+            ResultSet rs = ste.executeQuery(requete);
+            while (rs.next()) {
+                Sexe sexe = Sexe.valueOf(rs.getString(7));
+                Role role = Role.valueOf(rs.getString(8));
+                User ad = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6), sexe, role);
+                ad.setId(rs.getInt(1));
+                ad.setSalaire(rs.getDouble(9));
+                ad.setId_bilan_financier(rs.getInt(10));
+                adherents.add(ad);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return adherents;
+    }
+
+
     public int countByRole(Role role) throws SQLException {
         String query = "SELECT COUNT(*) AS count FROM user WHERE role = ?";
         try (PreparedStatement pst = conn.prepareStatement(query)) {

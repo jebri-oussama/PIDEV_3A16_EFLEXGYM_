@@ -141,11 +141,9 @@ public class DashboardController implements Initializable {
             LocalDate date = bilan.getDate_debut();
             Month month = date.getMonth();
             String mois = month.getDisplayName(java.time.format.TextStyle.FULL, Locale.FRENCH);
-            // Vous devez obtenir les revenus des abonnements et des produits par mois
-            // par exemple, vous pourriez avoir des méthodes dans BilanFinancierService pour récupérer ces données
-            // et les ajouter au dataset
-            double revenusAbonnements = bilan.getRevenus_abonnements();
-            double revenusProduits = bilan.getRevenus_produits();
+            // Call methods to retrieve revenues
+            double revenusAbonnements = bilan.recupererRevenuAbonnements();
+            double revenusProduits = bilan.recupererRevenusProduits();
 
             dataset.addValue(revenusAbonnements, "Revenus Abonnements", mois);
             dataset.addValue(revenusProduits, "Revenus Produits", mois);
@@ -161,6 +159,7 @@ public class DashboardController implements Initializable {
         // Afficher le graphique dans ChartViewer
         oscillationsChartViewer.setChart(chart);
     }
+
 
     private void updateAdherents(int count) {
         adherentsText.setText(String.valueOf(count));
