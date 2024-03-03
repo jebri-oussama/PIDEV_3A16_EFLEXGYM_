@@ -19,6 +19,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+
+
 
 import javafx.stage.Stage;
 import utils.DataSource;
@@ -142,6 +146,19 @@ public class AdminController {
     @FXML
     private RadioButton male;
 
+    private FilteredList<User> filteredUsers;
+
+
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button showAdherentsButton;
+
+    @FXML
+    private Button showCoachsButton;
+    @FXML
+    private Button showAdminsButton;
+
     private Connection conn;
     private Statement ste;
     private PreparedStatement pst;
@@ -216,10 +233,10 @@ public class AdminController {
             adherentList.add(a1);
 
         } else {
-        // Get the values from the text fields
-        User a1 = new User(adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1,Role.valueOf(selectedRole));
-        as.addAdherent(a1);
-        adherentList.add(a1);}
+            // Get the values from the text fields
+            User a1 = new User(adherentNom, adherentPrenom, adherentMotDePasse, adherentEmail, adherentDateNaissance, sexe1,Role.valueOf(selectedRole));
+            as.addAdherent(a1);
+            adherentList.add(a1);}
 
     };
     private boolean isValidEmail(String email) {
@@ -283,6 +300,54 @@ public class AdminController {
         readAllAdherents();
         initializeRefreshButton();
         initializeIdBilanFinanciersChoiceBox();
+
+        // Create FilteredList and bind it to the TableView
+        filteredUsers = new FilteredList<>(adherentList, p -> true);
+
+        // Bind the filter predicate to the search text property
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredUsers.setPredicate(user -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true; // Show all users when the filter is empty
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // You can modify this logic to match your search criteria
+                return user.getNom().toLowerCase().contains(lowerCaseFilter)
+                        || user.getPrenom().toLowerCase().contains(lowerCaseFilter)
+                        || user.getEmail().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
+        // Wrap the FilteredList in a SortedList
+        SortedList<User> sortedUsers = new SortedList<>(filteredUsers);
+
+        // Bind the SortedList comparator to the TableView comparator
+        sortedUsers.comparatorProperty().bind(list.comparatorProperty());
+
+        // Set the TableView items to the SortedList
+        list.setItems(sortedUsers);
+
+        showAdherentsButton.setOnAction(event -> showAdherents());
+        showCoachsButton.setOnAction(event -> showCoaches());
+        showAdminsButton.setOnAction(event -> showAdmins());
+
+    }
+
+    private void showAdherents() {
+        // Update the FilteredList predicate to show only adherents
+        filteredUsers.setPredicate(user -> user.getRole() == Role.Adherent);
+    }
+
+    private void showCoaches() {
+        // Update the FilteredList predicate to show only coaches
+        filteredUsers.setPredicate(user -> user.getRole() == Role.Coach);
+    }
+
+    private void showAdmins() {
+        // Update the FilteredList predicate to show only coaches
+        filteredUsers.setPredicate(user -> user.getRole() == Role.Admin);
     }
     private void initializeIdBilanFinanciersChoiceBox() {
         List<Integer> idBilanFinanciersChoices = BilanFinancierService.getAllIdBilanFinancier();
@@ -300,12 +365,14 @@ public class AdminController {
         refreshButton.setOnAction(event -> {
             adherentList.clear();
             readAllAdherents();
+            filteredUsers.setPredicate(user -> true);
         });
     }
     @FXML
     private void handleRefresh(ActionEvent event) {
         adherentList.clear();
         readAllAdherents();
+        filteredUsers.setPredicate(user -> true);
     }
 
     private void initializeTableView() {
@@ -336,27 +403,27 @@ public class AdminController {
 
 
 
-        private void addButtonColumns() {
+    private void addButtonColumns() {
 
-            colUpdate.setCellFactory(param -> new TableCell<>() {
-                private final Button updateButton = new Button("Modifier");
+        colUpdate.setCellFactory(param -> new TableCell<>() {
+            private final Button updateButton = new Button("Modifier");
 
-                {  updateButton.setStyle("-fx-text-fill: #f19a00; -fx-background-color: #000000;");
-                    updateButton.setOnAction(event -> {
-                        User selectedAdherent = getTableView().getItems().get(getIndex());
-                        openUpdatePage(selectedAdherent);
-                    });
-                }
+            {  updateButton.setStyle("-fx-text-fill: #f19a00; -fx-background-color: #000000;");
+                updateButton.setOnAction(event -> {
+                    User selectedAdherent = getTableView().getItems().get(getIndex());
+                    openUpdatePage(selectedAdherent);
+                });
+            }
 
-                @Override
-                protected void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(updateButton);
-                    }                }
-            });
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(updateButton);
+                }                }
+        });
 
         colDelete.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Supprimer");
@@ -383,17 +450,17 @@ public class AdminController {
 
         });
 
-            list.setRowFactory(tv -> new TableRow<User>() {
-                @Override
-                protected void updateItem(User item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setStyle("");
-                    } else {
-                        setStyle("-fx-background-color: #ffb311;");
-                    }
+        list.setRowFactory(tv -> new TableRow<User>() {
+            @Override
+            protected void updateItem(User item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setStyle("");
+                } else {
+                    setStyle("-fx-background-color: #ffb311;");
                 }
-            });
+            }
+        });
 
 
 
@@ -420,7 +487,7 @@ public class AdminController {
     }
 
 
-        private void readAllAdherents() {
+    private void readAllAdherents() {
         List<User> adherents = new UserService().readAllAdherent();
         adherentList.addAll(adherents);
 
@@ -440,8 +507,8 @@ public class AdminController {
 
     private void openUpdatePage(User selectedAdherent) {
 
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/UpdateAdherent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("/UpdateAdherent.fxml"));
         try {
             Parent root = loader.load();
 
@@ -491,8 +558,3 @@ public class AdminController {
 
 
 }
-
-
-
-
-

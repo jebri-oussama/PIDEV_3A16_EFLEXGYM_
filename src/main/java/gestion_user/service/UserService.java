@@ -7,7 +7,7 @@ import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
 import utils.DataSource;
-
+import gestion_user.entities.PasswordHashing;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -34,6 +34,7 @@ public class UserService implements IService<User> {
             pst = conn.prepareStatement(requete);
             pst.setString(1, c.getNom());
             pst.setString(2, c.getPrenom());
+            // String hashedPassword = PasswordHashing.hashPassword();
             pst.setString(3, c.getMot_de_passe());
             pst.setString(4, c.getEmail());
             pst.setDate(5, c.getDate_de_naissance());

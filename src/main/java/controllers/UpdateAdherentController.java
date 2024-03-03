@@ -197,8 +197,6 @@ public class UpdateAdherentController {
         String selectedRole = getSelectedRole();
         boolean isCoachSelected = "Coach".equals(selectedRole);
 
-        labelBilan.setVisible(isCoachSelected);
-        idBilanChoiceBox.setVisible(isCoachSelected);
         labelSalaire.setVisible(isCoachSelected);
         Salaire.setVisible(isCoachSelected);
     }
