@@ -37,6 +37,9 @@ public class Suivi_Progre {
         this.idUser = idUser;
     }
 
+
+
+
     public double getIMC() {
         return poids / Math.pow(taille / 100, 2);
     }
@@ -70,7 +73,7 @@ public class Suivi_Progre {
         }
 
         // Construction du message d'évaluation
-        String message = "Votre IMC est " + imc + " (" + imcEvaluation + ") et votre IMG est " + img + " (" + imgEvaluation + "). ";
+        String message = "Votre IMC est " + imc + " (" + imcEvaluation + ") \n votre IMG est " + img + " (" + imgEvaluation + ").\n ";
 
         // Déterminer le programme en fonction de l'évaluation combinée de l'IMC et de l'IMG
         String programme = "";
@@ -91,7 +94,7 @@ public class Suivi_Progre {
         } else {
             message += "perdre du poids";
         }
-        message += ". Voir le programme " + programme + ". Courage!";
+        message += ". Voir le programme " + programme + ".\n Courage!";
 
         return message;
     }

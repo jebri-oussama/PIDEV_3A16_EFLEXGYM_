@@ -1,0 +1,34 @@
+/* Style pour le titre "Mes statistiques" */
+#titre {
+    -fx-underline: true; /* Sous-ligné */
+    -fx-alignment: center; /* Centré horizontalement */
+}
+
+/* Style pour le fond de l'AnchorPane */
+.root {
+    -fx-background-color: #fb8000; /* Fond orange */
+}
+
+/* Style pour les séries de données du graphique */
+.series0.chart-series-line { /* Couleur rouge pour "IMC" */
+    -fx-stroke: red;
+}
+
+.series1.chart-series-line { /* Couleur verte pour "IMG" */
+    -fx-stroke: green;
+}
+
+/* Style pour les labels du graphique */
+.axis-label {
+    -fx-text-fill: black; /* Texte noir */
+    -fx-font-size: 12px; /* Taille de police */
+}
+/* styles.css */
+.root {
+    -fx-background-color: #FB8000; /* Background color */
+}
+
+.title {
+    -fx-font-size: 24px; /* Font size */
+    -fx-text-fill: black; /* Text color */
+}

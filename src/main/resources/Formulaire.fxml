@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Formulaire">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Formulaire">
     <children>
         <Label id="titre" layoutX="259.0" layoutY="14.0" text="Mes Mesures" textFill="#85685d" underline="true" />
 
@@ -23,11 +23,11 @@
             </children>
         </Group>
         <Label layoutX="156.0" layoutY="56.0" text="Nom:" />
-        <TextField fx:id="nomField" layoutX="233.0" layoutY="53.0" prefHeight="25.0" prefWidth="200.0" />
+        <TextField fx:id="nomField" layoutX="273.0" layoutY="53.0" prefHeight="25.0" prefWidth="200.0" />
         <Label layoutX="146.0" layoutY="111.0" text="Prénom:" />
-        <TextField fx:id="prenomField" layoutX="233.0" layoutY="108.0" prefHeight="25.0" prefWidth="200.0" />
+        <TextField fx:id="prenomField" layoutX="268.0" layoutY="108.0" prefHeight="25.0" prefWidth="200.0" />
         <Label layoutX="159.0" layoutY="180.0" text="Âge:" />
-        <TextField fx:id="ageField" layoutX="233.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0" />
+        <TextField fx:id="ageField" layoutX="268.0" layoutY="177.0" prefHeight="25.0" prefWidth="100.0" />
         <Label layoutX="156.0" layoutY="231.0" text="Sexe:" />
         <RadioButton fx:id="hommeRadioButton" layoutX="268.0" layoutY="232.0" mnemonicParsing="false" text="Homme" />
         <RadioButton fx:id="femmeRadioButton" layoutX="393.0" layoutY="232.0" mnemonicParsing="false" text="Femme" />
@@ -40,7 +40,7 @@
         <Button layoutX="485.0" layoutY="366.0" mnemonicParsing="false" onAction="#enregistrerButtonClicked" prefHeight="25.0" prefWidth="100.0" text="Enregistrer" />
 
         <!-- Image "taille.png" -->
-        <ImageView fitHeight="80.0" fitWidth="60.0" layoutX="495.0" layoutY="239.0">
+        <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="495.0" layoutY="239.0">
             <image>
                 <Image url="@taille.png" />
             </image>
