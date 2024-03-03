@@ -1,21 +1,22 @@
 package controller;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import gestion_suivi.entitis.Exercice;
-import gestion_suivi.service.Exercice_Service;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import gestion_suivi.entitis.Exercice;
+import gestion_suivi.service.Exercice_Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AfficherExerciceController {
     @FXML
@@ -40,6 +41,8 @@ public class AfficherExerciceController {
     private TableColumn<Exercice, String> typeColumn;
     @FXML
     private TableColumn<Exercice, Void> actionsColumn;
+    @FXML
+    private TextField searchField;
 
     private Exercice_Service exerciceService;
 
@@ -64,28 +67,28 @@ public class AfficherExerciceController {
         // Set custom cell factory for actions column
         actionsColumn.setCellFactory(createActionCellFactory());
 
-        addButton.setOnAction(event -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/AjouterExercice.fxml"));
-                Scene scene = new Scene(root, 900.0, 600.0);
-                Stage stage = (Stage) addButton.getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        affecterButton.setOnAction(event -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/AffecterExercice.fxml"));
-                Scene scene = new Scene(root, 900.0, 600.0);
-                Stage stage = (Stage) addButton.getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        addButton.setOnAction(event -> loadAjouterExerciceScene());
+        affecterButton.setOnAction(event -> loadAffecterExerciceScene());
+    }
+
+    private void loadAjouterExerciceScene() {
+        loadScene("/AjouterExercice.fxml");
+    }
+
+    private void loadAffecterExerciceScene() {
+        loadScene("/AffecterExercice.fxml");
+    }
+
+    private void loadScene(String fxmlPath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Scene scene = new Scene(root, 900.0, 600.0);
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Callback<TableColumn<Exercice, Void>, TableCell<Exercice, Void>> createActionCellFactory() {
@@ -123,36 +126,21 @@ public class AfficherExerciceController {
     }
 
     private void deleteExercice(Exercice exercice) {
-        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationAlert.setTitle("Confirmation");
-        confirmationAlert.setHeaderText("Confirm Delete");
-        confirmationAlert.setContentText("Are you sure you want to delete the suivi?");
-
-        // Add OK and Cancel buttons to the confirmation dialog
-        confirmationAlert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
-
-        // Show the confirmation dialog and wait for user input
-        confirmationAlert.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == ButtonType.OK) {
-                // User clicked OK, proceed with deletion
-                boolean isDeleted = exerciceService.delete(exercice);
-                if (isDeleted) {
-                    // Remove the deleted club from the table view
-                    exerciceTableView.getItems().remove(exercice);
-                    // Update the filtered data after deletion
-                    // filteredData.getSource().remove(club);
-                    showAlert("Success", "Suivi deleted successfully.", Alert.AlertType.INFORMATION);
-                } else {
-                    showAlert("Error", "Failed to delete suivi.", Alert.AlertType.ERROR);
-                }
-            }
-        });
+        // Suppression de l'exercice
+        boolean isDeleted = exerciceService.delete(exercice);
+        if (isDeleted) {
+            // Mettre à jour la table après la suppression
+            exerciceTableView.getItems().remove(exercice);
+            showAlert("Success", "Exercice supprimé avec succès.", Alert.AlertType.INFORMATION);
+        } else {
+            showAlert("Error", "Échec de la suppression de l'exercice.", Alert.AlertType.ERROR);
+        }
     }
 
     private void editExercice(Exercice exercice) {
         try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterExercice.fxml"));   Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterExercice.fxml"));
+            Parent root = loader.load();
             AjouterExerciceController exerciceController = loader.getController();
             exerciceController.populateFieldsWithExercie(exercice.getId());
             Scene scene = new Scene(root, 1320.0, 660.0);
@@ -175,5 +163,26 @@ public class AfficherExerciceController {
     private void populateTableView() {
         List<Exercice> exerciceList = exerciceService.readAll();
         exerciceTableView.getItems().addAll(exerciceList);
+    }
+
+    @FXML
+    private void search() {
+        populate();
+    }
+
+    private void populate() {
+        String searchTerm = searchField.getText().trim().toLowerCase();
+
+        ObservableList<Exercice> filteredExercices = FXCollections.observableArrayList(
+                exerciceService.readAll().stream()
+                        .filter(exercice -> exercice.getNom().toLowerCase().contains(searchTerm))
+                        .collect(Collectors.toList())
+        );
+
+        if (filteredExercices.isEmpty()) {
+            showAlert("Aucun exercice trouvé", "Aucun exercice trouvé avec le nom spécifié.", Alert.AlertType.INFORMATION);
+        } else {
+            exerciceTableView.setItems(filteredExercices);
+        }
     }
 }

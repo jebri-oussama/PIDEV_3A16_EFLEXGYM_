@@ -32,3 +32,18 @@
     -fx-font-size: 24px; /* Font size */
     -fx-text-fill: black; /* Text color */
 }
+/* styles.css */
+.root {
+    -fx-background-color: black; /* Background color */
+}
+
+.title {
+    -fx-font-size: 24px; /* Font size */
+    -fx-text-fill: #FB8000; /* Text color */
+    -fx-underline: true; /* Underline */
+}
+
+.axis-label {
+    -fx-text-fill: black; /* Text color */
+    -fx-font-size: 12px; /* Font size */
+}

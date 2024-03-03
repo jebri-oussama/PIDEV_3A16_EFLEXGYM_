@@ -4,8 +4,11 @@ import gestion_suivi.entitis.Exercice;
 import gestion_suivi.entitis.Programme_personnalise;
 import gestion_suivi.entitis.Suivi_Progre;
 import gestion_suivi.pdf.PdfGenerator;
+import gestion_suivi.service.Exercice_Service;
 import gestion_suivi.service.Programme_personnalise_service;
 import gestion_suivi.service.Suivi_Progre_Service;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,24 +22,24 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
 
 public class ResultatController {
-
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private Label searchField;
     @FXML
     private AnchorPane root;
-
     @FXML
     private Button voirStatButton;
-
     @FXML
     private Label evaluationLabel;
-
     @FXML
     private Label programmeLabel;
-
     @FXML
     private TextField search; // Change to TextField for search input
     @FXML
@@ -83,6 +86,14 @@ public class ResultatController {
         exercicesTableView.getColumns().addAll(idColumn, nameColumn, descriptionColumn, nbrDeSetColumn, groupeMusculaireColumn, nbrDeRepetitionsColumn, categorieExerciceColumn, typeEquipementColumn);
         root = (AnchorPane) evaluationLabel.getParent();
         generatePDFButton.setOnAction(event -> generatePDF());
+
+        // Add listener to searchTextField for real-time search
+        searchTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                populate(newValue);
+            }
+        });
     }
 
     public void populateFieldsWithExercie(int id) {
@@ -138,13 +149,13 @@ public class ResultatController {
         }
     }
 
-    @FXML
-    private void searchByName() {
-        String searchTerm = search.getText().trim().toLowerCase();
+    private void populate(String searchTerm) {
+        searchTerm = searchTerm.trim().toLowerCase();
 
+        String finalSearchTerm = searchTerm;
         ObservableList<Exercice> filteredExercices = FXCollections.observableArrayList(
                 exercices.stream()
-                        .filter(exercice -> exercice.getNom().toLowerCase().contains(searchTerm))
+                        .filter(exercice -> exercice.getNom().toLowerCase().contains(finalSearchTerm))
                         .collect(Collectors.toList())
         );
 
@@ -163,8 +174,32 @@ public class ResultatController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    @FXML
     private void generatePDF() {
         String outputPath = "dashboard.pdf"; // Chemin où enregistrer le fichier PDF
         PdfGenerator.generatePdf(root, outputPath); // Passer le nœud racine de la scène
     }
+    @FXML
+    void redirecttomeal(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Meal.fxml"));
+            Parent root = loader.load();
+            MealController MealController = loader.getController();
+
+            // Retrieve IMC value from Suivi_Progre object
+            double imc = suivi.getIMC();
+
+            // Populate IMC statistics in StatistiqueController
+
+
+            Scene scene = new Scene(root, 1180.0, 655.0);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

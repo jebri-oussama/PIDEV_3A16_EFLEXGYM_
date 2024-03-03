@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -9,64 +12,105 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@exercice.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterExerciceController">
-    <children>
-        <Label fx:id="titre" layoutX="259.0" layoutY="14.0" text="Nouvel Exercice" textAlignment="CENTER" textFill="#fa9500" underline="true">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font></Label>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="826.0" stylesheets="@exercice.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AjouterExerciceController">
+
+
+        <!-- Plus image -->   <children>
+        <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="516.0" layoutY="14.0">
+            <image>
+                <Image url="@plus.png" />
+            </image>
+        </ImageView>
+
+
+
+        <Label fx:id="titre" layoutX="259.0" layoutY="14.0" prefHeight="16.0" prefWidth="158.0" styleClass="custom-label" text="Nouvel Exercice:" textAlignment="CENTER" textFill="#000000" underline="true">
+            <font>
+                <Font name="Arial Bold" size="18.0" />
+            </font>
+        </Label>
 
         <Group layoutX="20.0" layoutY="20.0">
             <children>
-                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="69.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@logo.png" />
                     </image>
                 </ImageView>
             </children>
         </Group>
-        <Label layoutX="188.0" layoutY="71.0" text="Nom:" textFill="#fb8000">
+        <Label layoutX="197.0" layoutY="72.0" text="Nom:" textFill="#fb8000">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="nomField" layoutX="331.0" layoutY="66.0" prefHeight="25.0" prefWidth="200.0" />
-        <Label layoutX="165.0" layoutY="124.0" text="Description:" textFill="#fb8000">
+        <TextField fx:id="nomField" layoutX="273.0" layoutY="64.0" prefHeight="25.0" prefWidth="200.0" />
+        <Label layoutX="165.0" layoutY="116.0" text="Description:" textFill="#fb8000">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="descriptionField" layoutX="338.0" layoutY="121.0" prefHeight="25.0" prefWidth="200.0" />
-        <Label layoutX="159.0" layoutY="170.0" text="Nombre de Sets:" textFill="#fb8000">
+        <TextField fx:id="descriptionField" layoutX="273.0" layoutY="109.0" prefHeight="25.0" prefWidth="200.0" />
+        <Label layoutX="141.0" layoutY="170.0" text="Nombre de Sets:" textFill="#fb8000">
             <font>
                 <Font name="Arial Bold" size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="nbrSetsField" layoutX="338.0" layoutY="167.0" prefHeight="25.0" prefWidth="100.0" />
-        <Label layoutX="149.0" layoutY="218.0" text="Groupe Musculaire:" textFill="#fb8000">
+        <ChoiceBox fx:id="nbrSetsChoiceBox" layoutX="273.0" layoutY="165.0" prefHeight="26.0" prefWidth="181.0" stylesheets="@exercice.css">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="1" />
+                    <String fx:value="2" />
+                    <String fx:value="3" />
+                    <String fx:value="4" />
+                    <String fx:value="5" />
+                    <String fx:value="6" />
+                    <String fx:value="7" />
+                    <String fx:value="8" />
+                    <String fx:value="9" />
+                    <String fx:value="10" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+        <Label layoutX="120.0" layoutY="218.0" text="Groupe Musculaire:" textFill="#fb8000">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="groupeMusculaireField" layoutX="338.0" layoutY="215.0" prefHeight="25.0" prefWidth="200.0" />
-        <Label layoutX="135.0" layoutY="256.0" text="Nombre de Répétitions:" textFill="#fb8000">
+        <TextField fx:id="groupeMusculaireField" layoutX="273.0" layoutY="211.0" prefHeight="25.0" prefWidth="200.0" />
+        <Label layoutX="107.0" layoutY="264.0" text="Nombre de Répétitions:" textFill="#fb8000">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="nbrRepetitionsField" layoutX="338.0" layoutY="253.0" prefHeight="25.0" prefWidth="100.0" />
-        <Label layoutX="137.0" layoutY="290.0" text="Catégorie de l'Exercice:" textFill="#fb8000">
+        <Label layoutX="100.0" layoutY="305.0" text="Catégorie de l'Exercice:" textFill="#fb8000">
             <font>
                 <Font name="Arial Bold" size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="categorieExerciceField" layoutX="338.0" layoutY="287.0" prefHeight="25.0" prefWidth="200.0" />
-        <Label layoutX="140.0" layoutY="325.0" text="Type d'Équipement:" textFill="#fb8000">
+        <TextField fx:id="categorieExerciceField" layoutX="273.0" layoutY="298.0" prefHeight="25.0" prefWidth="200.0" />
+        <Label layoutX="112.0" layoutY="348.0" text="Type d'Équipement:" textFill="#fb8000">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="typeEquipementField" layoutX="338.0" layoutY="320.0" prefHeight="25.0" prefWidth="200.0" />
-        <Button fx:id="enregistrerButton" layoutX="381.0" layoutY="360.0" mnemonicParsing="false" onAction="#enregistrerButtonClicked" prefHeight="25.0" prefWidth="100.0" text="Enregistrer" textFill="#fb8000" />
+        <TextField fx:id="typeEquipementField" layoutX="273.0" layoutY="341.0" prefHeight="25.0" prefWidth="200.0" />
+        <Button fx:id="enregistrerButton" layoutX="486.0" layoutY="373.0" mnemonicParsing="false" onAction="#enregistrerButtonClicked" prefHeight="25.0" prefWidth="100.0" text="Enregistrer" textFill="#fb8000" />
+        <ChoiceBox fx:id="nbrRepsChoiceBox" layoutX="273.0" layoutY="259.0" prefHeight="26.0" prefWidth="181.0" stylesheets="@exercice.css">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="1" />
+                    <String fx:value="2" />
+                    <String fx:value="3" />
+                    <String fx:value="4" />
+                    <String fx:value="5" />
+                    <String fx:value="6" />
+                    <String fx:value="7" />
+                    <String fx:value="8" />
+                    <String fx:value="9" />
+                    <String fx:value="10" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
     </children>
 </AnchorPane>

@@ -5,7 +5,7 @@
 }
 
 .label {
-    -fx-text-fill: #fb8000;
+    -fx-text-fill:Black;
     -fx-font-family: "Arial Bold";
     -fx-font-size: 14px;
 }
@@ -19,11 +19,28 @@
 }
 
 .button {
-    -fx-background-color: #fb8000;
+    -fx-background-color: Black;
     -fx-text-fill: #ffffff;
     -fx-font-family: "Arial Bold";
 }
 
 .button:hover {
     -fx-background-color: #ff9900;
+}
+.custom-label {
+    -fx-text-fill: #000000; /* Couleur noire */
+}
+.custom-label {
+    -fx-text-fill: #000000; /* Black color */
+}
+/* Ajoutez ces styles à votre fichier exercice.css */
+
+/* Sélectionnez les enfants de l'AnchorPane */
+.anchor-pane > * {
+    /* Appliquez les styles pour la demi-partie de l'interface */
+    -fx-background-color: #fb8000; /* Couleur de fond */
+    -fx-padding: 15px; /* Marge intérieure */
+}
+.root {
+    -fx-background-color: #fb8000; /* Couleur de fond pour toute l'interface */
 }

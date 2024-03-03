@@ -44,7 +44,7 @@ public class AffecterExerciceController {
     private List<Exercice> exercices;
     private List<Programme_personnalise> programmePersonnalises;
     private ObservableList<Exercice> selectedExercises;
-//selectionner
+    //selectionner
     private Programme_personnalise selectedProgramme;
 
     public AffecterExerciceController() {
@@ -109,7 +109,7 @@ public class AffecterExerciceController {
             }
         }
     }
-// effacer la selection
+    // effacer la selection
     @FXML
     private void programSelected() {
         selectedExercises.clear();
