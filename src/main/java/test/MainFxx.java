@@ -1,4 +1,4 @@
-package gestion_evenement.tests;
+package test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ public class MainFxx extends Application {
     @Override
     public void start(Stage primaryStage) {
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("/Participer.fxml")); // Changer le chemin du fichier FXML
+                .getResource("/login.fxml")); // Changer le chemin du fichier FXML
         try {
             Parent root = loader.load();
             Scene scene = new Scene(root);

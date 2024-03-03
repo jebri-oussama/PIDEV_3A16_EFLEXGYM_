@@ -1,0 +1,24 @@
+
+
+.text-field{
+    -fx-background-color:#000000;
+
+}
+.label{
+    -fx-font-family:"Bauhaus 93";
+    -fx-font-size: 16px;
+    -fx-font-style: Bold ;
+}
+
+
+.button{
+    -fx-text-fill: #f19a00;
+    -fx-background-color: #000000;
+}
+.choice-box{
+    -fx-text-fill: #f19a00;
+    -fx-background-color: #000000;
+}
+#status{
+    -fx-alignment: left;
+}

@@ -1,8 +1,5 @@
 package gestion_evenement.Controllers;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.common.BitMatrix;
 import gestion_evenement.QRCodeGenerator;
 import gestion_evenement.entities.Evenement;
 import gestion_evenement.service.EvenementService;
@@ -28,12 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -42,15 +37,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static com.twilio.example.ValidationExample.ACCOUNT_SID;
-import static com.twilio.example.ValidationExample.AUTH_TOKEN;
-
 public class ParticiperController implements Initializable {
 
     @FXML
     private FlowPane eventContainer;
-        private int selectedEventId;
-    @FXML private Pagination pagination;
+    private int selectedEventId;
+    @FXML
+    private Pagination pagination;
     private EvenementService evenementService;
     private static final String ACCOUNT_SID = "AC8c0d46d6a42b027f40aafca7cb712bd2";
     private static final String AUTH_TOKEN = "adaf7a80490a5fe576d18a07a2443c51";
@@ -59,6 +52,11 @@ public class ParticiperController implements Initializable {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
     private static final int ITEMS_PER_PAGE = 4;
+    private int userId;
+
+    public void initData(int userId) {
+        this.userId = userId;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,77 +76,77 @@ public class ParticiperController implements Initializable {
 
             for (Evenement evenement : sublist) {
 
-                    VBox eventBox = new VBox(5);
-                    eventBox.getStyleClass().add("event-box");
+                VBox eventBox = new VBox(5);
+                eventBox.getStyleClass().add("event-box");
 
-                    ImageView imageView = new ImageView();
-                    imageView.setFitWidth(265);
-                    imageView.setFitHeight(265);
-                    imageView.getStyleClass().add("event-image");
-                    try {
-                        String imagePath = evenement.getImagePath();
-                        Image image = new Image(imagePath);
-                        imageView.setImage(image);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                ImageView imageView = new ImageView();
+                imageView.setFitWidth(265);
+                imageView.setFitHeight(265);
+                imageView.getStyleClass().add("event-image");
+                try {
+                    String imagePath = evenement.getImagePath();
+                    Image image = new Image(imagePath);
+                    imageView.setImage(image);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    Label eventNameLabel = new Label(evenement.getEvent_name());
-                    eventNameLabel.getStyleClass().add("event-name");
-                    Button participerButton = new Button("Participer");
-                    participerButton.setOnAction(event -> {
-                        // Create a confirmation dialog
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Confirm Participation");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Are you sure you want to participate in this event?");
-                        ParticipationService participationService = new ParticipationService();
-                        int selectedEventId = participationService.getNumberOfParticipants(evenement.getId())+1;
-                        // Show the confirmation dialog and wait for user response
-                        alert.showAndWait().ifPresent(response -> {
-                            if (response == ButtonType.OK) {
-                                // User clicked OK, proceed with adding participation
-                                participationService.addParticipation(evenement.getId());
+                Label eventNameLabel = new Label(evenement.getEvent_name());
+                eventNameLabel.getStyleClass().add("event-name");
+                Button participerButton = new Button("Participer");
+                participerButton.setOnAction(event -> {
+                    // Create a confirmation dialog
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirm Participation");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Are you sure you want to participate in this event?");
+                    ParticipationService participationService = new ParticipationService();
+                    int selectedEventId = participationService.getNumberOfParticipants(evenement.getId()) + 1;
+                    // Show the confirmation dialog and wait for user response
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == ButtonType.OK) {
+                            // User clicked OK, proceed with adding participation
+                            participationService.addParticipation(evenement.getId(), userId);
 
-                                // Generate QR code
-                                String qrData = "You are the " + (participationService.getNumberOfParticipants(evenement.getId())) + " participant";
-                                ImageView qrCodeImageView = QRCodeGenerator.generateQRCodeImage(qrData, 200, 200);
+                            // Generate QR code
+                            String qrData = "You are the " + selectedEventId + " participant";
+                            ImageView qrCodeImageView = QRCodeGenerator.generateQRCodeImage(qrData, 200, 200);
 
-                                // Show QR code in a new stage
-                                Stage qrCodeStage = new Stage();
-                                qrCodeStage.initModality(Modality.APPLICATION_MODAL);
-                                qrCodeStage.setTitle("QR Code");
-                                VBox qrCodeBox = new VBox(10);
-                                qrCodeBox.setPadding(new Insets(20));
-                                qrCodeBox.getChildren().add(qrCodeImageView);
-                                Scene qrCodeScene = new Scene(qrCodeBox, 300, 300);
-                                qrCodeStage.setScene(qrCodeScene);
-                                qrCodeStage.show();
-                            }
-                        });
-                        TextInputDialog dialog = new TextInputDialog();
-                        dialog.setTitle("Enter Number");
-                        dialog.setHeaderText(null);
-                        dialog.setContentText("Please enter your number:");
+                            // Show QR code in a new stage
+                            Stage qrCodeStage = new Stage();
+                            qrCodeStage.initModality(Modality.APPLICATION_MODAL);
+                            qrCodeStage.setTitle("QR Code");
+                            VBox qrCodeBox = new VBox(10);
+                            qrCodeBox.setPadding(new Insets(20));
+                            qrCodeBox.getChildren().add(qrCodeImageView);
+                            Scene qrCodeScene = new Scene(qrCodeBox, 300, 300);
+                            qrCodeStage.setScene(qrCodeScene);
+                            qrCodeStage.show();
+                        }
+                    });
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("Enter Number");
+                    dialog.setHeaderText(null);
+                    dialog.setContentText("Please enter your number:");
 
-                        Optional<String> result = dialog.showAndWait();
-                        result.ifPresent(number -> {
-                            // Send the message using the messaging API
-                            sendMessage(number,selectedEventId);
-                        });
-
+                    Optional<String> result = dialog.showAndWait();
+                    result.ifPresent(number -> {
+                        // Send the message using the messaging API
+                        sendMessage(number, selectedEventId);
                     });
 
-                    Button detailsButton = new Button("Details");
-                    detailsButton.setOnAction(event -> {
-                        showEventDetailsPopup(evenement);
-                    });
+                });
 
-                    HBox buttonBox = new HBox(5);
-                    buttonBox.getChildren().addAll(participerButton, detailsButton);
+                Button detailsButton = new Button("Details");
+                detailsButton.setOnAction(event -> {
+                    showEventDetailsPopup(evenement);
+                });
 
-                    eventBox.getChildren().addAll(imageView, eventNameLabel, buttonBox);
-                    eventContainer.getChildren().add(eventBox);
+                HBox buttonBox = new HBox(5);
+                buttonBox.getChildren().addAll(participerButton, detailsButton);
+
+                eventBox.getChildren().addAll(imageView, eventNameLabel, buttonBox);
+                eventContainer.getChildren().add(eventBox);
 
             }
 
@@ -221,9 +219,6 @@ public class ParticiperController implements Initializable {
 
                 Label weatherLabel = new Label("Temperature on Event Day: " + formattedTemperature + "°C");
 
-
-
-
                 detailsBox.getChildren().add(weatherLabel);
             } else {
                 Label errorLabel = new Label("Weather data not found for the event date");
@@ -243,7 +238,7 @@ public class ParticiperController implements Initializable {
     }
 
     private void sendMessage(String number, int selectedEventId) {
-       System.out.println(selectedEventId);
+        System.out.println(selectedEventId);
         if (!isValidPhoneNumber(number)) {
             showAlert("Invalid Phone Number", "Please enter a valid phone number.");
             return;
@@ -271,4 +266,3 @@ public class ParticiperController implements Initializable {
         alert.showAndWait();
     }
 }
-

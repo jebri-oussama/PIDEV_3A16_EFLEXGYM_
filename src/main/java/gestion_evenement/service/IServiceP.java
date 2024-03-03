@@ -15,5 +15,5 @@ public interface IServiceP<P> {
 
     Participation readById(int id);
 
-    void addParticipation(int id);
+    void addParticipation(int id,int userId);
 }
