@@ -3,6 +3,7 @@ package gestion_user.service;
 
 import GestionFinance.entites.BilanFinancier;
 import GestionFinance.service.BilanFinancierService;
+import gestion_user.entities.PasswordHashing;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
@@ -34,6 +35,9 @@ public class UserService implements IService<User> {
             pst = conn.prepareStatement(requete);
             pst.setString(1, c.getNom());
             pst.setString(2, c.getPrenom());
+           // String hashedPassword = PasswordHashing.hashPassword();
+
+
             pst.setString(3, c.getMot_de_passe());
             pst.setString(4, c.getEmail());
             pst.setDate(5, c.getDate_de_naissance());
