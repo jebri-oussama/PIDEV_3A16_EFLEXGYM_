@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 
 
 import gestion_evenement.Controllers.ParticiperController;
@@ -135,6 +135,33 @@ public class AdherentController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        @FXML
+        void handleConsultAbonn(){
+            // Retrieve the currently logged-in user from the session
+            User loggedInUser = UserSession.getLoggedInUser();
+
+            if (loggedInUser != null) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsulterAbonnement.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(loader.load());
+
+                    // Pass the logged-in user ID to the ConsulterAbonnementController
+                    ConsulterAbonnementController controller = loader.getController();
+                    controller.setAdherentId(loggedInUser.getId());
+
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // Handle the case where no user is logged in
+                // You can display an error message or take appropriate action
+            }
+        }
+
     }
 
 

@@ -5,13 +5,72 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="integration avec user">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_user/entities/PasswordHashing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/AfficherProduitController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/CategorieController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Home.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Map.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/PaymentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/UpdateProduitController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/panierController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/userInterfaceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/AfficherAbonnementsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/AjouterAbonnementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/AjouterBilanFinancierController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/BilanFinancierController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/UpdateAbonnementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/service/AbonnementService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/Payment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/entities/categorie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/entities/panier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/entities/produit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/entities/type.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/IService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/categorieService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/panierService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/produitService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utils/BadWordFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utils/Word_Filter.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/AfficherAbonnements.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/AfficherProduit.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/AjouterAbonnement.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/BilanFinancier.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/CategoryCrud.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Payment-Methods-Icon-Set.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/PaymentForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Product.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/UserInterface.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/home.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/map.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/panier.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/png-clipart-computer-icons-cart-icon-cdr-eps.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UpdateAdherentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UpdateAdherentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GestionFinance/entites/BilanFinancier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/entites/BilanFinancier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GestionFinance/service/BilanFinancierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/service/BilanFinancierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdherentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AdherentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CoachController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CoachController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/ForgotPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ForgotPasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UpdateAdherentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UpdateAdherentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_user/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_user/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_user/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_user/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_user/entities/UserSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_user/entities/UserSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_user/service/IService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_user/service/IService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gestion_user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/MainFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Adherent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Adherent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Coach.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Coach.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/UpdateAdherent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UpdateAdherent.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ajouterAdherent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ajouterAdherent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,13 +111,16 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;oussema&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging integration&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Oussama/IdeaProjects/PIDEV_3A16_EFLEXGYM_&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -79,6 +141,7 @@
       <workItem from="1709136984478" duration="74000" />
       <workItem from="1709406120166" duration="20491000" />
       <workItem from="1709470072976" duration="2243000" />
+      <workItem from="1709479713461" duration="2513000" />
     </task>
     <task id="LOCAL-00001" summary="qr code avec participation">
       <option name="closed" value="true" />
@@ -152,6 +215,7 @@
     <MESSAGE value="pagination" />
     <MESSAGE value="o" />
     <MESSAGE value="integration avec user" />
-    <option name="LAST_COMMIT_MESSAGE" value="integration avec user" />
+    <MESSAGE value="integration avec user finale" />
+    <option name="LAST_COMMIT_MESSAGE" value="integration avec user finale" />
   </component>
 </project>

@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 
 import gestion_user.entities.User;
 import gestion_user.entities.UserSession;

@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="472.0" style="-fx-background-color: #d08617;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateAdherentController">
+<AnchorPane prefHeight="400.0" prefWidth="472.0" style="-fx-background-color: #d08617;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UpdateAdherentController">
     <children>
     <Label layoutX="81.0" layoutY="34.0" prefHeight="17.0" prefWidth="112.0" stylesheets="@style.css" text="ID:" visible="false" />
     <Label layoutX="106.0" layoutY="40.0" prefHeight="15.0" prefWidth="112.0" stylesheets="@style.css" text="Nom :" />

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.panierController" style="-fx-background-color: #FFFFFF;">
+    <!-- Top Area: Title -->
+    <top>
+        <Label text="Your Cart" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-padding: 10px;" />
+    </top>
+
+    <!-- Center Area: Table -->
+    <center>
+        <TableView fx:id="panierTable" prefHeight="300.0" prefWidth="400.0">
+            <columns>
+                <TableColumn fx:id="nomCol" prefWidth="200.0" text="Product Name" />
+                <TableColumn fx:id="prixCol" prefWidth="100.0" text="Price" />
+                <TableColumn fx:id="deleteCol" prefWidth="100.0" text="Supprimer" />
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- Bottom Area: Subtotal, Subtotal Value, and Continue Shopping Button -->
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10px;">
+            <!-- Subtotal -->
+            <Label  style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #000000;" />
+
+            <!-- Subtotal Value -->
+            <Label fx:id="subtotalLabel" text="0.00" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-padding: 0 10px;" />
+            <Button text="payer en ligne" onAction="#openPaymentForm" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
+            <!-- Continue Shopping Button -->
+            <Button text="Continue le Shopping" onAction="#goBackToProducts" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
+            <Button text="livraison" onAction="#gotomap" style="-fx-background-color: #FB8000; -fx-text-fill: white;" />
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,4 +1,4 @@
-package controllers;
+package Controllers;
 
 import gestion_user.entities.*;
 import gestion_user.service.UserService;
@@ -9,14 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import utils.DataSource;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 
 public class LoginController {

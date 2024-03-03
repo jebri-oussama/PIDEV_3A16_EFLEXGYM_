@@ -1,7 +1,6 @@
-package controllers;
+package Controllers;
 
 import GestionFinance.service.BilanFinancierService;
-import gestion_user.entities.ProfileUpdateEvent;
 import gestion_user.entities.Role;
 import gestion_user.entities.Sexe;
 import gestion_user.entities.User;
@@ -13,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import utils.DataSource;
 
 import java.io.IOException;
 import java.sql.Date;

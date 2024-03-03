@@ -21,10 +21,8 @@ public class User {
 
     private int idBilanFinancier;
 
-
-
-
-
+    public User() {
+    }
 
     public User(String nom, String prenom, String mot_de_passe, String email, Date date_de_naissance, Sexe sexe, Role role, double aDouble, int anInt) {
         this.nom = nom;

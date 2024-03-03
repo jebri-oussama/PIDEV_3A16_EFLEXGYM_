@@ -1,11 +1,10 @@
-package controllers;
+package Controllers;
 
 import gestion_user.entities.MailSender;
 import gestion_user.entities.User;
 import gestion_user.entities.UserSession;
 import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

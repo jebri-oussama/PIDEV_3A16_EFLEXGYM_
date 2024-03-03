@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
+<?import javafx.scene.control.TextField?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controllers.Map"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <children>
+        <WebView fx:id="webView" prefHeight="570.0" prefWidth="800.0"/>
+        <TextField fx:id="searchInput" layoutX="20.0" layoutY="580.0" prefWidth="200.0" promptText="Search for a place"/>
+    </children>
+</AnchorPane>
