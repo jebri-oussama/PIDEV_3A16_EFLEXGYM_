@@ -1,19 +1,20 @@
 package GestionFinance.service;
 
-import GestionFinance.entites.Abonnement;
-import GestionFinance.entites.BilanFinancier;
-import GestionFinance.entites.Etat;
-import GestionFinance.entites.Type;
+import GestionFinance.entites.*;
 import gestion_user.entities.Role;
 import gestion_user.entities.User;
+import gestion_user.entities.UserSession;
 import gestion_user.service.UserService;
 import utils.DataSource;
 
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class AbonnementService implements IService<Abonnement> {
 
@@ -99,11 +100,11 @@ public class AbonnementService implements IService<Abonnement> {
                 Etat etat = Etat.valueOf(rs.getString("etat"));
                 int idAdherent = rs.getInt("id_adherent");
                 UserService adherentService = new UserService();
-               // User adherent = adherentService.readById(idAdherent);
+                User adherent = adherentService.readById(idAdherent);
                 int idBilanFinancier = rs.getInt("id_bilan_financier");
                 BilanFinancierService bilanFinancierService = new BilanFinancierService();
                 BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
-               // list.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
+                list.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -127,17 +128,194 @@ public class AbonnementService implements IService<Abonnement> {
 
                 int idAdherent = rs.getInt("id_adherent");
                 UserService adherentService = new UserService();
-             //   User adherent = adherentService.readById(idAdherent);
+                User adherent = adherentService.readById(idAdherent);
 
                 int idBilanFinancier = rs.getInt("id_bilan_financier");
                 BilanFinancierService bilanFinancierService = new BilanFinancierService();
                 BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
 
-              //  return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+                return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
     }
+
+    @Override
+    public Abonnement readAbonnementForLoggedInUser() {
+        String query = "SELECT * FROM Abonnement " +
+                "INNER JOIN User ON Abonnement.id_adherent = User.id " +
+                "WHERE User.id = ?";
+        try (PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, UserSession.getLoggedInUser().getId());
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    Type type = Type.valueOf(rs.getString("type"));
+                    double prix = rs.getDouble("prix");
+                    LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
+                    LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
+                    Etat etat = Etat.valueOf(rs.getString("etat"));
+
+                    User adherent = new User();
+                    adherent.setId(rs.getInt("id_adherent"));
+                    BilanFinancierService bilanFinancierService = new BilanFinancierService();
+                    BilanFinancier bilanFinancier = bilanFinancierService.readById(rs.getInt("id_bilan_financier"));
+
+                    return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    public List<Abonnement> filterByType(Type type) {
+        String requete = "SELECT * FROM Abonnement WHERE type = ?";
+        List<Abonnement> filteredAbonnements = new ArrayList<>();
+        try {
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setString(1, type.toString());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                double prix = rs.getDouble("prix");
+                LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
+                LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
+                Etat etat = Etat.valueOf(rs.getString("etat"));
+                int idAdherent = rs.getInt("id_adherent");
+                UserService adherentService = new UserService();
+                User adherent = adherentService.readById(idAdherent);
+                int idBilanFinancier = rs.getInt("id_bilan_financier");
+                BilanFinancierService bilanFinancierService = new BilanFinancierService();
+                BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
+                filteredAbonnements.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return filteredAbonnements;
+    }
+
+
+
+
+    @Override
+    public List<Abonnement> readByUserId(int userId) {
+        String requete = "SELECT * FROM Abonnement WHERE id_adherent = ?";
+        List<Abonnement> abonnements = new ArrayList<>();
+        try {
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                Type type = Type.valueOf(rs.getString("type"));
+                double prix = rs.getDouble("prix");
+                LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
+                LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
+                Etat etat = Etat.valueOf(rs.getString("etat"));
+
+                UserService adherentService = new UserService();
+                User adherent = adherentService.readById(userId);
+
+                int idBilanFinancier = rs.getInt("id_bilan_financier");
+                BilanFinancierService bilanFinancierService = new BilanFinancierService();
+                BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
+
+                abonnements.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return abonnements;
+    }
+
+    public long calculerTempsRestant(Abonnement abonnement) {
+        LocalDate dateFinAbonnement = abonnement.getDate_fin();
+        LocalDate dateActuelle = LocalDate.now();
+        return ChronoUnit.DAYS.between(dateActuelle, dateFinAbonnement);
+    }
+
+    // Méthode pour notifier un adhérent lorsque son abonnement expire bientôt
+  /*  public void notifierAdherent(Abonnement abonnement) {
+        long joursRestants = calculerTempsRestant(abonnement);
+        if (joursRestants <= 2) {
+            User adherent = abonnement.getId_adherent();
+            if (adherent != null) {
+                System.out.println("ID de l'adhérent associé à l'abonnement : " + adherent.getId());
+                String sujet = "Notification d'abonnement";
+                String message = "Bonjour " + adherent.getNom() + ",\n\nVotre abonnement expire dans " + joursRestants + " jours. Veuillez renouveler votre abonnement dès que possible.\n\nCordialement,\nVotre salle de sport";
+                String destinataire = adherent.getEmail();
+                try {
+                    MailAPI.sendMail(destinataire, sujet, message);
+                    System.out.println("Notification envoyée à l'adhérent : " + destinataire);
+                } catch (MessagingException e) {
+                    System.out.println("Erreur lors de l'envoi de la notification : " + e.getMessage());
+                    e.printStackTrace(); // Imprimez la trace de la pile pour plus d'informations sur l'erreur
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                System.out.println("Impossible d'envoyer la notification : adhérent non trouvé.");
+            }
+        }
+    }
+
+
+
+    public void notifierTousAdherents() {
+        List<Abonnement> abonnements = readAll();
+        for (Abonnement abonnement : abonnements) {
+            notifierAdherent(abonnement);
+        }
+    }
+
+    // Méthode de test pour calculer le temps restant d'un abonnement
+    public void testCalculerTempsRestant() {
+        Abonnement abonnement = new Abonnement();
+        abonnement.setDate_fin(LocalDate.now().plusDays(2)); // Abonnement expirant dans 2 jours
+
+        long tempsRestant = calculerTempsRestant(abonnement);
+
+        System.out.println("Temps restant de l'abonnement : " + tempsRestant + " jours");
+    }
+
+    // Méthode de test pour envoyer un email à un adhérent
+    public void testNotifierAdherent() {
+        Abonnement abonnement = new Abonnement();
+        abonnement.setId(1); // ID de l'abonnement
+        abonnement.setDate_fin(LocalDate.now().plusDays(2)); // Abonnement expirant dans 2 jours
+        User adherent = new User();
+        adherent.setNom("Nom de l'adhérent");
+        adherent.setEmail("email@domaine.com");
+
+        notifierAdherent(abonnement);
+    }*/
+  /*  public List<Abonnement> searchByName(String searchTerm) {
+        List<Abonnement> searchResults = new ArrayList<>();
+        String query = "SELECT * FROM abonnement WHERE type LIKE ?";
+
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, "%" + searchTerm + "%");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Populate Abonnement objects from the result set
+                Abonnement abonnement = new Abonnement();
+                // Set properties of abonnement
+                // abonnement.setType(resultSet.getString("type"));
+                // Populate other properties similarly
+                searchResults.add(abonnement);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return searchResults;
+    }*/
+
 }

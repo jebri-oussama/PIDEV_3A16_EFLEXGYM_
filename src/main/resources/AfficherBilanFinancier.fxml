@@ -15,9 +15,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="584.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherAbonnementsController">
+<HBox prefHeight="584.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.AfficherBilanFinancierController">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
+
+      <AnchorPane prefHeight="593.0" prefWidth="207.0" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="647.0">
          <children>
             <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FB8000;">
                <children>
@@ -51,7 +52,7 @@
                         <Font name="Arial" size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="abonnementsId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#afficherAbonnements" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements">
+                  <Button fx:id="abonnementsId" alignment="CENTER" onAction="#afficherAbonnements" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
@@ -62,7 +63,7 @@
                         <Font name="Arial" size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="adherentsId" mnemonicParsing="false" onAction="#afficherAdherents" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: fb8000;" text="Adherents">
+                  <Button fx:id="adherentsId" mnemonicParsing="false" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: fb8000;" text="Adherents">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
@@ -84,7 +85,7 @@
                         <Font name="Arial" size="21.0" />
                      </font>
                   </Button>
-                  <Button fx:id="bilanFinancierId" mnemonicParsing="false" onAction="#afficherBilanFinancier" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer">
+                  <Button fx:id="bilanFinancierId" mnemonicParsing="false" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer" onAction="#afficherBilanFinancier">
                      <padding>
                         <Insets bottom="15.0" left="50.0" right="50.0" />
                      </padding>
@@ -96,24 +97,12 @@
             </VBox>
          </children>
       </AnchorPane>
+
+
       <AnchorPane prefHeight="584.0" prefWidth="400.0" style="-fx-background-color: black;">
          <children>
-            <Button fx:id="filtreMensuelButton" layoutX="292.0" layoutY="92.0" onAction="#filtrerAbonnementsMensuels" style="-fx-background-color: FFFFFF;" text=" Mensuel" />
-            <Button fx:id="filtreAnnuelButton" layoutX="484.0" layoutY="92.0" onAction="#filtrerAbonnementsAnnuels" style="-fx-background-color: FFFFFF;" text=" Annuel" />
-
-            <TableView fx:id="abonnementsTable" layoutX="14.0" layoutY="145.0" prefHeight="354.0" prefWidth="997.0" style="-fx-background-color: FF8000;">
+            <TableView fx:id="bilanFinancierTable" layoutX="26.0" layoutY="93.0" prefHeight="354.0" prefWidth="1044.0" style="-fx-background-color: ff8000;">
                <columns>
-                  <TableColumn fx:id="typeColumn" prefWidth="133.0" style="-fx-background-color: white; -fx-font: Arial;" styleClass="font" text="Type">
-                     <cellValueFactory>
-                        <PropertyValueFactory property="type" />
-                     </cellValueFactory>
-                  </TableColumn>
-                  <TableColumn fx:id="prixColumn" prefWidth="67.0" style="-fx-background-color: white; -fx-font: Arial;" text="Prix">
-                     <cellValueFactory>
-                        <PropertyValueFactory property="prix" />
-                     </cellValueFactory>
-                  </TableColumn>
-
                   <TableColumn fx:id="dateDebutColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Date Début">
                      <cellValueFactory>
                         <PropertyValueFactory property="date_debut" />
@@ -125,54 +114,69 @@
                         <PropertyValueFactory property="date_fin" />
                      </cellValueFactory>
                   </TableColumn>
-
-                  <TableColumn fx:id="etatColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Etat">
+                  <TableColumn fx:id="prixLocationColumn" prefWidth="67.0" style="-fx-background-color: white; -fx-font: Arial;" text="Prix Loyer">
                      <cellValueFactory>
-                        <PropertyValueFactory property="etat" />
+                        <PropertyValueFactory property="revenus_abonnements" />
+                     </cellValueFactory>
+                  </TableColumn>
+
+                  <TableColumn fx:id="salairesCoachsColumn" prefWidth="133.0" style="-fx-background-color: white; -fx-font: Arial;" text="Salaires Coachs">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="salaires_coachs" />
+                     </cellValueFactory>
+                  </TableColumn>
+
+                  <TableColumn fx:id="revenusAbonnementsColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="Revenus Abonnements">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="prix_location" />
+                     </cellValueFactory>
+                  </TableColumn>
+
+                  <TableColumn fx:id="revenusProduitsColumn" prefWidth="141.0" style="-fx-background-color: white; -fx-font: Arial;" text="Revenus Produits">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="revenus_produits" />
                      </cellValueFactory>
                   </TableColumn>
 
 
-                  <TableColumn fx:id="idAdherentColumn" prefWidth="100.0" style="-fx-background-color: white; -fx-font: Arial;" text="ID Adhérent">
+                  <TableColumn fx:id="depensesColumn" prefWidth="118.0" style="-fx-background-color: white; -fx-font: Arial;" text="Dépenses">
                      <cellValueFactory>
-                        <PropertyValueFactory property="id_adherent" />
+                        <PropertyValueFactory property="depenses" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="profitColumn" prefWidth="95.0" style="-fx-background-color: white; -fx-font: Arial;" text="Profit">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="profit" />
                      </cellValueFactory>
                   </TableColumn>
 
-                  <TableColumn fx:id="idBilanFinancierColumn" prefWidth="153.0" style="-fx-background-color: white; -fx-font: Arial;" text="ID Bilan Financier">
-                     <cellValueFactory>
-                        <PropertyValueFactory property="id_bilan_financier" />
-                     </cellValueFactory>
-                  </TableColumn>
-                  <TableColumn fx:id="modifierColumn" prefWidth="124.0" style="-fx-background-color: white; -fx-font: Arial;" text="Modifier">
+                  <TableColumn fx:id="modifierColumn" prefWidth="97.0" style="-fx-background-color: white; -fx-font: Arial;" text="Modifier">
                      <cellFactory>
                         <PropertyValueFactory property="modifierButton" />
                      </cellFactory>
                   </TableColumn>
-                  <TableColumn fx:id="supprimerColumn" prefWidth="119.0" style="-fx-background-color: white; -fx-font: Arial;" text="Supprimer">
+                  <TableColumn fx:id="supprimerColumn" prefWidth="97.0" style="-fx-background-color: white; -fx-font: Arial;" text="Supprimer">
                      <cellFactory>
                         <PropertyValueFactory property="supprimerButton" />
                      </cellFactory>
                   </TableColumn>
-
-
-
-
                </columns>
             </TableView>
-            <Button fx:id="ajouterAbonnementButton" layoutX="397.0" layoutY="525.0" onAction="#ajouterAbonnement" style="-fx-background-color: FFFFFF;" text="Ajouter Abonnement">
+            <Button fx:id="ajouterBilanFinancierButton" layoutX="393.0" layoutY="508.0" onAction="#ajouter" style="-fx-background-color: #FFFFFF;" text="Ajouter Bilan financier">
                <effect>
                   <InnerShadow>
                      <color>
                         <Color red="0.12941177189350128" green="0.12941177189350128" blue="0.12941177189350128" />
                      </color>
                   </InnerShadow>
-               </effect></Button>
+               </effect>
+            </Button>
+
             <AnchorPane prefHeight="62.0" prefWidth="1089.0">
                <children>
                   <VBox prefHeight="62.0" prefWidth="1089.0" style="-fx-background-color: DCD6C5;">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/home/Abonnements" textAlignment="JUSTIFY" wrappingWidth="241.029296875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/home/Dashboard" textAlignment="JUSTIFY" wrappingWidth="241.029296875">
                            <VBox.margin>
                               <Insets bottom="10.0" left="30.0" right="10.0" top="15.0" />
                            </VBox.margin>

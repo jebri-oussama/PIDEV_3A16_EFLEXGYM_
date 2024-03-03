@@ -1,8 +1,8 @@
 package GestionFinance.service;
 
 
+import GestionFinance.entites.Abonnement;
 import GestionFinance.entites.BilanFinancier;
-import GestionFinance.service.IService;
 import utils.DataSource;
 
 import java.sql.*;
@@ -13,6 +13,7 @@ import java.util.List;
 public class BilanFinancierService implements IService<BilanFinancier> {
 
     private static  Connection conn;
+
     private Statement ste;
     private PreparedStatement pst;
 
@@ -26,8 +27,8 @@ public class BilanFinancierService implements IService<BilanFinancier> {
         try {
             pst = conn.prepareStatement(requete);
             pst.setInt(1, bf.getId());
-            pst.setDate(2, Date.valueOf(bf.getDateDebut()));
-            pst.setDate(3, Date.valueOf(bf.getDateFin()));
+            pst.setDate(2, Date.valueOf(bf.getDate_debut()));
+            pst.setDate(3, Date.valueOf(bf.getDate_fin()));
             pst.setDouble(4, bf.getSalaires_coachs());
             pst.setDouble(5, bf.getPrix_location());
             pst.setDouble(6, bf.getRevenus_abonnements());
@@ -57,8 +58,8 @@ public class BilanFinancierService implements IService<BilanFinancier> {
         String requete = "UPDATE bilan_financier SET date_debut = ?, date_fin = ?, salaires_coachs = ?, prix_location = ?, profit = ?, revenus_abonnements = ?, revenus_produits = ?, depenses = ? WHERE id = ?";
         try{
             pst = conn.prepareStatement(requete);
-            pst.setDate(1, Date.valueOf(bf.getDateDebut()));
-            pst.setDate(2, Date.valueOf(bf.getDateFin()));
+            pst.setDate(1, Date.valueOf(bf.getDate_debut()));
+            pst.setDate(2, Date.valueOf(bf.getDate_fin()));
             pst.setDouble(3, bf.getSalaires_coachs());
             pst.setDouble(4, bf.getPrix_location());
             pst.setDouble(5, bf.getRevenus_abonnements());
@@ -122,6 +123,17 @@ public class BilanFinancierService implements IService<BilanFinancier> {
         }
         return null;
     }
+
+    @Override
+    public Abonnement readAbonnementForLoggedInUser() {
+        return null;
+    }
+
+    @Override
+    public List<Abonnement> readByUserId(int userId) {
+        return null;
+    }
+
     public int getIdBilanFinancier() {
         List<BilanFinancier> bilanFinanciers = readAll();
         if (!bilanFinanciers.isEmpty()) {
@@ -180,6 +192,19 @@ public class BilanFinancierService implements IService<BilanFinancier> {
             throw new RuntimeException(e);
         }
     }
+
+    public void updateProfit(int id, double profit) {
+        String requete = "UPDATE bilan_financier SET profit = ? WHERE id = ?";
+        try {
+            pst = conn.prepareStatement(requete);
+            pst.setDouble(1, profit);
+            pst.setInt(2, id);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 }

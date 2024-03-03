@@ -1,5 +1,6 @@
 package GestionFinance.controller;
 
+import GestionFinance.entites.Type;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import GestionFinance.entites.Abonnement;
 import GestionFinance.service.AbonnementService;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -26,10 +26,17 @@ public class AfficherAbonnementsController implements Initializable {
     @FXML
     private TableView<Abonnement> abonnementsTable;
     @FXML
+    private Button dashboardId;
+    @FXML
+    private Button adherentsId;
+    @FXML
+    private Button bilanFinancierId;
+    @FXML
+    private Button abonnementsId;
+    @FXML
     private TableColumn<Abonnement, Void> modifierColumn;
     @FXML
     private TableColumn<Abonnement, Void> supprimerColumn;
-
     @FXML
     private TableColumn<Abonnement, String> typeColumn;
     @FXML
@@ -47,11 +54,49 @@ public class AfficherAbonnementsController implements Initializable {
 
     private final ObservableList<Abonnement> abonnements = FXCollections.observableArrayList();
     private AbonnementService abonnementService;
+    @FXML
+    private Button filtreMensuelButton;
+
+    @FXML
+    private Button filtreAnnuelButton;
+
+    @FXML
+    void filtrerAbonnementsMensuels(ActionEvent event) {
+        List<Abonnement> abonnementsMensuels = abonnementService.filterByType(Type.mensuel);
+        abonnements.clear();
+        abonnements.addAll(abonnementsMensuels);
+        abonnementsTable.setItems(abonnements);
+    }
+
+    @FXML
+    void filtrerAbonnementsAnnuels(ActionEvent event) {
+        List<Abonnement> abonnementsAnnuels = abonnementService.filterByType(Type.annuel);
+        abonnements.clear();
+        abonnements.addAll(abonnementsAnnuels);
+        abonnementsTable.setItems(abonnements);
+    }
+
+
+   /* @FXML
+    void searchByName(ActionEvent event) {
+        String searchTerm = searchField.getText().trim();
+
+        // Clear existing abonnements in the table
+        abonnements.clear();
+
+        // Perform search only if search term is not empty
+        if (!searchTerm.isEmpty()) {
+            List<Abonnement> searchResults = abonnementService.searchByName(searchTerm);
+            abonnements.addAll(searchResults);
+        } else {
+            // If search term is empty, refresh the table with all abonnements
+            refreshTable();
+        }
+    }*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         abonnementService = new AbonnementService();
-
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         prixColumn.setCellValueFactory(new PropertyValueFactory<>("prix"));
         dateDebutColumn.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
@@ -105,6 +150,41 @@ public class AfficherAbonnementsController implements Initializable {
                 }
             }
         });
+
+
+    }
+    @FXML
+    void afficherBilanFinancier() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherBilanFinancier.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherAbonnements() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAbonnements.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void afficherDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void refreshTable() {
@@ -162,4 +242,16 @@ public class AfficherAbonnementsController implements Initializable {
             refreshTable();
         }
     }
+
+    public void afficherAdherents(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAdherents.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

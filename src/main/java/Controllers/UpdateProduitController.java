@@ -1,7 +1,17 @@
-package Controllers;
+/*package Controllers;
+
+import GestionFinance.entites.BilanFinancier;
+import gestion_produit.entities.categorie;
+import gestion_produit.entities.produit;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.TextField;
+import gestion_produit.service.produitService;
 
 public class UpdateProduitController {
-  /*  @FXML
+    @FXML
     private TextField txtid;
     @FXML
     private TextField txtnom;
@@ -43,9 +53,9 @@ public class UpdateProduitController {
         produit p = new produit(nom, image, prix, quantite, description, category, bilan, id_admin);
         produitService ps = new produitService();
         ps.update(id,p);
-      /*  FXMLLoader loader = new FXMLLoader(getClass()
+      FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/AfficherProduit.fxml"));
-       /* try {
+        try {
             Parent root = loader.load();
             AfficherProduitController ac = loader.getController();
             ac.setRnom(nom);
@@ -61,8 +71,8 @@ public class UpdateProduitController {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
     }
-
+*/
 
 

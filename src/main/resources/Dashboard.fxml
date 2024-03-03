@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import org.jfree.chart.fx.ChartViewer?>
+<AnchorPane prefHeight="500.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
+    <children>
+        <ChartViewer fx:id="bilanChartViewer" layoutX="227.0" layoutY="186.0" prefHeight="300.0" prefWidth="350.0" />
+        <ChartViewer fx:id="oscillationsChartViewer" layoutX="600.0" layoutY="192.0" prefHeight="300.0" prefWidth="350.0" />
+        <Button fx:id="generatePDFButton" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" text="Générer PDF" />
+        <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FB8000;">
+            <children>
+                <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                    <image>
+                        <Image url="@logo.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="70.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-flex Gym" textAlignment="RIGHT" underline="true" wrappingWidth="136.10107421875">
+                    <font>
+                        <Font name="Arial" size="26.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="50.0" />
+                    </VBox.margin>
+                </Text>
+                <Button fx:id="dashboardId" mnemonicParsing="false" onAction="#afficherDashboard" prefHeight="29.0" prefWidth="238.0" style="-fx-background-color: fb8000;" text="Dashboard" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS">
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <font>
+                        <Font name="Arial" size="22.0" />
+                    </font>
+                </Button>
+                <Button fx:id="abonnementsId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#afficherAbonnements" prefHeight="32.0" prefWidth="222.0" style="-fx-background-color: fb8000;" text="Abonnements">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial" size="19.0" />
+                    </font>
+                </Button>
+                <Button fx:id="adherentsId" mnemonicParsing="false" prefHeight="30.0" prefWidth="221.0" style="-fx-background-color: fb8000;" text="Adherents">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial" size="20.0" />
+                    </font>
+                </Button>
+                <Button fx:id="coachsId" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="32.0" prefWidth="218.0" style="-fx-background-color: fb8000;" text="Coachs" textAlignment="JUSTIFY">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="25.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="Arial" size="21.0" />
+                    </font>
+                </Button>
+                <Button fx:id="bilanFinancierId" mnemonicParsing="false" onAction="#afficherBilanFinancier" prefHeight="32.0" prefWidth="223.0" style="-fx-background-color: fb8000;" text="Bilan finanicer">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" right="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="Arial" size="19.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        <Text layoutX="373.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adhérents" textAlignment="CENTER" wrappingWidth="84.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text fx:id="adherentsText" layoutX="395.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text layoutX="743.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coachs " textAlignment="CENTER" wrappingWidth="84.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <Text fx:id="coachsText" layoutX="765.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+      <ImageView fitHeight="76.0" fitWidth="92.0" layoutX="281.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@adherent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="112.0" layoutX="643.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@coach.png" />
+         </image>
+      </ImageView>
+
+    </children>
+</AnchorPane>
