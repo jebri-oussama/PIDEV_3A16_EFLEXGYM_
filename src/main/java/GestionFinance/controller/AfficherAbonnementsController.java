@@ -52,6 +52,24 @@ public class AfficherAbonnementsController implements Initializable {
     private final ObservableList<Abonnement> abonnements = FXCollections.observableArrayList();
     private AbonnementService abonnementService;
 
+
+   /* @FXML
+    void searchByName(ActionEvent event) {
+        String searchTerm = searchField.getText().trim();
+
+        // Clear existing abonnements in the table
+        abonnements.clear();
+
+        // Perform search only if search term is not empty
+        if (!searchTerm.isEmpty()) {
+            List<Abonnement> searchResults = abonnementService.searchByName(searchTerm);
+            abonnements.addAll(searchResults);
+        } else {
+            // If search term is empty, refresh the table with all abonnements
+            refreshTable();
+        }
+    }*/
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         abonnementService = new AbonnementService();

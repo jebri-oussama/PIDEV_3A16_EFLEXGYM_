@@ -209,6 +209,31 @@ public class AbonnementService implements IService<Abonnement> {
 
         notifierAdherent(abonnement);
     }*/
+  /*  public List<Abonnement> searchByName(String searchTerm) {
+        List<Abonnement> searchResults = new ArrayList<>();
+        String query = "SELECT * FROM abonnement WHERE type LIKE ?";
+
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, "%" + searchTerm + "%");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Populate Abonnement objects from the result set
+                Abonnement abonnement = new Abonnement();
+                // Set properties of abonnement
+                // abonnement.setType(resultSet.getString("type"));
+                // Populate other properties similarly
+                searchResults.add(abonnement);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return searchResults;
+    }*/
+
 }
 
 

@@ -1,6 +1,7 @@
 package GestionFinance.controller;
 
 import GestionFinance.entites.Abonnement;
+import gestion_user.entities.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -28,6 +29,7 @@ public class ConsulterAbonnementController {
 
         public void initialize() {
             // Afficher les détails de l'abonnement dans l'interface utilisateur
+            Abonnement abonnement = UserSession.getUserAbonnement();
             if (abonnement != null) {
                 typeLabel.setText("Type : " + abonnement.getType());
                 prixLabel.setText("Prix : " + abonnement.getPrix());
