@@ -12,13 +12,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="940.0" style="-fx-background-color: #d08617;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="940.0" style="-fx-background-color: #d08617;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
    <children>
       <Label layoutX="25.0" layoutY="26.0" stylesheets="@style.css" text="Nom:" />
       <Label layoutX="199.0" layoutY="24.0" stylesheets="@style.css" text="Prenom:" />
@@ -78,7 +76,7 @@
             <Font name="Bauhaus 93" size="12.0" />
          </font></Button>
        <Group fx:id="role" layoutX="506.0" layoutY="94.0" />
-      <TableView fx:id="list" layoutX="18.0" layoutY="210.0" prefHeight="309.0" prefWidth="902.0" style="-fx-background-color: #d08617;" stylesheets="@style.css">
+      <TableView fx:id="list" layoutX="18.0" layoutY="261.0" prefHeight="283.0" prefWidth="902.0" style="-fx-background-color: #d08617;" stylesheets="@style.css">
         <columns>
           <TableColumn fx:id="colId" prefWidth="35.0" text="ID" visible="false" />
           <TableColumn fx:id="colNom" prefWidth="59.0" text="Nom" />
@@ -93,16 +91,12 @@
             <TableColumn fx:id="colUpdate" prefWidth="72.0" />
             <TableColumn fx:id="colDelete" prefWidth="84.0" />
         </columns>
-         <effect>
-            <Lighting bumpInput="$null">
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
+         <effect>
+            <InnerShadow />
+         </effect>
       </TableView>
       <Button fx:id="refreshButton" layoutX="679.0" layoutY="165.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Refresh">
          <effect>
@@ -148,10 +142,48 @@
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font></Button>
-      <Label fx:id="checkEmail" layoutX="370.0" layoutY="52.0" prefHeight="29.0" prefWidth="248.0" textFill="RED" visible="false" />
+      <Label fx:id="checkEmail" layoutX="393.0" layoutY="52.0" prefHeight="29.0" prefWidth="239.0" textFill="RED" visible="false" />
       <Label fx:id="NonPrenom" layoutX="52.0" layoutY="60.0" prefHeight="19.0" prefWidth="260.0" textFill="RED" visible="false" />
       <Label fx:id="motdepaase" layoutX="613.0" layoutY="51.0" prefHeight="40.0" prefWidth="319.0" textFill="RED" visible="false" />
       <RadioButton fx:id="rbAdmin" layoutX="827.0" layoutY="97.0" mnemonicParsing="false" text="Admin" toggleGroup="$TGR" />
+      <TextField fx:id="searchField" layoutX="121.0" layoutY="220.0" prefHeight="29.0" prefWidth="233.0" promptText="Filtrer (par Nom, Prenom, Email)" style="-fx-background-color: #000000;">
+         <font>
+            <Font name="Bauhaus 93" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.6578947305679321" green="0.4842836260795593" blue="0.13706140220165253" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </TextField>
+      <Label layoutX="24.0" layoutY="225.0" stylesheets="@style.css" text="Rechercher :" />
+      <Button fx:id="showAdherentsButton" layoutX="485.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Adherents">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="showCoachsButton" layoutX="607.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Coaches">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="showAdminsButton" layoutX="727.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #000000; -fx-text-fill: #f19a00;" text="Admins">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Bauhaus 93" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="381.0" layoutY="225.0" stylesheets="@style.css" text="Filtrer par :" />
 
 
    </children>
