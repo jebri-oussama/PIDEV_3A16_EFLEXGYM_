@@ -1,0 +1,68 @@
+/* styles.css */
+
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+.form-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+    -fx-border-radius: 10px;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 10,0,0,1 );
+}
+
+.title-label {
+    -fx-font-size: 24px;
+    -fx-text-fill: #333333;
+}
+
+.input-row {
+    -fx-alignment: center-left;
+}
+
+.input-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+.text-field {
+    -fx-background-color: #f9f9f9;
+    -fx-text-fill: #333333;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+}
+
+.combo-box {
+    -fx-background-color: #f9f9f9;
+    -fx-text-fill: #333333;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+}
+
+.update-button {
+    -fx-background-color: #ff9900;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #ff9900;
+    -fx-border-width: 1px;
+}
+
+.update-button:hover {
+    -fx-background-color: #ff6600;
+    -fx-border-color: #ff6600;
+}

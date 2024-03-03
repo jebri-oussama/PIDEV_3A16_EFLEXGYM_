@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="369.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_evenement.Controllers.AjouterEvenementController">
+    <stylesheets>
+        <String fx:value="stylesajouter.css" />
+    </stylesheets>
+    <children>
+        <ImageView fitHeight="88.0" fitWidth="122.0" preserveRatio="true">
+            <image>
+                <Image url="@logo.png" />
+            </image>
+        </ImageView>
+        <VBox layoutX="-2.0" layoutY="85.0" prefHeight="454.0" prefWidth="494.0" spacing="10.0" styleClass="form-container">
+            <children>
+                <Label styleClass="title-label" text="Ajouter" />
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Type:" />
+                        <ComboBox fx:id="typeComboBox" styleClass="combo-box" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Nom:" />
+                        <TextField fx:id="txtevent_name" styleClass="text-field" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Date de début:" />
+                        <DatePicker fx:id="datePickerDebut" styleClass="text-field" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Date de fin:" />
+                        <DatePicker fx:id="datePickerFin" styleClass="text-field" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Duration:" />
+                        <TextField fx:id="txtduration" styleClass="text-field" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Place:" />
+                        <TextField fx:id="txtplace" styleClass="text-field" />
+                    </children>
+                </HBox>
+                <HBox spacing="10.0" styleClass="input-row">
+                    <children>
+                        <Label styleClass="input-label" text="Image:" />
+                        <Button onAction="#selectImage" text="Sélectionner" />
+                    </children>
+                </HBox>
+                <!-- Placeholder for image preview -->
+                <StackPane styleClass="image-preview-container">
+                    <Label opacity="0.2" styleClass="image-preview-label" text="Image Preview" />
+                    <ImageView fx:id="imageView" fitHeight="100" fitWidth="100" />
+                </StackPane>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </VBox>
+          <Button layoutX="206.0" layoutY="488.0" mnemonicParsing="false" onAction="#addEvenement" styleClass="add-button" text="Ajouter" />
+    </children>
+</AnchorPane>
