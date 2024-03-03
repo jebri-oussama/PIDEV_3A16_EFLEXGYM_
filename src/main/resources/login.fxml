@@ -102,8 +102,8 @@
             <Font name="Bauhaus 93" size="16.0" />
          </font>
       </Hyperlink>
-      <ImageView fx:id="captchaImageView" fitHeight="27.0" fitWidth="99.0" layoutX="268.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="captchaInputField" layoutX="380.0" layoutY="232.0" style="-fx-background-color: #d08617;">
+      <ImageView fx:id="captchaImageView" fitHeight="42.0" fitWidth="117.0" layoutX="259.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="captchaInputField" layoutX="380.0" layoutY="232.0" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #d08617;">
          <effect>
             <InnerShadow />
          </effect>

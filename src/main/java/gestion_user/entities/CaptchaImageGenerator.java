@@ -12,16 +12,14 @@ public class CaptchaImageGenerator {
         Graphics2D g = image.createGraphics();
 
         // Set background color
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
 
         // Set font and draw code
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.setColor(Color.BLACK);
+        g.setColor(Color.ORANGE);
         g.drawString(code, 20, 30);
 
-        // Add noise (optional)
-        // You can add lines, dots, or other elements to make it harder for bots
 
         g.dispose();
         return image;
