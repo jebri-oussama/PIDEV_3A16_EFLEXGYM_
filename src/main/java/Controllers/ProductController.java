@@ -8,10 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import gestion_produit.entities.panier;
+import gestion_produit.service.panierService;
+import gestion_user.entities.User;
+import gestion_user.entities.UserSession;
+import gestion_user.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -26,11 +32,17 @@ public class ProductController implements Initializable {
 
     @FXML
     private FlowPane productsPane;
+    private final panierService panierService = new panierService();
+
 
     // Declare the connection object
     private Connection conn;
     @FXML
     private TextField searchField;
+    private int userId;
+
+    public void initData(int userId) {
+        this.userId = userId;}
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the connection
@@ -87,9 +99,15 @@ public class ProductController implements Initializable {
         return productBox;
     }
 
+
     // Method to add product to cart (insert into the panier table)
     private void addToCart(String productName, String productPrice) {
         try {
+
+         User p = new UserService().readById(userId);
+            float aa = Float.parseFloat(productPrice);
+            panier pp = new panier(productName,aa,p);
+            panierService.add(pp);
             // Check if the product already exists in the cart
             PreparedStatement checkStatement = conn.prepareStatement("SELECT prix FROM panier WHERE nom = ?");
             checkStatement.setString(1, productName);
@@ -156,6 +174,7 @@ public class ProductController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     // Method to close the connection when the application exits or when it's no longer needed
     public void closeConnection() {

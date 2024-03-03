@@ -3,6 +3,7 @@ package Controllers;
 
 import Controllers.UpdateAdherentController;
 import GestionFinance.controller.ConsulterAbonnementController;
+
 import gestion_evenement.Controllers.ParticiperController;
 import gestion_user.entities.User;
 import gestion_user.entities.UserSession;
@@ -22,6 +23,8 @@ import java.io.IOException;
 public class AdherentController {
     @FXML
     private Label eventsLabel;
+    @FXML
+    private Label panierlabel;
     @FXML
     private Label dn;
 
@@ -101,6 +104,24 @@ public class AdherentController {
             Stage stage = (Stage) eventsLabel.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Participer");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void handlePanierClicked(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Product.fxml"));
+            Parent root = loader.load();
+
+           ProductController P = loader.getController();
+            P.initData(loggedInUser.getId());
+
+
+
+            Stage stage = (Stage) panierlabel.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("panier");
         } catch (IOException e) {
             e.printStackTrace();
         }

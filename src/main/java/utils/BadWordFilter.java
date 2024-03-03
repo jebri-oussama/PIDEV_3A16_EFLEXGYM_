@@ -23,7 +23,7 @@ public class BadWordFilter {
 
     public static void loadConfigs() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\yassine\\PIDEV_3A16_EFLEXGYM_\\src\\main\\java\\utils\\Word_Filter.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Oussama\\IdeaProjects\\PIDEV_3A16_EFLEXGYM_\\src\\main\\java\\utils\\Word_Filter.csv"));
             String line = "";
             int counter = 0;
             while((line = reader.readLine()) != null) {

@@ -1,5 +1,7 @@
 package gestion_produit.service;
 
+import gestion_produit.entities.panier;
+
 import java.util.List;
 public interface IService<T> {
     void add(T t);
@@ -12,4 +14,7 @@ public interface IService<T> {
     T readById(int id);
 
 
+    panier getParticipationByUserId(int userID);
+
+    panier getPanierByUserId(int userID);
 }

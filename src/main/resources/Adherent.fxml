@@ -19,7 +19,7 @@
                         <Image url="@adherent.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="28.0" layoutY="298.0" text="Cours" textAlignment="CENTER">
+                <Label layoutX="28.0" layoutY="264.0" text="Cours" textAlignment="CENTER">
                     <font>
                         <Font name="Bauhaus 93" size="25.0" />
                     </font>
@@ -27,7 +27,7 @@
                         <InnerShadow />
                     </effect>
                 </Label>
-                <Label layoutX="28.0" layoutY="255.0" text="Mon Profile" textAlignment="CENTER">
+                <Label layoutX="28.0" layoutY="221.0" text="Mon Profile" textAlignment="CENTER">
                     <font>
                         <Font name="Bauhaus 93" size="25.0" />
                     </font>
@@ -51,7 +51,7 @@
                         <InnerShadow />
                     </effect>
                 </Label>
-                <Button fx:id="logout" layoutX="27.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Se déconnecter">
+                <Button fx:id="logout" layoutX="30.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="29.0" prefWidth="114.0" style="-fx-background-color: #d08617;" text="Se déconnecter">
                     <font>
                         <Font name="Bauhaus 93" size="13.0" />
                     </font>
@@ -59,7 +59,7 @@
                         <InnerShadow />
                     </effect>
                 </Button>
-                <Label layoutX="28.0" layoutY="341.0" text="Boite Mail" textAlignment="CENTER">
+                <Label layoutX="28.0" layoutY="305.0" text="Boite Mail" textAlignment="CENTER">
                     <font>
                         <Font name="Bauhaus 93" size="25.0" />
                     </font>
@@ -67,7 +67,15 @@
                         <InnerShadow />
                     </effect>
                 </Label>
-                <Label  fx:id="eventsLabel" layoutX="28.0" layoutY="386.0" text="Events" textAlignment="CENTER" onMouseClicked="#handleEventsClicked">
+                <Label fx:id="eventsLabel" layoutX="51.0" layoutY="372.0" onMouseClicked="#handleEventsClicked" text="Events" textAlignment="CENTER">
+                    <font>
+                        <Font name="Bauhaus 93" size="25.0" />
+                    </font>
+                    <effect>
+                        <InnerShadow />
+                    </effect>
+                </Label>
+                <Label fx:id="panierlabel" layoutX="57.0" layoutY="404.0" onMouseClicked="#handlePanierClicked" text="Shop" textAlignment="CENTER">
                     <font>
                         <Font name="Bauhaus 93" size="25.0" />
                     </font>
@@ -82,7 +90,7 @@
                <font>
                   <Font name="Bauhaus 93" size="21.0" />
                </font></Label>
-                <Button layoutX="30.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleConsultAbonn" text="Abonnement" />
+                <Button layoutX="33.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleConsultAbonn" text="Abonnement" />
             </children>
 
         </AnchorPane>

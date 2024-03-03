@@ -1,6 +1,7 @@
 package GestionFinance.controller;
 
 import GestionFinance.pdf.PdfGenerator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,6 +43,8 @@ public class DashboardController implements Initializable {
     private Button bilanFinancierId;
     @FXML
     private Button abonnementsId;
+    @FXML
+    private Button covidId;
     @FXML
     void afficherBilanFinancier() {
         try {
@@ -85,8 +88,7 @@ public class DashboardController implements Initializable {
     private AnchorPane root;
 
     @FXML
-    private Button generatePDFButton; // Ajout du bouton pour générer le PDF
-
+    private Button generatePDFButton;
     private UserService userService;
     private BilanFinancierService bilanFinancierService;
 
@@ -103,7 +105,6 @@ public class DashboardController implements Initializable {
             throwables.printStackTrace();
         }
 
-        // Assurez-vous que root est correctement initialisé avant d'appeler generatePDF()
         root = (AnchorPane) adherentsText.getParent();
         generatePDFButton.setOnAction(event -> generatePDF());
     }
@@ -112,7 +113,7 @@ public class DashboardController implements Initializable {
     private void initializeBilanFinancierChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        // Charger les données du service pour le bilan financier
+
         List<BilanFinancier> bilans = bilanFinancierService.readAll();
         for (BilanFinancier bilan : bilans) {
             LocalDate date = bilan.getDate_debut();
@@ -121,27 +122,24 @@ public class DashboardController implements Initializable {
             dataset.addValue(bilan.getProfit(), "Profit", mois);
         }
 
-        // Créer le graphique à barres pour le bilan financier
-        JFreeChart chart = ChartFactory.createBarChart(
-                "Bilan Financier", // Titre du graphique
-                "Mois", // Axe X
-                "Profit", // Axe Y
-                dataset); // Données
 
-        // Afficher le graphique dans ChartViewer
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Bilan Financier",
+                "Mois",
+                "Profit",
+                dataset);
         bilanChartViewer.setChart(chart);
     }
 
     private void initializeOscillationsChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        // Charger les données du service pour les oscillations des revenus
         List<BilanFinancier> bilans = bilanFinancierService.readAll();
         for (BilanFinancier bilan : bilans) {
             LocalDate date = bilan.getDate_debut();
             Month month = date.getMonth();
             String mois = month.getDisplayName(java.time.format.TextStyle.FULL, Locale.FRENCH);
-            // Call methods to retrieve revenues
+
             double revenusAbonnements = bilan.recupererRevenuAbonnements();
             double revenusProduits = bilan.recupererRevenusProduits();
 
@@ -149,14 +147,11 @@ public class DashboardController implements Initializable {
             dataset.addValue(revenusProduits, "Revenus Produits", mois);
         }
 
-        // Créer le graphique en courbes pour les oscillations des revenus
         JFreeChart chart = ChartFactory.createLineChart(
-                "Oscillations des Revenus", // Titre du graphique
-                "Mois", // Axe X
-                "Revenus", // Axe Y
-                dataset); // Données
-
-        // Afficher le graphique dans ChartViewer
+                "Oscillations des Revenus",
+                "Mois",
+                "Revenus",
+                dataset);
         oscillationsChartViewer.setChart(chart);
     }
 
@@ -170,8 +165,19 @@ public class DashboardController implements Initializable {
     }
 
     private void generatePDF() {
-        String outputPath = "dashboard.pdf"; // Chemin où enregistrer le fichier PDF
-        PdfGenerator.generatePdf(root, outputPath); // Passer le nœud racine de la scène
+        String outputPath = "dashboard.pdf";
+        PdfGenerator.generatePdf(root, outputPath);
+    }
+
+    public void getCovidData(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Covid.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

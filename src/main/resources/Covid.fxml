@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="chartPane" prefHeight="504.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.CovidController">
+
+    <top>
+        <Button fx:id="fetchDataButton" text="Fetch Data">
+         <BorderPane.margin>
+            <Insets left="300.0" />
+         </BorderPane.margin></Button>
+    </top>
+
+</BorderPane>

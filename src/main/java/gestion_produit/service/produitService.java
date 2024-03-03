@@ -5,6 +5,7 @@ package gestion_produit.service;
 import GestionFinance.entites.BilanFinancier;
 import GestionFinance.service.BilanFinancierService;
 import gestion_produit.entities.categorie;
+import gestion_produit.entities.panier;
 import gestion_produit.entities.produit;
 import utils.DataSource;
 
@@ -137,6 +138,16 @@ public class produitService implements gestion_produit.service.IService<produit>
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
+    }
+
+    @Override
+    public panier getParticipationByUserId(int userID) {
+        return null;
+    }
+
+    @Override
+    public panier getPanierByUserId(int userID) {
         return null;
     }
 }

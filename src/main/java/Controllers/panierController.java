@@ -40,6 +40,9 @@ public class panierController implements Initializable {
 
     @FXML
     private TableColumn<panier, Float> prixCol;
+    @FXML
+    private TableColumn<panier, Float> idUserCol;
+
 
     @FXML
     private TableColumn<panier, Void> deleteCol;

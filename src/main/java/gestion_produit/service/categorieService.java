@@ -1,4 +1,5 @@
 package gestion_produit.service;
+import gestion_produit.entities.panier;
 import gestion_produit.entities.type;
 import utils.DataSource;
 import gestion_produit.entities.categorie;
@@ -96,6 +97,16 @@ public class categorieService implements IService<categorie>{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
+    }
+
+    @Override
+    public panier getParticipationByUserId(int userID) {
+        return null;
+    }
+
+    @Override
+    public panier getPanierByUserId(int userID) {
         return null;
     }
 

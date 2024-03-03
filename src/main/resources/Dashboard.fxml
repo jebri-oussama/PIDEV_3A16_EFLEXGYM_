@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.jfree.chart.fx.*?>
 
-<?import org.jfree.chart.fx.ChartViewer?>
-<AnchorPane prefHeight="500.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
+<AnchorPane prefHeight="500.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GestionFinance.controller.DashboardController">
     <children>
         <ChartViewer fx:id="bilanChartViewer" layoutX="227.0" layoutY="186.0" prefHeight="300.0" prefWidth="350.0" />
-        <ChartViewer fx:id="oscillationsChartViewer" layoutX="600.0" layoutY="192.0" prefHeight="300.0" prefWidth="350.0" />
-        <Button fx:id="generatePDFButton" layoutX="531.0" layoutY="14.0" mnemonicParsing="false" text="Générer PDF" />
+        <ChartViewer fx:id="oscillationsChartViewer" layoutX="600.0" layoutY="186.0" prefHeight="300.0" prefWidth="350.0" />
+        <Button fx:id="generatePDFButton" layoutX="536.0" layoutY="14.0" mnemonicParsing="false" text="Générer PDF" />
+        <Button fx:id="covidId" layoutX="700.0" layoutY="14.0" mnemonicParsing="false" onAction="#getCovidData" text="Covid-19 maj" />
+
         <VBox prefHeight="588.0" prefWidth="222.0" style="-fx-background-color: FB8000;">
             <children>
                 <ImageView fitHeight="92.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
