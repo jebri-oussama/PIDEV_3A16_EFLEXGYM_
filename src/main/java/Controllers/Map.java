@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +13,14 @@ public class Map implements Initializable {
 
     @FXML
     private WebView webView;
+
+    @FXML
+    private TextField searchInput;
+
+    // Method to set the text of the search input field
+    public void setSearchInputText(String text) {
+        searchInput.setText(text);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
