@@ -6,7 +6,6 @@ import GestionFinance.entites.Etat;
 import GestionFinance.entites.Type;
 import GestionFinance.service.AbonnementService;
 import gestion_user.entities.User;
-
 import GestionFinance.service.BilanFinancierService;
 import gestion_user.service.UserService;
 import javafx.collections.FXCollections;
@@ -16,10 +15,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AjouterAbonnementController {
@@ -37,10 +39,13 @@ public class AjouterAbonnementController {
 
     @FXML
     private TextField etatId;
+
     @FXML
     private Button dashboardId;
+
     @FXML
     private Button bilanFinancierId1;
+
     @FXML
     private Button abonnementsId;
 
@@ -48,7 +53,7 @@ public class AjouterAbonnementController {
     private TextField prixId;
 
     @FXML
-    private ComboBox<String> adherentId;
+    private ComboBox<User> adherentId;
 
     @FXML
     private ComboBox<String> bilanFinancierId;
@@ -67,19 +72,21 @@ public class AjouterAbonnementController {
     void initialize() {
         try {
             List<User> users = userService.readAll();
-            List<String> adherentIds = users.stream()
-                    .map(User::getId)
-                    .map(String::valueOf)
-                    .collect(Collectors.toList());
-            adherentId.setItems(FXCollections.observableArrayList(adherentIds));
+            adherentId.setItems(FXCollections.observableArrayList(users));
+            adherentId.setConverter(new StringConverter<User>() {
+                @Override
+                public String toString(User user) {
+                    return user.getNom();
+                }
 
+                @Override
+                public User fromString(String string) {
+                    return null;
+                }
+            });
 
-            List<BilanFinancier> bilansFinanciers = bilanFinancierService.readAll();
-            List<String> bilanFinancierIds = bilansFinanciers.stream()
-                    .map(BilanFinancier::getId)
-                    .map(String::valueOf)
-                    .collect(Collectors.toList());
-            bilanFinancierId.setItems(FXCollections.observableArrayList(bilanFinancierIds));
+            List<String> mois = Arrays.asList("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
+            bilanFinancierId.setItems(FXCollections.observableArrayList(mois));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -87,9 +94,9 @@ public class AjouterAbonnementController {
 
     @FXML
     void ajouter() {
-        if(typeId.getText().isEmpty() || prixId.getText().isEmpty() ||dateDebutId.getValue()== null ||
-           dateFinId.getValue()== null || etatId.getText().isEmpty()|| adherentId.getValue() == null ||
-           bilanFinancierId.getValue()==null){
+        if(typeId.getText().isEmpty() || prixId.getText().isEmpty() || dateDebutId.getValue() == null ||
+                dateFinId.getValue() == null || etatId.getText().isEmpty() || adherentId.getValue() == null ||
+                bilanFinancierId.getValue() == null){
             showAlert("Veuillez remplir tous les champs.");
             return;
         }
@@ -97,41 +104,30 @@ public class AjouterAbonnementController {
         try{
             double prix = Double.parseDouble(prixId.getText());
             if (prix <= 0){
-                showAlert("Le prix doit etre supérieur à zéro");
+                showAlert("Le prix doit être supérieur à zéro");
                 return;
             }
-        }catch(NumberFormatException e){
-            showAlert("Le prix doit etre un nombre valide");
+        } catch(NumberFormatException e){
+            showAlert("Le prix doit être un nombre valide");
             return;
         }
 
-
-
-
-
-
-        String typeString = typeId.getText();
-        Type type = Type.valueOf(typeString);
+        Type type = Type.valueOf(typeId.getText());
         double prix = Double.parseDouble(prixId.getText());
         LocalDate dateDebut = dateDebutId.getValue();
         LocalDate dateFin = dateFinId.getValue();
-        String etatString = etatId.getText();
-        Etat etat = Etat.valueOf(etatString);
-        int adherentIdSelected = Integer.parseInt(adherentId.getValue());
-        int bilanFinancierIdSelected = Integer.parseInt(bilanFinancierId.getValue());
-        User user = userService.readById(adherentIdSelected);
-        BilanFinancier bilanFinancier = bilanFinancierService.readById(bilanFinancierIdSelected);
-        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, user, bilanFinancier);
-
+        Etat etat = Etat.valueOf(etatId.getText());
+        User adherent = adherentId.getValue();
+        BilanFinancier bilanFinancier = bilanFinancierService.readById(Integer.parseInt(bilanFinancierId.getValue()));
+        Abonnement abonnement = new Abonnement(type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
 
         abonnementService.add(abonnement);
 
-
         clearFields();
-
 
         redirectToAfficherAbonnements();
     }
+
     private void showAlert(String message){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
@@ -163,6 +159,7 @@ public class AjouterAbonnementController {
             e.printStackTrace();
         }
     }
+
     @FXML
     void afficherBilanFinancier() {
         try {
@@ -174,6 +171,7 @@ public class AjouterAbonnementController {
             e.printStackTrace();
         }
     }
+
     @FXML
     void afficherAbonnements() {
         try {
@@ -185,6 +183,7 @@ public class AjouterAbonnementController {
             e.printStackTrace();
         }
     }
+
     @FXML
     void afficherDashboard() {
         try {
