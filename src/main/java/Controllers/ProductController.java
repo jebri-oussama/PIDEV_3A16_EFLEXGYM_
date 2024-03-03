@@ -90,25 +90,46 @@ public class ProductController implements Initializable {
     // Method to add product to cart (insert into the panier table)
     private void addToCart(String productName, String productPrice) {
         try {
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO panier (nom, prix) VALUES (?, ?)");
+            // Check if the product already exists in the cart
+            PreparedStatement checkStatement = conn.prepareStatement("SELECT prix FROM panier WHERE nom = ?");
+            checkStatement.setString(1, productName);
+            ResultSet resultSet = checkStatement.executeQuery();
 
-            // Set the product name and price as parameters for the prepared statement
-            statement.setString(1, productName);
-            statement.setString(2, productPrice);
+            if (resultSet.next()) {
+                // If the product exists, double its price
+                float currentPrice = resultSet.getFloat("prix");
+                float a = Float.parseFloat(productPrice);
+                float newPrice = currentPrice + a ;
 
-            // Execute the query
-            int rowsInserted = statement.executeUpdate();
+                PreparedStatement updateStatement = conn.prepareStatement("UPDATE panier SET prix = ? WHERE nom = ?");
+                updateStatement.setFloat(1, newPrice);
+                updateStatement.setString(2, productName);
+                int rowsUpdated = updateStatement.executeUpdate();
 
-            if (rowsInserted > 0) {
-                System.out.println("Product added to cart: " + productName);
+                if (rowsUpdated > 0) {
+                    System.out.println("Product price doubled: " + productName);
+                } else {
+                    System.out.println("Failed to update product price: " + productName);
+                }
             } else {
-                System.out.println("Failed to add product to cart");
-            }
+                // If the product doesn't exist, add it to the cart
+                PreparedStatement insertStatement = conn.prepareStatement("INSERT INTO panier (nom, prix) VALUES (?, ?)");
+                insertStatement.setString(1, productName);
+                insertStatement.setString(2, productPrice.toString());
+                int rowsInserted = insertStatement.executeUpdate();
 
+                if (rowsInserted > 0) {
+                    System.out.println("Product added to cart: " + productName);
+                } else {
+                    System.out.println("Failed to add product to cart");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
 
     // Event handler for "Ajouter" button
     @FXML

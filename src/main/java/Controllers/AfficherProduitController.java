@@ -351,6 +351,10 @@ private ImageView imageView;
         float prix;
         try {
             prix = Float.parseFloat(txtprix.getText());
+            if (prix < 0) {
+                showAlert(AlertType.ERROR, "Erreur", "Prix invalide", "Le prix ne peut pas être négatif.");
+                return;
+            }
         } catch (NumberFormatException e) {
             showAlert(AlertType.ERROR, "Erreur", "Prix invalide", "Veuillez saisir un prix valide.");
             return;
@@ -358,6 +362,10 @@ private ImageView imageView;
         int quantite;
         try {
             quantite = Integer.parseInt(txtquantite.getText());
+            if (quantite < 0) {
+                showAlert(AlertType.ERROR, "Erreur", "Quantité invalide", "La quantité ne peut pas être négative.");
+                return;
+            }
         } catch (NumberFormatException e) {
             showAlert(AlertType.ERROR, "Erreur", "Quantité invalide", "Veuillez saisir une quantité valide.");
             return;
@@ -397,6 +405,7 @@ private ImageView imageView;
         clearFields();
         refreshTable();
     }
+
 
 
 
