@@ -1,5 +1,6 @@
 package GestionFinance.controller;
 
+import GestionFinance.entites.Type;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,6 +54,27 @@ public class AfficherAbonnementsController implements Initializable {
 
     private final ObservableList<Abonnement> abonnements = FXCollections.observableArrayList();
     private AbonnementService abonnementService;
+    @FXML
+    private Button filtreMensuelButton;
+
+    @FXML
+    private Button filtreAnnuelButton;
+
+    @FXML
+    void filtrerAbonnementsMensuels(ActionEvent event) {
+        List<Abonnement> abonnementsMensuels = abonnementService.filterByType(Type.mensuel);
+        abonnements.clear();
+        abonnements.addAll(abonnementsMensuels);
+        abonnementsTable.setItems(abonnements);
+    }
+
+    @FXML
+    void filtrerAbonnementsAnnuels(ActionEvent event) {
+        List<Abonnement> abonnementsAnnuels = abonnementService.filterByType(Type.annuel);
+        abonnements.clear();
+        abonnements.addAll(abonnementsAnnuels);
+        abonnementsTable.setItems(abonnements);
+    }
 
 
    /* @FXML

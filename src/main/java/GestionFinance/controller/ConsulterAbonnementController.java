@@ -28,7 +28,7 @@ public class ConsulterAbonnementController {
     @FXML
     private Label etatLabel;
 
-    private int adherentId; // Adherent ID of the logged-in user
+    private int adherentId;
 
     public void setAdherentId(int adherentId) {
         this.adherentId = adherentId;

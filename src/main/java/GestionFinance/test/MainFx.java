@@ -85,4 +85,12 @@ public class MainFx extends Application {
         primaryStage.show();
 
     }
+   /* FXMLLoader loader = new FXMLLoader(getClass().getResource("/Covid.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Bilan Financier");
+        primaryStage.show();*/
+
+
 }

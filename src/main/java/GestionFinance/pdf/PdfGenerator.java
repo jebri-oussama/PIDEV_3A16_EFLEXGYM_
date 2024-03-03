@@ -17,30 +17,26 @@ import java.io.IOException;
 public class PdfGenerator {
 
     public static void generatePdf(Node node, String outputPath) {
-        // Créer un nouveau document PDF
+
         Document document = new Document(PageSize.A4);
         FileOutputStream fileOutputStream = null;
 
-        try {
-            // Ouvrir le flux de sortie pour écrire dans le fichier PDF
-            fileOutputStream = new FileOutputStream(outputPath);
+        try {  fileOutputStream = new FileOutputStream(outputPath);
             PdfWriter writer = PdfWriter.getInstance(document, fileOutputStream);
             document.open();
 
-            // Prendre une capture d'écran de la Node
-            WritableImage image = node.snapshot(new SnapshotParameters(), null);
+             WritableImage image = node.snapshot(new SnapshotParameters(), null);
 
-            // Dessiner l'image sur le document PDF
-            PdfContentByte contentByte = writer.getDirectContent();
+              PdfContentByte contentByte = writer.getDirectContent();
             com.itextpdf.text.Image pdfImage = com.itextpdf.text.Image.getInstance(
                     SwingFXUtils.fromFXImage(image, null),
-                    null // Pas de couleur de fond
+                    null
             );
             pdfImage.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
             pdfImage.setAbsolutePosition(0, 0);
             contentByte.addImage(pdfImage);
 
-            // Fermer le document
+
             document.close();
             System.out.println("Document PDF du dashboard généré avec succès.");
         } catch (DocumentException | FileNotFoundException e) {
@@ -48,7 +44,7 @@ public class PdfGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            // Assurez-vous de fermer le FileOutputStream pour libérer les ressources
+
             if (fileOutputStream != null) {
                 try {
                     fileOutputStream.close();

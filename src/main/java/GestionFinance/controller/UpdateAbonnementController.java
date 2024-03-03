@@ -191,7 +191,7 @@ public class UpdateAbonnementController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         typeId.setItems(FXCollections.observableArrayList(Type.values()));
 
-        // Remplir la ComboBox etatId avec les valeurs de l'énumération Etat
+
         etatId.setItems(FXCollections.observableArrayList(Etat.values()));
     }
 }

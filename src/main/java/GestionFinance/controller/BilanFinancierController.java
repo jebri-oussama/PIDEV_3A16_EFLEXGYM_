@@ -67,43 +67,43 @@ public class BilanFinancierController {
 
     @FXML
     public void calculerProfit() {
-        int id = bilanFinancierId; // Utiliser l'ID du bilan financier stocké
+        int id = bilanFinancierId;
         BilanFinancier bilanFinancier = bilanFinancierService.readById(id);
 
-        // Récupération des valeurs des revenus et des salaires
+
         double nouveauxRevenusAbonnements = bilanFinancier.recupererRevenuAbonnements();
         double nouveauxRevenusProduits = bilanFinancier.recupererRevenusProduits();
         double nouveauxSalairesCoachs = bilanFinancier.recupererSalairesCoachs();
 
-        // Mise à jour des champs du bilan financier
+
         bilanFinancier.setRevenus_abonnements(nouveauxRevenusAbonnements);
         bilanFinancier.setRevenus_produits(nouveauxRevenusProduits);
         bilanFinancier.setSalaires_coachs(nouveauxSalairesCoachs);
 
-        // Mise à jour des valeurs dans le service
+
         bilanFinancierService.updateRevenusAbonnements(id, nouveauxRevenusAbonnements);
         bilanFinancierService.updateRevenusProduits(id, nouveauxRevenusProduits);
         bilanFinancierService.updateSalairesCoachs(id, nouveauxSalairesCoachs);
 
-        // Calcul du profit
+
         double depenses = bilanFinancier.getDepenses();
         double prixLocation = bilanFinancier.getPrix_location();
         double profit = bilanFinancier.calculerProfit(prixLocation, depenses);
 
-        // Mise à jour du profit dans le bilan financier
+
         bilanFinancier.setProfit(profit);
         bilanFinancierService.updateProfit(id, profit);
 
-        // Affichage du profit dans le label
+
         profitLabel.setText(Double.toString(profit));
 
-        // Nettoyage des champs
+
         clearFields();
 
-        // Fermeture de la fenêtre actuelle
+
         profitLabel.getScene().getWindow().hide();
 
-        // Redirection vers la vue AfficherBilanFinancier
+
         redirectToAfficherBilanFinancier();
     }
 

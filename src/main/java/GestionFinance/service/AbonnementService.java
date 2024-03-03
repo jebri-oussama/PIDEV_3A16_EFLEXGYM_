@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+
 
 public class AbonnementService implements IService<Abonnement> {
 
@@ -151,7 +151,6 @@ public class AbonnementService implements IService<Abonnement> {
             pst.setInt(1, UserSession.getLoggedInUser().getId());
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    // Extract abonnement details from the result set
                     int id = rs.getInt("id");
                     Type type = Type.valueOf(rs.getString("type"));
                     double prix = rs.getDouble("prix");
@@ -159,16 +158,11 @@ public class AbonnementService implements IService<Abonnement> {
                     LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
                     Etat etat = Etat.valueOf(rs.getString("etat"));
 
-                    // Create User object for the adherent
                     User adherent = new User();
                     adherent.setId(rs.getInt("id_adherent"));
-                    // You might need to set other properties of the adherent here
-
-                    // Create BilanFinancier object (assuming you have a method to retrieve it)
-                    BilanFinancierService bilanFinancierService = new BilanFinancierService();
+                      BilanFinancierService bilanFinancierService = new BilanFinancierService();
                     BilanFinancier bilanFinancier = bilanFinancierService.readById(rs.getInt("id_bilan_financier"));
 
-                    // Create and return the Abonnement object
                     return new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier);
                 }
             }
@@ -177,6 +171,33 @@ public class AbonnementService implements IService<Abonnement> {
         }
         return null;
     }
+    public List<Abonnement> filterByType(Type type) {
+        String requete = "SELECT * FROM Abonnement WHERE type = ?";
+        List<Abonnement> filteredAbonnements = new ArrayList<>();
+        try {
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setString(1, type.toString());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                double prix = rs.getDouble("prix");
+                LocalDate dateDebut = rs.getDate("date_debut").toLocalDate();
+                LocalDate dateFin = rs.getDate("date_fin").toLocalDate();
+                Etat etat = Etat.valueOf(rs.getString("etat"));
+                int idAdherent = rs.getInt("id_adherent");
+                UserService adherentService = new UserService();
+                User adherent = adherentService.readById(idAdherent);
+                int idBilanFinancier = rs.getInt("id_bilan_financier");
+                BilanFinancierService bilanFinancierService = new BilanFinancierService();
+                BilanFinancier bilanFinancier = bilanFinancierService.readById(idBilanFinancier);
+                filteredAbonnements.add(new Abonnement(id, type, prix, dateDebut, dateFin, etat, adherent, bilanFinancier));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return filteredAbonnements;
+    }
+
 
 
 

@@ -75,18 +75,16 @@ public class AjouterAbonnementController {
     void initialize() {
         typeId.setItems(FXCollections.observableArrayList(Type.values()));
 
-        // Remplir la ComboBox etatId avec les valeurs de l'énumération Etat
-        etatId.setItems(FXCollections.observableArrayList(Etat.values()));
+         etatId.setItems(FXCollections.observableArrayList(Etat.values()));
         try {
-            // Fetch only users with the role "Adherent"
-            List<User> adherents = userService.readAllAdherent();
+           List<User> adherents = userService.readAllAdherent();
             adherentId.setItems(FXCollections.observableArrayList(adherents));
 
-            // Set up the StringConverter to display user names
+
             adherentId.setConverter(new StringConverter<User>() {
                 @Override
                 public String toString(User user) {
-                    return (user != null) ? user.getNom() : ""; // Check if user is null
+                    return (user != null) ? user.getNom() : "";
                 }
 
                 @Override
@@ -98,10 +96,9 @@ public class AjouterAbonnementController {
             List<String> mois = Arrays.asList("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
             bilanFinancierId.setItems(FXCollections.observableArrayList(mois));
 
-            // Initialize the map to associate each month name with a financial statement ID
             moisBilanFinancierMap = new HashMap<>();
             for (int i = 0; i < mois.size(); i++) {
-                moisBilanFinancierMap.put(mois.get(i), i + 1); // IDs start from 1
+                moisBilanFinancierMap.put(mois.get(i), i + 1);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
