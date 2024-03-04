@@ -1,6 +1,7 @@
 package Gestion_planing.entities;
 
 import gestion_user.entities.User;
+import com.google.gson.Gson;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -34,6 +35,11 @@ public class planning {
         this.heure = heure;
         this.id_cour = id_cour;
         this.id_coach = id_coach;
+    }
+
+    public static planning fromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, planning.class);
     }
 
 
