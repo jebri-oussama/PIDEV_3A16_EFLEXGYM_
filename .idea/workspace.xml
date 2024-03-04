@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d30c80b-b3d6-43c6-9e12-6d2e32a50526" name="Changes" comment="integration">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/CovidController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Covid.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/AdherentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/AdherentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/panierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/panierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GestionFinance/controller/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_produit/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_produit/entities/panier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/entities/panier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_produit/service/IService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/IService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_produit/service/categorieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/categorieService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_produit/service/panierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/panierService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_produit/service/produitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_produit/service/produitService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/MainFxx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/MainFxx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/BadWordFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/BadWordFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Adherent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Adherent.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ajouterAdherent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ajouterAdherent.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/AjouterEvenement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AjouterEvenement.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stylesajouter.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stylesajouter.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +21,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -96,7 +83,7 @@
       <workItem from="1709406120166" duration="20491000" />
       <workItem from="1709470072976" duration="2243000" />
       <workItem from="1709479713461" duration="10559000" />
-      <workItem from="1709494099904" duration="8715000" />
+      <workItem from="1709494099904" duration="12987000" />
     </task>
     <task id="LOCAL-00001" summary="qr code avec participation">
       <option name="closed" value="true" />
@@ -170,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709499386564</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="integration">
+      <option name="closed" value="true" />
+      <created>1709506806709</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1709506806709</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
