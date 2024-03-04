@@ -6,6 +6,7 @@ import Gestion_planing.service.PlanningService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -97,6 +98,22 @@ public class AfficherPlaningAdherentController implements Initializable {
                 e.printStackTrace();
             }
         }
+    @FXML
+    public void OpenCalendar(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Calendar.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
     public void refreshTable() {
         plannings.clear();
         List<planning> planningList = planningService.readAll();

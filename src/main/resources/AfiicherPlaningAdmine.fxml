@@ -79,6 +79,7 @@
             <TableColumn fx:id="supprimerColumn" prefWidth="166.40008544921875" style="-fx-background-color: EEEE19;" text="Supprimer" />
          </columns>
       </TableView>
+      <Button fx:id="calendrier" layoutX="402.0" layoutY="458.0" onAction="#OpenCalendar"  prefHeight="44.0" prefWidth="267.0" text="calendrier des cours" />
       <Button fx:id="ajouterplaning" layoutX="702.0" layoutY="458.0" onAction="#ajouterplaning" prefHeight="44.0" prefWidth="267.0" text="Planifier un nouveau cours" />
       <AnchorPane prefHeight="62.0" prefWidth="1089.0" />
    </children>
