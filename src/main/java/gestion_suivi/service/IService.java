@@ -1,7 +1,5 @@
 package gestion_suivi.service;
 
-import gestion_suivi.entitis.User;
-
 import java.util.List;
 
 public interface IService <T>{

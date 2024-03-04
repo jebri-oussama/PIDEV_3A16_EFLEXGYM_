@@ -1,10 +1,9 @@
-package controller;
+package gestion_suivi.controller;
 
 import gestion_suivi.entitis.Exercice;
 import gestion_suivi.entitis.Programme_personnalise;
 import gestion_suivi.entitis.Suivi_Progre;
 import gestion_suivi.pdf.PdfGenerator;
-import gestion_suivi.service.Exercice_Service;
 import gestion_suivi.service.Programme_personnalise_service;
 import gestion_suivi.service.Suivi_Progre_Service;
 import javafx.beans.value.ChangeListener;
@@ -18,11 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;

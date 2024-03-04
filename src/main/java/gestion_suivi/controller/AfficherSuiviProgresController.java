@@ -1,21 +1,13 @@
-package controller;
+package gestion_suivi.controller;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import gestion_suivi.entitis.Suivi_Progre;
 import gestion_suivi.service.Suivi_Progre_Service;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
-import java.io.IOException;
 import java.util.List;
 
 public class AfficherSuiviProgresController {

@@ -1,4 +1,4 @@
-package controller;
+package gestion_suivi.controller;
 
 import gestion_suivi.entitis.Exercice;
 import gestion_suivi.service.Exercice_Service;
@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;

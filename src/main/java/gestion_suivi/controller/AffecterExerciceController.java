@@ -1,4 +1,4 @@
-package controller;
+package gestion_suivi.controller;
 
 import gestion_suivi.entitis.Exercice;
 import gestion_suivi.entitis.Programme_personnalise;

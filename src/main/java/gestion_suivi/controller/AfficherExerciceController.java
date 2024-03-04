@@ -1,4 +1,4 @@
-package controller;
+package gestion_suivi.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

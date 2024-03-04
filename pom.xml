@@ -12,13 +12,13 @@
         <json.version>20211205</json.version>
     </properties>
     <dependencies>
-        <!--  MySQL Connector  -->
+        <!--   MySQL Connector   -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
-        <!--  JavaFX  -->
+        <!--   JavaFX   -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -29,45 +29,31 @@
             <artifactId>javafx-fxml</artifactId>
             <version>17</version>
         </dependency>
-        <!--  Webcam Capture  -->
+        <!--   Webcam Capture   -->
         <dependency>
             <groupId>com.github.sarxos</groupId>
             <artifactId>webcam-capture</artifactId>
             <version>0.3.12</version>
         </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>17.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-swing</artifactId>
-            <version>19</version>
-        </dependency>
-        <!--  Apache HttpClient  -->
+        <!--   Apache HttpClient   -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>${httpclient.version}</version>
         </dependency>
+        <!--   iText PDF   -->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.5.9</version>
         </dependency>
-        <!--  Jackson Databind  -->
+        <!--   Jackson Databind   -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <!--  JSON-java  -->
+        <!--   JSON-java   -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>

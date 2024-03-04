@@ -14,7 +14,7 @@ public class Main extends Application {
      Scene scene = new Scene(root, 1100, 600);
 
      // Load the CSS file
-   scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+   scene.getStylesheets().add(getClass().getResource("/stylesss.css").toExternalForm());
 
      primaryStage.setTitle("Mes Mesures");
      Image icon = new Image(getClass().getResourceAsStream("/logo.png"));
@@ -25,7 +25,7 @@ public class Main extends Application {
      primaryStage.show();*/
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/AjouterExercice.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Meal.fxml"));
         Scene scene = new Scene(root, 900, 500);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Affichage Suivi Prog");

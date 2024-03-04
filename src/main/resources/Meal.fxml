@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="294.0" prefWidth="539.0" spacing="20" style="-fx-background-color: #fb8000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MealController">
+<VBox prefHeight="294.0" prefWidth="539.0" spacing="20" style="-fx-background-color: #fb8000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_suivi.controller.MealController">
 
     <Label prefHeight="27.0" prefWidth="470.0" style="-fx-font-family: Arial Black; -fx-font-size: 24px; -fx-text-fill: black; -fx-underline: true; -fx-alignment: center;" text="Nutrition:" />
     <Label style="-fx-font-family: Arial Black; -fx-font-size: 15px; -fx-text-fill: black; -fx-alignment: center;" text="Entrez le nom du plat :" />

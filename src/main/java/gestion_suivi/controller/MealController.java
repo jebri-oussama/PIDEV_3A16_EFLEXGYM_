@@ -1,4 +1,4 @@
-package controller;
+package gestion_suivi.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

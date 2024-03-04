@@ -1,4 +1,4 @@
-package controller;
+package gestion_suivi.controller;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
