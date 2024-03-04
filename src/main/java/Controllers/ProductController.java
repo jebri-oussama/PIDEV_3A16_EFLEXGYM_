@@ -11,8 +11,9 @@ import java.util.ResourceBundle;
 import gestion_produit.entities.panier;
 import gestion_produit.service.panierService;
 import gestion_user.entities.User;
-import gestion_user.entities.UserSession;
 import gestion_user.service.UserService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,6 +68,14 @@ public class ProductController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Add listener to searchField
+        searchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                searchByName(newValue);
+            }
+        });
     }
 
     // Method to create product element
@@ -90,8 +99,8 @@ public class ProductController implements Initializable {
         descriptionLabel.setWrapText(true);
 
         // Add button to add product to cart
-        Button addButton = new Button("Ajouter");
-        addButton.setOnAction(this::addToCartHandler);
+        Button addButton = new Button("Add to Cart");
+        addButton.setOnAction(event -> addToCart(name, price));
 
         // Add elements to productBox
         productBox.getChildren().addAll(imageView, nameLabel, priceLabel, descriptionLabel, addButton);
@@ -99,25 +108,20 @@ public class ProductController implements Initializable {
         return productBox;
     }
 
-
     // Method to add product to cart (insert into the panier table)
     private void addToCart(String productName, String productPrice) {
         try {
 
-         User p = new UserService().readById(userId);
-            float aa = Float.parseFloat(productPrice);
-            panier pp = new panier(productName,aa,p);
-            panierService.add(pp);
+
             // Check if the product already exists in the cart
             PreparedStatement checkStatement = conn.prepareStatement("SELECT prix FROM panier WHERE nom = ?");
             checkStatement.setString(1, productName);
             ResultSet resultSet = checkStatement.executeQuery();
 
             if (resultSet.next()) {
-                // If the product exists, double its price
+                float aa = Float.parseFloat(productPrice);
                 float currentPrice = resultSet.getFloat("prix");
-                float a = Float.parseFloat(productPrice);
-                float newPrice = currentPrice + a ;
+                float newPrice = currentPrice + aa;
 
                 PreparedStatement updateStatement = conn.prepareStatement("UPDATE panier SET prix = ? WHERE nom = ?");
                 updateStatement.setFloat(1, newPrice);
@@ -125,15 +129,19 @@ public class ProductController implements Initializable {
                 int rowsUpdated = updateStatement.executeUpdate();
 
                 if (rowsUpdated > 0) {
-                    System.out.println("Product price doubled: " + productName);
+                    System.out.println("Product price updated: " + productName);
                 } else {
                     System.out.println("Failed to update product price: " + productName);
                 }
             } else {
-                // If the product doesn't exist, add it to the cart
+                User p = new UserService().readById(userId);
+                float ab = Float.parseFloat(productPrice);
+                panier pp = new panier(productName, ab, p);
+                panierService.add(pp);
+                float aa = Float.parseFloat(productPrice);
                 PreparedStatement insertStatement = conn.prepareStatement("INSERT INTO panier (nom, prix) VALUES (?, ?)");
                 insertStatement.setString(1, productName);
-                insertStatement.setString(2, productPrice.toString());
+                insertStatement.setFloat(2, aa);
                 int rowsInserted = insertStatement.executeUpdate();
 
                 if (rowsInserted > 0) {
@@ -146,7 +154,6 @@ public class ProductController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
 
     // Event handler for "Ajouter" button
@@ -188,8 +195,36 @@ public class ProductController implements Initializable {
     }
 
     @FXML
-    private void searchByName(ActionEvent event) {
-        String searchTerm = searchField.getText().trim();
+    private void searchByName(String searchTerm) {
+        searchTerm = searchTerm.trim();
+
+        // Check if search term is empty
+        if (searchTerm.isEmpty()) {
+            // Clear existing products in the FlowPane
+            productsPane.getChildren().clear();
+
+            // Fetch all products from the database
+            try {
+                PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit");
+                ResultSet resultSet = statement.executeQuery();
+
+                // Iterate through the results and create product elements
+                while (resultSet.next()) {
+                    String productName = resultSet.getString("nom");
+                    String productPrice = resultSet.getString("prix");
+                    String productDescription = resultSet.getString("description");
+                    String productImageURL = resultSet.getString("image");
+
+                    // Create and add product element to the FlowPane
+                    VBox productBox = createProductBox(productName, productPrice, productDescription, productImageURL);
+                    productsPane.getChildren().add(productBox);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return; // Exit search if search term is empty
+        }
 
         // Check if search term contains bad words
         if (BadWordFilter.filterText(searchTerm)) {
@@ -217,6 +252,7 @@ public class ProductController implements Initializable {
         productsPane.getChildren().clear();
 
         try {
+            // Assuming conn is a valid and accessible database connection
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM produit WHERE nom LIKE ?");
             statement.setString(1, "%" + searchTerm + "%");
             ResultSet resultSet = statement.executeQuery();
@@ -232,13 +268,15 @@ public class ProductController implements Initializable {
                 productsPane.getChildren().add(productBox);
             }
 
-            // Clear search field after search
-            searchField.clear();
+            // Optionally, clear search field after successful search
+            // searchField.clear();
 
         } catch (SQLException e) {
             e.printStackTrace();
+            // Optionally, show an alert or log the error
         }
     }
+
     @FXML
     private void handleAlimentaireAction(ActionEvent event) {
         fetchProducts(7); // Category for Alimentaire

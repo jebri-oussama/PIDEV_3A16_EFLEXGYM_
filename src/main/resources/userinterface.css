@@ -1,0 +1,8 @@
+.root {
+    -fx-background-color: #FB8000; /* Couleur de fond de l'interface */
+}
+
+.button {
+    -fx-background-color: #000000; /* Couleur de fond du bouton en noir */
+    -fx-text-fill: #FFFFFF; /* Couleur du texte en blanc */
+}

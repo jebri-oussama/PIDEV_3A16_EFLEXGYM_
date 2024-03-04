@@ -15,8 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
+
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.concurrent.Worker;
@@ -24,9 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebEvent;
-import javafx.scene.web.WebView;
+
 import java.awt.*;
 import java.io.File;
 import java.sql.Date;
@@ -40,10 +37,7 @@ public class AjouterEvenementController {
     @FXML
     private Label lblPlace;
 
-    @FXML
-    private WebView webView;
 
-    private WebEngine webEngine;
     public ImageView imageView;
     @FXML
     private ComboBox<Type> typeComboBox;
@@ -142,11 +136,7 @@ public class AjouterEvenementController {
 
         return true;
     }
-    @FXML
-    void selectPlace(ActionEvent event) {
-        // Reload the map to clear previous selections
-        webEngine.reload();
-    }
+
     private boolean isValidDate(String value) {
         try {
             Date.valueOf(value);

@@ -4,16 +4,21 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.param.PaymentIntentCreateParams;
+import gestion_produit.service.panierService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.List; // Import List
+import gestion_produit.entities.panier;// Assuming Product is your model class for products
 import javafx.stage.Stage;
 import utils.DataSource;
 
@@ -81,26 +86,26 @@ public class PaymentController {
     private void sup() {
         // Confirm with the user before deleting all entries
 
-                try {
-                    // Get connection from DataSource
-                    Connection connection = DataSource.getInstance().getCnx();
+        try {
+            // Get connection from DataSource
+            Connection connection = DataSource.getInstance().getCnx();
 
-                    // Create statement
-                    Statement statement = connection.createStatement();
+            // Create statement
+            Statement statement = connection.createStatement();
 
-                    // Execute SQL DELETE query to delete all entries from "panier" table
-                    String sql = "DELETE  FROM panier";
-                    statement.executeUpdate(sql);
+            // Execute SQL DELETE query to delete all entries from "panier" table
+            String sql = "DELETE  FROM panier";
+            statement.executeUpdate(sql);
 
 
 
-                    // Refresh the table after deletion
+            // Refresh the table after deletion
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        ;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    ;
 
     private void refreshPanierTable() throws IOException {
         // Load the panierController

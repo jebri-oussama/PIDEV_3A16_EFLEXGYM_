@@ -117,6 +117,7 @@ public class panierController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private float calculateTotalPrice() {
         float totalPrice = 0.0f;
         for (panier p : paniers) {
@@ -124,6 +125,7 @@ public class panierController implements Initializable {
         }
         return totalPrice;
     }
+
     @FXML
     private void updateSubtotalLabel() {
         subtotalLabel.setText("Subtotal: $ " + calculateTotalPrice());
@@ -160,6 +162,7 @@ public class panierController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void gotomap(ActionEvent event) {
         try {

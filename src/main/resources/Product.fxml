@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.image.Image?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProductController" style="-fx-background-color: #FFFFFF;">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProductController" stylesheets="@produit.css" style="-fx-background-color: #FB8000;">
 
     <!-- Logo -->
     <ImageView fx:id="logoImageView" fitWidth="50" fitHeight="50" layoutX="10.0" layoutY="10.0" />
@@ -18,13 +18,13 @@
     <!-- Product Details -->
     <VBox layoutX="80.0" layoutY="10.0" spacing="10.0">
         <children>
-            <Label text="Détails du Produit" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #FFA500;" />
+            <Label text="Détails du Produit" styleClass="label-title" />
             <HBox spacing="10">
                 <ImageView fx:id="productImageView" fitWidth="200" fitHeight="200" />
                 <VBox spacing="5">
-                    <Label fx:id="productNameLabel" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #000000;" />
-                    <Label fx:id="productPriceLabel" style="-fx-font-size: 16px; -fx-text-fill: #FFA500;" />
-                    <Label fx:id="productDescriptionLabel" wrapText="true" style="-fx-font-size: 14px; -fx-text-fill: #000000;" />
+                    <Label fx:id="productNameLabel" styleClass="label-details" />
+                    <Label fx:id="productPriceLabel" styleClass="label-price" />
+                    <Label fx:id="productDescriptionLabel" wrapText="true" styleClass="label-description" />
                 </VBox>
             </HBox>
         </children>
@@ -35,12 +35,28 @@
         <children>
             <Label text="Recherche par nom:" />
             <HBox spacing="5" alignment="CENTER">
-                <TextField fx:id="searchField" promptText="Entrez le nom du produit" />
-                <Button text="Rechercher" onAction="#searchByName" />
+                <TextField fx:id="searchField" styleClass="text-field" promptText="Entrez le nom du produit" />
+
             </HBox>
             <HBox spacing="5" alignment="CENTER">
-                <Button mnemonicParsing="false" onAction="#handleAlimentaireAction" text="Alimentaire" style="-fx-background-color: #FFA500; -fx-text-fill: #000000; -fx-font-size: 7pt; -fx-pref-width: 80px; -fx-pref-height: 30px;" />
-                <Button mnemonicParsing="false" onAction="#handleVestimentaireAction" text="Vestimentaire" style="-fx-background-color: #FFA500; -fx-text-fill: #000000; -fx-font-size: 7pt; -fx-pref-width: 80px; -fx-pref-height: 30px;" />
+                <Button layoutX="10.0" layoutY="300.0" styleClass="white-button" onAction="#handleAlimentaireAction">
+                    <graphic>
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <!-- Add the path to your icon image -->
+                            <Image url="icons8-sucre-glace-50.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button layoutX="10.0" layoutY="300.0" styleClass="white-button" onAction="#handleVestimentaireAction">
+                    <graphic>
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <!-- Add the path to your icon image -->
+                            <Image url="icons8-costume-pour-femme-48.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+
             </HBox>
         </children>
     </VBox>
@@ -56,7 +72,7 @@
     </Button>
 
     <!-- ScrollPane for Product FlowPane -->
-    <ScrollPane layoutX="250.0" layoutY="100.0" prefWidth="340.0" prefHeight="270.0" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+    <ScrollPane layoutX="250.0" layoutY="100.0" prefWidth="450.0" prefHeight="270.0" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
         <content>
             <!-- FlowPane to display products -->
             <FlowPane prefWidth="320.0" prefHeight="260.0" hgap="20" vgap="20" fx:id="productsPane">
