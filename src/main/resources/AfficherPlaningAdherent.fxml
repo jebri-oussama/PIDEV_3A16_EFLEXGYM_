@@ -51,6 +51,18 @@
                   <Font size="13.0" />
                </font>
             </Button>
+            <Button fx:id="calendrier" mnemonicParsing="false" onAction="#OpenCalendar" prefHeight="0.0" prefWidth="158.0" text="Calendrier des Cours">
+               <padding>
+                  <Insets bottom="15.0" left="50.0" right="50.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="50.0" right="10.0" top="25.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+
          </children>
       </VBox>
       <TableView fx:id="planingTable" layoutX="238.0" layoutY="45.0" prefHeight="354.0" prefWidth="1096.0">

@@ -36,7 +36,7 @@ public class PlanningService implements IntService<planning> {
             pst.setString(1, p.getSalle());
             pst.setInt(2, p.getNb_place_max());
             LocalDate localDate = p.getDate();
-            java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+            Date sqlDate = Date.valueOf(localDate);
             pst.setDate(3, sqlDate);
             pst.setString(4, p.getHeure());
             pst.setInt(5, p.getId_cour().getId());
@@ -70,7 +70,7 @@ public class PlanningService implements IntService<planning> {
                 pst.setString(1, p.getSalle());
                 pst.setInt(2, p.getNb_place_max());
                 LocalDate localDate = p.getDate();
-                java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+                Date sqlDate = Date.valueOf(localDate);
                 pst.setDate(3, sqlDate);
                 pst.setString(4, p.getHeure());
                 pst.setInt(5, p.getId_cour().getId());
@@ -128,5 +128,30 @@ public class PlanningService implements IntService<planning> {
             throw new RuntimeException(e);
         }
         return null;
+    }
+    public List<planning> getPlanningByCoach(int coach_id) {
+        List<planning> pl = new ArrayList<>();
+        String query = "SELECT * FROM planning WHERE id_coach = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, coach_id);
+            ResultSet result = statement.executeQuery();
+            UserService us = new UserService();
+            CoursService cs = new CoursService();
+            while (result.next()) {
+                planning p = new planning();
+                p.setId(result.getInt("id"));
+                p.setSalle(result.getString("salle"));
+                p.setNb_place_max(result.getInt("nb_place_max"));
+                p.setDate(result.getDate("date").toLocalDate());
+                p.setId_coach(us.readById(result.getInt("id_coach")));
+                p.setHeure(result.getString("heure"));
+                p.setId_cour(cs.readById(result.getInt("id_cour")));
+
+                pl.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return pl;
     }
 }

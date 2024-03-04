@@ -45,6 +45,7 @@ public class AfficherPlaningAdmineController  implements Initializable {
     @FXML
     private TableColumn<planning, String> heureColumn;
 
+
     @FXML
     private TableColumn<planning, Integer> idcourColumn;
     @FXML
@@ -59,6 +60,7 @@ public class AfficherPlaningAdmineController  implements Initializable {
         nbplacemaxColumn.setCellValueFactory(new PropertyValueFactory<>("nb_place_max"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         heureColumn.setCellValueFactory(new PropertyValueFactory<>("heure"));
+
         idcourColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getId_cour().getId()).asObject());
         iduserColumn.setCellValueFactory(cellData -> {
             planning planning = cellData.getValue();
@@ -79,6 +81,7 @@ public class AfficherPlaningAdmineController  implements Initializable {
                     openUpdatePlaning(p);
                 });
             }
+
 
             @Override
             protected void updateItem(Void item, boolean empty) {
@@ -102,6 +105,11 @@ public class AfficherPlaningAdmineController  implements Initializable {
                     planning p = getTableView().getItems().get(getIndex());
                     deletePlaning(p);
                 });
+            }
+            private final Button calendrier = new Button("Calendrier");
+
+            {
+
             }
 
             @Override
@@ -141,6 +149,22 @@ public class AfficherPlaningAdmineController  implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void OpenCalendar(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Calendar.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+
+
     }
 
     private void openUpdatePlaning(planning p) {
