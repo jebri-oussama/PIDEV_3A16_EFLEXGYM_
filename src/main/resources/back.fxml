@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Back">
+    <children>
+        <MenuBar style="-fx-background-color: #fb8000;">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Exit" />
+                    </items>
+                </Menu>
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TabPane fx:id="tabPane" layoutX="10.0" layoutY="30.0" prefHeight="800.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="gestionDashbordTab" text="Dashboard">
+                    <content>
+                        <AnchorPane>
+                            <!-- Content of Dashboard tab will be loaded dynamically -->
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="membersTab" text="Members">
+                    <content>
+                        <AnchorPane>
+                            <!-- Content of Members tab will be loaded dynamically -->
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Payments">
+                    <content>
+                        <BorderPane>
+                            <center>
+                                <TableView prefHeight="500.0" prefWidth="750.0">
+                                    <columns>
+                                        <TableColumn text="ID" prefWidth="50.0" />
+                                        <TableColumn text="Member ID" prefWidth="100.0">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="memberId" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn text="Amount" prefWidth="100.0">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="amount" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn text="Date" prefWidth="200.0">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="date" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                    </columns>
+                                </TableView>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="gestionProduitTab" text="Gestion Produit">
+                    <!-- Content of Gestion Produit tab will be loaded dynamically -->
+                </Tab>
+                <Tab fx:id="gestionEvenementTab" text="Gestion Evenement">
+                    <content>
+                        <AnchorPane>
+                            <!-- Content of Gestion Evenement tab will be loaded dynamically -->
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="settingsTab" text=" Formulaire">
+                    <content>
+                        <AnchorPane>
+                            <!-- Content of Afficher Formulaire tab will be loaded dynamically -->
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Settings">
+                    <content>
+                        <BorderPane>
+                            <center>
+                                <VBox alignment="CENTER" spacing="10">
+                                    <Label text="Change Password" style="-fx-text-fill: #fb8000;"/>
+                                    <TextField promptText="Enter new password" />
+                                    <Button text="Save" style="-fx-background-color: #fb8000; -fx-text-fill: white;"/>
+                                </VBox>
+                            </center>
+                        </BorderPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
