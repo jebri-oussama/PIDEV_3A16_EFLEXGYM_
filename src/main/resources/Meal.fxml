@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="294.0" prefWidth="539.0" spacing="20" style="-fx-background-color: #fb8000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_suivi.controller.MealController">
+
+    <Label prefHeight="27.0" prefWidth="470.0" style="-fx-font-family: Arial Black; -fx-font-size: 24px; -fx-text-fill: black; -fx-underline: true; -fx-alignment: center;" text="Nutrition:" />
+    <Label style="-fx-font-family: Arial Black; -fx-font-size: 15px; -fx-text-fill: black; -fx-alignment: center;" text="Entrez le nom du plat :" />
+
+    <Label fx:id="mealNameLabel" style="-fx-font-weight: bold; -fx-font-family: Arial; -fx-underline: true; -fx-alignment: center;" />
+    <TextField fx:id="searchTextField" prefHeight="18.0" prefWidth="466.0" style="-fx-font-size: 10px;" />
+    <Button onAction="#handleSearchButton" style="-fx-background-color: Black; -fx-text-fill: white;" text="Rechercher" />
+    <Label style="-fx-font-weight: bold; -fx-font-family: Arial; -fx-underline: true; -fx-alignment: center;" text="Ingrédients :" />
+    <Label fx:id="ingredientsLabel" style="-fx-alignment: center;" wrapText="true" />
+    <Label style="-fx-font-weight: bold; -fx-font-family: Arial; -fx-underline: true; -fx-alignment: center;" text="Instructions :" />
+    <Label fx:id="instructionsLabel" style="-fx-alignment: center;" wrapText="true" />
+
+    <ImageView fx:id="mealImageView" fitHeight="200" fitWidth="400" />
+</VBox>

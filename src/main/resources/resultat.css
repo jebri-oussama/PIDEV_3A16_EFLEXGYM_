@@ -1,0 +1,48 @@
+.root {
+    -fx-background-color: #fb8000; /* Couleur de fond orange */
+}
+
+#titre {
+    -fx-underline: true;
+    -fx-alignment: center;
+}
+
+.evaluation-text {
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+    -fx-white-space: pre-line; /* Retour à la ligne après le texte */
+}
+
+.programme-text {
+    -fx-font-family: Arial Bold ;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+    -fx-alignment: center; /* Centrage du texte */
+}
+
+.exercices-table {
+    -fx-background-color: white;
+    -fx-pref-width: 800px; /* Largeur du TableView */
+}
+
+.type-equipement-label {
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+    -fx-alignment: center; /* Centrage du texte */
+}
+
+/* Bouton */
+.custom-button {
+    -fx-background-color: Black; /* Fond transparent */
+    -fx-border-color: black; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Épaisseur de la bordure */
+    -fx-text-fill:white; /* Couleur du texte */
+}
+
+.custom-button:hover {
+    -fx-background-color: black; /* Fond noir au survol */
+    -fx-border-color: black; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Épaisseur de la bordure */
+}

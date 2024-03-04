@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesss.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_suivi.controller.AfficherSuiviProgresController">
+    <children>
+        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="20.0" layoutY="20.0">
+            <image>
+                <Image url="@logo.png" />
+            </image>
+        </ImageView>
+
+        <!-- Fin du titre -->
+        <TableView fx:id="suivitableView" layoutX="42.0" layoutY="138.0" prefHeight="200.0" prefWidth="532.0">
+            <columns>
+                <TableColumn fx:id="nomColumn" prefWidth="47.19997787475586" text="Nom">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="nom" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="prenomColumn" prefWidth="57.600006103515625" text="Prénom">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="prenom" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="ageColumn" prefWidth="47.99993896484375" text="Âge">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="age" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="tailleColumn" prefWidth="47.199951171875" text="Taille">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="taille" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="poidsColumn" prefWidth="52.79994201660156" text="Poids">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="poids" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="tourDeTailleColumn" prefWidth="110.39996337890625" text="Tour de taille">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="tour_de_taille" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="sexeColumn" prefWidth="51.199951171875" text="Sexe">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="sexe" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="actionsColumn" prefWidth="112.800048828125" text="Actions" />
+            </columns>
+        </TableView>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fill="#fb8000" layoutX="200.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les informations corporelles des adherants " textAlignment="CENTER" underline="true" wrappingWidth="201.1331787109375" />
+    </children>
+</AnchorPane>

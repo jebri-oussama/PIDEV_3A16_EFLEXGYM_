@@ -1,0 +1,21 @@
+.main-container {
+    -fx-background-color: #fb8000; /* Couleur de fond */
+    -fx-padding: 20px; /* Marge intérieure */
+}
+
+.custom-button {
+    -fx-background-color: black; /* Couleur de fond du bouton */
+    -fx-text-fill: white; /* Couleur du texte du bouton */
+    -fx-font-weight: bold; /* Police en gras */
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0.5, 0, 0); /* Effet de surbrillance */
+}
+
+.quote-label {
+    -fx-font-size: 18px; /* Taille de la police de la citation */
+    -fx-text-fill: black; /* Couleur du texte de la citation */
+}
+
+.author-label {
+    -fx-font-style: italic; /* Police en italique pour l'auteur */
+    -fx-text-fill: black; /* Couleur du texte de l'auteur */
+}
